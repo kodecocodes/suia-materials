@@ -33,10 +33,10 @@
 import SwiftUI
 import AVKit
 
-let videoNames = ["squat", "step-up", "burpee", "sun-salute"]
-let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
-
 struct ExerciseView: View {
+  let videoNames = ["squat", "step-up", "burpee", "sun-salute"]
+  let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
+
   let index: Int
   let interval: TimeInterval = 30
 
