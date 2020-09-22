@@ -33,6 +33,7 @@
 import SwiftUI
 
 enum Settings {
-  static let defaultElementSize = CGSize(width: 250, height: 180)
+  static let defaultElementSize = CGSize(
+    width: 250, height: 180)
   static let borderColor: Color = .blue
 }

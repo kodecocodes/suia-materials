@@ -67,7 +67,9 @@ struct ResizableView: View {
         previousOffset = transform.offset
       }
     content
-      .frame(width: transform.size.width, height: transform.size.height)
+      .frame(
+        width: transform.size.width,
+        height: transform.size.height)
       .foregroundColor(color)
       .rotationEffect(transform.rotation)
       .scaleEffect(scale)
