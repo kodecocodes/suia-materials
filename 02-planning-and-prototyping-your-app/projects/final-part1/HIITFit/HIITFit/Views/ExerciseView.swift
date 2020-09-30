@@ -37,11 +37,10 @@ struct ExerciseView: View {
   let videoNames = ["squat", "step-up", "burpee", "sun-salute"]
   let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
   let index: Int
-  
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        HeaderView(: exerciseNames[index])
+        HeaderView(exerciseName: exerciseNames[index])
           .padding(.bottom)
         if let url = Bundle.main.url(
           forResource: videoNames[index],

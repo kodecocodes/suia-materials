@@ -105,6 +105,7 @@
 				CD30C91C251474DC0049DB93 /* Sources */,
 				CD30C91D251474DC0049DB93 /* Frameworks */,
 				CD30C91E251474DC0049DB93 /* Resources */,
+				CD0BEDFE2524567A00937B4F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -162,6 +163,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CD0BEDFE2524567A00937B4F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD30C91C251474DC0049DB93 /* Sources */ = {
