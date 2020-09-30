@@ -53,6 +53,7 @@ struct WelcomeView: View {
             .resizedToFill(width: 240, height: 240)
             .clipShape(Circle())
         }
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
         Button(action: { }) {
           Text("Get Started")
           Image(systemName: "arrow.right.circle")

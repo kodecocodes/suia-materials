@@ -38,7 +38,7 @@ struct ExerciseView: View {
   let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
   let index: Int
   let interval: TimeInterval = 30
-  
+
   var body: some View {
     GeometryReader { geometry in
       VStack {
@@ -62,7 +62,7 @@ struct ExerciseView: View {
           .padding()
         Spacer()
         Button("History") { }
-         .padding(.bottom)
+          .padding(.bottom)
       }
     }
   }

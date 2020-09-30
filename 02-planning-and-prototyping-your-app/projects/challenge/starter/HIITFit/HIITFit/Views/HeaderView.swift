@@ -34,7 +34,7 @@ import SwiftUI
 
 struct HeaderView: View {
   let titleText: String
-  
+
   var body: some View {
     VStack {
       Text(titleText)
@@ -52,14 +52,14 @@ struct HeaderView: View {
 }
 
 struct HeaderView_Previews: PreviewProvider {
-    static var previews: some View {
-      Group {
-        HeaderView(titleText: "Squat")
-          .previewLayout(.sizeThatFits)
-        HeaderView(titleText: "Squat")
-          .preferredColorScheme(.dark)
-          .environment(\.sizeCategory, .accessibilityLarge)
-          .previewLayout(.sizeThatFits)
-      }
+  static var previews: some View {
+    Group {
+      HeaderView(titleText: "Squat")
+        .previewLayout(.sizeThatFits)
+      HeaderView(titleText: "Squat")
+        .preferredColorScheme(.dark)
+        .environment(\.sizeCategory, .accessibilityLarge)
+        .previewLayout(.sizeThatFits)
     }
+  }
 }
