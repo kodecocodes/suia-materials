@@ -35,8 +35,8 @@ import SwiftUI
 struct TextEntryView: View {
   @Environment(\.presentationMode) var presentationMode
 
-  let element: Element?
-  @Binding var textElement: Element
+  let element: CardElement?
+  @Binding var textElement: TextElement
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -56,7 +56,7 @@ struct TextEntryView: View {
         .font(.title)
     }
     .onAppear {
-      if let element = element {
+      if let element = element as? TextElement {
         textElement.text = element.text
         textElement.textColor = element.textColor
       }
@@ -65,7 +65,7 @@ struct TextEntryView: View {
 }
 
 struct TextEntryView_Previews: PreviewProvider {
-  @State static private var element = Element()
+  @State static private var element = TextElement()
 
   static var previews: some View {
     TextEntryView(element: nil, textElement: $element)

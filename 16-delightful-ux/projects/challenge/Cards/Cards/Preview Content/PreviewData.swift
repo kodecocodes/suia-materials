@@ -33,23 +33,23 @@
 import SwiftUI
 
 
-let initialElements: [Element] = [
-  Element(transform: Transform(size: UIImage.imageSize(named: "hedgehog1"),
+let initialElements: [CardElement] = [
+  ImageElement(transform: Transform(size: UIImage.imageSize(named: "hedgehog1"),
                                scale: 0.3, rotation: .zero,
                                offset: .zero),
           image: UIImage(named: "hedgehog1")),
-  Element(transform: Transform(size: UIImage.imageSize(named: "hedgehog2"),
+  ImageElement(transform: Transform(size: UIImage.imageSize(named: "hedgehog2"),
                                scale: 0.4, rotation: .zero,
                                offset: CGSize(width: 0, height: 200)),
           image: UIImage(named: "hedgehog2")),
-  Element(transform: Transform(size: UIImage.imageSize(named: "hedgehog3"),
+  ImageElement(transform: Transform(size: UIImage.imageSize(named: "hedgehog3"),
                                scale: 0.2, rotation: .init(degrees: -20),
                                offset: CGSize(width: -100, height: -220)),
           image: UIImage(named: "hedgehog3")),
-  Element(transform: Transform(size: CGSize(width: Settings.defaultElementSize * 0.4,
+  TextElement(transform: Transform(size: CGSize(width: Settings.defaultElementSize * 0.4,
                                             height: Settings.defaultElementSize * 0.4),
                                offset: CGSize(width: 0, height: 300)),
-          text: "Hedgehogs!!!", elementType: .text),
+              text: "Hedgehogs!!!", textColor: .blue),
 ]
 
 let initialCards: [Card] = [

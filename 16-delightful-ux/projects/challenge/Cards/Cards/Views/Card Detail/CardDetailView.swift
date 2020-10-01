@@ -32,7 +32,7 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct CardDetailView: View {
   @EnvironmentObject var model: Model
   
   @Binding var isPresented: Bool
@@ -44,10 +44,10 @@ struct CardView: View {
   @State private var shapeIndex: Int?
   @State private var particleIndex: Int?
   @State private var particleImage: Image?
-  @State private var elementSelected: Element?
+  @State private var elementSelected: CardElement?
   @State private var shareImage: UIImage?
   @State private var shouldScreenshot = false
-  @State private var textElement = Element()
+  @State private var textElement = TextElement()
   @Binding var card: Card
   
   init(isPresented: Binding<Bool>, card: Binding<Card>) {
@@ -114,11 +114,8 @@ struct CardView: View {
     
     
     .background(Color("Background"))
-    .onAppear {
-      DispatchQueue.main.async {
-        card.loadElements()
-      }
-    }
+
+
     .toolbar {
       ToolbarItem(placement: .principal) {
         HStack {
@@ -153,6 +150,8 @@ struct CardView: View {
         }
       }
     }
+
+
     .sheet(item: $viewState) { item in
       switch item {
       case .imagePicker:
@@ -169,7 +168,7 @@ struct CardView: View {
             card.save()
           }
       case .clipShapes:
-        if let element = elementSelected {
+        if let element = elementSelected as? ImageElement {
           ClipShapesView(shapeIndex: $shapeIndex,
                          image: element.image)
             .onDisappear {
@@ -206,13 +205,12 @@ struct CardView: View {
                 card.addTextElement(textElement)
               }
             } else {
-              if let element = elementSelected,
-                 element.elementType == .text {
+              if let element = elementSelected {
                 card.remove(element)
               }
             }
             elementSelected = nil
-            textElement = Element()
+            textElement = TextElement()
           }
       case .shareSheet:
         if let shareImage = shareImage {
@@ -221,6 +219,7 @@ struct CardView: View {
         }
       }
     }
+ 
   }
   
   func cardScale(size: CGSize) -> CGFloat {
@@ -240,7 +239,7 @@ struct CardView_Previews: PreviewProvider {
   
   static var previews: some View {
     NavigationView {
-      CardView(isPresented: $isPresented, card: $card)
+      CardDetailView(isPresented: $isPresented, card: $card)
         .environmentObject(Model())
     }
   }

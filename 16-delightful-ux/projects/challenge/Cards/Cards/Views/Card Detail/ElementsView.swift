@@ -37,15 +37,15 @@ struct ElementsView: View {
   @EnvironmentObject var model: Model
   
   @Binding var card: Card
-  @Binding var elementSelected: Element?
+  @Binding var elementSelected: CardElement?
   @Binding var viewState: ViewState?
   
-  @State private var elementForContextMenu: Element?
+  @State private var elementForContextMenu: CardElement?
   
   var body: some View {
     return ZStack {
       Group {
-      ForEach(card.elements) { element in
+        ForEach(card.elements, id: \.id) { element in
         ZStack {
           ResizableView(id: element.id,
                         transform: element.transform,
@@ -54,7 +54,7 @@ struct ElementsView: View {
                         isSelected: elementSelected?.id == element.id)
               .onTapGesture {
                 elementSelected = element
-                if element.elementType == .text {
+                if element is TextElement {
                   viewState = .textEntry
                 }
               }
@@ -105,7 +105,7 @@ struct ElementsView: View {
     }
   }
     
-  func getUpdate(element: Element) -> ResizableUpdate {
+  func getUpdate(element: CardElement) -> ResizableUpdate {
     let update: ResizableUpdate = { transform in
       card.update(element, transform: transform)
     }
@@ -115,7 +115,7 @@ struct ElementsView: View {
 
 struct ElementsView_Previews: PreviewProvider {
   @State static var card = initialCards[0]
-  @State static var elementSelected: Element?
+  @State static var elementSelected: CardElement?
   @State static var viewState: ViewState? = nil
   static var previews: some View {
     ElementsView(card: $card,

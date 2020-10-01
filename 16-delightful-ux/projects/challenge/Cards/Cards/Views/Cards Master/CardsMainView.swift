@@ -65,7 +65,7 @@ struct CardsMainView: View {
       }
     } else  {
         NavigationView {
-          CardView(isPresented: $isPresented,
+          CardDetailView(isPresented: $isPresented,
                    card: $model.cards[selectedIndex])
         }
         .accentColor(Settings.accentColor)

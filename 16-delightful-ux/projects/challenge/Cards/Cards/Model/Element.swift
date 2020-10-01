@@ -32,48 +32,72 @@
 
 import SwiftUI
 
-enum ElementType: String {
-  case image = "I"
-  case text = "T"
+protocol CardElement {
+  var id: UUID { get }
+  var transform: Transform { get set }
 }
 
-struct Element: Identifiable {
-  var id = UUID()
-  var transform: Transform = Transform()
+struct ImageElement: CardElement {
+  let id = UUID()
+  var transform = Transform()
   var image: UIImage?
   var imageFilename: String?
   var clipShape: AnyShape?
   var clipShapeIndex: Int?
-  var text: String = ""
-  var textColor: Color = .primary
-  var elementType: ElementType = .image
 
-  struct ElementData: Codable {
+  struct ImageData: Codable {
     var transform: Transform
     var imageFilename: String?
     var clipShapeIndex: Int?
-    var text: String
-    var textColor: [CGFloat]
-    var elementType: String
 
-    var element: Element {
-      Element(transform: transform,
-              image: nil,
-              imageFilename: imageFilename,
-              clipShape: nil,
-              clipShapeIndex: clipShapeIndex,
-              text: text,
-              textColor: Color.color(components: textColor),
-              elementType: ElementType(rawValue: elementType) ?? .image)
+    var imageElement: ImageElement {
+      let clipShape: AnyShape?
+      if let clipShapeIndex = clipShapeIndex {
+        clipShape = clipShapes[clipShapeIndex]
+      } else {
+        clipShape = nil
+      }
+      let image: UIImage?
+      if let imageName = imageFilename {
+        image = UIImage.load(uuid: imageName)
+      } else {
+        image = nil
+      }
+
+      return ImageElement(transform: transform,
+                   image: image,
+                   imageFilename: imageFilename,
+                   clipShape: clipShape,
+                   clipShapeIndex: clipShapeIndex)
     }
   }
-  
-  var data: ElementData {
-    ElementData(transform: transform,
-                imageFilename: imageFilename,
-                clipShapeIndex: clipShapeIndex,
-                text: text,
-                textColor: textColor.colorComponents(),
-                elementType: elementType.rawValue)
+  var data: ImageData {
+    ImageData(transform: transform,
+              imageFilename: imageFilename,
+              clipShapeIndex: clipShapeIndex)
+  }
+}
+
+struct TextElement: CardElement {
+  let id = UUID()
+  var transform = Transform()
+  var text: String = ""
+  var textColor: Color = .primary
+
+  struct TextData: Codable {
+    var transform: Transform
+    var text: String
+    var textColor: [CGFloat]
+
+    var textElement: TextElement {
+      TextElement(transform: transform,
+                  text: text,
+                  textColor: Color.color(components: textColor))
+    }
+  }
+  var data: TextData {
+    TextData(transform: transform,
+             text: text,
+             textColor: textColor.colorComponents())
   }
 }

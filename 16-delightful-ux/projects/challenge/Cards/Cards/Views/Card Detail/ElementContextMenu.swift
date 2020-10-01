@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct ElementContextMenu: View  {
-  @Binding var elementForContextMenu: Element?
+  @Binding var elementForContextMenu: CardElement?
 
   let deleteAction: ()->()
   
@@ -42,7 +42,7 @@ struct ElementContextMenu: View  {
       ZStack(alignment: .center) {
         Color.secondary.opacity(0.1)
         VStack {
-          ElementView(element: elementForContextMenu ?? Element(), isSelected: false)
+          ElementView(element: elementForContextMenu ?? TextElement(), isSelected: false)
             .frame(width: geometry.size.width / 2)
           Button(action: { deleteAction() }) {
           Label("Delete", systemImage: "trash")

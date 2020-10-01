@@ -21,7 +21,7 @@
 		8240082C24EBA50B008460E0 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 8240082B24EBA50B008460E0 /* Stickers */; };
 		8242374524ECE69B00607EAF /* ClipShapesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242374424ECE69B00607EAF /* ClipShapesView.swift */; };
 		8242374724ECE6CE00607EAF /* AnyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242374624ECE6CE00607EAF /* AnyShape.swift */; };
-		8242374924ECFD6E00607EAF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242374824ECFD6E00607EAF /* CardView.swift */; };
+		8242374924ECFD6E00607EAF /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242374824ECFD6E00607EAF /* CardDetailView.swift */; };
 		8242374B24ED3AB600607EAF /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242374A24ED3AB600607EAF /* Shapes.swift */; };
 		8242375124ED468300607EAF /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242375024ED468300607EAF /* UIImageExtension.swift */; };
 		8242375324EDEA2700607EAF /* AngleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242375224EDEA2700607EAF /* AngleExtension.swift */; };
@@ -68,7 +68,7 @@
 		8240082B24EBA50B008460E0 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Stickers; sourceTree = "<group>"; };
 		8242374424ECE69B00607EAF /* ClipShapesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipShapesView.swift; sourceTree = "<group>"; };
 		8242374624ECE6CE00607EAF /* AnyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyShape.swift; sourceTree = "<group>"; };
-		8242374824ECFD6E00607EAF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		8242374824ECFD6E00607EAF /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		8242374A24ED3AB600607EAF /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		8242375024ED468300607EAF /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		8242375224EDEA2700607EAF /* AngleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleExtension.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		8228965724F3CDDC000F2691 /* Card Detail */ = {
 			isa = PBXGroup;
 			children = (
-				8242374824ECFD6E00607EAF /* CardView.swift */,
+				8242374824ECFD6E00607EAF /* CardDetailView.swift */,
 				822DDB3724F4C70E00238694 /* ParticleView.swift */,
 				825A6C0924EA4CA6008B4571 /* ElementsView.swift */,
 				82AA750824FB428700503192 /* ElementContextMenu.swift */,
@@ -379,7 +379,7 @@
 				8242375524EDEB7800607EAF /* Card.swift in Sources */,
 				8201CD4524F7C32B00A81F01 /* ViewState.swift in Sources */,
 				823B83D624F2448B005ACB06 /* CardThumbView.swift in Sources */,
-				8242374924ECFD6E00607EAF /* CardView.swift in Sources */,
+				8242374924ECFD6E00607EAF /* CardDetailView.swift in Sources */,
 				82AD4FD724ECBA9B00C12A88 /* ImagePicker.swift in Sources */,
 				82AD4FAC24EBF92500C12A88 /* CardViewToolbar.swift in Sources */,
 				82E3EEE324EB77FE00C564C8 /* ResizableView.swift in Sources */,
@@ -521,7 +521,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.Cards;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.Cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -543,7 +543,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.Cards;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.Cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

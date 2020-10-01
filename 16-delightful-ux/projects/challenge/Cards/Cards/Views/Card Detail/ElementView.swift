@@ -33,45 +33,52 @@
 import SwiftUI
 
 struct ElementView: View {
-  let element: Element
+  let element: CardElement
   let isSelected: Bool
-  
+
   var body: some View {
     Group {
-      if let image = element.image {
-        Image(uiImage: image)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .clipShape(clipShape(element))
-          .overlay(clipShape(element)
-                    .stroke(Settings.borderColor,
-                            lineWidth: isSelected ? 5 : 0)
-          )
-          .contentShape(clipShape(element))
-      } else if element.elementType == .text {
+      if let element = element as? ImageElement {
+        ImageElementView(element: element, isSelected: isSelected)
+      }
+      if let element = element as? TextElement {
         Text(element.text)
           .font(.system(size: 1000))
           .minimumScaleFactor(0.01)
           .lineLimit(1)
           .foregroundColor(element.textColor)
-      } else {
-        ZStack {
-          Color.green.opacity(0.3)
-          Text("ERROR!")
-            .font(.system(size: 50))
-        }
       }
     }
   }
 
-  func clipShape(_ element: Element) -> AnyShape {
+
+}
+
+struct ImageElementView: View {
+  let element: ImageElement
+  let isSelected: Bool
+
+  var body: some View {
+    if let image = element.image {
+    Image(uiImage: image)
+      .resizable()
+      .aspectRatio(contentMode: .fit)
+      .clipShape(clipShape(element))
+      .overlay(clipShape(element)
+                .stroke(Settings.borderColor,
+                        lineWidth: isSelected ? 5 : 0)
+      )
+      .contentShape(clipShape(element))
+    }
+  }
+
+  func clipShape(_ element: ImageElement) -> AnyShape {
     if let clipShape = element.clipShape {
       return clipShape
     } else {
       return AnyShape(Rectangle())
     }
   }
-
 }
 
 struct ElementView_Previews: PreviewProvider {

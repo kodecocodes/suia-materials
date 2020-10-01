@@ -37,9 +37,9 @@ struct Card: Identifiable {
   var name = "Untitled"
   var backgroundColor: Color
   var image: UIImage?
-  var elements: [Element] = []
+  var elements: [CardElement] = []
 
-  func index(for element: Element) -> Int? {
+  func index(for element: CardElement) -> Int? {
     elements.firstIndex(where: { $0.id == element.id } )
   }
 
@@ -49,23 +49,12 @@ struct Card: Identifiable {
       self.image = image
     }
   }
-  
-  mutating func loadElements() {
-    for (index, element) in elements.enumerated() {
-      if let clipShapeIndex = elements[index].clipShapeIndex {
-        elements[index].clipShape = clipShapes[clipShapeIndex]
-      }
-      if let imageName = element.imageFilename {
-        let image = UIImage.load(uuid: imageName)
-        elements[index].image = image
-      }
-    }
-  }
 
   // MARK: - Remove element
   
-  mutating func remove(_ element: Element) {
-    if let index = index(for: element) {
+  mutating func remove(_ element: CardElement) {
+    if let index = index(for: element),
+       let element = element as? ImageElement {
       UIImage.remove(name: element.imageFilename)
       elements.remove(at: index)
     }
@@ -80,35 +69,32 @@ struct Card: Identifiable {
     transform.size = image.initialSize()
     transform.offset = offset
     transform.offset.height -= transform.size.height / 2
-    let element = Element(transform: transform,
-                          image: image,
-                          imageFilename: uuid,
-                          elementType: .image)
+    let element = ImageElement(transform: transform,
+                               image: image,
+                               imageFilename: uuid)
     elements.append(element)
     save()
   }
   
-  mutating func addTextElement(_ element: Element) {
-    let element = Element(transform: Transform(),
-                          text: element.text,
-                          textColor: element.textColor,
-                          elementType: .text)
+  mutating func addTextElement(_ element: TextElement) {
+    let element = TextElement(transform: Transform(),
+                              text: element.text,
+                              textColor: element.textColor)
     elements.append(element)
     save()
   }
   
   // MARK: - Update element
   
-  mutating func update(_ element: Element,
-                       textElement: Element) {
+  mutating func update(_ element: CardElement,
+                       textElement: TextElement) {
     if let index = index(for: element) {
-      elements[index].text = textElement.text
-      elements[index].textColor = textElement.textColor
+      elements[index] = textElement
     }
     save()
   }
   
-  mutating func update(_ element: Element,
+  mutating func update(_ element: CardElement,
                        transform: Transform) {
     if let index = index(for: element) {
       elements[index].transform = transform
@@ -116,11 +102,14 @@ struct Card: Identifiable {
     save()
   }
   
-  mutating func update(_ element: Element,
+  mutating func update(_ element: CardElement,
                        shapeIndex: Int) {
-    if let index = index(for: element) {
-      elements[index].clipShape = clipShapes[shapeIndex]
-      elements[index].clipShapeIndex = shapeIndex
+    if let index = index(for: element),
+       let element = element as? ImageElement {
+      var newElement = element
+      newElement.clipShape = clipShapes[shapeIndex]
+      newElement.clipShapeIndex = shapeIndex
+      elements[index] = newElement
     }
     save()
   }
@@ -129,7 +118,7 @@ struct Card: Identifiable {
 extension Card: Codable {
   
   enum CodingKeys: CodingKey {
-    case id, name, backgroundColor, elementsData
+    case id, name, backgroundColor, imageData, textData
   }
   
   public func encode(to encoder: Encoder) throws {
@@ -138,8 +127,10 @@ extension Card: Codable {
     let color = backgroundColor.colorComponents()
     try container.encode(color, forKey: .backgroundColor)
     try container.encode(name, forKey: .name)
-    let elementsData = elements.map { $0.data }
-    try container.encode(elementsData, forKey: .elementsData)
+    let imageData = (elements.compactMap { $0 as? ImageElement}).map { $0.data }
+    try container.encode(imageData, forKey: .imageData)
+    let textData = (elements.compactMap { $0 as? TextElement}).map { $0.data }
+    try container.encode(textData, forKey: .textData)
   }
   
   public init(from decoder: Decoder) throws {
@@ -148,10 +139,9 @@ extension Card: Codable {
     name = try container.decode(String.self, forKey: .name)
     let color = try container.decode([CGFloat].self, forKey: .backgroundColor)
     backgroundColor = Color.color(components: color)
-    let elementsData = try container.decode([Element.ElementData].self, forKey: .elementsData)
-    elements = elementsData.map {
-      $0.element
-    }
+    let imageData = try container.decode([ImageElement.ImageData].self, forKey: .imageData)
+    let textData = try container.decode([TextElement.TextData].self, forKey: .textData)
+    elements = imageData.map { $0.imageElement } + textData.map { $0.textElement }
   }
 }
 
