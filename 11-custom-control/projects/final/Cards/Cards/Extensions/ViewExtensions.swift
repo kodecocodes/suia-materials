@@ -32,15 +32,12 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
+extension View {
+  func resizableView(transform: Binding<Transform>) -> some View {
+    return modifier(ResizableViewModifier(transform: transform))
+  }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+  func bringToFront() -> some View {
+    return modifier(BringToFront())
+  }
 }

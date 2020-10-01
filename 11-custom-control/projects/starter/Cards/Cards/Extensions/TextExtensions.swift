@@ -32,15 +32,11 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
-
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+extension Text {
+  func scaleableText(font: Font = Font.system(size: 1000)) -> some View {
+    self
+      .font(font)
+      .minimumScaleFactor(0.01)
+      .lineLimit(1)
+  }
 }

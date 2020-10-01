@@ -32,15 +32,16 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
+struct BringToFront: ViewModifier {
+  @GestureState private var isDragging = false
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+  func body(content: Content) -> some View {
+    content
+    .simultaneousGesture(
+      DragGesture(minimumDistance: 0)
+        .updating($isDragging) { _, gestureState, _ in
+          gestureState = true
+        })
+    .zIndex(isDragging ? 1000 : 0)
+  }
 }

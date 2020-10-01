@@ -32,15 +32,56 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
+struct ResizableView: View {
+  @State private var transform = Transform()
+  @State private var previousOffset: CGSize = .zero
+  @State private var previousRotation: Angle = .zero
+  @State private var scale: CGFloat = 1.0
+
+  let content = RoundedRectangle(cornerRadius: 30.0)
+  let color = Color.random()
+
+  var body: some View {
+    let scaleGesture = MagnificationGesture()
+      .onChanged { scale in
+        self.scale = scale
+      }
+      .onEnded { scale in
+        transform.size.width *= scale
+        transform.size.height *= scale
+        self.scale = 1.0
+      }
+    let rotationGesture = RotationGesture()
+      .onChanged { rotation in
+        transform.rotation += rotation - previousRotation
+        previousRotation = rotation
+      }
+      .onEnded { _ in
+        previousRotation = .zero
+      }
+    let dragGesture = DragGesture()
+      .onChanged { value in
+        transform.offset = value.translation + previousOffset
+      }
+      .onEnded { _ in
+        previousOffset = transform.offset
+      }
+    content
+      .frame(
+        width: transform.size.width,
+        height: transform.size.height)
+      .foregroundColor(color)
+      .rotationEffect(transform.rotation)
+      .scaleEffect(scale)
+      .offset(transform.offset)
+      .gesture(dragGesture)
+      .gesture(
+        SimultaneousGesture(rotationGesture, scaleGesture))
+  }
 }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+struct ResizableView_Previews: PreviewProvider {
+  static var previews: some View {
+    ResizableView()
+  }
 }

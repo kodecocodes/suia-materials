@@ -32,15 +32,45 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
+struct CardElementView: View {
+  let element: CardElement
+
+  var body: some View {
+    if let element = element as? ImageElement {
+      ImageElementView(element: element)
+    }
+    if let element = element as? TextElement {
+      TextElementView(element: element)
+    }
+  }
 }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+struct ImageElementView: View {
+  let element: ImageElement
+
+  var body: some View {
+    if let image = element.image {
+      image
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+    }
+  }
+}
+
+struct TextElementView: View {
+  let element: TextElement
+
+  var body: some View {
+    if !element.text.isEmpty {
+      Text(element.text)
+        .foregroundColor(element.textColor)
+        .scaleableText()
+    }
+  }
+}
+
+struct CardElementView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardElementView(element: initialElements[0])
+  }
 }

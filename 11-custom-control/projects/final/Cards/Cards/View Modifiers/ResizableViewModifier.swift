@@ -32,15 +32,61 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
+struct ResizableViewModifier: ViewModifier {
+  @Binding var transform: Transform
+  @State private var previousOffset: CGSize = .zero
+  @State private var previousRotation: Angle = .zero
+  @State private var scale: CGFloat = 1.0
+
+  func body(content: Content) -> some View {
+    let scaleGesture = MagnificationGesture()
+      .onChanged { scale in
+        self.scale = scale
+      }
+      .onEnded { scale in
+        transform.size.width *= scale
+        transform.size.height *= scale
+        self.scale = 1.0
+      }
+    let rotationGesture = RotationGesture()
+      .onChanged { rotation in
+        transform.rotation += rotation - previousRotation
+        previousRotation = rotation
+      }
+      .onEnded { _ in
+        previousRotation = .zero
+      }
+    let dragGesture = DragGesture()
+      .onChanged { value in
+        transform.offset = value.translation + previousOffset
+      }
+      .onEnded { _ in
+        previousOffset = transform.offset
+      }
+    return content
+      .frame(
+        width: transform.size.width,
+        height: transform.size.height)
+      .rotationEffect(transform.rotation)
+      .scaleEffect(scale)
+      .offset(transform.offset)
+      .gesture(dragGesture)
+      .gesture(
+        SimultaneousGesture(rotationGesture, scaleGesture))
+      .onAppear {
+        previousOffset = transform.offset
+      }
+  }
 }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+struct ResizableViewModifier_Previews: PreviewProvider {
+  static let color = Color.random()
+  static let content = Rectangle()
+
+  static var previews: some View {
+    content
+      .foregroundColor(color)
+      .modifier(ResizableViewModifier(
+        transform: .constant(Transform())))
+  }
 }

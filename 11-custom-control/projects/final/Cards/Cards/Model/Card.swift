@@ -32,15 +32,14 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
+struct Card: Identifiable {
+  let id = UUID()
+  var backgroundColor: Color = .yellow
+  var elements: [CardElement] = []
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+  mutating func remove(_ element: CardElement) {
+    if let index = element.index(in: elements) {
+      elements.remove(at: index)
+    }
+  }
 }

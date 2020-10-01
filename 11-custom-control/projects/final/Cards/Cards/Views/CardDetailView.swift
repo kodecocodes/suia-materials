@@ -32,15 +32,53 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
+struct CardDetailView: View {
+  @Binding var card: Card
+  @Binding var allCardsShowing: Bool
+
+  var body: some View {
+    ZStack {
+      card.backgroundColor
+        .edgesIgnoringSafeArea(.all)
+      ForEach(card.elements, id: \.id) { element in
+        CardElementView(element: element)
+          .contextMenu {
+            // swiftlint:disable:next multiple_closures_with_trailing_closure
+            Button(action: { card.remove(element) }) {
+              Label("Delete", systemImage: "trash")
+            }
+          }
+          .resizableView(transform: boundTransform(for: element))
+          .frame(
+            width: element.transform.size.width,
+            height: element.transform.size.height)
+      }
+    }
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
+        Button(action: { allCardsShowing.toggle() }) {
+          Text("Done")
+        }
+      }
+    }
+  }
+
+  func boundTransform(for element: CardElement)
+    -> Binding<Transform> {
+    guard let index = element.index(in: card.elements) else {
+      fatalError("Element does not exist")
+    }
+    return $card.elements[index].transform
+  }
 }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+struct CardDetailView_Previews: PreviewProvider {
+  static var previews: some View {
+    NavigationView {
+      CardDetailView(
+        card: .constant(initialCards[0]),
+        allCardsShowing: .constant(false))
+    }
+  }
 }

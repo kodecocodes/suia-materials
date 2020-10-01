@@ -32,15 +32,14 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
+@main
+struct CardsApp: App {
+  @StateObject var model = Model(defaultData: true)
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+  var body: some Scene {
+    WindowGroup {
+      CardsView()
+        .environmentObject(model)
+    }
+  }
 }

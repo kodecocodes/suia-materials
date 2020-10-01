@@ -32,15 +32,43 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
+struct CardsView: View {
+  @EnvironmentObject var model: Model
+  @State private var showAllCards = true
+  @State private var selectedCard: Card?
+
+  var body: some View {
+    VStack {
+      if showAllCards {
+        ScrollView(showsIndicators: false) {
+          ForEach(model.cards) { card in
+            card.backgroundColor
+              .cornerRadius(5.0)
+              .frame(width: 150, height: 200)
+              .onTapGesture {
+                showAllCards.toggle()
+                selectedCard = card
+              }
+          }
+        }
+      } else {
+        if let selectedCard = selectedCard,
+          let index = model.cards.index(for: selectedCard) {
+          NavigationView {
+            CardDetailView(
+              card: $model.cards[index],
+              allCardsShowing: $showAllCards)
+          }
+          .environment(\.horizontalSizeClass, .compact)
+        }
+      }
+    }
+  }
 }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+struct CardsView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardsView()
+      .environmentObject(Model(defaultData: true))
+  }
 }

@@ -32,15 +32,8 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
-
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+enum Settings {
+  static let defaultElementSize = CGSize(
+    width: 250, height: 180)
+  static let borderColor: Color = .blue
 }

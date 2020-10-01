@@ -32,15 +32,12 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  return CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
-}
+class Model: ObservableObject {
+  @Published var cards: [Card] = []
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+  init(defaultData: Bool = false) {
+    if defaultData {
+      cards = initialCards
+    }
+  }
 }
