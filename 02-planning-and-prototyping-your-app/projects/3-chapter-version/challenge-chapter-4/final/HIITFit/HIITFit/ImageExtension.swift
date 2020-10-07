@@ -39,7 +39,7 @@ extension Image {
   ///     - height: Frame height.
   func resizedToFill(width: CGFloat, height: CGFloat)
   -> some View {
-    return self
+    self
       .resizable()
       .aspectRatio(contentMode: .fill)
       .frame(width: width, height: height)
