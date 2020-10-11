@@ -34,7 +34,7 @@ import SwiftUI
 
 extension View {
   func resizableView() -> some View {
-    return modifier(ResizableViewModifier())
+    return modifier(ResizableView())
   }
 
   func bringToFront() -> some View {
