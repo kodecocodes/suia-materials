@@ -33,10 +33,9 @@
 import SwiftUI
 
 struct StickerPicker: View {
-  @State private var stickerNames: [String] = []
-  @Binding var stickerImage: UIImage?
   @Environment(\.presentationMode) var presentationMode
-
+  @Binding var stickerImage: UIImage?
+  @State private var stickerNames: [String] = []
   var columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
   ]
@@ -60,16 +59,9 @@ struct StickerPicker: View {
     }
   }
 
-  func image(from path: String) -> UIImage {
-    print("loading:", path)
-    return UIImage(named: path)
-      ?? UIImage(named: "error-image")
-      ?? UIImage()
-  }
-
   func loadStickers() -> [String] {
-    var stickerNames: [String] = []
     var themes: [URL] = []
+    var stickerNames: [String] = []
     // 1
     let fileManager = FileManager.default
     if let resourcePath = Bundle.main.resourcePath,
@@ -78,21 +70,28 @@ struct StickerPicker: View {
         at: URL(fileURLWithPath: resourcePath + "/Stickers"),
         includingPropertiesForKeys: nil,
         options: [.skipsSubdirectoryDescendants, .skipsHiddenFiles]) {
-      // 3
-      for case let url as URL in enumerator
-      where url.hasDirectoryPath {
-        themes.append(url)
-      }
+          // 3
+          for case let url as URL in enumerator
+          where url.hasDirectoryPath {
+            themes.append(url)
+          }
     }
     for theme in themes {
       if let files = try?
-        fileManager.contentsOfDirectory(atPath: theme.path) {
+      fileManager.contentsOfDirectory(atPath: theme.path) {
         for file in files {
           stickerNames.append(theme.path + "/" + file)
         }
       }
     }
     return stickerNames
+  }
+
+  func image(from path: String) -> UIImage {
+    print("loading:", path)
+    return UIImage(named: path)
+      ?? UIImage(named: "error-image")
+      ?? UIImage()
   }
 }
 

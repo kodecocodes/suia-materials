@@ -32,71 +32,36 @@
 
 import SwiftUI
 
-struct StickerPicker: View {
-  @State private var stickerNames: [String] = []
-
-  var columns = [
-    GridItem(.adaptive(minimum: 120), spacing: 10)
-  ]
-
+struct ToolbarButtonView: View {
   var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns) {
-        ForEach(stickerNames, id: \.self) { sticker in
-          Image(uiImage: image(from: sticker))
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-        }
-      }
+    VStack {
+      Image(systemName: "heart.circle")
+        .font(.largeTitle)
+      Text("Stickers")
     }
-    .onAppear {
-      stickerNames = loadStickers()
-    }
-  }
-
-  func image(from path: String) -> UIImage {
-    print("loading:", path)
-    return UIImage(named: path)
-      ?? UIImage(named: "error-image")
-      ?? UIImage()
-  }
-
-  func loadStickers() -> [String] {
-    var stickerNames: [String] = []
-    var themes: [URL] = []
-    // 1
-    let fileManager = FileManager.default
-    if let resourcePath = Bundle.main.resourcePath,
-      // 2
-      let enumerator = fileManager.enumerator(
-        at: URL(fileURLWithPath: resourcePath + "/Stickers"),
-        includingPropertiesForKeys: nil,
-        options: [.skipsSubdirectoryDescendants, .skipsHiddenFiles]) {
-          // 3
-          for case let url as URL in enumerator
-          where url.hasDirectoryPath {
-            themes.append(url)
-          }
-    }
-
-
-      for theme in themes {
-      if let files = try?
-        fileManager.contentsOfDirectory(atPath: theme.path) {
-        for file in files {
-          stickerNames.append(theme.path + "/" + file)
-        }
-      }
-    }
-
-    return stickerNames
+    .padding(.top)
   }
 }
 
-struct StickerView_Previews: PreviewProvider {
+struct CardViewToolbar: View {
+  @Binding var cardModal: CardModal?
+
+  var body: some View {
+    HStack {
+      Button(action: {
+        cardModal = .stickerPicker
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
+      }) {
+        ToolbarButtonView()
+      }
+    }
+  }
+}
+
+struct CardViewToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    StickerPicker()
-    StickerPicker()
-      .previewLayout(PreviewLayout.fixed(width: 896, height: 414))
+    CardViewToolbar(cardModal: .constant(.stickerPicker))
+      .previewLayout(.sizeThatFits)
+      .padding()
   }
 }

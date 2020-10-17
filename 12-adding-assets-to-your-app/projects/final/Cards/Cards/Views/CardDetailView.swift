@@ -32,22 +32,11 @@
 
 import SwiftUI
 
-enum CurrentSheet: Identifiable {
-  case stickerPicker
-
-  var id: Int {
-    hashValue
-  }
-}
-
 struct CardDetailView: View {
   @Binding var card: Card
   @Binding var allCardsShowing: Bool
-
-
-  @State private var cardModal: CardModal?
+  @State private var currentModal: CardModal?
   @State private var stickerImage: UIImage?
-
 
   var body: some View {
     ZStack {
@@ -75,10 +64,10 @@ struct CardDetailView: View {
         }
       }
       ToolbarItem(placement: .bottomBar) {
-        CardViewToolbar(cardModal: $cardModal)
+        CardViewToolbar(cardModal: $currentModal)
       }
     }
-    .sheet(item: $cardModal) { item in
+    .sheet(item: $currentModal) { item in
       switch item {
       case .stickerPicker:
         StickerPicker(stickerImage: $stickerImage)

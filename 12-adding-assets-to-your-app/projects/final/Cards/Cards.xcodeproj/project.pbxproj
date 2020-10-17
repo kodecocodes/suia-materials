@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		82357D0D253572FC00EA7E02 /* StickerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82357D0C253572FC00EA7E02 /* StickerPicker.swift */; };
 		823E6C15250A41BA001C5B59 /* BringToFrontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823E6C14250A41BA001C5B59 /* BringToFrontModifier.swift */; };
-		8257621B25351E5B002A2C13 /* CardModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8257621A25351E5B002A2C13 /* CardModal.swift */; };
-		8257621F25352166002A2C13 /* CardViewToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8257621E25352166002A2C13 /* CardViewToolbar.swift */; };
 		825F9674250A307C00ECE5DF /* CardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F9673250A307C00ECE5DF /* CardsApp.swift */; };
 		825F9678250A307D00ECE5DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 825F9677250A307D00ECE5DF /* Assets.xcassets */; };
 		825F967B250A307D00ECE5DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 825F967A250A307D00ECE5DF /* Preview Assets.xcassets */; };
@@ -20,7 +17,10 @@
 		825F968B250A34C100ECE5DF /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F968A250A34C100ECE5DF /* Operators.swift */; };
 		825F968D250A368A00ECE5DF /* ResizableViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F968C250A368A00ECE5DF /* ResizableViewModifier.swift */; };
 		825F968F250A394200ECE5DF /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825F968E250A394200ECE5DF /* ViewExtensions.swift */; };
-		826DB42125391AC6008B7B06 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 826DB42025391AC6008B7B06 /* Stickers */; };
+		826DB429253973E1008B7B06 /* CardModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826DB428253973E1008B7B06 /* CardModal.swift */; };
+		826DB42D25397439008B7B06 /* CardViewToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826DB42C25397439008B7B06 /* CardViewToolbar.swift */; };
+		826DB43425397C18008B7B06 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 826DB43325397C18008B7B06 /* Stickers */; };
+		826DB43725397CB8008B7B06 /* StickerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826DB43625397CB8008B7B06 /* StickerPicker.swift */; };
 		8299E3842526AB3300047B6A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299E3832526AB3300047B6A /* Card.swift */; };
 		8299E3872526ABE800047B6A /* CardElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299E3862526ABE800047B6A /* CardElement.swift */; };
 		8299E38A2526B02900047B6A /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D155C02525A1C9002E9DDC /* PreviewData.swift */; };
@@ -34,10 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		82357D0C253572FC00EA7E02 /* StickerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPicker.swift; sourceTree = "<group>"; };
 		823E6C14250A41BA001C5B59 /* BringToFrontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BringToFrontModifier.swift; sourceTree = "<group>"; };
-		8257621A25351E5B002A2C13 /* CardModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModal.swift; sourceTree = "<group>"; };
-		8257621E25352166002A2C13 /* CardViewToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewToolbar.swift; sourceTree = "<group>"; };
 		825F9670250A307C00ECE5DF /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		825F9673250A307C00ECE5DF /* CardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApp.swift; sourceTree = "<group>"; };
 		825F9677250A307D00ECE5DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +46,10 @@
 		825F968A250A34C100ECE5DF /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		825F968C250A368A00ECE5DF /* ResizableViewModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableViewModifier.swift; sourceTree = "<group>"; };
 		825F968E250A394200ECE5DF /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		826DB42025391AC6008B7B06 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = ../../../../../assets/Stickers; sourceTree = "<group>"; };
+		826DB428253973E1008B7B06 /* CardModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModal.swift; sourceTree = "<group>"; };
+		826DB42C25397439008B7B06 /* CardViewToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewToolbar.swift; sourceTree = "<group>"; };
+		826DB43325397C18008B7B06 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = "../../../../../Github-Materials/12-adding-assets-to-your-app/assets/Stickers"; sourceTree = "<group>"; };
+		826DB43625397CB8008B7B06 /* StickerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPicker.swift; sourceTree = "<group>"; };
 		8299E3832526AB3300047B6A /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		8299E3862526ABE800047B6A /* CardElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardElement.swift; sourceTree = "<group>"; };
 		8299E38C2526B0A400047B6A /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
@@ -124,16 +124,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		8257621925351E47002A2C13 /* Card Modals */ = {
-			isa = PBXGroup;
-			children = (
-				8257621A25351E5B002A2C13 /* CardModal.swift */,
-				8257621E25352166002A2C13 /* CardViewToolbar.swift */,
-				82357D0C253572FC00EA7E02 /* StickerPicker.swift */,
-			);
-			path = "Card Modals";
-			sourceTree = "<group>";
-		};
 		825F9667250A307C00ECE5DF = {
 			isa = PBXGroup;
 			children = (
@@ -155,12 +145,13 @@
 			children = (
 				825F9673250A307C00ECE5DF /* CardsApp.swift */,
 				823E6C19250A42FD001C5B59 /* Views */,
-				8257621925351E47002A2C13 /* Card Modals */,
+				826DB427253973AA008B7B06 /* Card Modal Views */,
 				823E6C18250A42F4001C5B59 /* View Modifiers */,
 				823E6C1A250A4304001C5B59 /* Model */,
 				823E6C17250A42E7001C5B59 /* Config */,
 				823E6C16250A42BA001C5B59 /* Extensions */,
-				826DB40D253822F6008B7B06 /* Assets */,
+				825F9677250A307D00ECE5DF /* Assets.xcassets */,
+				826DB43325397C18008B7B06 /* Stickers */,
 				825F967C250A307D00ECE5DF /* Info.plist */,
 				825F9679250A307D00ECE5DF /* Preview Content */,
 			);
@@ -176,13 +167,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		826DB40D253822F6008B7B06 /* Assets */ = {
+		826DB427253973AA008B7B06 /* Card Modal Views */ = {
 			isa = PBXGroup;
 			children = (
-				825F9677250A307D00ECE5DF /* Assets.xcassets */,
-				826DB42025391AC6008B7B06 /* Stickers */,
+				826DB428253973E1008B7B06 /* CardModal.swift */,
+				826DB42C25397439008B7B06 /* CardViewToolbar.swift */,
+				826DB43625397CB8008B7B06 /* StickerPicker.swift */,
 			);
-			path = Assets;
+			path = "Card Modal Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,7 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				826DB42125391AC6008B7B06 /* Stickers in Resources */,
+				826DB43425397C18008B7B06 /* Stickers in Resources */,
 				829DAC062525BA20002EBFDE /* license.txt in Resources */,
 				825F967B250A307D00ECE5DF /* Preview Assets.xcassets in Resources */,
 				825F9678250A307D00ECE5DF /* Assets.xcassets in Resources */,
@@ -285,16 +277,16 @@
 				825F968B250A34C100ECE5DF /* Operators.swift in Sources */,
 				8299E38D2526B0A400047B6A /* CardsView.swift in Sources */,
 				825F968F250A394200ECE5DF /* ViewExtensions.swift in Sources */,
-				8257621B25351E5B002A2C13 /* CardModal.swift in Sources */,
+				826DB429253973E1008B7B06 /* CardModal.swift in Sources */,
 				8299E39A2526B6FE00047B6A /* ArrayExtensions.swift in Sources */,
+				826DB43725397CB8008B7B06 /* StickerPicker.swift in Sources */,
 				825F9674250A307C00ECE5DF /* CardsApp.swift in Sources */,
-				8257621F25352166002A2C13 /* CardViewToolbar.swift in Sources */,
+				826DB42D25397439008B7B06 /* CardViewToolbar.swift in Sources */,
 				8299E3962526B2A000047B6A /* Model.swift in Sources */,
 				8299E3872526ABE800047B6A /* CardElement.swift in Sources */,
 				8299E3842526AB3300047B6A /* Card.swift in Sources */,
 				825F9685250A314200ECE5DF /* Settings.swift in Sources */,
 				825F9689250A32AE00ECE5DF /* Transform.swift in Sources */,
-				82357D0D253572FC00EA7E02 /* StickerPicker.swift in Sources */,
 				823E6C15250A41BA001C5B59 /* BringToFrontModifier.swift in Sources */,
 				8299E3932526B1C000047B6A /* CardDetailView.swift in Sources */,
 				8299E3902526B11C00047B6A /* CardElementView.swift in Sources */,
@@ -427,7 +419,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Cards/Preview Content\"";
-				DEVELOPMENT_TEAM = 3E7TCD55JT;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Cards/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -449,7 +441,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Cards/Preview Content\"";
-				DEVELOPMENT_TEAM = 3E7TCD55JT;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Cards/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

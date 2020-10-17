@@ -36,5 +36,5 @@ enum CardModal: Identifiable {
   var id: Int {
     hashValue
   }
-  case photoPicker, colorPicker, stickerPicker
+  case stickerPicker, photoPicker, colorPicker
 }

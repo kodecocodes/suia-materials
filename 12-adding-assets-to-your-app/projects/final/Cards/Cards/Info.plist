@@ -33,8 +33,6 @@
 		<string>LaunchColor</string>
 		<key>UIImageName</key>
 		<string>LaunchImage</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

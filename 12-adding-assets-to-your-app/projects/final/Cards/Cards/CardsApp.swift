@@ -36,14 +36,6 @@ import SwiftUI
 struct CardsApp: App {
   @StateObject var model = Model(defaultData: true)
 
-  static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-  static let libraryDirectory = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
-
-  init() {
-    print(Self.documentsDirectory)
-    print(Self.libraryDirectory)
-  }
-
   var body: some Scene {
     WindowGroup {
       CardsView()
