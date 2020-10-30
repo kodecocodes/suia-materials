@@ -43,10 +43,10 @@ extension CardElement {
   }
 }
 
-struct ImageElement: CardElement {
+struct ImageElement: CardElement, Identifiable {
   let id = UUID()
   var transform = Transform()
-  var image: Image?
+  var image: Image
 }
 
 struct TextElement: CardElement {

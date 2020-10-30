@@ -52,11 +52,9 @@ struct ImageElementView: View {
   let element: ImageElement
 
   var body: some View {
-    if let image = element.image {
-      image
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-    }
+    element.image
+      .resizable()
+      .aspectRatio(contentMode: .fit)
   }
 }
 
