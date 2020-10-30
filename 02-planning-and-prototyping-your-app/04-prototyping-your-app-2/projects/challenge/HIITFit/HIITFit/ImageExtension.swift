@@ -45,12 +45,3 @@ extension Image {
       .frame(width: width, height: height)
   }
 }
-
-struct LibraryContent: LibraryContentProvider {
-  @LibraryContentBuilder
-  func modifiers(base: Image) -> [LibraryItem] {
-    LibraryItem(
-      base.resizedToFill(width: 100, height: 100)
-    )
-  }
-}
