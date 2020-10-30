@@ -40,4 +40,10 @@ class Model: ObservableObject {
       cards = initialCards
     }
   }
+
+  func remove(_ card: Card) {
+    if let index = cards.index(for: card) {
+      cards.remove(at: index)
+    }
+  }
 }
