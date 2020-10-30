@@ -42,6 +42,9 @@ struct CardElementView: View {
     if let element = element as? TextElement {
       TextElementView(element: element)
     }
+    if let element = element as? ColorElement {
+      ColorElementView(element: element)
+    }
   }
 }
 
@@ -64,6 +67,15 @@ struct TextElementView: View {
         .foregroundColor(element.textColor)
         .scaleableText()
     }
+  }
+}
+
+struct ColorElementView: View {
+  let element: ColorElement
+
+  var body: some View {
+    element.color
+      .opacity(element.opacity)
   }
 }
 

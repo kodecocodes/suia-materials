@@ -49,6 +49,13 @@ struct ImageElement: CardElement {
   var image: Image
 }
 
+struct ColorElement: CardElement {
+  let id = UUID()
+  var transform = Transform()
+  var color: Color = .red
+  var opacity: Double = 1.0
+}
+
 struct TextElement: CardElement {
   let id = UUID()
   var transform = Transform()

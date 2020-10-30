@@ -49,6 +49,12 @@ struct CardsView: View {
                 showAllCards.toggle()
                 selectedCard = card
               }
+              .contextMenu {
+                // swiftlint:disable:next multiple_closures_with_trailing_closure
+                Button(action: { model.remove(card) }) {
+                  Label("Delete", systemImage: "trash")
+                }
+              }
           }
         }
       } else {
