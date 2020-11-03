@@ -93,11 +93,17 @@ struct CardDetailView: View {
 }
 
 struct CardDetailView_Previews: PreviewProvider {
+  struct CardDetailPreview: View {
+    @State private var card = initialCards[0]
+    var body: some View {
+      CardDetailView(
+        card: $card,
+        allCardsShowing: .constant(false))
+    }
+  }
   static var previews: some View {
     NavigationView {
-      CardDetailView(
-        card: .constant(initialCards[0]),
-        allCardsShowing: .constant(false))
+      CardDetailPreview()
     }
   }
 }

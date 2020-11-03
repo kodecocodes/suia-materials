@@ -64,15 +64,13 @@ struct ResizableViewModifier: ViewModifier {
         previousOffset = transform.offset
       }
     return content
-      .frame(
-        width: transform.size.width,
+      .frame(width: transform.size.width,
         height: transform.size.height)
       .rotationEffect(transform.rotation)
       .scaleEffect(scale)
       .offset(transform.offset)
       .gesture(dragGesture)
-      .gesture(
-        SimultaneousGesture(rotationGesture, scaleGesture))
+      .gesture(SimultaneousGesture(rotationGesture, scaleGesture))
       .onAppear {
         previousOffset = transform.offset
       }
