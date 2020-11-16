@@ -33,6 +33,10 @@
 import Foundation
 
 struct Exercise: Identifiable {
+  let id = UUID()
+  let exerciseName: String
+  let videoName: String
+  
   enum ExerciseEnum: CustomStringConvertible { // String {
     case squat //= "Squat"
     case stepUp //= "Step Up"
@@ -54,10 +58,6 @@ struct Exercise: Identifiable {
       }
     }
   }
-
-  let id = UUID()
-  let exerciseName: String
-  let videoName: String
 }
 
 extension Exercise {
