@@ -32,12 +32,63 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct ToolbarButtonView: View {
+  let modal: CardModal
+  let modalButton: [CardModal: (
+    text: String, imageName: String)] = [
+    CardModal.photoPicker: ("Photos", "photo"),
+    CardModal.framePicker: ("Frames", "square.on.circle"),
+    CardModal.stickerPicker: ("Stickers", "heart.circle")
+    ]
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  var body: some View {
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+    VStack {
+      Image(systemName: imageName)
+        .font(.largeTitle)
+      Text(text)
+    }
+    .padding(.top)
+    }
+  }
+}
+
+struct CardViewToolbar: View {
+  @Binding var cardModal: CardModal?
+  let selectedElement: CardElement?
+
+  var body: some View {
+    HStack {
+      Button(action: {
+        cardModal = .photoPicker
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
+      }) {
+        ToolbarButtonView(modal: .photoPicker)
+      }
+      Button(action: {
+        cardModal = .framePicker
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
+      }) {
+        ToolbarButtonView(modal: .framePicker)
+      }
+      .disabled(selectedElement == nil || !(selectedElement.self is ImageElement))
+      Button(action: {
+        cardModal = .stickerPicker
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
+      }) {
+        ToolbarButtonView(modal: .stickerPicker)
+      }
+    }
+  }
+}
+
+struct CardViewToolbar_Previews: PreviewProvider {
+  static var previews: some View {
+    CardViewToolbar(
+      cardModal: .constant(.stickerPicker),
+      selectedElement: nil)
+      .previewLayout(.sizeThatFits)
+      .padding()
   }
 }

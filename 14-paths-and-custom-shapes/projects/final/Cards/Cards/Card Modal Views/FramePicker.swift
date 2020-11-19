@@ -32,12 +32,43 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct FramePicker: View {
+  @Environment(\.presentationMode) var presentationMode
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  // 1
+  @Binding var frame: AnyShape?
+  private let columns = [
+    GridItem(.adaptive(minimum: 120), spacing: 10)
+  ]
+  private let style = StrokeStyle(
+    lineWidth: 5, lineJoin: .round)
+
+  var body: some View {
+    ScrollView {
+      LazyVGrid(columns: columns) {
+      // 2
+        ForEach(0..<shapes.count, id: \.self) { index in
+          shapes[index]
+          // 3
+            .stroke(Color.primary, style: style)
+            // 4
+            .background(shapes[index].fill(Color.secondary))
+            .frame(width: 100, height: 120)
+            .padding()
+            // 5
+            .onTapGesture {
+              frame = shapes[index]
+              presentationMode.wrappedValue.dismiss()
+            }
+        }
+      }
+    }
+    .padding(5)
+  }
+}
+
+struct FramePicker_Previews: PreviewProvider {
+  static var previews: some View {
+    FramePicker(frame: .constant(nil))
   }
 }

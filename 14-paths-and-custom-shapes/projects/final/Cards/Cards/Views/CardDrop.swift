@@ -32,12 +32,23 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct CardDrop: DropDelegate {
+  @Binding var card: Card
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  func performDrop(info: DropInfo) -> Bool {
+    let itemProviders = info.itemProviders(for: [.image])
+
+    for item in itemProviders {
+      if item.canLoadObject(ofClass: UIImage.self) {
+        item.loadObject(ofClass: UIImage.self) { image, _ in
+          if let image = image as? UIImage {
+            DispatchQueue.main.async {
+              card.addElement(uiImage: image)
+            }
+          }
+        }
+      }
+    }
+    return true
   }
 }

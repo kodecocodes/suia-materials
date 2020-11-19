@@ -30,14 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
-
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+enum CardModal: Identifiable {
+  var id: Int {
+    hashValue
   }
+  case stickerPicker, photoPicker,
+    framePicker, colorPicker
 }

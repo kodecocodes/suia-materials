@@ -31,13 +31,30 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PencilKit
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct PencilView: View {
+  @State private var canvas = PKCanvasView()
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  var body: some View {
+    PencilViewRepresentable(canvas: $canvas)
+  }
+}
+
+struct PencilView_Previews: PreviewProvider {
+  static var previews: some View {
+    PencilView()
+  }
+}
+
+struct PencilViewRepresentable: UIViewRepresentable {
+  @Binding var canvas: PKCanvasView
+
+  func makeUIView(context: Context) -> some UIView {
+    canvas.drawingPolicy = .anyInput
+    return canvas
+  }
+
+  func updateUIView(_ uiView: UIViewType, context: Context) {
   }
 }

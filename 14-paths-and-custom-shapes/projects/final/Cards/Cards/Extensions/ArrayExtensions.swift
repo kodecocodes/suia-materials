@@ -32,12 +32,8 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
-
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+extension Array where Element: Identifiable {
+  func index(for item: Element) -> Int? {
+    firstIndex { $0.id == item.id }
   }
 }

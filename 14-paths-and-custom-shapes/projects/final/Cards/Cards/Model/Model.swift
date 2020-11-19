@@ -32,12 +32,18 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+class Model: ObservableObject {
+  @Published var cards: [Card] = []
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  init(defaultData: Bool = false) {
+    if defaultData {
+      cards = initialCards
+    }
+  }
+
+  func remove(_ card: Card) {
+    if let index = cards.index(for: card) {
+      cards.remove(at: index)
+    }
   }
 }

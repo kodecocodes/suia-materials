@@ -32,12 +32,15 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+func + (left: CGSize, right: CGSize) -> CGSize {
+  return CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
+}
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
-  }
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right
+  )
 }

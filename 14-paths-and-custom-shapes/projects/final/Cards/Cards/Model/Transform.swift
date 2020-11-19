@@ -32,12 +32,10 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
-
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
-  }
+struct Transform {
+  var size = CGSize(
+    width: Settings.defaultElementSize.width,
+    height: Settings.defaultElementSize.height)
+  var rotation: Angle = .zero
+  var offset: CGSize = .zero
 }

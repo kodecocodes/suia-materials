@@ -32,12 +32,49 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct CardsView: View {
+  @EnvironmentObject var model: Model
+  @State private var showAllCards = true
+  @State private var selectedCard: Card?
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  var body: some View {
+    VStack {
+      if showAllCards {
+        ScrollView(showsIndicators: false) {
+          ForEach(model.cards) { card in
+            card.backgroundColor
+              .cornerRadius(5.0)
+              .frame(width: 150, height: 200)
+              .onTapGesture {
+                showAllCards.toggle()
+                selectedCard = card
+              }
+              .contextMenu {
+                // swiftlint:disable:next multiple_closures_with_trailing_closure
+                Button(action: { model.remove(card) }) {
+                  Label("Delete", systemImage: "trash")
+                }
+              }
+          }
+        }
+      } else {
+        if let selectedCard = selectedCard,
+          let index = model.cards.index(for: selectedCard) {
+          NavigationView {
+            CardDetailView(
+              card: $model.cards[index],
+              allCardsShowing: $showAllCards)
+          }
+          .environment(\.horizontalSizeClass, .compact)
+        }
+      }
+    }
+  }
+}
+
+struct CardsView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardsView()
+      .environmentObject(Model(defaultData: true))
   }
 }

@@ -32,12 +32,29 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct Card: Identifiable {
+  let id = UUID()
+  var backgroundColor: Color = .yellow
+  var elements: [CardElement] = []
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  mutating func remove(_ element: CardElement) {
+    if let index = element.index(in: elements) {
+      elements.remove(at: index)
+    }
+  }
+
+  mutating func addElement(uiImage: UIImage) {
+    let image = Image(uiImage: uiImage)
+    let element = ImageElement(image: image)
+    elements.append(element)
+  }
+
+  mutating func update(_ element: CardElement?, frame: AnyShape) {
+    if let element = element as? ImageElement,
+      let index = element.index(in: elements) {
+        var newElement = element
+        newElement.frame = frame
+        elements[index] = newElement
+    }
   }
 }

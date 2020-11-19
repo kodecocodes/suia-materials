@@ -32,12 +32,14 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+@main
+struct CardsApp: App {
+  @StateObject var model = Model(defaultData: true)
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  var body: some Scene {
+    WindowGroup {
+      CardsView()
+        .environmentObject(model)
+    }
   }
 }

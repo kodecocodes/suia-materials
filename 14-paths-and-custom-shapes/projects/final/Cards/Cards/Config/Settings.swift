@@ -32,12 +32,9 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
-
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
-  }
+enum Settings {
+  static let defaultElementSize = CGSize(
+    width: 250, height: 180)
+  static let borderColor: Color = .blue
+  static let borderWidth: CGFloat = 5
 }

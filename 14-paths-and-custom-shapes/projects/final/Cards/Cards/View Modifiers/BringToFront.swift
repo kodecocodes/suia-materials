@@ -32,12 +32,16 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct BringToFront: ViewModifier {
+  @GestureState private var isDragging = false
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  func body(content: Content) -> some View {
+    content
+    .simultaneousGesture(
+      DragGesture(minimumDistance: 0)
+        .updating($isDragging) { _, gestureState, _ in
+          gestureState = true
+        })
+    .zIndex(isDragging ? 1000 : 0)
   }
 }

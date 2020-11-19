@@ -32,12 +32,12 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+extension View {
+  func resizableView(transform: Binding<Transform>) -> some View {
+    return modifier(ResizableViewModifier(transform: transform))
+  }
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  func bringToFront() -> some View {
+    return modifier(BringToFront())
   }
 }

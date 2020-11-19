@@ -32,12 +32,64 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct CardElementView: View {
+  let element: CardElement
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  var body: some View {
+    if let element = element as? ImageElement {
+      ImageElementView(element: element)
+    }
+    if let element = element as? TextElement {
+      TextElementView(element: element)
+    }
+    if let element = element as? ColorElement {
+      ColorElementView(element: element)
+    }
+  }
+}
+
+struct ImageElementView: View {
+  let element: ImageElement
+
+  var body: some View {
+    if let frame = element.frame {
+      bodyMain
+        .clipShape(frame)
+    } else {
+      bodyMain
+    }
+  }
+
+  var bodyMain: some View {
+    element.image
+      .resizable()
+      .aspectRatio(contentMode: .fit)
+  }
+}
+
+struct TextElementView: View {
+  let element: TextElement
+
+  var body: some View {
+    if !element.text.isEmpty {
+      Text(element.text)
+        .foregroundColor(element.textColor)
+        .scaleableText()
+    }
+  }
+}
+
+struct ColorElementView: View {
+  let element: ColorElement
+
+  var body: some View {
+    element.color
+      .opacity(element.opacity)
+  }
+}
+
+struct CardElementView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardElementView(element: initialElements[0])
   }
 }

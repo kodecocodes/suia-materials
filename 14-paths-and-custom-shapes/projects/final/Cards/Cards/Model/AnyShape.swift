@@ -32,12 +32,19 @@
 
 import SwiftUI
 
-extension Color {
-  static let randomColors: [Color] = [
-    .green, .red, .blue, .gray, .yellow, .pink, .orange, .purple
-  ]
+struct AnyShape: Shape {
+  private let path: (CGRect) -> Path
 
-  static func random() -> Color {
-    randomColors.randomElement() ?? .black
+  // 1
+  init<CustomShape: Shape>(_ shape: CustomShape) {
+  // 2
+    self.path = { rect in
+  // 3
+    shape.path(in: rect)
+    }
+  }
+
+  func path(in rect: CGRect) -> Path {
+    path(rect)
   }
 }
