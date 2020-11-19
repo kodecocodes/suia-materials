@@ -38,11 +38,15 @@ struct CardDetailView: View {
   @State private var currentModal: CardModal?
   @State private var stickerImage: UIImage?
   @State private var images: [UIImage] = []
+  @State private var selectedElement: CardElement?
 
   var body: some View {
     ZStack {
       card.backgroundColor
         .edgesIgnoringSafeArea(.all)
+        .onTapGesture {
+          selectedElement = nil
+        }
       ForEach(card.elements, id: \.id) { element in
         CardElementView(element: element)
           .contextMenu {
@@ -51,10 +55,16 @@ struct CardDetailView: View {
               Label("Delete", systemImage: "trash")
             }
           }
+          .border(
+            Settings.borderColor,
+            width: selectedElement?.id == element.id ? 5 : 0)
           .resizableView(transform: boundTransform(for: element))
           .frame(
             width: element.transform.size.width,
             height: element.transform.size.height)
+          .onTapGesture {
+            selectedElement = element
+          }
       }
     }
     // 1
@@ -67,7 +77,9 @@ struct CardDetailView: View {
         }
       }
       ToolbarItem(placement: .bottomBar) {
-        CardViewToolbar(cardModal: $currentModal)
+        CardViewToolbar(
+          cardModal: $currentModal,
+          selectedElement: selectedElement)
       }
     }
     .sheet(item: $currentModal) { item in

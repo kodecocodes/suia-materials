@@ -41,42 +41,14 @@ let initialCards: [Card] = [
 ]
 
 let initialElements: [CardElement] = [
-  ColorElement(
-    transform: Transform(
-      size: CGSize(width: 333, height: 225),
-    rotation: .init(degrees: 10),
-    offset: CGSize(width: 5, height: -245)),
-    color: .yellow,
-    opacity: 0.8),
   ImageElement(
     transform: Transform(
-      size: CGSize(width: 310, height: 225),
-      rotation: .init(degrees: 10),
-      offset: CGSize(width: 5, height: -245)), image: Image("hedgehog1")),
-  ColorElement(
-    transform: Transform(
-      size: CGSize(width: 260, height: 180),
-    rotation: .init(degrees: -20),
-    offset: CGSize(width: 5, height: 200)),
-    color: .yellow,
-    opacity: 0.8),
-  ImageElement(
-    transform: Transform(
-      size: CGSize(width: 240, height: 160),
-      rotation: .init(degrees: -20),
-      offset: CGSize(width: 5, height: 200)), image: Image("hedgehog2")),
-  ImageElement(
-    transform: Transform(),
-      image: Image("hedgehog3")),
-  ColorElement(
-    transform: Transform(
-      size: CGSize(width: 295, height: 50),
-    offset: CGSize(width: -35, height: -123)),
-    color: .blue,
-    opacity: 0.3),
+      size: CGSize(width: 412, height: 296),
+      rotation: .init(degrees: -6),
+      offset: CGSize(width: 4, height: -137)), image: Image("giraffe")),
   TextElement(
     transform: Transform(
       size: Settings.defaultElementSize * 1.2,
-      offset: CGSize(width: -35, height: -125)), text: "Hedgehogs!!!",
-      textColor: .blue)
+      offset: CGSize(width: 12, height: 81)), text: "Snack time!",
+    textColor: .yellow)
 ]

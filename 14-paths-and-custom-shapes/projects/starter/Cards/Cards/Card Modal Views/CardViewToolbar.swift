@@ -37,6 +37,7 @@ struct ToolbarButtonView: View {
   let modalButton: [CardModal: (
     text: String, imageName: String)] = [
     CardModal.photoPicker: ("Photos", "photo"),
+    CardModal.framePicker: ("Frames", "square.on.circle"),
     CardModal.stickerPicker: ("Stickers", "heart.circle")
     ]
 
@@ -55,6 +56,7 @@ struct ToolbarButtonView: View {
 
 struct CardViewToolbar: View {
   @Binding var cardModal: CardModal?
+  let selectedElement: CardElement?
 
   var body: some View {
     HStack {
@@ -64,6 +66,13 @@ struct CardViewToolbar: View {
       }) {
         ToolbarButtonView(modal: .photoPicker)
       }
+      Button(action: {
+        cardModal = .framePicker
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
+      }) {
+        ToolbarButtonView(modal: .framePicker)
+      }
+      .disabled(selectedElement == nil || !(selectedElement.self is ImageElement))
       Button(action: {
         cardModal = .stickerPicker
         // swiftlint:disable:next multiple_closures_with_trailing_closure
@@ -76,7 +85,9 @@ struct CardViewToolbar: View {
 
 struct CardViewToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    CardViewToolbar(cardModal: .constant(.stickerPicker))
+    CardViewToolbar(
+      cardModal: .constant(.stickerPicker),
+      selectedElement: nil)
       .previewLayout(.sizeThatFits)
       .padding()
   }
