@@ -57,7 +57,7 @@ struct CardDetailView: View {
           }
           .border(
             Settings.borderColor,
-            width: selectedElement?.id == element.id ? 5 : 0)
+            width: selectedElement?.id == element.id ? Settings.borderWidth : 0)
           .resizableView(transform: boundTransform(for: element))
           .frame(
             width: element.transform.size.width,
