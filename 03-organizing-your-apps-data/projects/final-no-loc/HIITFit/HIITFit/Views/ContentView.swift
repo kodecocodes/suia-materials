@@ -36,10 +36,8 @@ struct ContentView: View {
   var body: some View {
     TabView {
       WelcomeView()
-      ForEach(Exercise.exercises) { exercise in
-        ExerciseView(
-          name: exercise.exerciseName,
-          videoName: exercise.videoName)
+      ForEach(0 ..< Exercise.exercises.count) { index in
+        ExerciseView(index: index)
       }
     }
     .tabViewStyle(PageTabViewStyle())

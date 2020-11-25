@@ -32,8 +32,7 @@
 
 import Foundation
 
-struct Exercise: Identifiable {
-  let id = UUID()
+struct Exercise {
   let exerciseName: String
   let videoName: String
 
