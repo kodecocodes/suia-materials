@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD3860D5257327F700CF0397 /* StateArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3860D4257327F700CF0397 /* StateArray.swift */; };
 		CDA8CD582564E47000126B1C /* ScratchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8CD572564E47000126B1C /* ScratchApp.swift */; };
 		CDA8CD5A2564E47000126B1C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA8CD592564E47000126B1C /* ContentView.swift */; };
 		CDA8CD5C2564E47200126B1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA8CD5B2564E47200126B1C /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD3860D4257327F700CF0397 /* StateArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateArray.swift; sourceTree = "<group>"; };
 		CDA8CD542564E47000126B1C /* Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scratch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA8CD572564E47000126B1C /* ScratchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScratchApp.swift; sourceTree = "<group>"; };
 		CDA8CD592564E47000126B1C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 				CDA8CD572564E47000126B1C /* ScratchApp.swift */,
 				CDA8CD592564E47000126B1C /* ContentView.swift */,
 				CDA8CD672564E4AC00126B1C /* RatingView.swift */,
+				CD3860D4257327F700CF0397 /* StateArray.swift */,
 				CDA8CD5B2564E47200126B1C /* Assets.xcassets */,
 				CDA8CD602564E47200126B1C /* Info.plist */,
 				CDA8CD5D2564E47200126B1C /* Preview Content */,
@@ -144,6 +147,7 @@
 				CDA8CD682564E4AC00126B1C /* RatingView.swift in Sources */,
 				CDA8CD5A2564E47000126B1C /* ContentView.swift in Sources */,
 				CDA8CD582564E47000126B1C /* ScratchApp.swift in Sources */,
+				CD3860D5257327F700CF0397 /* StateArray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,45 +31,30 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
-struct ExerciseView: View {
-  let index: Int
-  let interval: TimeInterval = 30
+struct TimerView: View {
+  @Binding var timeRemaining: Int
+  let timer = Timer.publish(
+    every: 1,
+    on: .main,
+    in: .common)
+    .autoconnect()
 
   var body: some View {
-    GeometryReader { geometry in
-      VStack {
-        HeaderView(
-          titleText: Exercise.exercises[index].exerciseName)
-          .padding(.bottom)
-        if let url = Bundle.main.url(
-          forResource: Exercise.exercises[index].videoName,
-          withExtension: "mp4") {
-          VideoPlayer(player: AVPlayer(url: url))
-            .frame(height: geometry.size.height * 0.45)
-        } else {
-          Text(
-            "Couldn't find \(Exercise.exercises[index].videoName).mp4")
-            .foregroundColor(.red)
+    Text("\(timeRemaining)")
+      .font(.system(size: 120, design: .rounded))
+      .padding()
+      .onReceive(timer) { _ in
+        if self.timeRemaining > 0 {
+          self.timeRemaining -= 1
         }
-        Text(Date().addingTimeInterval(interval), style: .timer)
-          .font(.system(size: 90))
-        Button("Start/Done") { }
-          .font(.title3)
-          .padding()
-        RatingView()
-          .padding()
-        Spacer()
-        Button("History") { }
-          .padding(.bottom)
       }
-    }
   }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
+struct TimerView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseView(index: 0)
+    TimerView(timeRemaining: .constant(30))
+      .previewLayout(.sizeThatFits)
   }
 }

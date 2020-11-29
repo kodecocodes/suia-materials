@@ -34,21 +34,32 @@ import SwiftUI
 import AVKit
 
 struct ExerciseView: View {
+  @EnvironmentObject var history: HistoryStore
+  @State var showHistory = false
+  @State var showSuccess = false
+
   let index: Int
   @Binding var selectedTab: Int
-  let interval: TimeInterval = 30
+
+  let exerciseTime: Int = 3
+  @State var timeRemaining = 3 //30
+  @State var showTimer = false
 
   var lastExercise: Bool {
     index + 1 == Exercise.exercises.count
   }
 
+  @State var rating = 0
+
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        HeaderView(titleText: Exercise.exercises[index].exerciseName, selectedTab: $selectedTab)
+        HeaderView(
+          titleText: Exercise.exercises[index].exerciseName,
+          selectedTab: $selectedTab)
           .padding(.bottom)
         if let url = Bundle.main.url(
-          forResource: Exercise.exercises[index].videoName,
+            forResource: Exercise.exercises[index].videoName,
             withExtension: "mp4") {
           VideoPlayer(player: AVPlayer(url: url))
             .frame(height: geometry.size.height * 0.45)
@@ -56,27 +67,42 @@ struct ExerciseView: View {
           Text("Couldn't find \(Exercise.exercises[index].videoName).mp4")
             .foregroundColor(.red)
         }
-        Text(Date().addingTimeInterval(interval), style: .timer)
-          .font(.system(size: 90))
-        HStack(spacing: 50.0) {
-          Button("Start") { }
-          Text("")
+        //Text(Date().addingTimeInterval(interval), style: .timer)
+        //.font(.system(size: 90))
+        HStack(spacing: 150) {
+          Button("Start Exercise") {
+            showTimer.toggle()
+          }
           Button("Done") {
-            selectedTab = lastExercise ? 9 : selectedTab + 1
+            history.addDoneExercise(Exercise.exercises[index].exerciseName)
+            showTimer.toggle()
+            timeRemaining = exerciseTime
             if lastExercise {
-              // show SuccessView
+              showSuccess.toggle()
             } else {
               selectedTab += 1
             }
           }
+          .disabled(timeRemaining > 0)
+          .sheet(isPresented: $showSuccess) {
+            SuccessView(selectedTab: $selectedTab)
+          }
         }
         .font(.title3)
         .padding()
-        RatingView()
-          .padding()
+        if showTimer {
+          TimerView(timeRemaining: $timeRemaining)
+        }
         Spacer()
-        Button("History") { }
-          .padding(.bottom)
+        RatingView(rating: $rating)
+          .padding()
+        Button("History") {
+          showHistory.toggle()
+        }
+        .sheet(isPresented: $showHistory) {
+          HistoryView(showHistory: $showHistory)
+        }
+        .padding(.bottom)
       }
     }
   }
@@ -84,6 +110,7 @@ struct ExerciseView: View {
 
 struct ExerciseView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseView(index: 1, selectedTab: .constant(1))
+    ExerciseView(index: 0, selectedTab: .constant(0))
+    .environmentObject(HistoryStore())
   }
 }

@@ -44,6 +44,7 @@ struct ContentView: View {
           .tag(index)
       }
     }
+    .environmentObject(HistoryStore())
     .tabViewStyle(PageTabViewStyle())
     .indexViewStyle(
       PageIndexViewStyle(backgroundDisplayMode: .never))

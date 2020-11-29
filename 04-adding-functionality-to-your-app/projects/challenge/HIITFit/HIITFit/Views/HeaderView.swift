@@ -31,45 +31,38 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
-struct ExerciseView: View {
-  let index: Int
-  let interval: TimeInterval = 30
+struct HeaderView: View {
+  let titleText: String
+  @Binding var selectedTab: Int
 
   var body: some View {
-    GeometryReader { geometry in
-      VStack {
-        HeaderView(
-          titleText: Exercise.exercises[index].exerciseName)
-          .padding(.bottom)
-        if let url = Bundle.main.url(
-          forResource: Exercise.exercises[index].videoName,
-          withExtension: "mp4") {
-          VideoPlayer(player: AVPlayer(url: url))
-            .frame(height: geometry.size.height * 0.45)
-        } else {
-          Text(
-            "Couldn't find \(Exercise.exercises[index].videoName).mp4")
-            .foregroundColor(.red)
+    VStack {
+      Text(titleText)
+        .font(.largeTitle)
+      HStack {
+        ForEach(0 ..< Exercise.exercises.count) { index in
+          let fill = index == selectedTab ? ".fill" : ""
+          Image(systemName: "\(index + 1).circle\(fill)")
+            .onTapGesture {
+              selectedTab = index
+            }
         }
-        Text(Date().addingTimeInterval(interval), style: .timer)
-          .font(.system(size: 90))
-        Button("Start/Done") { }
-          .font(.title3)
-          .padding()
-        RatingView()
-          .padding()
-        Spacer()
-        Button("History") { }
-          .padding(.bottom)
       }
+      .font(.title2)
     }
   }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
+struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseView(index: 0)
+    Group {
+      HeaderView(titleText: "Squat", selectedTab: .constant(0))
+        .previewLayout(.sizeThatFits)
+      HeaderView(titleText: "Step Up", selectedTab: .constant(1))
+        .preferredColorScheme(.dark)
+        .environment(\.sizeCategory, .accessibilityLarge)
+        .previewLayout(.sizeThatFits)
+    }
   }
 }

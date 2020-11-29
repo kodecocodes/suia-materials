@@ -30,46 +30,32 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
-import AVKit
+import Foundation
 
-struct ExerciseView: View {
-  let index: Int
-  let interval: TimeInterval = 30
-
-  var body: some View {
-    GeometryReader { geometry in
-      VStack {
-        HeaderView(
-          titleText: Exercise.exercises[index].exerciseName)
-          .padding(.bottom)
-        if let url = Bundle.main.url(
-          forResource: Exercise.exercises[index].videoName,
-          withExtension: "mp4") {
-          VideoPlayer(player: AVPlayer(url: url))
-            .frame(height: geometry.size.height * 0.45)
-        } else {
-          Text(
-            "Couldn't find \(Exercise.exercises[index].videoName).mp4")
-            .foregroundColor(.red)
-        }
-        Text(Date().addingTimeInterval(interval), style: .timer)
-          .font(.system(size: 90))
-        Button("Start/Done") { }
-          .font(.title3)
-          .padding()
-        RatingView()
-          .padding()
-        Spacer()
-        Button("History") { }
-          .padding(.bottom)
-      }
-    }
-  }
+struct ExerciseDay: Identifiable {
+  let id = UUID()
+  let date: Date
+  var exercises: [String] = []
 }
 
-struct ExerciseView_Previews: PreviewProvider {
-  static var previews: some View {
-    ExerciseView(index: 0)
+struct HistoryStore {
+  var exerciseDays: [ExerciseDay] = []
+
+  init() {
+    #if DEBUG
+    createDevData()
+    #endif
+  }
+
+  mutating func addDoneExercise(_ exerciseName: String) {
+    let today = Date()
+    if today.isSameDay(as: exerciseDays[0].date) {
+      print("Adding \(exerciseName)")
+      exerciseDays[0].exercises.append(exerciseName)
+    } else {
+      exerciseDays.insert(
+        ExerciseDay(date: today, exercises: [exerciseName]),
+        at: 0)
+    }
   }
 }

@@ -38,8 +38,8 @@ struct RatingView: View {
       ForEach(0 ..< 5) { _ in
         Image(systemName: "waveform.path.ecg")
           .foregroundColor(.gray)
+          .font(.largeTitle)
       }
-      .font(.largeTitle)
     }
   }
 }
