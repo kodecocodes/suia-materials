@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
-  @State var showHistory = false
+  @State private var showHistory = false
   @Binding var selectedTab: Int
 
   var body: some View {

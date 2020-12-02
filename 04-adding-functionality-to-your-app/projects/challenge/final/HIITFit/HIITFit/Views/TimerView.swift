@@ -33,7 +33,8 @@
 import SwiftUI
 
 struct TimerView: View {
-  @Binding var timeRemaining: Int
+  @State private var timeRemaining = 3 // 30
+  @Binding var timerDone: Bool
   let timer = Timer.publish(
     every: 1,
     on: .main,
@@ -47,6 +48,8 @@ struct TimerView: View {
       .onReceive(timer) { _ in
         if self.timeRemaining > 0 {
           self.timeRemaining -= 1
+        } else {
+          timerDone = true
         }
       }
   }
@@ -54,7 +57,7 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerView(timeRemaining: .constant(30))
+    TimerView(timerDone: .constant(false))
       .previewLayout(.sizeThatFits)
   }
 }

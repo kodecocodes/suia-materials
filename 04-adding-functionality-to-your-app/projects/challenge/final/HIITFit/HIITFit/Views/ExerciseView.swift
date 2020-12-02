@@ -35,21 +35,18 @@ import AVKit
 
 struct ExerciseView: View {
   @Binding var history: HistoryStore
-  @State var showHistory = false
-  @State var showSuccess = false
-
-  let index: Int
+  @State private var rating = 0
+  @State private var showHistory = false
+  @State private var showSuccess = false
   @Binding var selectedTab: Int
-
-  let exerciseTime: Int = 3
-  @State var timeRemaining = 3 //30
-  @State var showTimer = false
+  let index: Int
+  @State private var timerDone = false
+  @State private var showTimer = false
 
   var lastExercise: Bool {
     index + 1 == Exercise.exercises.count
   }
 
-  @State var rating = 0
 
   var body: some View {
     GeometryReader { geometry in
@@ -59,7 +56,7 @@ struct ExerciseView: View {
           selectedTab: $selectedTab)
           .padding(.bottom)
         if let url = Bundle.main.url(
-            forResource: Exercise.exercises[index].videoName,
+          forResource: Exercise.exercises[index].videoName,
             withExtension: "mp4") {
           VideoPlayer(player: AVPlayer(url: url))
             .frame(height: geometry.size.height * 0.45)
@@ -72,17 +69,16 @@ struct ExerciseView: View {
             showTimer.toggle()
           }
           Button("Done") {
-            //selectedTab = lastExercise ? 9 : selectedTab + 1
             history.addDoneExercise(Exercise.exercises[index].exerciseName)
+            timerDone = false
             showTimer.toggle()
-            timeRemaining = exerciseTime
             if lastExercise {
               showSuccess.toggle()
             } else {
               selectedTab += 1
             }
           }
-          .disabled(timeRemaining > 0)
+          .disabled(!timerDone)
           .sheet(isPresented: $showSuccess) {
             SuccessView(selectedTab: $selectedTab)
           }
@@ -90,7 +86,7 @@ struct ExerciseView: View {
         .font(.title3)
         .padding()
         if showTimer {
-          TimerView(timeRemaining: $timeRemaining)
+          TimerView(timerDone: $timerDone)
         }
         Spacer()
         RatingView(rating: $rating)
@@ -109,6 +105,6 @@ struct ExerciseView: View {
 
 struct ExerciseView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseView(history: .constant(HistoryStore()), index: 0, selectedTab: .constant(0))
+    ExerciseView(history: .constant(HistoryStore()), selectedTab: .constant(0), index: 0)
   }
 }

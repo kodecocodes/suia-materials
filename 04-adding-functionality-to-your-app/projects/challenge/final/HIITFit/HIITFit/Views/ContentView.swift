@@ -33,15 +33,15 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State var history = HistoryStore()
-  @State var selectedTab = 9
+  @State private var history = HistoryStore()
+  @State private var selectedTab = 9
 
   var body: some View {
     TabView(selection: $selectedTab) {
       WelcomeView(history: history, selectedTab: $selectedTab)
         .tag(9)
       ForEach(0 ..< Exercise.exercises.count) { index in
-        ExerciseView(history: $history, index: index, selectedTab: $selectedTab)
+        ExerciseView(history: $history, selectedTab: $selectedTab, index: index)
           .tag(index)
       }
     }

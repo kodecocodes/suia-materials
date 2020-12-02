@@ -34,14 +34,13 @@ import SwiftUI
 import AVKit
 
 struct ExerciseView: View {
-  @State var rating = 0
-  @State var showHistory = false
-  @State var showSuccess = false
+  @State private var rating = 0
+  @State private var showHistory = false
+  @State private var showSuccess = false
   @Binding var selectedTab: Int
   let index: Int
-  let exerciseTime: Int = 3  //30
-  @State var timeRemaining = 3  //30
-  @State var showTimer = false
+  @State private var timerDone = false
+  @State private var showTimer = false
 
   var lastExercise: Bool {
     index + 1 == Exercise.exercises.count
@@ -69,15 +68,15 @@ struct ExerciseView: View {
             showTimer.toggle()
           }
           Button("Done") {
+            timerDone = false
             showTimer.toggle()
-            timeRemaining = exerciseTime
             if lastExercise {
               showSuccess.toggle()
             } else {
               selectedTab += 1
             }
           }
-          .disabled(timeRemaining > 0)
+          .disabled(!timerDone)
           .sheet(isPresented: $showSuccess) {
             SuccessView(selectedTab: $selectedTab)
           }
@@ -85,7 +84,7 @@ struct ExerciseView: View {
         .font(.title3)
         .padding()
         if showTimer {
-          TimerView(timeRemaining: $timeRemaining)
+          TimerView(timerDone: $timerDone)
         }
         Spacer()
         RatingView(rating: $rating)
