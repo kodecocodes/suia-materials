@@ -32,7 +32,7 @@
 
 import SwiftUI
 
-class ThingStore: ObservableObject {
+final class ThingStore: ObservableObject {
   @Published var things: [String] = []
 }
 
