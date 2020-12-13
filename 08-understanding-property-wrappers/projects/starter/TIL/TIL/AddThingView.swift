@@ -42,7 +42,6 @@ struct AddThingView: View {
       }
       Spacer()
     }
-    .environment(\.textCase, nil)
   }
 }
 
