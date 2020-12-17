@@ -94,7 +94,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 825F967F250A307D00ECE5DF /* Build configuration list for PBXNativeTarget "Cards" */;
 			buildPhases = (
-				823E6C13250A3F74001C5B59 /* ShellScript */,
+				823E6C13250A3F74001C5B59 /* SwiftLint */,
 				825F966C250A307C00ECE5DF /* Sources */,
 				825F966D250A307C00ECE5DF /* Frameworks */,
 				825F966E250A307C00ECE5DF /* Resources */,
@@ -154,7 +154,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		823E6C13250A3F74001C5B59 /* ShellScript */ = {
+		823E6C13250A3F74001C5B59 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -163,6 +163,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (

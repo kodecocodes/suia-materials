@@ -64,7 +64,8 @@ struct ResizableView: ViewModifier {
         previousOffset = transform.offset
       }
     return content
-      .frame(width: transform.size.width,
+      .frame(
+        width: transform.size.width,
         height: transform.size.height)
       .rotationEffect(transform.rotation)
       .scaleEffect(scale)
