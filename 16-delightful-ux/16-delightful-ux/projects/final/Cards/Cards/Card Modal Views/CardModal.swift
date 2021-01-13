@@ -30,17 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
+enum CardModal: Identifiable {
+  var id: Int {
+    hashValue
   }
-
-  func bringToFront() -> some View {
-    modifier(BringToFront())
-  }
+  case stickerPicker, photoPicker,
+    framePicker, colorPicker, textPicker
 }

@@ -32,15 +32,56 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
+// extracted out CardsListView and SingleCardView
+// selected card and whether to show the single card are held
+// in the view state environment object as published values,
+// so that you don't need to pass them around
+// They need to be published so that views redraw when the value changes
+// Add button removed
+
+struct CardsView: View {
+  @EnvironmentObject var model: Model
+  @EnvironmentObject var viewState: ViewState
+
+  var body: some View {
+    ZStack {
+      CardsListView()
+      VStack {
+        Spacer()
+        createButton
+      }
+      if !viewState.showAllCards {
+        SingleCardView()
+      }
+    }
+    .background(
+      Color("background")
+        .edgesIgnoringSafeArea(.all))
   }
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  var createButton: some View {
+  // 1
+    Button(action: {
+      viewState.selectedCard = model.addCard()
+      viewState.showAllCards = false
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+    }) {
+      Label("Create New", systemImage: "plus")
+      .frame(maxWidth: .infinity)
+    }
+    .font(.system(size: 16, weight: .bold))
+  // 2
+    .padding([.top, .bottom], 10)
+  // 3
+    .background(Color("barColor"))
+    .accentColor(.white)
+  }
+}
+
+struct CardsView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardsView()
+      .environmentObject(Model(defaultData: true))
+      .environmentObject(ViewState())
   }
 }

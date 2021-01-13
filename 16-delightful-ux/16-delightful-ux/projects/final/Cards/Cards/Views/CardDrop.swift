@@ -32,15 +32,23 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
+struct CardDrop: DropDelegate {
+  @Binding var card: Card
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  func performDrop(info: DropInfo) -> Bool {
+    let itemProviders = info.itemProviders(for: [.image])
+
+    for item in itemProviders {
+      if item.canLoadObject(ofClass: UIImage.self) {
+        item.loadObject(ofClass: UIImage.self) { image, _ in
+          if let image = image as? UIImage {
+            DispatchQueue.main.async {
+              card.addElement(uiImage: image)
+            }
+          }
+        }
+      }
+    }
+    return true
   }
 }

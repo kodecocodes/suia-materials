@@ -32,15 +32,34 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
+struct CardToolbar: ViewModifier {
+  @EnvironmentObject var viewState: ViewState
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  @Binding var currentModal: CardModal?
+
+  func body(content: Content) -> some View {
+    content
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            viewState.showAllCards = true
+            viewState.selectedCard = nil
+          }
+          // swiftlint:disable:next multiple_closures_with_trailing_closure
+          ) {
+            Text("Done")
+          }
+        }
+        ToolbarItem(placement: .bottomBar) {
+          CardViewToolbar(
+            cardModal: $currentModal)
+        }
+      }
+  }
+}
+
+extension View {
+  func cardToolbar(currentModal: Binding<CardModal?>) -> some View {
+    modifier(CardToolbar(currentModal: currentModal))
   }
 }

@@ -32,15 +32,65 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
+struct CardModals: ViewModifier {
+  @EnvironmentObject var viewState: ViewState
+  @Binding var card: Card
+  @Binding var currentModal: CardModal?
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  @State private var stickerImage: UIImage?
+  @State private var images: [UIImage] = []
+  @State private var frame: AnyShape?
+  @State private var text: String = ""
+  @State private var textColor: Color = .black
+
+  func body(content: Content) -> some View {
+    content
+      .sheet(item: $currentModal) { item in
+        switch item {
+        case .stickerPicker:
+          StickerPicker(stickerImage: $stickerImage)
+            .onDisappear {
+              if let stickerImage = stickerImage {
+                card.addElement(uiImage: stickerImage)
+              }
+              stickerImage = nil
+            }
+        case .photoPicker:
+          PhotoPicker(images: $images)
+            .onDisappear {
+              for image in images {
+                card.addElement(uiImage: image)
+              }
+              images = []
+            }
+        case .framePicker:
+          FramePicker(frame: $frame)
+            .onDisappear {
+              if let frame = frame {
+                card.update(viewState.selectedElement, frame: frame)
+              }
+              frame = nil
+            }
+        case .textPicker:
+          TextPicker(text: $text, textColor: $textColor)
+            .onDisappear {
+              if !text.isEmpty {
+                card.addElement(text: text, textColor: textColor)
+              }
+              text = ""
+            }
+        default:
+          EmptyView()
+        }
+      }
+  }
+}
+
+extension View {
+  func cardModals(
+    card: Binding<Card>,
+    currentModal: Binding<CardModal?>
+  ) -> some View {
+    modifier(CardModals(card: card, currentModal: currentModal))
   }
 }

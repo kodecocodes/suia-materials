@@ -32,15 +32,16 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
+struct BringToFront: ViewModifier {
+  @GestureState private var isDragging = false
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  func body(content: Content) -> some View {
+    content
+    .simultaneousGesture(
+      DragGesture(minimumDistance: 0)
+        .updating($isDragging) { _, gestureState, _ in
+          gestureState = true
+        })
+    .zIndex(isDragging ? 1000 : 0)
   }
 }

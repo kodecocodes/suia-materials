@@ -32,15 +32,23 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
+struct TextPicker: View {
+  @Environment(\.presentationMode) var presentationMode
+  @Binding var text: String
+  @Binding var textColor: Color
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  var body: some View {
+    let onCommit = {
+      presentationMode.wrappedValue.dismiss()
+    }
+    TextField("Enter text", text: $text, onCommit: onCommit)
+  }
+}
+
+struct TextPicker_Previews: PreviewProvider {
+  static var previews: some View {
+    TextPicker(
+      text: .constant(""),
+      textColor: .constant(.black))
   }
 }

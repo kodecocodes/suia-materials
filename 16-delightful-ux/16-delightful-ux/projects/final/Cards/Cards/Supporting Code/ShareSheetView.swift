@@ -32,15 +32,16 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
+struct ShareSheetView: UIViewControllerRepresentable {
+  let activityItems: [UIImage]
+  let applicationActivities: [UIActivity]?
+
+  func makeUIViewController(context: Context) -> some UIViewController {
+    UIActivityViewController(
+      activityItems: activityItems,
+      applicationActivities: applicationActivities)
   }
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
   }
 }

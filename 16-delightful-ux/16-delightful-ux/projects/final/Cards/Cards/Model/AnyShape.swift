@@ -32,15 +32,27 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
+struct AnyShape: Shape {
+  private let path: (CGRect) -> Path
+
+  // 1
+  init<CustomShape: Shape>(_ shape: CustomShape) {
+  // 2
+    self.path = { rect in
+  // 3
+    shape.path(in: rect)
+    }
   }
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  func path(in rect: CGRect) -> Path {
+    path(rect)
+  }
+}
+
+extension AnyShape: Equatable {
+  static func == (lhs: AnyShape, rhs: AnyShape) -> Bool {
+    let lhsPath = lhs.path(in: .zero)
+    let rhsPath = rhs.path(in: .zero)
+    return lhsPath == rhsPath
   }
 }

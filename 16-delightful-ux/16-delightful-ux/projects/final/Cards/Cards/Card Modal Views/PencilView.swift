@@ -31,16 +31,30 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PencilKit
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
+struct PencilView: View {
+  @State private var canvas = PKCanvasView()
+
+  var body: some View {
+    PencilViewRepresentable(canvas: $canvas)
+  }
+}
+
+struct PencilView_Previews: PreviewProvider {
+  static var previews: some View {
+    PencilView()
+  }
+}
+
+struct PencilViewRepresentable: UIViewRepresentable {
+  @Binding var canvas: PKCanvasView
+
+  func makeUIView(context: Context) -> some UIView {
+    canvas.drawingPolicy = .anyInput
+    return canvas
   }
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  func updateUIView(_ uiView: UIViewType, context: Context) {
   }
 }

@@ -32,15 +32,11 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
-
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+extension Text {
+  func scaleableText(font: Font = Font.system(size: 1000)) -> some View {
+    self
+      .font(font)
+      .minimumScaleFactor(0.01)
+      .lineLimit(1)
   }
 }

@@ -32,15 +32,19 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
-    modifier(
-      ResizableViewModifier(
-        transform: transform,
-        viewScale: viewScale))
-  }
+@main
+struct CardsApp: App {
+  @StateObject var model = Model(defaultData: true)
+  @StateObject var viewState = ViewState()
 
-  func bringToFront() -> some View {
-    modifier(BringToFront())
+  var body: some Scene {
+    WindowGroup {
+      CardsView()
+        .environmentObject(model)
+        .environmentObject(viewState)
+        .onAppear {
+          print(FileManager.documentURL ?? "")
+        }
+    }
   }
 }
