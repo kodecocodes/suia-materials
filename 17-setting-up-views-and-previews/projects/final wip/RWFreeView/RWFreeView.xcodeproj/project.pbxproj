@@ -17,6 +17,7 @@
 		CD34211A25A5771000817FD8 /* PlayButtonIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD34211925A5771000817FD8 /* PlayButtonIcon.swift */; };
 		CD34211F25A6BCDC00817FD8 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD34211E25A6BCDC00817FD8 /* ColorExtension.swift */; };
 		CD95699A25A1663D000206E7 /* EpisodeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD95699925A1663D000206E7 /* EpisodeStore.swift */; };
+		CD9D2BE225AC0B070085F28C /* FilterOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D2BE125AC0B060085F28C /* FilterOptionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CD34211925A5771000817FD8 /* PlayButtonIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButtonIcon.swift; sourceTree = "<group>"; };
 		CD34211E25A6BCDC00817FD8 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		CD95699925A1663D000206E7 /* EpisodeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeStore.swift; sourceTree = "<group>"; };
+		CD9D2BE125AC0B060085F28C /* FilterOptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterOptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				1839F4AF25190F2A00BB00F1 /* RWFreeViewApp.swift */,
 				18D775C422AD944300AE281E /* ContentView.swift */,
 				CD304C7025A2D34900FD0E2C /* PlayerView.swift */,
+				CD9D2BE125AC0B060085F28C /* FilterOptionsView.swift */,
 				CD34211925A5771000817FD8 /* PlayButtonIcon.swift */,
 				CD95699925A1663D000206E7 /* EpisodeStore.swift */,
 				CD34211E25A6BCDC00817FD8 /* ColorExtension.swift */,
@@ -197,6 +200,7 @@
 				CD95699A25A1663D000206E7 /* EpisodeStore.swift in Sources */,
 				CD34211F25A6BCDC00817FD8 /* ColorExtension.swift in Sources */,
 				CD34211A25A5771000817FD8 /* PlayButtonIcon.swift in Sources */,
+				CD9D2BE225AC0B070085F28C /* FilterOptionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

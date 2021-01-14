@@ -50,7 +50,8 @@ struct PlayerView: View {
             LinearGradient(
               gradient: Gradient(
                 colors: [
-                  Color.gradientDark, Color.gradientLight]),
+                  Color.gradientDark, Color.gradientLight
+                ]),
               startPoint: .leading,
               endPoint: .trailing)
           )
