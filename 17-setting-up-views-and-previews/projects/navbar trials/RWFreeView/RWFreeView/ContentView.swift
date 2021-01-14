@@ -36,113 +36,52 @@ struct ContentView: View {
   @StateObject var store = EpisodeStore()
   @State var showFilters = false
 
-  @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-  @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
-  var isIPad: Bool {
-    horizontalSizeClass == .regular && verticalSizeClass == .regular
-  }
-
-  init() {
-    let barColor = UIColor.black
-    let appearance = UINavigationBar.appearance()
-    appearance.backgroundColor = barColor
-    //appearance.barTintColor = barColor
-    appearance.largeTitleTextAttributes = [
-      .foregroundColor: UIColor.white
-    ]
-    appearance.titleTextAttributes = [
-      .foregroundColor: UIColor.white
-    ]
-
-    //appearance.isTranslucent = false
-  }
-
   var body: some View {
-    //GeometryReader { geometry in
     NavigationView {
       List {
         HeaderView(count: store.episodes.count)
         ForEach(store.episodes, id: \.name) { episode in
-          ZStack {
-            NavigationLink(
-              destination: PlayerView(episode: episode)) {
-              EmptyView()
-            }
-            .opacity(0)
-            .buttonStyle(PlainButtonStyle())
-            EpisodeView(episode: episode, isIPad: isIPad)
+          NavigationLink(destination: PlayerView(episode: episode)) {
+            EpisodeView(episode: episode)
           }
-          .frame(
-            maxWidth: .infinity,
-            maxHeight: .infinity,
-            alignment: .leading)
-          .listRowInsets(EdgeInsets())
-          .padding(.bottom, 8)
-          //.padding([.leading, .trailing], 26)
-          .background(Color.listBkgd)
+        }
+        .sheet(isPresented: $showFilters) {
+          FilterOptionsView()
         }
       }
       .navigationTitle("Videos")
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: { }) {
-            FilterButtonView()
+        ToolbarItem {
+          // swiftlint:disable:next multiple_closures_with_trailing_closure
+          Button(action: { showFilters.toggle() }) {
+            Image(systemName: "line.horizontal.3.decrease.circle")
+              .accessibilityLabel(Text("Shows filter options"))
           }
         }
       }
-//      .navigationBarItems(
-//        trailing:
-//          // swiftlint:disable:next multiple_closures_with_trailing_closure
-//          Button(action: { showFilters.toggle() }) {
-//            Image(systemName: "line.horizontal.3.decrease.circle")
-//              .font(.title)
-//              .foregroundColor(.white)
-//              .accessibilityLabel(Text("Shows filter options"))
-//          }
-//      )
-      .sheet(isPresented: $showFilters) {
-        FilterOptionsView()
-      }
-      .frame(width: isIPad ? 700 : nil)
-      .navigationViewStyle(StackNavigationViewStyle())
-      //}
     }
   }
-}
 
-struct FilterButtonView: View {
-  var body: some View {
-    Image(systemName: "line.horizontal.3.decrease.circle")
-      .accessibilityLabel(Text("Shows filter options"))
-      .font(.title)
-      .foregroundColor(.white)
-  }
-}
+  init() {
+    let appearance = UINavigationBarAppearance()
+    appearance.backgroundColor = .black
+    appearance.largeTitleTextAttributes =
+      [.foregroundColor: UIColor.white]
+    appearance.titleTextAttributes =
+      [.foregroundColor: UIColor.white]
 
-struct HeaderView: View {
-  let count: Int
-  @State private var sortOn = "popular"
+    // Back button text and arrow color
+    UINavigationBar.appearance().tintColor = .white
 
-  var body: some View {
-    HStack {
-      Text("\(count) Tutorials")
-      Spacer()
-      Picker("", selection: $sortOn) {
-        Text("New").tag("new")
-        Text("Popular").tag("popular")
-      }
-      .pickerStyle(SegmentedPickerStyle())
-      .frame(maxWidth: 130)
-    }
-    .font(.footnote)
-    .padding()
-    //.roundedGradientBackground()
+    // Assign configuration to all appearances
+    UINavigationBar.appearance().standardAppearance = appearance
+    UINavigationBar.appearance().compactAppearance = appearance
+    UINavigationBar.appearance().scrollEdgeAppearance = appearance
   }
 }
 
 struct EpisodeView: View {
   let episode: Episode
-  let isIPad: Bool
 
   var body: some View {
     HStack(alignment: .top) {
@@ -164,17 +103,41 @@ struct EpisodeView: View {
       .font(.footnote)
       .foregroundColor(Color(UIColor.systemGray))
     }
+  }
+}
+
+struct HeaderView: View {
+  let count: Int
+  @State private var sortOn = "popular"
+
+  var body: some View {
+    HStack {
+      Text("\(count) Tutorials")
+        .foregroundColor(Color(UIColor.systemGray4))
+      Spacer()
+      Picker("", selection: $sortOn) {
+        Text("New").tag("new")
+        Text("Popular").tag("popular")
+      }
+      .pickerStyle(SegmentedPickerStyle())
+      .frame(maxWidth: 130)
+    }
+    .font(.subheadline)
+    .foregroundColor(.white)
+    .frame(
+      maxWidth: .infinity,
+      maxHeight: .infinity,
+      alignment: .leading)
+    .listRowInsets(EdgeInsets())
     .padding()
-    .frame(width: isIPad ? 644 : nil)
-    .background(Color.itemBkgd)
-    .cornerRadius(15)
-    .shadow(color: Color.black.opacity(0.1), radius: 10)
+    .background(Color.black)
+    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+    //.roundedGradientBackground()
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
-    //.preferredColorScheme(.dark)
   }
 }
