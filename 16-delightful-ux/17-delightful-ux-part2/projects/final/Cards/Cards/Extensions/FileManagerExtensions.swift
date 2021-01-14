@@ -30,21 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-enum CardListState {
-  case list, carousel
-}
-
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+extension FileManager {
+  static var documentURL: URL? {
+    return Self.default.urls(
+      for: .documentDirectory,
+      in: .userDomainMask).first
+  }
 }

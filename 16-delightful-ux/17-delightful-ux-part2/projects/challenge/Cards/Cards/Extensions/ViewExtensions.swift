@@ -32,19 +32,15 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
+extension View {
+  func resizableView(transform: Binding<Transform>, viewScale: CGFloat = 1) -> some View {
+    modifier(
+      ResizableViewModifier(
+        transform: transform,
+        viewScale: viewScale))
+  }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  func bringToFront() -> some View {
+    modifier(BringToFront())
+  }
 }

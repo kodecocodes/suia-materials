@@ -31,20 +31,61 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PhotosUI
 
-enum CardListState {
-  case list, carousel
+struct PhotoPicker: UIViewControllerRepresentable {
+  @Environment(\.presentationMode) var presentationMode
+  @Binding var images: [UIImage]
+
+  func makeUIViewController(context: Context) -> some UIViewController {
+    var configuration = PHPickerConfiguration()
+    configuration.filter = .images
+    configuration.selectionLimit = 0
+    let picker =
+      PHPickerViewController(configuration: configuration)
+    picker.delegate = context.coordinator
+    return picker
+  }
+
+  func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+  }
+
+  func makeCoordinator() -> PhotosCoordinator {
+    PhotosCoordinator(parent: self)
+  }
+
+  class PhotosCoordinator: NSObject,
+    PHPickerViewControllerDelegate {
+    var parent: PhotoPicker
+
+    init(parent: PhotoPicker) {
+      self.parent = parent
+    }
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+      let itemProviders = results.map(\.itemProvider)
+      for item in itemProviders {
+        if item.canLoadObject(ofClass: UIImage.self) {
+          item.loadObject(ofClass: UIImage.self) { image, error in
+            if let error = error {
+              print("Error!", error.localizedDescription)
+            } else {
+              DispatchQueue.main.async {
+                if let image = image as? UIImage {
+                  self.parent.images.append(image)
+                }
+              }
+            }
+          }
+        }
+      }
+      parent.presentationMode.wrappedValue.dismiss()
+    }
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct PhotoPicker_Previews: PreviewProvider {
+  static var previews: some View {
+    PhotoPicker(images: .constant([UIImage]()))
+  }
 }

@@ -32,19 +32,45 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct CardToolbar: ViewModifier {
+  @EnvironmentObject var viewState: ViewState
+
+  @Binding var currentModal: CardModal?
+
+  func body(content: Content) -> some View {
+    content
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            viewState.shouldScreenshot = true
+            currentModal = .shareSheet
+            // swiftlint:disable:next multiple_closures_with_trailing_closure
+          }) {
+            Image(systemName: "square.and.arrow.up")
+          }
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button(action: {
+            withAnimation {
+              viewState.showAllCards = true
+            }
+            viewState.selectedCard = nil
+          }
+          // swiftlint:disable:next multiple_closures_with_trailing_closure
+          ) {
+            Text("Done")
+          }
+        }
+        ToolbarItem(placement: .bottomBar) {
+          CardViewToolbar(
+            cardModal: $currentModal)
+        }
+      }
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+extension View {
+  func cardToolbar(currentModal: Binding<CardModal?>) -> some View {
+    modifier(CardToolbar(currentModal: currentModal))
+  }
 }

@@ -32,19 +32,16 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
+struct ShareSheetView: UIViewControllerRepresentable {
+  let activityItems: [UIImage]
+  let applicationActivities: [UIActivity]?
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
+  func makeUIViewController(context: Context) -> some UIViewController {
+    UIActivityViewController(
+      activityItems: activityItems,
+      applicationActivities: applicationActivities)
+  }
 
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+  }
 }

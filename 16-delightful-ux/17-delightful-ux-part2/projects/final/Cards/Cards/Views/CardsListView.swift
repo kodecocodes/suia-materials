@@ -32,19 +32,47 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct CardsListView: View {
+  @EnvironmentObject var model: Model
+  @EnvironmentObject var viewState: ViewState
+
+  func columns(size: CGSize) -> [GridItem] {
+    [
+      GridItem(.adaptive(
+        minimum: Settings.thumbnailSize(size: size).width))
+    ]
+  }
+
+  var body: some View {
+    GeometryReader { proxy in
+      ScrollView(showsIndicators: false) {
+        LazyVGrid(columns: columns(size: proxy.size), spacing: 30) {
+          ForEach(model.cards) { card in
+            CardThumbnailView(card: card, size: proxy.size)
+              .onTapGesture {
+                viewState.selectedCard = card
+                withAnimation {
+                  viewState.showAllCards = false
+                }
+              }
+              .contextMenu {
+                // swiftlint:disable:next multiple_closures_with_trailing_closure
+                Button(action: { model.remove(card) }) {
+                  Label("Delete", systemImage: "trash")
+                }
+              }
+          }
+        }
+      }
+    }
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct CardsListView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardsListView()
+      .preferredColorScheme(.light)
+      .environmentObject(Model(defaultData: true))
+      .environmentObject(ViewState())
+  }
 }

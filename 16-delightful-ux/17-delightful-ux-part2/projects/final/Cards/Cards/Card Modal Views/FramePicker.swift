@@ -32,19 +32,38 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct FramePicker: View {
+  @Environment(\.presentationMode) var presentationMode
+
+  @Binding var frame: AnyShape?
+  private let columns = [
+    GridItem(.adaptive(minimum: 120), spacing: 10)
+  ]
+  private let style = StrokeStyle(
+    lineWidth: 5, lineJoin: .round)
+
+  var body: some View {
+    ScrollView {
+      LazyVGrid(columns: columns) {
+        ForEach(0..<shapes.count, id: \.self) { index in
+          shapes[index]
+            .stroke(Color.primary, style: style)
+            .background(shapes[index].fill(Color.secondary))
+            .frame(width: 100, height: 120)
+            .padding()
+            .onTapGesture {
+              frame = shapes[index]
+              presentationMode.wrappedValue.dismiss()
+            }
+        }
+      }
+    }
+    .padding(5)
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct FramePicker_Previews: PreviewProvider {
+  static var previews: some View {
+    FramePicker(frame: .constant(nil))
+  }
 }

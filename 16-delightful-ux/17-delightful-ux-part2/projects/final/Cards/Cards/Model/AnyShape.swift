@@ -32,19 +32,24 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct AnyShape: Shape {
+  private let path: (CGRect) -> Path
+
+  init<CustomShape: Shape>(_ shape: CustomShape) {
+    self.path = { rect in
+    shape.path(in: rect)
+    }
+  }
+
+  func path(in rect: CGRect) -> Path {
+    path(rect)
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+extension AnyShape: Equatable {
+  static func == (lhs: AnyShape, rhs: AnyShape) -> Bool {
+    let lhsPath = lhs.path(in: .zero)
+    let rhsPath = rhs.path(in: .zero)
+    return lhsPath == rhsPath
+  }
 }

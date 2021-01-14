@@ -32,19 +32,19 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
+@main
+struct CardsApp: App {
+  @StateObject var model = Model()
+  @StateObject var viewState = ViewState()
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  var body: some Scene {
+    WindowGroup {
+      AppLoadingView()
+        .environmentObject(model)
+        .environmentObject(viewState)
+        .onAppear {
+          print(FileManager.documentURL ?? "")
+        }
+    }
+  }
 }

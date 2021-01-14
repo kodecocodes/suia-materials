@@ -31,20 +31,30 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PencilKit
 
-enum CardListState {
-  case list, carousel
+struct PencilView: View {
+  @State private var canvas = PKCanvasView()
+
+  var body: some View {
+    PencilViewRepresentable(canvas: $canvas)
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
+struct PencilView_Previews: PreviewProvider {
+  static var previews: some View {
+    PencilView()
+  }
+}
 
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
+struct PencilViewRepresentable: UIViewRepresentable {
+  @Binding var canvas: PKCanvasView
 
-  @Published var selectedElement: CardElement?
+  func makeUIView(context: Context) -> some UIView {
+    canvas.drawingPolicy = .anyInput
+    return canvas
+  }
 
-  // holds card currently being edited
-  var selectedCard: Card?
+  func updateUIView(_ uiView: UIViewType, context: Context) {
+  }
 }

@@ -32,19 +32,45 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+extension Color {
+  static let randomColors: [Color] = [
+    Color("random1"),
+    Color("random2"),
+    Color("random3"),
+    Color("random4"),
+    Color("random5"),
+    Color("random6"),
+    Color("random7"),
+    Color("random8")
+  ]
+
+  static func random() -> Color {
+    randomColors.randomElement() ?? .black
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
+extension Color {
+  func colorComponents() -> [CGFloat] {
+    let uiColor = UIColor(self)
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
 
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
+    uiColor.getRed(
+      &red,
+      green: &green,
+      blue: &blue,
+      alpha: &alpha)
+    return [red, green, blue, alpha]
+  }
 
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  static func color(components color: [CGFloat]) -> Color {
+    let uiColor = UIColor(
+      red: color[0],
+      green: color[1],
+      blue: color[2],
+      alpha: color[3])
+    return Color(uiColor)
+  }
 }

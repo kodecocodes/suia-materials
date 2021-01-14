@@ -32,19 +32,48 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+class Model: ObservableObject {
+  @Published var cards: [Card] = []
+
+  init(defaultData: Bool = false) {
+    cards = defaultData ? initialCards : load()
+  }
+
+  func remove(_ card: Card) {
+    if let index = cards.index(for: card) {
+      cards.remove(at: index)
+    }
+  }
+
+  func addCard() -> Card {
+    let card = Card(backgroundColor: Color.random())
+    cards.append(card)
+    card.save()
+    return card
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+extension Model {
+  func load() -> [Card] {
+    var cards: [Card] = []
+    guard let path = FileManager.documentURL?.path,
+      let enumerator =
+        FileManager.default.enumerator(atPath: path),
+          let files = enumerator.allObjects as? [String]
+    else { return cards }
+    let cardFiles = files.filter { $0.contains(".rwcard") }
+    for cardFile in cardFiles {
+      do {
+        let path = path + "/" + cardFile
+        let data =
+          try Data(contentsOf: URL(fileURLWithPath: path))
+        let decoder = JSONDecoder()
+        let card = try decoder.decode(Card.self, from: data)
+        cards.append(card)
+      } catch {
+        print("Error: ", error.localizedDescription)
+      }
+    }
+    return cards
+  }
 }

@@ -32,19 +32,68 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+// extracted out CardsListView and SingleCardView
+// selected card and whether to show the single card are held
+// in the view state environment object as published values,
+// so that you don't need to pass them around
+// They need to be published so that views redraw when the value changes
+// Add button removed
+
+struct CardsView: View {
+  @EnvironmentObject var model: Model
+  @EnvironmentObject var viewState: ViewState
+
+  var body: some View {
+    VStack {
+      if viewState.showAllCards {
+        ListSelectionView(selection: $viewState.cardListState)
+      }
+      ZStack {
+        switch viewState.cardListState {
+        case .list:
+          CardsListView()
+        case .carousel:
+          Carousel()
+        }
+        VStack {
+          Spacer()
+          createButton
+        }
+        if !viewState.showAllCards {
+          SingleCardView()
+            .transition(.move(edge: .bottom))
+            .zIndex(1)
+        }
+      }
+      .background(
+        Color("background")
+        .edgesIgnoringSafeArea(.all))
+    }
+  }
+
+  var createButton: some View {
+  // 1
+    Button(action: {
+      viewState.selectedCard = model.addCard()
+      viewState.showAllCards = false
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+    }) {
+      Label("Create New", systemImage: "plus")
+        .frame(maxWidth: .infinity)
+    }
+    .font(.system(size: 16, weight: .bold))
+  // 2
+    .padding([.top, .bottom], 10)
+  // 3
+    .background(Color("barColor"))
+    .accentColor(.white)
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct CardsView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardsView()
+      .environmentObject(Model(defaultData: true))
+      .environmentObject(ViewState())
+  }
 }

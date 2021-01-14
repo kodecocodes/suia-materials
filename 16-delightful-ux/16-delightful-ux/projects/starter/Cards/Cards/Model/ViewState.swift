@@ -47,8 +47,4 @@ class ViewState: ObservableObject {
 
   // holds card currently being edited
   var selectedCard: Card?
-
-  // For sharing the card with a screenshot - see `RenderableView`
-  var shareImage: UIImage?
-  var shouldScreenshot = false
 }

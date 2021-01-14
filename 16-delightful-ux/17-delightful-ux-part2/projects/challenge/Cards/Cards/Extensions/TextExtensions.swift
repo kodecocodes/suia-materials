@@ -32,19 +32,11 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
-
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+extension Text {
+  func scaleableText(font: Font = Font.system(size: 1000)) -> some View {
+    self
+      .font(font)
+      .minimumScaleFactor(0.01)
+      .lineLimit(1)
+  }
 }

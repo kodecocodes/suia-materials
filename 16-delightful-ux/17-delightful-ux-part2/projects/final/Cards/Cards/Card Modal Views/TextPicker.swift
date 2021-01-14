@@ -32,19 +32,21 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct TextPicker: View {
+  @Environment(\.presentationMode) var presentationMode
+  @Binding var textElement: TextElement
+
+  var body: some View {
+    let onCommit = {
+      presentationMode.wrappedValue.dismiss()
+    }
+    TextField("Enter text", text: $textElement.text, onCommit: onCommit)
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct TextPicker_Previews: PreviewProvider {
+  @State static var textElement = TextElement()
+  static var previews: some View {
+    TextPicker(textElement: $textElement)
+  }
 }

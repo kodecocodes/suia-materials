@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -32,19 +32,30 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct AppLoadingView: View {
+  @State private var showSplash = true
+
+  var body: some View {
+    if showSplash {
+      SplashScreen()
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            withAnimation {
+              showSplash = false
+            }
+          }
+        }
+    } else {
+      CardsView()
+        .transition(.scale(scale: 0, anchor: .top))
+    }
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct AppLoadingView_Previews: PreviewProvider {
+  static var previews: some View {
+    AppLoadingView()
+      .environmentObject(Model(defaultData: true))
+  }
 }

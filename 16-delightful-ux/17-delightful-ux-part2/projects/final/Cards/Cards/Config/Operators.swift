@@ -32,19 +32,22 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+func + (left: CGSize, right: CGSize) -> CGSize {
+  return CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right
+  )
+}
 
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+func / (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width / right,
+    height: left.height / right
+  )
 }

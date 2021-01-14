@@ -32,19 +32,12 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct Transform {
+  var size = CGSize(
+    width: Settings.defaultElementSize.width,
+    height: Settings.defaultElementSize.height)
+  var rotation: Angle = .zero
+  var offset: CGSize = .zero
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
-}
+extension Transform: Codable {}

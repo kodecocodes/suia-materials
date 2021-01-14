@@ -32,19 +32,16 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
+struct BringToFront: ViewModifier {
+  @GestureState private var isDragging = false
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  func body(content: Content) -> some View {
+    content
+    .simultaneousGesture(
+      DragGesture(minimumDistance: 0)
+        .updating($isDragging) { _, gestureState, _ in
+          gestureState = true
+        })
+    .zIndex(isDragging ? 1000 : 0)
+  }
 }

@@ -32,19 +32,20 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
+extension Angle: Codable {
+  enum CodingKeys: CodingKey {
+    case degrees
+  }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let degrees =
+      try container.decode(Double.self, forKey: .degrees)
+    self.init(degrees: degrees)
+  }
 
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(degrees, forKey: .degrees)
+  }
 }

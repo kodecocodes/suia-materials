@@ -32,19 +32,47 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct CardThumbnailView: View {
+  let card: Card
+  var size: CGSize = .zero
+
+  @State private var image: Image?
+
+  var body: some View {
+    ZStack {
+      Group {
+        if let image = loadCardImage() {
+          image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+        } else {
+          card.backgroundColor
+        }
+      }
+      .cornerRadius(10)
+      .frame(
+        width: Settings.thumbnailSize(size: size).width,
+        height: Settings.thumbnailSize(size: size).height)
+      .shadow(
+        color: Color("shadow-color"),
+        radius: 3,
+        x: 0.0,
+        y: 0.0)
+    }
+    .padding(.top, 20)
+  }
+
+  func loadCardImage() -> Image? {
+    if let uiImage = UIImage.load(uuidString: card.id.uuidString) {
+      return Image(uiImage: uiImage)
+    }
+    return nil
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+struct CardThumbnailView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardThumbnailView(card: initialCards[0])
+      .preferredColorScheme(.light)
+  }
 }

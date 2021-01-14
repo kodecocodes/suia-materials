@@ -1,4 +1,4 @@
-///// Copyright (c) 2021 Razeware LLC
+///// Copyright (c) 2020 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,19 +32,24 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
-}
-
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
-
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
-
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+enum AppFonts {
+  static let fonts = [
+    "San Fransisco",
+    "AmericanTypewriter",
+    "Avenir-Heavy",
+    "Avenir-Book",
+    "Baskerville-Italic",
+    "ChalkboardSE-Regular",
+    "Chalkduster",
+    "Cochin-BoldItalic",
+    "Copperplate",
+    "GillSans-UltraBold",
+    "MarkerFelt-Wide",
+    "Noteworthy-Bold",
+    "Verdana-Bold",
+    "Papyrus",
+    "PartyLetPlain",
+    "SavoyeLetPlain",
+    "SnellRoundhand-Black"
+  ]
 }

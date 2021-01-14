@@ -32,19 +32,37 @@
 
 import SwiftUI
 
-enum CardListState {
-  case list, carousel
+struct SingleCardView: View {
+  @EnvironmentObject var model: Model
+  @EnvironmentObject var viewState: ViewState
+
+  var body: some View {
+    if let selectedCard = viewState.selectedCard,
+    let index = model.cards.index(for: selectedCard) {
+      NavigationView {
+        CardDetailView(
+          card: $model.cards[index])
+          .navigationBarTitleDisplayMode(.inline)
+      }
+      .environment(\.horizontalSizeClass, .compact)
+    }
+  }
 }
 
-class ViewState: ObservableObject {
-  // Determines which view to show in `CardsListView`
-  @Published var cardListState: CardListState = .list
+struct SingleCardView_Previews: PreviewProvider {
+  static var model = Model(defaultData: true)
+  static var viewState = ViewState()
 
-  // When true, show the card in `selectedCard`
-  @Published var showAllCards = true
+  struct SingleCardPreview: View {
+    var body: some View {
+      return SingleCardView()
+    }
+  }
 
-  @Published var selectedElement: CardElement?
-
-  // holds card currently being edited
-  var selectedCard: Card?
+  static var previews: some View {
+    viewState.selectedCard = model.cards[0]
+    return SingleCardPreview()
+      .environmentObject(model)
+      .environmentObject(viewState)
+  }
 }
