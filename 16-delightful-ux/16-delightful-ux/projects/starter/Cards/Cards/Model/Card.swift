@@ -48,18 +48,19 @@ struct Card: Identifiable {
     save()
   }
 
-  mutating func addElement(text: String, textColor: Color) {
-    let element = TextElement(text: text, textColor: textColor)
-    elements.append(element)
+  mutating func addElement(textElement: TextElement) {
+    elements.append(textElement)
     save()
   }
 
-  mutating func addElement(uiImage: UIImage) {
-  // 1
+  mutating func addElement(
+    uiImage: UIImage,
+    transform: Transform = Transform()
+  ) {
     let imageFilename = uiImage.save()
     let image = Image(uiImage: uiImage)
-    // 2
     let element = ImageElement(
+      transform: transform,
       image: image,
       imageFilename: imageFilename)
     elements.append(element)
@@ -78,16 +79,12 @@ struct Card: Identifiable {
 
   func save() {
     do {
-    // 1
       let encoder = JSONEncoder()
       encoder.outputFormatting = .prettyPrinted
-      // 2
       let data = try encoder.encode(self)
-      // 3
       let filename = "\(id).rwcard"
       if let url = FileManager.documentURL?
         .appendingPathComponent(filename) {
-        // 4
         try data.write(to: url)
       }
     } catch {
@@ -104,10 +101,8 @@ extension Card: Codable {
   init(from decoder: Decoder) throws {
     let container =
       try decoder.container(keyedBy: CodingKeys.self)
-    // 1
     let id = try container.decode(String.self, forKey: .id)
     self.id = UUID(uuidString: id) ?? UUID()
-    // 2
     elements += try container.decode(
       [ImageElement].self, forKey: .imageElements)
     elements += try container.decode([TextElement].self, forKey: .textElements)

@@ -38,15 +38,11 @@ struct PhotoPicker: UIViewControllerRepresentable {
   @Binding var images: [UIImage]
 
   func makeUIViewController(context: Context) -> some UIViewController {
-    // 1
     var configuration = PHPickerConfiguration()
     configuration.filter = .images
-    // 2
     configuration.selectionLimit = 0
-    // 3
     let picker =
       PHPickerViewController(configuration: configuration)
-    // 4 - set delegate here
     picker.delegate = context.coordinator
     return picker
   }
@@ -69,16 +65,11 @@ struct PhotoPicker: UIViewControllerRepresentable {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
       let itemProviders = results.map(\.itemProvider)
       for item in itemProviders {
-        // load the image from the item here
-        // 1
         if item.canLoadObject(ofClass: UIImage.self) {
-          // 2
           item.loadObject(ofClass: UIImage.self) { image, error in
-            // 3
             if let error = error {
               print("Error!", error.localizedDescription)
             } else {
-              // 4
               DispatchQueue.main.async {
                 if let image = image as? UIImage {
                   self.parent.images.append(image)

@@ -49,7 +49,6 @@ struct CardDetailView: View {
     .onDisappear {
       card.save()
     }
-    .onDrop(of: [.image], delegate: CardDrop(card: $card))
     .cardToolbar(currentModal: $currentModal)
     .cardModals(card: $card, currentModal: $currentModal)
   }
@@ -70,6 +69,9 @@ struct CardDetailView: View {
           .onTapGesture {
             viewState.selectedElement = nil
           }
+          .onDrop(
+            of: [.image],
+            delegate: CardDrop(card: $card))
         ForEach(card.elements, id: \.id) { element in
           CardElementView(
             element: element,

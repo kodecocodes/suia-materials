@@ -34,21 +34,19 @@ import SwiftUI
 
 struct TextPicker: View {
   @Environment(\.presentationMode) var presentationMode
-  @Binding var text: String
-  @Binding var textColor: Color
+  @Binding var textElement: TextElement
 
   var body: some View {
     let onCommit = {
       presentationMode.wrappedValue.dismiss()
     }
-    TextField("Enter text", text: $text, onCommit: onCommit)
+    TextField("Enter text", text: $textElement.text, onCommit: onCommit)
   }
 }
 
 struct TextPicker_Previews: PreviewProvider {
+  @State static var textElement = TextElement()
   static var previews: some View {
-    TextPicker(
-      text: .constant(""),
-      textColor: .constant(.black))
+    TextPicker(textElement: $textElement)
   }
 }

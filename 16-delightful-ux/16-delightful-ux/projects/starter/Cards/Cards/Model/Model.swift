@@ -54,24 +54,19 @@ class Model: ObservableObject {
 }
 
 extension Model {
-  // 1
   func load() -> [Card] {
     var cards: [Card] = []
-    // 2
     guard let path = FileManager.documentURL?.path,
       let enumerator =
         FileManager.default.enumerator(atPath: path),
           let files = enumerator.allObjects as? [String]
     else { return cards }
-    // 3
     let cardFiles = files.filter { $0.contains(".rwcard") }
     for cardFile in cardFiles {
       do {
-        // 4
         let path = path + "/" + cardFile
         let data =
           try Data(contentsOf: URL(fileURLWithPath: path))
-        // 5
         let decoder = JSONDecoder()
         let card = try decoder.decode(Card.self, from: data)
         cards.append(card)

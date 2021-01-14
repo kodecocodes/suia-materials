@@ -35,7 +35,6 @@ import SwiftUI
 struct FramePicker: View {
   @Environment(\.presentationMode) var presentationMode
 
-  // 1
   @Binding var frame: AnyShape?
   private let columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
@@ -46,16 +45,12 @@ struct FramePicker: View {
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns) {
-      // 2
         ForEach(0..<shapes.count, id: \.self) { index in
           shapes[index]
-          // 3
             .stroke(Color.primary, style: style)
-            // 4
             .background(shapes[index].fill(Color.secondary))
             .frame(width: 100, height: 120)
             .padding()
-            // 5
             .onTapGesture {
               frame = shapes[index]
               presentationMode.wrappedValue.dismiss()
