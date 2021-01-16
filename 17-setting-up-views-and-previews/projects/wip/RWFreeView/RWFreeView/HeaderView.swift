@@ -31,64 +31,65 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
-struct PlayerView: View {
-  let episode: Episode
-  @State var showPlayer = false
-  @Environment(\.verticalSizeClass) var vSizeClass
+struct HeaderView: View {
+  let count: Int
+  @State private var sortOn = "popular"
 
   var body: some View {
-    if let url = URL(string: episode.videoUrlString) {
-      VStack {
-        VideoPlayer(player: AVPlayer(url: url))
-          .frame(
-            maxHeight: vSizeClass == .regular ?
-              300 : .infinity)
-          .padding(10)
-          .background(
-            LinearGradient(
-              gradient: Gradient(
-                colors: [
-                  Color.gradientDark, Color.gradientLight
-                ]),
-              startPoint: .leading,
-              endPoint: .trailing)
-          )
-          .cornerRadius(12)
-
-        if vSizeClass == .regular {
-          VStack(spacing: 16) {
-            Text(episode.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .foregroundColor(Color(UIColor.label))
-            HStack(spacing: 15) {
-              Text(episode.released)
-              Text(episode.domain)
-              Text(String(episode.difficulty).capitalized)
-            }
-            Text(episode.description)
-              .padding(.horizontal)
-          }
-          .foregroundColor(Color(UIColor.systemGray))
-        }
-
+    VStack {
+      HStack {
+        Button("Clear all") { }
+          .buttonStyle(HeaderButtonStyle())
+        Button("iOS & Swift") { }
+          .buttonStyle(HeaderButtonStyle())
         Spacer()
       }
+      HStack {
+        Text("\(count) Tutorials")
+          .foregroundColor(Color.white.opacity(0.5))
+        Spacer()
+        Picker("", selection: $sortOn) {
+          Text("New").tag("new")
+          Text("Popular").tag("popular")
+        }
+        .pickerStyle(SegmentedPickerStyle())
+        .frame(maxWidth: 130)
+        .background(Color.gray.opacity(0.8))
+      }
     }
+    .font(.subheadline)
+    .foregroundColor(.white)
+    .frame(
+      maxWidth: .infinity,
+      maxHeight: .infinity,
+      alignment: .leading)
+    .listRowInsets(EdgeInsets())
+    .padding()
+    .background(Color.topBkgd)
+    .cornerRadius(32, corners: [.bottomLeft, .bottomRight])
+    .background(Color.listBkgd)
   }
 }
 
-struct PlayView_Previews: PreviewProvider {
-  static var previews: some View {
-    let store = EpisodeStore()
-    Group {
-      PlayerView(episode: store.episodes[0])
-
-      // landscape view shows only VideoPlayer
-      PlayerView(episode: store.episodes[0])
-        .previewLayout(.fixed(width: 896.0, height: 414.0))
+struct HeaderButtonStyle: ButtonStyle {
+  func makeBody(configuration: Self.Configuration) -> some View {
+    HStack {
+      Image(systemName: "xmark")
+      configuration.label
     }
+    .padding(8)
+    .background(
+      RoundedRectangle(cornerRadius: 10)
+        .fill(Color.white.opacity(0.2))
+    )
+  }
+}
+
+struct HeaderView_Previews: PreviewProvider {
+  static var previews: some View {
+    HeaderView(count: 42)
+      .preferredColorScheme(.dark)
+      .previewLayout(.sizeThatFits)
   }
 }

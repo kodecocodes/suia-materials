@@ -31,64 +31,26 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
-struct PlayerView: View {
-  let episode: Episode
-  @State var showPlayer = false
-  @Environment(\.verticalSizeClass) var vSizeClass
-
-  var body: some View {
-    if let url = URL(string: episode.videoUrlString) {
-      VStack {
-        VideoPlayer(player: AVPlayer(url: url))
-          .frame(
-            maxHeight: vSizeClass == .regular ?
-              300 : .infinity)
-          .padding(10)
-          .background(
-            LinearGradient(
-              gradient: Gradient(
-                colors: [
-                  Color.gradientDark, Color.gradientLight
-                ]),
-              startPoint: .leading,
-              endPoint: .trailing)
-          )
-          .cornerRadius(12)
-
-        if vSizeClass == .regular {
-          VStack(spacing: 16) {
-            Text(episode.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .foregroundColor(Color(UIColor.label))
-            HStack(spacing: 15) {
-              Text(episode.released)
-              Text(episode.domain)
-              Text(String(episode.difficulty).capitalized)
-            }
-            Text(episode.description)
-              .padding(.horizontal)
-          }
-          .foregroundColor(Color(UIColor.systemGray))
-        }
-
-        Spacer()
-      }
-    }
+extension View {
+  // Mojtaba Hosseini
+  // stackoverflow.com/questions/56760335/round-specific-corners-swiftui
+  /// Round specified corners
+  func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+    clipShape( RoundedCorner(radius: radius, corners: corners) )
   }
 }
 
-struct PlayView_Previews: PreviewProvider {
-  static var previews: some View {
-    let store = EpisodeStore()
-    Group {
-      PlayerView(episode: store.episodes[0])
+struct RoundedCorner: Shape {
+  var radius: CGFloat = .infinity
+  var corners: UIRectCorner = .allCorners
 
-      // landscape view shows only VideoPlayer
-      PlayerView(episode: store.episodes[0])
-        .previewLayout(.fixed(width: 896.0, height: 414.0))
-    }
+  func path(in rect: CGRect) -> Path {
+    let path = UIBezierPath(
+      roundedRect: rect,
+      byRoundingCorners: corners,
+      cornerRadii: CGSize(width: radius, height: radius)
+    )
+    return Path(path.cgPath)
   }
 }

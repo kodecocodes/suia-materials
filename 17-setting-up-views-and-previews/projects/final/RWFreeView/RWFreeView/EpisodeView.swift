@@ -31,64 +31,40 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
-struct PlayerView: View {
+struct EpisodeView: View {
   let episode: Episode
-  @State var showPlayer = false
-  @Environment(\.verticalSizeClass) var vSizeClass
 
   var body: some View {
-    if let url = URL(string: episode.videoUrlString) {
-      VStack {
-        VideoPlayer(player: AVPlayer(url: url))
-          .frame(
-            maxHeight: vSizeClass == .regular ?
-              300 : .infinity)
-          .padding(10)
-          .background(
-            LinearGradient(
-              gradient: Gradient(
-                colors: [
-                  Color.gradientDark, Color.gradientLight
-                ]),
-              startPoint: .leading,
-              endPoint: .trailing)
-          )
-          .cornerRadius(12)
-
-        if vSizeClass == .regular {
-          VStack(spacing: 16) {
-            Text(episode.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .foregroundColor(Color(UIColor.label))
-            HStack(spacing: 15) {
-              Text(episode.released)
-              Text(episode.domain)
-              Text(String(episode.difficulty).capitalized)
-            }
-            Text(episode.description)
-              .padding(.horizontal)
-          }
-          .foregroundColor(Color(UIColor.systemGray))
+    HStack(alignment: .top, spacing: 0) {
+      PlayButtonIcon(width: 40, height: 40, radius: 6)
+      VStack(alignment: .leading, spacing: 6) {
+        Text(episode.name)
+          .font(.headline)
+          .fontWeight(.bold)
+          .foregroundColor(Color(UIColor.label))
+        AdaptingStack {
+          Text(episode.released + "  ")
+          Text(episode.domain + "  ")
+          Text(String(episode.difficulty).capitalized)
         }
-
-        Spacer()
+        Text(episode.description)
+          .lineLimit(2)
       }
+      .padding(.horizontal)
+      .font(.footnote)
+      .foregroundColor(Color(UIColor.systemGray))
     }
+    .padding(10)
+    .background(Color.itemBkgd)
+    .cornerRadius(15)
+    .shadow(color: Color.black.opacity(0.1), radius: 10)
   }
 }
 
-struct PlayView_Previews: PreviewProvider {
+struct EpisodeView_Previews: PreviewProvider {
   static var previews: some View {
-    let store = EpisodeStore()
-    Group {
-      PlayerView(episode: store.episodes[0])
-
-      // landscape view shows only VideoPlayer
-      PlayerView(episode: store.episodes[0])
-        .previewLayout(.fixed(width: 896.0, height: 414.0))
-    }
+    EpisodeView(episode: EpisodeStore().episodes[0])
+      .previewLayout(.sizeThatFits)
   }
 }

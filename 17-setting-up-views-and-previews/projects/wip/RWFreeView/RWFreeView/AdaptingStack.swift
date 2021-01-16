@@ -31,64 +31,29 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
-struct PlayerView: View {
-  let episode: Episode
-  @State var showPlayer = false
-  @Environment(\.verticalSizeClass) var vSizeClass
+/// HStack unless dynamic font size is XXL or larger
+struct AdaptingStack<Content>: View where Content: View {
+  init(@ViewBuilder content: @escaping () -> Content) {
+    self.content = content
+  }
+
+  var content: () -> Content
+  @Environment(\.sizeCategory) var sizeCategory
 
   var body: some View {
-    if let url = URL(string: episode.videoUrlString) {
-      VStack {
-        VideoPlayer(player: AVPlayer(url: url))
-          .frame(
-            maxHeight: vSizeClass == .regular ?
-              300 : .infinity)
-          .padding(10)
-          .background(
-            LinearGradient(
-              gradient: Gradient(
-                colors: [
-                  Color.gradientDark, Color.gradientLight
-                ]),
-              startPoint: .leading,
-              endPoint: .trailing)
-          )
-          .cornerRadius(12)
-
-        if vSizeClass == .regular {
-          VStack(spacing: 16) {
-            Text(episode.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .foregroundColor(Color(UIColor.label))
-            HStack(spacing: 15) {
-              Text(episode.released)
-              Text(episode.domain)
-              Text(String(episode.difficulty).capitalized)
-            }
-            Text(episode.description)
-              .padding(.horizontal)
-          }
-          .foregroundColor(Color(UIColor.systemGray))
-        }
-
-        Spacer()
-      }
-    }
-  }
-}
-
-struct PlayView_Previews: PreviewProvider {
-  static var previews: some View {
-    let store = EpisodeStore()
-    Group {
-      PlayerView(episode: store.episodes[0])
-
-      // landscape view shows only VideoPlayer
-      PlayerView(episode: store.episodes[0])
-        .previewLayout(.fixed(width: 896.0, height: 414.0))
+    switch sizeCategory {
+    case
+      .extraExtraLarge,
+      .extraExtraExtraLarge,
+      .accessibilityMedium,
+      .accessibilityLarge,
+      .accessibilityExtraLarge,
+      .accessibilityExtraExtraLarge,
+      .accessibilityExtraExtraExtraLarge:
+      return AnyView(VStack(content: self.content).padding(.top, 10))
+    default:
+      return AnyView(HStack(alignment: .top, content: self.content))
     }
   }
 }

@@ -33,14 +33,74 @@
 import SwiftUI
 
 struct ContentView: View {
+  @StateObject var store = EpisodeStore()
+  @State var showFilters = false
+
   var body: some View {
-    Text("Hello, world!")
-      .padding()
+    NavigationView {
+      List {
+        HeaderView(count: store.episodes.count)
+        ForEach(store.episodes, id: \.name) { episode in
+          ZStack {
+            NavigationLink(destination: PlayerView(episode: episode)) {
+              EmptyView()
+            }
+            .opacity(0)
+            .buttonStyle(PlainButtonStyle())
+            EpisodeView(episode: episode)
+          }
+          .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .leading)
+          .listRowInsets(EdgeInsets())
+          .padding(.bottom, 8)
+          .padding([.leading, .trailing], 20)
+          .background(Color.listBkgd)
+        }
+      }
+      .navigationTitle("Videos")
+      .toolbar {
+        ToolbarItem {
+          // swiftlint:disable:next multiple_closures_with_trailing_closure
+          Button(action: { showFilters.toggle() }) {
+            Image(systemName: "line.horizontal.3.decrease.circle")
+              .accessibilityLabel(Text("Shows filter options"))
+          }
+          .sheet(isPresented: $showFilters) {
+            FilterOptionsView()
+          }
+        }
+      }
+    }
+  }
+
+  init() {
+    // 1
+    let appearance = UINavigationBarAppearance()
+    appearance.backgroundColor = UIColor(named: "top-bkgd")
+    appearance.largeTitleTextAttributes =
+      [.foregroundColor: UIColor.white]
+    appearance.titleTextAttributes =
+      [.foregroundColor: UIColor.white]
+
+    // 2. Back button text and arrow color
+    UINavigationBar.appearance().tintColor = .white
+
+    // 3. Assign configuration to all appearances
+    UINavigationBar.appearance().standardAppearance = appearance
+    UINavigationBar.appearance().compactAppearance = appearance
+    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
+    // 4. Selected segment color
+    UISegmentedControl.appearance()
+      .selectedSegmentTintColor = UIColor(named: "list-bkgd")
   }
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+      //.preferredColorScheme(.dark)
   }
 }

@@ -76,6 +76,8 @@ struct PlayerView: View {
 
         Spacer()
       }
+      .navigationTitle(episode.name)
+      .navigationBarTitleDisplayMode(.inline)
     }
   }
 }
@@ -84,7 +86,9 @@ struct PlayView_Previews: PreviewProvider {
   static var previews: some View {
     let store = EpisodeStore()
     Group {
-      PlayerView(episode: store.episodes[0])
+      NavigationView {
+        PlayerView(episode: store.episodes[0])
+      }
 
       // landscape view shows only VideoPlayer
       PlayerView(episode: store.episodes[0])
