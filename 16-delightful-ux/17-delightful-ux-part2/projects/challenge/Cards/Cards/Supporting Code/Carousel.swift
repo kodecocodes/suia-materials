@@ -48,8 +48,8 @@ struct Carousel: View {
         ForEach((0..<model.cards.count), id: \.self) { index in
           cardView(model.cards[index])
             .frame(
-              width: calculateSize(index: index, size: proxy.size).width,
-              height: calculateSize(index: index, size: proxy.size).height)
+              width: calculateSize(proxy.size).width,
+              height: calculateSize(proxy.size).height)
             .cornerRadius(15)
             .shadow(
               color: Color(white: 0.5, opacity: 0.7),
@@ -60,7 +60,7 @@ struct Carousel: View {
                 viewState.showAllCards = false
               }
             }
-            .offset(y: -proxy.size.height * 0.1)
+            .offset(y: -proxy.size.height * 0.05)
         }
       }
       .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -87,17 +87,19 @@ struct Carousel: View {
     return nil
   }
 
-  func calculateSize(index: Int, size: CGSize) -> CGSize {
-    let width = cardWidth(size: size)
-    let aspectRatio = Settings.cardSize.height / Settings.cardSize.width
-    let height = width * aspectRatio
-    return CGSize(width: width, height: height)
-  }
+  func calculateSize(_ size: CGSize) -> CGSize {
+    var newSize = size
+    let ratio =
+      Settings.cardSize.width / Settings.cardSize.height
 
-  func cardWidth(size: CGSize) -> CGFloat {
-    let cardSize = min(size.width, size.height)
-    let width = cardSize * 0.8
-    return width
+    if size.width < size.height {
+      newSize.height = min(size.height, newSize.width / ratio)
+      newSize.width = min(size.width, newSize.height * ratio)
+    } else {
+      newSize.width = min(size.width, newSize.height * ratio)
+      newSize.height = min(size.height, newSize.width / ratio)
+    }
+    return newSize * 0.7
   }
 }
 
