@@ -41,119 +41,54 @@ struct CarouselCards {
 struct Carousel: View {
   @EnvironmentObject var model: Model
   @EnvironmentObject var viewState: ViewState
-  @State private var frontCardIndex = 0
-  @State private var offsets: [CGFloat] = []
 
   var body: some View {
-    VStack {
-      GeometryReader { proxy in
-        ForEach((0..<model.cards.count).reversed(), id: \.self) { index in
+    GeometryReader { proxy in
+      TabView {
+        ForEach((0..<model.cards.count), id: \.self) { index in
           cardView(model.cards[index])
             .frame(
               width: calculateSize(index: index, size: proxy.size).width,
               height: calculateSize(index: index, size: proxy.size).height)
             .cornerRadius(15)
-            .offset(x: calculateOffset(index: index))
-            .gesture(dragGesture(index: index, size: proxy.size))
             .shadow(
-              color: Color(
-                white: 0.5,
-                opacity: calculateShadow(index: index)),
+              color: Color(white: 0.5, opacity: 0.7),
               radius: 5)
-            .onAppear {
-              offsets = [CGFloat](repeating: 0, count: model.cards.count)
-              frontCardIndex = 0
-            }
             .onTapGesture {
               viewState.selectedCard = model.cards[index]
               withAnimation {
                 viewState.showAllCards = false
               }
             }
+            .offset(y: -proxy.size.height * 0.1)
         }
-        .frame(
-          width: proxy.size.width,
-          height: proxy.size.height * 0.9)
-        .offset(CGSize(width: -10, height: 0))
-        .padding(.horizontal)
       }
+      .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+      .tabViewStyle(PageTabViewStyle())
     }
-  }
-
-  func dragGesture(index: Int, size: CGSize) -> some Gesture {
-    return DragGesture()
-      .onChanged { value in
-        let leftDrag = value.translation.width < 0
-        // right drag drags the previous card
-        if leftDrag {
-          if index == frontCardIndex && index < model.cards.count - 1 {
-            offsets[index] = value.translation.width
-          }
-        } else {
-          if index - 1 >= 0 {
-            offsets[index - 1] = -size.width + value.translation.width
-          }
-        }
-      }
-      .onEnded { value in
-        withAnimation {   // card will animate to final position
-          let leftDrag = value.translation.width < 0
-          if leftDrag {
-            // move card off
-            if index == frontCardIndex && index < model.cards.count - 1 {
-              if abs(value.translation.width) > size.width / 4 {
-                offsets[index] = -size.width
-                frontCardIndex += 1
-              } else {
-                offsets[index] = 0
-              }
-            }
-          } else {
-            // bring card back
-            if value.translation.width > size.width / 4 {
-              if index - 1 >= 0 {
-                offsets[index - 1] = 0
-                frontCardIndex -= 1
-              }
-            }
-          }
-        }
-      }
   }
 
   func cardView(_ card: Card) -> some View {
-    ZStack {
-      card.backgroundColor
-      if let image = card.image {
-        Image(uiImage: image)
+    Group {
+      if let image = loadCardImage(card) {
+        image
           .resizable()
           .aspectRatio(contentMode: .fit)
+      } else {
+        card.backgroundColor
       }
     }
   }
 
-  func calculateOffset(index: Int) -> CGFloat {
-    if index >= offsets.count { return 0 }
-    let offset: CGFloat = 30
-    var position = index - frontCardIndex <= 1 ? index - frontCardIndex : 2
-    if position < 0 {
-      position = 0
+  func loadCardImage(_ card: Card) -> Image? {
+    if let uiImage = UIImage.load(uuidString: card.id.uuidString) {
+      return Image(uiImage: uiImage)
     }
-    return offsets[index] + CGFloat(position) * offset
-  }
-
-  func calculateShadow(index: Int) -> Double {
-    let position = abs(frontCardIndex - index)
-    return position < 3 ? 0.5 : 0
+    return nil
   }
 
   func calculateSize(index: Int, size: CGSize) -> CGSize {
-    let scaleOffset: CGFloat = 30
-    var position = index - frontCardIndex <= 1 ? index - frontCardIndex : 2
-    if position < 0 {
-      position = 0
-    }
-    let width = cardWidth(size: size) - scaleOffset * CGFloat(position)
+    let width = cardWidth(size: size)
     let aspectRatio = Settings.cardSize.height / Settings.cardSize.width
     let height = width * aspectRatio
     return CGSize(width: width, height: height)
@@ -161,8 +96,7 @@ struct Carousel: View {
 
   func cardWidth(size: CGSize) -> CGFloat {
     let cardSize = min(size.width, size.height)
-    let padding: CGFloat = 0.25 * cardSize
-    let width = cardSize - 2 * padding
+    let width = cardSize * 0.8
     return width
   }
 }
