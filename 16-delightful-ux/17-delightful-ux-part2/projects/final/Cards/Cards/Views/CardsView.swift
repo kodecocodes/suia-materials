@@ -75,7 +75,9 @@ struct CardsView: View {
   // 1
     Button(action: {
       viewState.selectedCard = model.addCard()
-      viewState.showAllCards = false
+      withAnimation {
+        viewState.showAllCards = false
+      }
       // swiftlint:disable:next multiple_closures_with_trailing_closure
     }) {
       Label("Create New", systemImage: "plus")

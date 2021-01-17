@@ -41,6 +41,8 @@ class Model: ObservableObject {
 
   func remove(_ card: Card) {
     if let index = cards.index(for: card) {
+      UIImage.remove(name: card.id.uuidString)
+      UIImage.remove(name: "\(card.id.uuidString).rwcard")
       cards.remove(at: index)
     }
   }
