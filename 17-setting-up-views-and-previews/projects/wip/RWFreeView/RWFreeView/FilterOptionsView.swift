@@ -46,6 +46,8 @@ struct FilterOptionsView: View {
   @State var selectedI = false  // Intermediate
   @State var selectedA = false  // Advanced
 
+  let columns = [GridItem(.adaptive(minimum: 90))]
+
   var body: some View {
     ZStack(alignment: .topTrailing) {
       HStack {
@@ -61,7 +63,7 @@ struct FilterOptionsView: View {
             .padding()
             .background(
               Circle().fill((Color.closeBkgd))
-          )
+            )
         }
         .padding([.top, .trailing])
       }
@@ -75,31 +77,31 @@ struct FilterOptionsView: View {
             Text("Platforms")
               .font(.title2)
               .padding(.bottom)
-            VStack(alignment: .leading) {
-              AdaptingStack {
-                Button("iOS & Swift") { selected1.toggle() }
-                  .buttonStyle(FilterButtonStyle(selected: selected1, width: nil))
-                Button("Android & Kotlin") { selected2.toggle() }
-                  .buttonStyle(FilterButtonStyle(selected: selected2, width: nil))
-                Button("macOS") { selected5.toggle() }
-                  .buttonStyle(FilterButtonStyle(selected: selected5, width: nil))
-              }
-              AdaptingStack {
-                Button("Server-Side Swift") { selected8.toggle() }
-                  .buttonStyle(FilterButtonStyle(selected: selected8, width: nil))
-                Button("Unity") { selected3.toggle() }
-                  .buttonStyle(FilterButtonStyle(selected: selected3, width: nil))
-                Button("Flutter") { selected9.toggle() }
-                  .buttonStyle(FilterButtonStyle(selected: selected9, width: nil))
-              }
-              .padding(.bottom)
+            //VStack(alignment: .leading) {
+            LazyVGrid(columns: columns) {
+              Button("iOS & Swift") { selected1.toggle() }
+                .buttonStyle(FilterButtonStyle(selected: selected1, width: nil))
+              Button("Android & Kotlin") { selected2.toggle() }
+              .buttonStyle(FilterButtonStyle(selected: selected2, width: nil))
+              Button("macOS") { selected5.toggle() }
+                .buttonStyle(FilterButtonStyle(selected: selected5, width: nil))
+              //}
+              //AdaptingStack {
+              Button("Server-Side Swift") { selected8.toggle() }
+                .buttonStyle(FilterButtonStyle(selected: selected8, width: nil))
+              Button("Unity") { selected3.toggle() }
+                .buttonStyle(FilterButtonStyle(selected: selected3, width: nil))
+              Button("Flutter") { selected9.toggle() }
+                .buttonStyle(FilterButtonStyle(selected: selected9, width: nil))
             }
+            .padding(.bottom)
+            //}
           }
           VStack(alignment: .leading) {
             Text("Difficulty")
               .font(.title2)
               .padding(.vertical)
-            AdaptingStack {
+            LazyVGrid(columns: columns) {
               Button("Beginner") { selectedB.toggle() }
                 .buttonStyle(FilterButtonStyle(selected: selectedB, width: nil))
               Button("Intermediate") { selectedI.toggle() }
@@ -119,6 +121,7 @@ struct FilterOptionsView: View {
           }
           .buttonStyle(FilterButtonStyle(selected: true, width: 160))
         }
+        .padding(.bottom)
         .font(.title2)
       }
     }
@@ -145,6 +148,6 @@ struct FilterButtonStyle: ButtonStyle {
 struct FilterOptionsView_Previews: PreviewProvider {
   static var previews: some View {
     FilterOptionsView()
-      //.preferredColorScheme(.dark)
+    //.preferredColorScheme(.dark)
   }
 }
