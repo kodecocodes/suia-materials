@@ -34,13 +34,13 @@ import SwiftUI
 
 struct EpisodeView: View {
   let episode: Episode
-  
+
   @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
   @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
   var isIPad: Bool {
     horizontalSizeClass == .regular && verticalSizeClass == .regular
   }
-  
+
   var body: some View {
     HStack(alignment: .top, spacing: 0) {
       PlayButtonIcon(width: 40, height: 40, radius: 6)

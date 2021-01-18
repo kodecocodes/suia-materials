@@ -46,7 +46,7 @@ struct FilterOptionsView: View {
   @State var selectedI = false  // Intermediate
   @State var selectedA = false  // Advanced
 
-  let columns = [GridItem(.adaptive(minimum: 90))]
+  let columns = [GridItem(.adaptive(minimum: 115))]
 
   var body: some View {
     ZStack(alignment: .topTrailing) {
@@ -78,11 +78,12 @@ struct FilterOptionsView: View {
               .font(.title2)
               .padding(.bottom)
             //VStack(alignment: .leading) {
-            LazyVGrid(columns: columns) {
+            LazyVGrid(columns: columns, spacing: 10) {
               Button("iOS & Swift") { selected1.toggle() }
                 .buttonStyle(FilterButtonStyle(selected: selected1, width: nil))
               Button("Android & Kotlin") { selected2.toggle() }
-              .buttonStyle(FilterButtonStyle(selected: selected2, width: nil))
+                //.fixedSize()
+                .buttonStyle(FilterButtonStyle(selected: selected2, width: nil))
               Button("macOS") { selected5.toggle() }
                 .buttonStyle(FilterButtonStyle(selected: selected5, width: nil))
               //}

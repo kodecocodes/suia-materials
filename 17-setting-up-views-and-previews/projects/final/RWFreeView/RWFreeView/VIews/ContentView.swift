@@ -73,10 +73,11 @@ struct ContentView: View {
         }
       }
     }
+    .navigationViewStyle(StackNavigationViewStyle())
   }
 
   init() {
-    // 1
+    // 1. White title on black background
     let appearance = UINavigationBarAppearance()
     appearance.backgroundColor = UIColor(named: "top-bkgd")
     appearance.largeTitleTextAttributes =

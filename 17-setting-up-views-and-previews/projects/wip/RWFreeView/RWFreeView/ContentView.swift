@@ -60,6 +60,7 @@ struct ContentView: View {
         }
       }
       .navigationTitle("Videos")
+      //PlayerView(episode: store.episodes[0])
       .toolbar {
         ToolbarItem {
           // swiftlint:disable:next multiple_closures_with_trailing_closure

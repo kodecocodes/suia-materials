@@ -119,6 +119,7 @@ struct FilterOptionsView: View {
           }
           .buttonStyle(FilterButtonStyle(selected: true, width: 160))
         }
+        .padding(.bottom)
         .font(.title2)
       }
     }
