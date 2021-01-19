@@ -110,10 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				18D775C422AD944300AE281E /* ContentView.swift */,
-				CD9D2C0625B12EC10085F28C /* EpisodeView.swift */,
-				CD9D2C0A25B12F8F0085F28C /* HeaderView.swift */,
 				CD304C7025A2D34900FD0E2C /* PlayerView.swift */,
 				CD9D2BFD25B00D5C0085F28C /* FilterOptionsView.swift */,
+				CD9D2C0A25B12F8F0085F28C /* HeaderView.swift */,
+				CD9D2C0625B12EC10085F28C /* EpisodeView.swift */,
 				CD34211925A5771000817FD8 /* PlayButtonIcon.swift */,
 				CD9D2C2C25B145B50085F28C /* AdaptingStack.swift */,
 			);

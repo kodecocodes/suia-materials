@@ -35,10 +35,13 @@ import SwiftUI
 struct EpisodeView: View {
   let episode: Episode
 
-  @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
-  @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+  @Environment(\.verticalSizeClass) var
+    verticalSizeClass: UserInterfaceSizeClass?
+  @Environment(\.horizontalSizeClass) var
+    horizontalSizeClass: UserInterfaceSizeClass?
   var isIPad: Bool {
-    horizontalSizeClass == .regular && verticalSizeClass == .regular
+    horizontalSizeClass == .regular &&
+      verticalSizeClass == .regular
   }
 
   var body: some View {

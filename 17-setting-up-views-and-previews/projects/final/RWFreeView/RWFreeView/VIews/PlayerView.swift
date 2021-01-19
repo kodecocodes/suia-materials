@@ -53,7 +53,7 @@ struct PlayerView: View {
             .padding(15)
             .roundedGradientBackground()
 
-          // Show video info in ipad or portrait orientation
+          // Show video info in iPad or iPhone portrait orientation
           if vSizeClass == .regular {
             VStack(spacing: 16) {
               Text(episode.name)
@@ -86,6 +86,7 @@ struct PlayView_Previews: PreviewProvider {
       NavigationView {
         PlayerView(episode: store.episodes[0])
       }
+      .navigationViewStyle(StackNavigationViewStyle())
 
       // landscape view shows only VideoPlayer
       PlayerView(episode: store.episodes[0])
@@ -95,7 +96,7 @@ struct PlayView_Previews: PreviewProvider {
 }
 
 extension View {
-  /// Set the background to app's gradient with rounded corners
+  /// Set the background to app's gradient with rounded bottom corners
   func roundedGradientBackground() -> some View {
     self
       .background(
