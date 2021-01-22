@@ -45,14 +45,14 @@ struct FramePicker: View {
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns) {
-        ForEach(0..<shapes.count, id: \.self) { index in
-          shapes[index]
+        ForEach(0..<Shapes.shapes.count, id: \.self) { index in
+          Shapes.shapes[index]
             .stroke(Color.primary, style: style)
-            .background(shapes[index].fill(Color.secondary))
+            .background(Shapes.shapes[index].fill(Color.secondary))
             .frame(width: 100, height: 120)
             .padding()
             .onTapGesture {
-              frame = shapes[index]
+              frame = Shapes.shapes[index]
               presentationMode.wrappedValue.dismiss()
             }
         }
