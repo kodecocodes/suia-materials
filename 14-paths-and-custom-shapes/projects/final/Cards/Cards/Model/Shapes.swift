@@ -32,10 +32,12 @@
 
 import SwiftUI
 
-let shapes: [AnyShape] = [
-  AnyShape(Circle()), AnyShape(Rectangle()),
-  AnyShape(Cone()), AnyShape(Lens())
-]
+extension Shapes {
+  static let shapes: [AnyShape] = [
+    AnyShape(Circle()), AnyShape(Rectangle()),
+    AnyShape(Cone()), AnyShape(Lens())
+  ]
+}
 
 struct Shapes: View {
   let currentShape = Lens()
