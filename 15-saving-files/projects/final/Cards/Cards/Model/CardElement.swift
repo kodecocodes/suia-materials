@@ -75,8 +75,9 @@ extension ImageElement: Codable {
     // 4
       image = Image("error-image")
     }
-    if let index = try container.decodeIfPresent(Int.self, forKey: .frame) {
-      frame = shapes[index]
+    if let index =
+      try container.decodeIfPresent(Int.self, forKey: .frame) {
+      frame = Shapes.shapes[index]
     }
   }
 
@@ -84,7 +85,8 @@ extension ImageElement: Codable {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(transform, forKey: .transform)
     try container.encode(imageFilename, forKey: .imageFilename)
-    if let index = shapes.firstIndex(where: { $0 == frame }) {
+    if let index =
+      Shapes.shapes.firstIndex(where: { $0 == frame }) {
       try container.encode(index, forKey: .frame)
     }
   }
