@@ -39,7 +39,7 @@ struct ContentView: View {
   var body: some View {
     NavigationView {
       List {
-        HeaderView(count: store.episodes.count)
+        HeaderView(count: store.episodes.count, store: store)
         ForEach(store.episodes, id: \.name) { episode in
           ZStack {
             NavigationLink(destination: PlayerView(episode: episode)) {
@@ -102,6 +102,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
-      //.preferredColorScheme(.dark)
+    //.preferredColorScheme(.dark)
   }
 }

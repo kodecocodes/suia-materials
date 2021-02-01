@@ -34,6 +34,7 @@ import Foundation
 
 class EpisodeStore: ObservableObject {
   @Published var episodes: [Episode] = []
+  @Published var queryTerm = ""
 
   init() {
     #if DEBUG
@@ -45,7 +46,7 @@ class EpisodeStore: ObservableObject {
 struct Episode {
   let name: String
   let description: String  // description_plain_text
-  let released: String  // released_at, will be Date
+  let released: String  // released_at
   let domain: String  // enum
   let difficulty: String  // enum
   let videoUrlString: String  // will be videoIdentifier: Int

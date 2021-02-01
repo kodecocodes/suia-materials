@@ -35,9 +35,11 @@ import SwiftUI
 struct HeaderView: View {
   let count: Int
   @State private var sortOn = "popular"
+  @ObservedObject var store: EpisodeStore
 
   var body: some View {
     VStack {
+      SearchField(store: store)
       HStack {
         Button("Clear all") { }
           .buttonStyle(HeaderButtonStyle())
@@ -47,7 +49,12 @@ struct HeaderView: View {
       }
       HStack {
         Text("\(count) Tutorials")
-          .foregroundColor(Color.white.opacity(0.5))
+        Menu("\(Image(systemName: "filemenu.and.cursorarrow"))") {
+          Button("10 results/page") { }
+          Button("20 results/page") { }
+          Button("30 results/page") { }
+          Button("No change") { }
+        }
         Spacer()
         Picker("", selection: $sortOn) {
           Text("New").tag("new")
@@ -57,6 +64,7 @@ struct HeaderView: View {
         .frame(maxWidth: 130)
         .background(Color.gray.opacity(0.8))
       }
+      .foregroundColor(Color.white.opacity(0.6))
     }
     .font(.subheadline)
     .foregroundColor(.white)
@@ -69,6 +77,24 @@ struct HeaderView: View {
     .background(Color.topBkgd)
     .cornerRadius(32, corners: [.bottomLeft, .bottomRight])
     .background(Color.listBkgd)
+  }
+}
+
+struct SearchField: View {
+  @ObservedObject var store: EpisodeStore
+
+  var body: some View {
+    ZStack(alignment: .leading) {
+      if store.queryTerm.isEmpty {
+        Text("\(Image(systemName: "magnifyingglass")) Search videos")
+          .foregroundColor(Color.white.opacity(0.6))
+      }
+      TextField("", text: $store.queryTerm)
+    }
+    .padding(10)
+    .background(
+      RoundedRectangle(cornerRadius: 10)
+        .foregroundColor(Color.white.opacity(0.2)))
   }
 }
 
@@ -88,8 +114,8 @@ struct HeaderButtonStyle: ButtonStyle {
 
 struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    HeaderView(count: 42)
-      .preferredColorScheme(.dark)
+    HeaderView(count: 42, store: EpisodeStore())
+      //.preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
   }
 }
