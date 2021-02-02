@@ -39,11 +39,11 @@ struct SingleCardView: View {
   var body: some View {
     if let selectedCard = viewState.selectedCard,
       let index = store.index(for: selectedCard) {
-    NavigationView {
-      CardDetailView(card: $store.cards[index])
-        .navigationBarTitleDisplayMode(.inline)
-    }
-    .navigationViewStyle(StackNavigationViewStyle())
+      NavigationView {
+        CardDetailView(card: $store.cards[index])
+          .navigationBarTitleDisplayMode(.inline)
+      }
+      .navigationViewStyle(StackNavigationViewStyle())
     }
   }
 }
