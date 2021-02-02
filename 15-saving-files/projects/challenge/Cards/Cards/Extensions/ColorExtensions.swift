@@ -42,7 +42,6 @@ extension Color {
   }
 }
 
-
 extension Color {
   func colorComponents() -> [CGFloat] {
     let uiColor = UIColor(self)
