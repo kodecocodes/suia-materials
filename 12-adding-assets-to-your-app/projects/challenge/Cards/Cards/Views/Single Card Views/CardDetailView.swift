@@ -78,14 +78,11 @@ struct CardDetailView: View {
     }
   }
 
-  // 1
   func bindingTransform(for element: CardElement)
     -> Binding<Transform> {
-    // 2
     guard let index = element.index(in: card.elements) else {
       fatalError("Element does not exist")
     }
-    // 3
     return $card.elements[index].transform
   }
 }
