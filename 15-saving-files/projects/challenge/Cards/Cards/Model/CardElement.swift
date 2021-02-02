@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -72,7 +72,7 @@ extension ImageElement: Codable {
       let uiImage = UIImage.load(uuidString: imageFilename) {
       image = Image(uiImage: uiImage)
     } else {
-    // 4
+      // 4
       image = Image("error-image")
     }
     if let index =
@@ -85,17 +85,11 @@ extension ImageElement: Codable {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(transform, forKey: .transform)
     try container.encode(imageFilename, forKey: .imageFilename)
-    if let index = Shapes.shapes.firstIndex(where: { $0 == frame }) {
+    if let index =
+      Shapes.shapes.firstIndex(where: { $0 == frame }) {
       try container.encode(index, forKey: .frame)
     }
   }
-}
-
-struct ColorElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var color: Color = .red
-  var opacity: Double = 1.0
 }
 
 struct TextElement: CardElement {
@@ -103,11 +97,12 @@ struct TextElement: CardElement {
   var transform = Transform()
   var text = ""
   var textColor = Color.black
+  var textFont = "San Fransisco"
 }
 
 extension TextElement: Codable {
   enum CodingKeys: CodingKey {
-    case transform, text, textColor
+    case transform, text, textColor, textFont
   }
 
   init(from decoder: Decoder) throws {
@@ -117,6 +112,7 @@ extension TextElement: Codable {
     text = try container.decode(String.self, forKey: .text)
     let components = try container.decode([CGFloat].self, forKey: .textColor)
     textColor = Color.color(components: components)
+    textFont = try container.decode(String.self, forKey: .textFont)
   }
 
   func encode(to encoder: Encoder) throws {
@@ -125,5 +121,6 @@ extension TextElement: Codable {
     try container.encode(text, forKey: .text)
     let components = textColor.colorComponents()
     try container.encode(components, forKey: .textColor)
+    try container.encode(textFont, forKey: .textFont)
   }
 }
