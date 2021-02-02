@@ -32,11 +32,22 @@
 
 import SwiftUI
 
-enum Settings {
-  static let thumbnailSize =
-    CGSize(width: 150, height: 250)
-  static let defaultElementSize =
-    CGSize(width: 250, height: 180)
-  static let borderColor: Color = .blue
-  static let borderWidth: CGFloat = 5
+class CardStore: ObservableObject {
+  @Published var cards: [Card] = []
+
+  init(defaultData: Bool = false) {
+    if defaultData {
+      cards = initialCards
+    }
+  }
+
+  func index(for card: Card) -> Int? {
+    cards.firstIndex { $0.id == card.id }
+  }
+
+  func remove(_ card: Card) {
+    if let index = index(for: card) {
+      cards.remove(at: index)
+    }
+  }
 }

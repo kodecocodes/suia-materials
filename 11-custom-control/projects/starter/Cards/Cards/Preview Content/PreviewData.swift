@@ -32,6 +32,7 @@
 
 import SwiftUI
 
+/*
 let initialCards: [Card] = [
   Card(backgroundColor: .green, elements: initialElements),
   Card(backgroundColor: .orange),
@@ -61,3 +62,4 @@ let initialElements: [CardElement] = [
       offset: CGSize(width: -35, height: -125)), text: "Hedgehogs!!!",
       textColor: .blue)
 ]
+*/

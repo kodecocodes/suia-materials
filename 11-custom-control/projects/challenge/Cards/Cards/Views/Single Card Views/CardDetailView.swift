@@ -32,11 +32,58 @@
 
 import SwiftUI
 
-enum Settings {
-  static let thumbnailSize =
-    CGSize(width: 150, height: 250)
-  static let defaultElementSize =
-    CGSize(width: 250, height: 180)
-  static let borderColor: Color = .blue
-  static let borderWidth: CGFloat = 5
+
+struct CardDetailView: View {
+  @EnvironmentObject var viewState: ViewState
+  @State private var currentModal: CardModal?
+  @Binding var card: Card
+
+  var body: some View {
+    content
+      .modifier(CardToolbar(currentModal: $currentModal))
+  }
+
+  var content: some View {
+    ZStack {
+      card.backgroundColor
+        .edgesIgnoringSafeArea(.all)
+      ForEach(card.elements, id: \.id) { element in
+        CardElementView(element: element)
+          .contextMenu {
+            // swiftlint:disable:next multiple_closures_with_trailing_closure
+            Button(action: { card.remove(element) }) {
+              Label("Delete", systemImage: "trash")
+            }
+          }
+          .resizableView(transform: bindingTransform(for: element))
+          .frame(
+            width: element.transform.size.width,
+            height: element.transform.size.height)
+      }
+    }
+  }
+
+  // 1
+  func bindingTransform(for element: CardElement)
+    -> Binding<Transform> {
+    // 2
+    guard let index = element.index(in: card.elements) else {
+      fatalError("Element does not exist")
+    }
+    // 3
+    return $card.elements[index].transform
+  }
+}
+
+struct CardDetailView_Previews: PreviewProvider {
+  struct CardDetailPreview: View {
+    @State private var card = initialCards[0]
+    var body: some View {
+      CardDetailView(card: $card)
+        .environmentObject(ViewState(card: card))
+    }
+  }
+  static var previews: some View {
+    CardDetailPreview()
+  }
 }

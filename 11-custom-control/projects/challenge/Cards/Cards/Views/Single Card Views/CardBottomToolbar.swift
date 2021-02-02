@@ -32,11 +32,58 @@
 
 import SwiftUI
 
-enum Settings {
-  static let thumbnailSize =
-    CGSize(width: 150, height: 250)
-  static let defaultElementSize =
-    CGSize(width: 250, height: 180)
-  static let borderColor: Color = .blue
-  static let borderWidth: CGFloat = 5
+struct ToolbarButtonView: View {
+  let modal: CardModal
+  private let modalButton: [CardModal: (
+    text: String, imageName: String)] = [
+      CardModal.photoPicker: ("Photos", "photo"),
+      CardModal.framePicker: ("Frames", "square.on.circle"),
+      CardModal.stickerPicker: ("Stickers", "heart.circle"),
+      CardModal.textPicker: ("Text", "textformat")
+    ]
+
+  var body: some View {
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+    VStack {
+      Image(systemName: imageName)
+        .font(.largeTitle)
+      Text(text)
+    }
+    .padding(.top)
+    }
+  }
+}
+
+struct CardBottomToolbar: View {
+  @Binding var cardModal: CardModal?
+
+  var body: some View {
+    HStack {
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .photoPicker }) {
+        ToolbarButtonView(modal: .photoPicker)
+      }
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .framePicker }) {
+        ToolbarButtonView(modal: .framePicker)
+      }
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .stickerPicker }) {
+        ToolbarButtonView(modal: .stickerPicker)
+      }
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .textPicker }) {
+        ToolbarButtonView(modal: .textPicker)
+      }
+    }
+  }
+}
+
+struct CardBottomToolbar_Previews: PreviewProvider {
+  static var previews: some View {
+    CardBottomToolbar(cardModal: .constant(.stickerPicker))
+      .previewLayout(.sizeThatFits)
+      .padding()
+  }
 }

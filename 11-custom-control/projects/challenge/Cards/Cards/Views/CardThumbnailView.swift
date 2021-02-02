@@ -32,11 +32,20 @@
 
 import SwiftUI
 
-enum Settings {
-  static let thumbnailSize =
-    CGSize(width: 150, height: 250)
-  static let defaultElementSize =
-    CGSize(width: 250, height: 180)
-  static let borderColor: Color = .blue
-  static let borderWidth: CGFloat = 5
+struct CardThumbnailView: View {
+  let card: Card
+
+  var body: some View {
+    RoundedRectangle(cornerRadius: 15)
+      .foregroundColor(card.backgroundColor)
+      .frame(
+        width: Settings.thumbnailSize.width,
+        height: Settings.thumbnailSize.height)
+  }
+}
+
+struct CardThumbnailView_Previews: PreviewProvider {
+  static var previews: some View {
+    CardThumbnailView(card: initialCards[0])
+  }
 }

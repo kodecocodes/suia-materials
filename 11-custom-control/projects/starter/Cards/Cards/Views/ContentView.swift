@@ -33,29 +33,9 @@
 import SwiftUI
 
 struct ContentView: View {
-  @State private var isSelected = false
-
   var body: some View {
-    ZStack {
-      Group {
-        Capsule()
-          .foregroundColor(.yellow)
-          .onTapGesture {
-            isSelected.toggle()
-          }
-          .border(Settings.borderColor, width: isSelected ? 5 : 0)
-        Text("Resize Me!")
-          .fontWeight(.bold)
-          .font(.system(size: 500))
-          .minimumScaleFactor(0.01)
-          .lineLimit(1)
-      }
-      .resizableView()
-      .bringToFront()
-      Circle()
-        .resizableView()
-        .offset(CGSize(width: 50, height: 200))
-    }
+    Text("Hello, world!")
+      .padding()
   }
 }
 

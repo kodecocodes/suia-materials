@@ -32,8 +32,15 @@
 
 import SwiftUI
 
-extension Array where Element: Identifiable {
-  func index(for item: Element) -> Int? {
-    firstIndex { $0.id == item.id }
+struct ContentView: View {
+  var body: some View {
+    Text("Hello, world!")
+      .padding()
+  }
+}
+
+struct ContentView_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView()
   }
 }
