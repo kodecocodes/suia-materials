@@ -67,8 +67,8 @@ struct ContentView: View {
             Image(systemName: "line.horizontal.3.decrease.circle")
               .accessibilityLabel(Text("Shows filter options"))
           }
-          }
         }
+      }
       .sheet(isPresented: $showFilters) {
         FilterOptionsView()
       }
