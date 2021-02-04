@@ -1,4 +1,4 @@
-///// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -57,6 +57,7 @@ struct CardDrop: DropDelegate {
   }
 
   func calculateOffset(location: CGPoint) -> CGSize {
+    guard size.width > 0 && size.height > 0 else { return .zero }
     // `frame` is a CGRect bounding the whole area including margins
     // surrounding the card
     // size is the calculated card size without margins
