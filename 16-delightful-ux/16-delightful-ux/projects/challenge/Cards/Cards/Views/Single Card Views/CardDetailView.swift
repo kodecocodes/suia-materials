@@ -40,62 +40,62 @@ struct CardDetailView: View {
   @Binding var card: Card
 
   var body: some View {
-    content
-      .onChange(of: scenePhase) { newScenePhase in
-        if newScenePhase == .inactive {
+    GeometryReader { proxy in
+      content(size: proxy.size)
+        .onChange(of: scenePhase) { newScenePhase in
+          if newScenePhase == .inactive {
+            card.save()
+          }
+        }
+        .onDisappear {
           card.save()
         }
-      }
-      .onDisappear {
-        card.save()
-      }
-      .modifier(CardToolbar(currentModal: $currentModal))
-      .cardModals(card: $card, currentModal: $currentModal)
+        .onDrop(
+          of: [.image],
+          delegate: CardDrop(
+            card: $card,
+            size: proxy.size,
+            frame: proxy.frame(in: .global)))
+        .modifier(CardToolbar(currentModal: $currentModal))
+        .cardModals(card: $card, currentModal: $currentModal)
+        // 1
+        .frame(
+          width: calculateSize(proxy.size).width ,
+          height: calculateSize(proxy.size).height)
+        // 2
+        .clipped()
+        // 3
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
   }
 
-  var content: some View {
-    GeometryReader { proxy in
-      ZStack {
-        card.backgroundColor
-          .edgesIgnoringSafeArea(.all)
-          .onTapGesture {
-            viewState.selectedElement = nil
-          }
-          .onDrop(
-            of: [.image],
-            delegate: CardDrop(
-              card: $card,
-              size: proxy.size,
-              frame: proxy.frame(in: .global)))
-        ForEach(card.elements, id: \.id) { element in
-          CardElementView(
-            element: element,
-            selected: viewState.selectedElement?.id == element.id)
-            .contextMenu {
-              // swiftlint:disable:next multiple_closures_with_trailing_closure
-              Button(action: { card.remove(element) }) {
-                Label("Delete", systemImage: "trash")
-              }
-            }
-            .resizableView(
-              transform: bindingTransform(for: element),
-              viewScale: calculateScale(proxy.size))
-            .frame(
-              width: element.transform.size.width,
-              height: element.transform.size.height)
-            .onTapGesture {
-              viewState.selectedElement = element
-            }
+  func content(size: CGSize) -> some View {
+    ZStack {
+      card.backgroundColor
+        .edgesIgnoringSafeArea(.all)
+        .onTapGesture {
+          viewState.selectedElement = nil
         }
+      ForEach(card.elements, id: \.id) { element in
+        CardElementView(
+          element: element,
+          selected: viewState.selectedElement?.id == element.id)
+          .contextMenu {
+            // swiftlint:disable:next multiple_closures_with_trailing_closure
+            Button(action: { card.remove(element) }) {
+              Label("Delete", systemImage: "trash")
+            }
+          }
+          .resizableView(
+            transform: bindingTransform(for: element),
+            viewScale: calculateScale(size))
+          .frame(
+            width: element.transform.size.width,
+            height: element.transform.size.height)
+          .onTapGesture {
+            viewState.selectedElement = element
+          }
       }
-      // 1
-      .frame(
-        width: calculateSize(proxy.size).width ,
-        height: calculateSize(proxy.size).height)
-      // 2
-      .clipped()
-      // 3
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
   }
 

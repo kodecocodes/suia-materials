@@ -39,21 +39,19 @@ struct CardsListView: View {
   var body: some View {
     GeometryReader { proxy in
       ScrollView(showsIndicators: false) {
-        VStack {
-          LazyVGrid(columns: columns(size: proxy.size), spacing: 30) {
-            ForEach(store.cards) { card in
-              CardThumbnailView(card: card, size: proxy.size)
-                .contextMenu {
-                  // swiftlint:disable:next multiple_closures_with_trailing_closure
-                  Button(action: { store.remove(card) }) {
-                    Label("Delete", systemImage: "trash")
-                  }
+        LazyVGrid(columns: columns(size: proxy.size), spacing: 30) {
+          ForEach(store.cards) { card in
+            CardThumbnailView(card: card, size: proxy.size)
+              .contextMenu {
+                // swiftlint:disable:next multiple_closures_with_trailing_closure
+                Button(action: { store.remove(card) }) {
+                  Label("Delete", systemImage: "trash")
                 }
-                .onTapGesture {
-                  viewState.showAllCards.toggle()
-                  viewState.selectedCard = card
-                }
-            }
+              }
+              .onTapGesture {
+                viewState.showAllCards.toggle()
+                viewState.selectedCard = card
+              }
           }
         }
       }

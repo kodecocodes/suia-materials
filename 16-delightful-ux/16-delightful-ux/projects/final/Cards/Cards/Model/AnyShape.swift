@@ -35,11 +35,8 @@ import SwiftUI
 struct AnyShape: Shape {
   private let path: (CGRect) -> Path
 
-  // 1
   init<CustomShape: Shape>(_ shape: CustomShape) {
-  // 2
     self.path = { rect in
-  // 3
     shape.path(in: rect)
     }
   }

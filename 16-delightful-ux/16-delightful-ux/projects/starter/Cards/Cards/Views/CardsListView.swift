@@ -38,20 +38,18 @@ struct CardsListView: View {
 
   var body: some View {
     ScrollView(showsIndicators: false) {
-      VStack {
-        ForEach(store.cards) { card in
-          CardThumbnailView(card: card)
-            .contextMenu {
-              // swiftlint:disable:next multiple_closures_with_trailing_closure
-              Button(action: { store.remove(card) }) {
-                Label("Delete", systemImage: "trash")
-              }
+      ForEach(store.cards) { card in
+        CardThumbnailView(card: card)
+          .contextMenu {
+            // swiftlint:disable:next multiple_closures_with_trailing_closure
+            Button(action: { store.remove(card) }) {
+              Label("Delete", systemImage: "trash")
             }
-            .onTapGesture {
-              viewState.showAllCards.toggle()
-              viewState.selectedCard = card
-            }
-        }
+          }
+          .onTapGesture {
+            viewState.showAllCards.toggle()
+            viewState.selectedCard = card
+          }
       }
     }
   }

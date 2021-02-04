@@ -12,7 +12,6 @@
 		820E12A625C791B000929AD0 /* FramePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820E12A525C791B000929AD0 /* FramePicker.swift */; };
 		820E12B125C7950100929AD0 /* AnyShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820E12A825C7924F00929AD0 /* AnyShape.swift */; };
 		821854D525C7D19C00615F7D /* CardModalViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821854D425C7D19C00615F7D /* CardModalViews.swift */; };
-		821854D925C7D82B00615F7D /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821854D825C7D82B00615F7D /* LayoutView.swift */; };
 		8225235725C65E8000A61DC3 /* CardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8225235625C65E8000A61DC3 /* CardToolbar.swift */; };
 		8225235B25C6736D00A61DC3 /* CardElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8225235A25C6736D00A61DC3 /* CardElement.swift */; };
 		8225235E25C6738200A61DC3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8225235D25C6738200A61DC3 /* Card.swift */; };
@@ -22,6 +21,7 @@
 		8225238125C681AA00A61DC3 /* CardElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8225238025C681AA00A61DC3 /* CardElementView.swift */; };
 		824DCCB925C7BEF7001F67C7 /* AngleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824DCCB825C7BEF7001F67C7 /* AngleExtensions.swift */; };
 		824DCCBD25C7C70D001F67C7 /* TextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824DCCBC25C7C70D001F67C7 /* TextPicker.swift */; };
+		8255AF5625CBCB8D0091D771 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8255AF5525CBCB8D0091D771 /* LayoutView.swift */; };
 		82C5EECE25C7ACAF00FF006A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C5EECD25C7ACAF00FF006A /* UIImageExtensions.swift */; };
 		82C5EED125C7ACD600FF006A /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C5EED025C7ACD600FF006A /* FileManagerExtensions.swift */; };
 		82D3B0FE25C6C12B00970C6A /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 82D3B0FD25C6C12B00970C6A /* Stickers */; };
@@ -55,7 +55,6 @@
 		820E12A525C791B000929AD0 /* FramePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramePicker.swift; sourceTree = "<group>"; };
 		820E12A825C7924F00929AD0 /* AnyShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyShape.swift; sourceTree = "<group>"; };
 		821854D425C7D19C00615F7D /* CardModalViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModalViews.swift; sourceTree = "<group>"; };
-		821854D825C7D82B00615F7D /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		8225235625C65E8000A61DC3 /* CardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardToolbar.swift; sourceTree = "<group>"; };
 		8225235A25C6736D00A61DC3 /* CardElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardElement.swift; sourceTree = "<group>"; };
 		8225235D25C6738200A61DC3 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		8225238025C681AA00A61DC3 /* CardElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardElementView.swift; sourceTree = "<group>"; };
 		824DCCB825C7BEF7001F67C7 /* AngleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleExtensions.swift; sourceTree = "<group>"; };
 		824DCCBC25C7C70D001F67C7 /* TextPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPicker.swift; sourceTree = "<group>"; };
+		8255AF5525CBCB8D0091D771 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		82C5EECD25C7ACAF00FF006A /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		82C5EED025C7ACD600FF006A /* FileManagerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		82D3B0FD25C6C12B00970C6A /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Stickers; sourceTree = "<group>"; };
@@ -162,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				82F3FAA025C62C1000BB30D0 /* ContentView.swift */,
-				821854D825C7D82B00615F7D /* LayoutView.swift */,
 				82F3FAC225C62FCB00BB30D0 /* CardsView.swift */,
+				8255AF5525CBCB8D0091D771 /* LayoutView.swift */,
 				82F3FAB225C62CDC00BB30D0 /* CardsListView.swift */,
 				82F3FAB525C62D6100BB30D0 /* CardThumbnailView.swift */,
 				82F3FAD525C652FD00BB30D0 /* ResizableView.swift */,
@@ -338,7 +338,7 @@
 				82D3B10B25C6CF4C00970C6A /* CardDrop.swift in Sources */,
 				8225236825C6793200A61DC3 /* PreviewData.swift in Sources */,
 				82F3FAD625C652FD00BB30D0 /* ResizableView.swift in Sources */,
-				821854D925C7D82B00615F7D /* LayoutView.swift in Sources */,
+				8255AF5625CBCB8D0091D771 /* LayoutView.swift in Sources */,
 				820E12A625C791B000929AD0 /* FramePicker.swift in Sources */,
 				82F3FAE225C659CB00BB30D0 /* ViewExtensions.swift in Sources */,
 				82F3FAE725C65C8400BB30D0 /* Settings.swift in Sources */,

@@ -52,6 +52,14 @@ class CardStore: ObservableObject {
 
   func remove(_ card: Card) {
     if let index = index(for: card) {
+      for element in cards[index].elements {
+        cards[index].remove(element)
+      }
+      UIImage.remove(name: card.id.uuidString)
+      if let filepath = FileManager.documentURL?
+        .absoluteURL.appendingPathComponent("\(card.id.uuidString).rwcard") {
+        try? FileManager.default.removeItem(at: filepath)
+      }
       cards.remove(at: index)
     }
   }

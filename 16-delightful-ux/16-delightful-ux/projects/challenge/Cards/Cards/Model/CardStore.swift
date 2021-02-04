@@ -52,30 +52,33 @@ class CardStore: ObservableObject {
 
   func remove(_ card: Card) {
     if let index = index(for: card) {
+      for element in cards[index].elements {
+        cards[index].remove(element)
+      }
+      UIImage.remove(name: card.id.uuidString)
+      if let filepath = FileManager.documentURL?
+        .absoluteURL.appendingPathComponent("\(card.id.uuidString).rwcard") {
+        try? FileManager.default.removeItem(at: filepath)
+      }
       cards.remove(at: index)
     }
   }
 }
 
 extension CardStore {
-  // 1
   func load() -> [Card] {
     var cards: [Card] = []
-    // 2
     guard let path = FileManager.documentURL?.path,
       let enumerator =
         FileManager.default.enumerator(atPath: path),
           let files = enumerator.allObjects as? [String]
     else { return cards }
-    // 3
     let cardFiles = files.filter { $0.contains(".rwcard") }
     for cardFile in cardFiles {
       do {
-        // 4
         let path = path + "/" + cardFile
         let data =
           try Data(contentsOf: URL(fileURLWithPath: path))
-        // 5
         let decoder = JSONDecoder()
         let card = try decoder.decode(Card.self, from: data)
         cards.append(card)

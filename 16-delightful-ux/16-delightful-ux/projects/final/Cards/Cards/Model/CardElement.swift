@@ -59,20 +59,16 @@ extension ImageElement: Codable {
   init(from decoder: Decoder) throws {
     let container =
       try decoder.container(keyedBy: CodingKeys.self)
-    // 1
     transform =
       try container.decode(Transform.self, forKey: .transform)
-    // 2
     imageFilename =
       try container.decodeIfPresent(
         String.self,
         forKey: .imageFilename)
-    // 3
     if let imageFilename = imageFilename,
       let uiImage = UIImage.load(uuidString: imageFilename) {
       image = Image(uiImage: uiImage)
     } else {
-      // 4
       image = Image("error-image")
     }
     if let index =

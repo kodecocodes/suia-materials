@@ -35,7 +35,6 @@ import SwiftUI
 struct FramePicker: View {
   @Environment(\.presentationMode) var presentationMode
 
-  // 1
   @Binding var frame: AnyShape?
   private let columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
