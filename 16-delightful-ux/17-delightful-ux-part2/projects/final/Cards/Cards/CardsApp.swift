@@ -1,4 +1,4 @@
-///// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,14 +34,14 @@ import SwiftUI
 
 @main
 struct CardsApp: App {
-  @StateObject var model = Model(defaultData: true)
+  @StateObject var store = CardStore(defaultData: true)
   @StateObject var viewState = ViewState()
 
   var body: some Scene {
     WindowGroup {
       AppLoadingView()
-        .environmentObject(model)
         .environmentObject(viewState)
+        .environmentObject(store)
         .onAppear {
           print(FileManager.documentURL ?? "")
         }

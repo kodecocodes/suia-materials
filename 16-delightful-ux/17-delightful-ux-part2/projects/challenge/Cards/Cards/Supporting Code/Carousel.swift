@@ -32,21 +32,15 @@
 
 import SwiftUI
 
-struct CarouselCards {
-  let card: Card
-  var offset: CGFloat = 0
-  var image: UIImage?
-}
-
 struct Carousel: View {
-  @EnvironmentObject var model: Model
+  @EnvironmentObject var store: CardStore
   @EnvironmentObject var viewState: ViewState
 
   var body: some View {
     GeometryReader { proxy in
       TabView {
-        ForEach((0..<model.cards.count), id: \.self) { index in
-          cardView(model.cards[index])
+        ForEach((0..<store.cards.count), id: \.self) { index in
+          cardView(store.cards[index])
             .frame(
               width: calculateSize(proxy.size).width,
               height: calculateSize(proxy.size).height)
@@ -55,7 +49,7 @@ struct Carousel: View {
               color: Color(white: 0.5, opacity: 0.7),
               radius: 5)
             .onTapGesture {
-              viewState.selectedCard = model.cards[index]
+              viewState.selectedCard = store.cards[index]
               withAnimation {
                 viewState.showAllCards = false
               }
@@ -106,7 +100,7 @@ struct Carousel: View {
 struct Carousel_Previews: PreviewProvider {
   static var previews: some View {
     Carousel()
-      .environmentObject(Model(defaultData: true))
+      .environmentObject(CardStore(defaultData: true))
       .environmentObject(ViewState())
   }
 }

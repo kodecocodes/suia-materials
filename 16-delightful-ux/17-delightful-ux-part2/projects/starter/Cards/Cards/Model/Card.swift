@@ -37,7 +37,7 @@ struct Card: Identifiable {
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
   var image: UIImage?
-  
+
   func save() {
     do {
       let encoder = JSONEncoder()

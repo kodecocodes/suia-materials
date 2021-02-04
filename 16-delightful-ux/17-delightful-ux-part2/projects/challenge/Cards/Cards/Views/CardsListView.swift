@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -33,8 +33,32 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @EnvironmentObject var model: Model
   @EnvironmentObject var viewState: ViewState
+  @EnvironmentObject var store: CardStore
+
+  var body: some View {
+    GeometryReader { proxy in
+      ScrollView(showsIndicators: false) {
+        LazyVGrid(columns: columns(size: proxy.size), spacing: 30) {
+          ForEach(store.cards) { card in
+            CardThumbnailView(card: card, size: proxy.size)
+              .contextMenu {
+                // swiftlint:disable:next multiple_closures_with_trailing_closure
+                Button(action: { store.remove(card) }) {
+                  Label("Delete", systemImage: "trash")
+                }
+              }
+              .onTapGesture {
+                withAnimation {
+                  viewState.showAllCards = false
+                }
+                viewState.selectedCard = card
+              }
+          }
+        }
+      }
+    }
+  }
 
   func columns(size: CGSize) -> [GridItem] {
     [
@@ -42,37 +66,12 @@ struct CardsListView: View {
         minimum: Settings.thumbnailSize(size: size).width))
     ]
   }
-
-  var body: some View {
-    GeometryReader { proxy in
-      ScrollView(showsIndicators: false) {
-        LazyVGrid(columns: columns(size: proxy.size), spacing: 30) {
-          ForEach(model.cards) { card in
-            CardThumbnailView(card: card, size: proxy.size)
-              .onTapGesture {
-                viewState.selectedCard = card
-                withAnimation {
-                  viewState.showAllCards = false
-                }
-              }
-              .contextMenu {
-                // swiftlint:disable:next multiple_closures_with_trailing_closure
-                Button(action: { model.remove(card) }) {
-                  Label("Delete", systemImage: "trash")
-                }
-              }
-          }
-        }
-      }
-    }
-  }
 }
 
 struct CardsListView_Previews: PreviewProvider {
   static var previews: some View {
     CardsListView()
-      .preferredColorScheme(.light)
-      .environmentObject(Model(defaultData: true))
       .environmentObject(ViewState())
+      .environmentObject(CardStore(defaultData: true))
   }
 }
