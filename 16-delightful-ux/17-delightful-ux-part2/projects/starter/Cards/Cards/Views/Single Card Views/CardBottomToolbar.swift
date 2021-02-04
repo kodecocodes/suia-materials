@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -35,7 +35,7 @@ import SwiftUI
 struct ToolbarButtonView: View {
   @Environment(\.verticalSizeClass) var verticalSizeClass
   let modal: CardModal
-  let modalButton: [CardModal: (
+  private let modalButton: [CardModal: (
     text: String, imageName: String)] = [
       CardModal.photoPicker: ("Photos", "photo"),
       CardModal.framePicker: ("Frames", "square.on.circle"),
@@ -75,49 +75,40 @@ struct ToolbarButtonView: View {
   }
 }
 
-struct CardViewToolbar: View {
+struct CardBottomToolbar: View {
   @EnvironmentObject var viewState: ViewState
   @Binding var cardModal: CardModal?
 
   var body: some View {
     HStack(alignment: .bottom) {
-      Button(action: {
-        cardModal = .photoPicker
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-      }) {
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .photoPicker }) {
         ToolbarButtonView(modal: .photoPicker)
       }
-      Button(action: {
-        cardModal = .framePicker
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-      }) {
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .framePicker }) {
         ToolbarButtonView(modal: .framePicker)
       }
       .disabled(
         viewState.selectedElement == nil
           || !(viewState.selectedElement.self is ImageElement))
-      Button(action: {
-        cardModal = .stickerPicker
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-      }) {
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .stickerPicker }) {
         ToolbarButtonView(modal: .stickerPicker)
       }
-      Button(action: {
-        cardModal = .textPicker
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-      }) {
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
+      Button(action: { cardModal = .textPicker }) {
         ToolbarButtonView(modal: .textPicker)
       }
     }
   }
 }
 
-struct CardViewToolbar_Previews: PreviewProvider {
+struct CardBottomToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    CardViewToolbar(
-      cardModal: .constant(.stickerPicker))
+    CardBottomToolbar(cardModal: .constant(.stickerPicker))
+      .environmentObject(ViewState())
       .previewLayout(.sizeThatFits)
       .padding()
-      .environmentObject(ViewState())
   }
 }

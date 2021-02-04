@@ -40,7 +40,8 @@ struct TextPicker: View {
     let onCommit = {
       presentationMode.wrappedValue.dismiss()
     }
-    TextField("Enter text", text: $textElement.text, onCommit: onCommit)
+    TextField(
+      "Enter text", text: $textElement.text, onCommit: onCommit)
   }
 }
 

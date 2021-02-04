@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -31,61 +31,64 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import PhotosUI
 
-struct PhotoPicker: UIViewControllerRepresentable {
-  @Environment(\.presentationMode) var presentationMode
-  @Binding var images: [UIImage]
+struct CardModals: ViewModifier {
+  @EnvironmentObject var viewState: ViewState
+  @Binding var card: Card
+  @Binding var currentModal: CardModal?
 
-  func makeUIViewController(context: Context) -> some UIViewController {
-    var configuration = PHPickerConfiguration()
-    configuration.filter = .images
-    configuration.selectionLimit = 0
-    let picker =
-      PHPickerViewController(configuration: configuration)
-    picker.delegate = context.coordinator
-    return picker
-  }
+  @State private var stickerImage: UIImage?
+  @State private var images: [UIImage] = []
+  @State private var frame: AnyShape?
+  @State private var textElement = TextElement()
+  @State private var textColor: Color = .black
 
-  func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-  }
-
-  func makeCoordinator() -> PhotosCoordinator {
-    PhotosCoordinator(parent: self)
-  }
-
-  class PhotosCoordinator: NSObject,
-    PHPickerViewControllerDelegate {
-    var parent: PhotoPicker
-
-    init(parent: PhotoPicker) {
-      self.parent = parent
-    }
-
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-      let itemProviders = results.map(\.itemProvider)
-      for item in itemProviders {
-        if item.canLoadObject(ofClass: UIImage.self) {
-          item.loadObject(ofClass: UIImage.self) { image, error in
-            if let error = error {
-              print("Error!", error.localizedDescription)
-            } else {
-              DispatchQueue.main.async {
-                if let image = image as? UIImage {
-                  self.parent.images.append(image)
-                }
+  func body(content: Content) -> some View {
+    content
+      .sheet(item: $currentModal) { item in
+        switch item {
+        case .stickerPicker:
+          StickerPicker(stickerImage: $stickerImage)
+            .onDisappear {
+              if let stickerImage = stickerImage {
+                card.addElement(uiImage: stickerImage)
               }
+              stickerImage = nil
             }
-          }
+        case .photoPicker:
+          PhotoPicker(images: $images)
+            .onDisappear {
+              for image in images {
+                card.addElement(uiImage: image)
+              }
+              images = []
+            }
+        case .framePicker:
+          FramePicker(frame: $frame)
+            .onDisappear {
+              if let frame = frame {
+                card.update(viewState.selectedElement, frame: frame)
+              }
+              frame = nil
+            }
+        case .textPicker:
+          TextPicker(textElement: $textElement)
+            .onDisappear {
+              if !textElement.text.isEmpty {
+                card.addElement(textElement)
+              }
+              textElement = TextElement()
+            }
         }
       }
-      parent.presentationMode.wrappedValue.dismiss()
-    }
   }
 }
 
-struct PhotoPicker_Previews: PreviewProvider {
-  static var previews: some View {
-    PhotoPicker(images: .constant([UIImage]()))
+extension View {
+  func cardModals(
+    card: Binding<Card>,
+    currentModal: Binding<CardModal?>
+  ) -> some View {
+    modifier(CardModals(card: card, currentModal: currentModal))
   }
 }

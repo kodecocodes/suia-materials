@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -32,34 +32,43 @@
 
 import SwiftUI
 
-struct CardToolbar: ViewModifier {
-  @EnvironmentObject var viewState: ViewState
+struct FramePicker: View {
+  @Environment(\.presentationMode) var presentationMode
 
-  @Binding var currentModal: CardModal?
+  @Binding var frame: AnyShape?
+  private let columns = [
+    GridItem(.adaptive(minimum: 120), spacing: 10)
+  ]
+  private let style = StrokeStyle(
+    lineWidth: 5, lineJoin: .round)
 
-  func body(content: Content) -> some View {
-    content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button(action: {
-            viewState.showAllCards = true
-            viewState.selectedCard = nil
-          }
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
-          ) {
-            Text("Done")
-          }
-        }
-        ToolbarItem(placement: .bottomBar) {
-          CardViewToolbar(
-            cardModal: $currentModal)
+  var body: some View {
+    ScrollView {
+      LazyVGrid(columns: columns) {
+      // 2
+        ForEach(0..<Shapes.shapes.count, id: \.self) { index in
+          Shapes.shapes[index]
+          // 3
+            .stroke(Color.primary, style: style)
+            // 4
+            .background(
+              Shapes.shapes[index].fill(Color.secondary))
+            .frame(width: 100, height: 120)
+            .padding()
+            // 5
+            .onTapGesture {
+              frame = Shapes.shapes[index]
+              presentationMode.wrappedValue.dismiss()
+            }
         }
       }
+    }
+    .padding(5)
   }
 }
 
-extension View {
-  func cardToolbar(currentModal: Binding<CardModal?>) -> some View {
-    modifier(CardToolbar(currentModal: currentModal))
+struct FramePicker_Previews: PreviewProvider {
+  static var previews: some View {
+    FramePicker(frame: .constant(nil))
   }
 }

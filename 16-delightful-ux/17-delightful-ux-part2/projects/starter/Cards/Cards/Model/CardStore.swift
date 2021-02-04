@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -32,38 +32,60 @@
 
 import SwiftUI
 
-struct FramePicker: View {
-  @Environment(\.presentationMode) var presentationMode
+class CardStore: ObservableObject {
+  @Published var cards: [Card] = []
 
-  @Binding var frame: AnyShape?
-  private let columns = [
-    GridItem(.adaptive(minimum: 120), spacing: 10)
-  ]
-  private let style = StrokeStyle(
-    lineWidth: 5, lineJoin: .round)
+  init(defaultData: Bool = false) {
+    cards = defaultData ? initialCards : load()
+  }
 
-  var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns) {
-        ForEach(0..<Shapes.shapes.count, id: \.self) { index in
-          Shapes.shapes[index]
-            .stroke(Color.primary, style: style)
-            .background(Shapes.shapes[index].fill(Color.secondary))
-            .frame(width: 100, height: 120)
-            .padding()
-            .onTapGesture {
-              frame = Shapes.shapes[index]
-              presentationMode.wrappedValue.dismiss()
-            }
-        }
+  func addCard() -> Card {
+    let card = Card(backgroundColor: Color.random())
+    cards.append(card)
+    card.save()
+    return card
+  }
+
+  func index(for card: Card) -> Int? {
+    cards.firstIndex { $0.id == card.id }
+  }
+
+  func remove(_ card: Card) {
+    if let index = index(for: card) {
+      for element in cards[index].elements {
+        cards[index].remove(element)
       }
+      UIImage.remove(name: card.id.uuidString)
+      if let filepath = FileManager.documentURL?
+        .absoluteURL.appendingPathComponent("\(card.id.uuidString).rwcard") {
+        try? FileManager.default.removeItem(at: filepath)
+      }
+      cards.remove(at: index)
     }
-    .padding(5)
   }
 }
 
-struct FramePicker_Previews: PreviewProvider {
-  static var previews: some View {
-    FramePicker(frame: .constant(nil))
+extension CardStore {
+  func load() -> [Card] {
+    var cards: [Card] = []
+    guard let path = FileManager.documentURL?.path,
+      let enumerator =
+        FileManager.default.enumerator(atPath: path),
+          let files = enumerator.allObjects as? [String]
+    else { return cards }
+    let cardFiles = files.filter { $0.contains(".rwcard") }
+    for cardFile in cardFiles {
+      do {
+        let path = path + "/" + cardFile
+        let data =
+          try Data(contentsOf: URL(fileURLWithPath: path))
+        let decoder = JSONDecoder()
+        let card = try decoder.decode(Card.self, from: data)
+        cards.append(card)
+      } catch {
+        print("Error: ", error.localizedDescription)
+      }
+    }
+    return cards
   }
 }
