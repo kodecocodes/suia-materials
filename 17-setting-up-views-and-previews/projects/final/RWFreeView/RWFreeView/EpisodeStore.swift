@@ -34,7 +34,6 @@ import Foundation
 
 class EpisodeStore: ObservableObject {
   @Published var episodes: [Episode] = []
-  @Published var queryTerm = ""
 
   init() {
     #if DEBUG

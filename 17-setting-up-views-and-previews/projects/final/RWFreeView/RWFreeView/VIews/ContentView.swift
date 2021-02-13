@@ -34,12 +34,12 @@ import SwiftUI
 
 struct ContentView: View {
   @StateObject var store = EpisodeStore()
-  @State var showFilters = false
+  @State private var showFilters = false
 
   var body: some View {
     NavigationView {
       List {
-        HeaderView(count: store.episodes.count, store: store)
+        HeaderView(count: store.episodes.count)
         ForEach(store.episodes, id: \.name) { episode in
           ZStack {
             NavigationLink(destination: PlayerView(episode: episode)) {

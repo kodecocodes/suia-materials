@@ -34,12 +34,12 @@ import SwiftUI
 
 struct HeaderView: View {
   let count: Int
+  @State private var queryTerm = ""
   @State private var sortOn = "popular"
-  @ObservedObject var store: EpisodeStore
 
   var body: some View {
     VStack {
-      SearchField(store: store)
+      SearchField(queryTerm: $queryTerm)
       HStack {
         Button("Clear all") { }
           .buttonStyle(HeaderButtonStyle())
@@ -81,15 +81,15 @@ struct HeaderView: View {
 }
 
 struct SearchField: View {
-  @ObservedObject var store: EpisodeStore
+  @Binding var queryTerm: String
 
   var body: some View {
     ZStack(alignment: .leading) {
-      if store.queryTerm.isEmpty {
+      if queryTerm.isEmpty {
         Text("\(Image(systemName: "magnifyingglass")) Search videos")
           .foregroundColor(Color.white.opacity(0.6))
       }
-      TextField("", text: $store.queryTerm)
+      TextField("", text: $queryTerm)
     }
     .padding(10)
     .background(
@@ -114,7 +114,7 @@ struct HeaderButtonStyle: ButtonStyle {
 
 struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    HeaderView(count: 42, store: EpisodeStore())
+    HeaderView(count: 42)
       //.preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
   }
