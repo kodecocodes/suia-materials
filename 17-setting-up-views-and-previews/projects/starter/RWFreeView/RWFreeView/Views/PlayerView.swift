@@ -35,7 +35,7 @@ import AVKit
 
 struct PlayerView: View {
   let episode: Episode
-  @State var showPlayer = false
+  @State private var showPlayer = false
   @Environment(\.verticalSizeClass) var vSizeClass
 
   private func height9(to16 width: CGFloat) -> CGFloat {

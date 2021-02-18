@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				1839F4AF25190F2A00BB00F1 /* RWFreeViewApp.swift */,
-				CD6FFA4625B557C900544BE1 /* VIews */,
+				CD6FFA4625B557C900544BE1 /* Views */,
 				CD95699925A1663D000206E7 /* EpisodeStore.swift */,
 				CD9D2C0D25B130CB0085F28C /* ViewExtension.swift */,
 				CD34211E25A6BCDC00817FD8 /* ColorExtension.swift */,
@@ -106,7 +106,7 @@
 			path = Supporting;
 			sourceTree = "<group>";
 		};
-		CD6FFA4625B557C900544BE1 /* VIews */ = {
+		CD6FFA4625B557C900544BE1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				18D775C422AD944300AE281E /* ContentView.swift */,
@@ -117,7 +117,7 @@
 				CD34211925A5771000817FD8 /* PlayButtonIcon.swift */,
 				CD9D2C2C25B145B50085F28C /* AdaptingStack.swift */,
 			);
-			path = VIews;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

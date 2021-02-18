@@ -48,7 +48,7 @@ struct HeaderView: View {
         Spacer()
       }
       HStack {
-        Text("\(count) Tutorials")
+        Text("\(count) Episodes")
         Spacer()
         Picker("", selection: $sortOn) {
           Text("New").tag("new")

@@ -48,7 +48,7 @@ struct HeaderView: View {
         Spacer()
       }
       HStack {
-        Text("\(count) Tutorials")
+        Text("\(count) Episodes")
         Menu("\(Image(systemName: "filemenu.and.cursorarrow"))") {
           Button("10 results/page") { }
           Button("20 results/page") { }

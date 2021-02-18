@@ -35,16 +35,16 @@ import SwiftUI
 struct FilterOptionsView: View {
   @Environment(\.presentationMode) var presentationMode
 
-  @State var selected1 = false  // iOS
-  @State var selected2 = false  // Android
-  @State var selected3 = false  // Unity
-  @State var selected5 = false  // macOS
-  @State var selected8 = false  // SSS
-  @State var selected9 = false  // Flutter
+  @State private var selected1 = false  // iOS
+  @State private var selected2 = false  // Android
+  @State private var selected3 = false  // Unity
+  @State private var selected5 = false  // macOS
+  @State private var selected8 = false  // SSS
+  @State private var selected9 = false  // Flutter
 
-  @State var selectedB = false  // Beginner
-  @State var selectedI = false  // Intermediate
-  @State var selectedA = false  // Advanced
+  @State private var selectedB = false  // Beginner
+  @State private var selectedI = false  // Intermediate
+  @State private var selectedA = false  // Advanced
 
   var body: some View {
     ZStack(alignment: .topTrailing) {
