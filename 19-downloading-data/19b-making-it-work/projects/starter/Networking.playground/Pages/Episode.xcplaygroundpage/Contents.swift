@@ -12,8 +12,14 @@ urlComponents.queryItems = [
   URLQueryItem(
     name: "filter[content_types][]", value: "episode")
 ]
-urlComponents.queryItems! +=
-  [URLQueryItem(name: "filter[domain_ids][]", value: "1")]
+var baseParams = [
+  "filter[subscription_types][]": "free",
+  "filter[content_types][]": "episode",
+  "sort": "-popularity",
+  "page[size]": "20",
+  "filter[q]": ""
+]
+urlComponents.setQueryItems(with: baseParams)
 urlComponents.url?.absoluteString
 
 let contentsUrl = urlComponents.url!  // 1
