@@ -117,15 +117,15 @@ final class EpisodeStore: ObservableObject, Decodable {
         print(response.statusCode)
         if let decodedResponse = try? JSONDecoder().decode(  // 1
           EpisodeStore.self, from: data) {
-          DispatchQueue.main.async { [self] in
-            episodes = decodedResponse.episodes  // 2
-            loading = false
+          DispatchQueue.main.async {
+            self.episodes = decodedResponse.episodes  // 2
+            self.loading = false
           }
           return
         }
       }
       print("Contents fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-      DispatchQueue.main.async { [self] in
+      DispatchQueue.main.async {
         self.loading = false
       }
     }
