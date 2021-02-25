@@ -55,6 +55,7 @@ struct RatingView: View {
     }
   }
 
+  // swiftlint:disable:next strict_fileprivate
   fileprivate func convertRating() {
     // 2
     let index = ratings.index(
