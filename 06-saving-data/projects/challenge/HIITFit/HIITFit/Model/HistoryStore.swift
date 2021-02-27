@@ -39,6 +39,7 @@ struct ExerciseDay: Identifiable {
 }
 
 class HistoryStore: ObservableObject {
+  // swiftlint:disable:next array_constructor
   @Published var exerciseDays: [ExerciseDay] = []
 
   enum FileError: Error {
@@ -50,10 +51,9 @@ class HistoryStore: ObservableObject {
   init() {}
 
   init(withChecking: Bool) throws {
-  #if DEBUG
-//    createDevData()
-  #endif
-
+    #if DEBUG
+    // createDevData()
+    #endif
     do {
       try load()
     } catch {
@@ -62,13 +62,10 @@ class HistoryStore: ObservableObject {
   }
 
   func getURL() -> URL? {
-    // 1
     guard let documentsURL = FileManager.default.urls(
       for: .documentDirectory, in: .userDomainMask).first else {
-      // 2
       return nil
     }
-    // 3
     return documentsURL.appendingPathComponent("history.plist")
   }
 
@@ -76,21 +73,18 @@ class HistoryStore: ObservableObject {
     guard let dataURL = getURL() else {
       throw FileError.urlFailure
     }
-    do {
-      if let data = try? Data(contentsOf: dataURL) {
-        let plistData = try PropertyListSerialization.propertyList(
-          from: data,
-          options: [],
-          format: nil)
-        let convertedPlistData = plistData as? [[Any]] ?? [[Any]]()
-        exerciseDays = convertedPlistData.map {
-          ExerciseDay(
-            date: $0[1] as? Date ?? Date(),
-            exercises: $0[2] as? [String] ?? [])
-        }
-      }
-    } catch {
-      throw FileError.loadFailure
+    guard let data = try? Data(contentsOf: dataURL) else {
+      return
+    }
+    let plistData = try PropertyListSerialization.propertyList(
+      from: data,
+      options: [],
+      format: nil)
+    let convertedPlistData = plistData as? [[Any]] ?? [[Any]]()
+    exerciseDays = convertedPlistData.map {
+      ExerciseDay(
+        date: $0[1] as? Date ?? Date(),
+        exercises: $0[2] as? [String] ?? [])
     }
   }
 
@@ -102,15 +96,12 @@ class HistoryStore: ObservableObject {
       [$0.id.uuidString, $0.date, $0.exercises]
     }
     do {
-      // 1
       let data = try PropertyListSerialization.data(
         fromPropertyList: plistData,
         format: .binary,
         options: .zero)
-      // 2
       try data.write(to: dataURL, options: .atomic)
     } catch {
-      // 3
       throw FileError.saveFailure
     }
   }

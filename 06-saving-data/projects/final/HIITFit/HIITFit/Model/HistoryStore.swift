@@ -39,6 +39,7 @@ struct ExerciseDay: Identifiable {
 }
 
 class HistoryStore: ObservableObject {
+  // swiftlint:disable:next array_constructor
   @Published var exerciseDays: [ExerciseDay] = []
 
   enum FileError: Error {
@@ -50,10 +51,9 @@ class HistoryStore: ObservableObject {
   init() {}
 
   init(withChecking: Bool) throws {
-  #if DEBUG
-//    createDevData()
-  #endif
-
+    #if DEBUG
+    // createDevData()
+    #endif
     do {
       try load()
     } catch {
