@@ -40,7 +40,7 @@ struct ContentView: View {
     NavigationView {
       List {
         HeaderView(count: store.episodes.count)
-        if store.loading { ActivityIndicator() }
+        if store.episodes.isEmpty { ActivityIndicator() }
         ForEach(store.episodes) { episode in
           ZStack {
             NavigationLink(destination: PlayerView(episode: episode)) {
@@ -59,6 +59,9 @@ struct ContentView: View {
           .padding([.leading, .trailing], 20)
           .background(Color.listBkgd)
         }
+        .redacted(
+          reason: store.loading ? .placeholder : []
+        )
       }
       .navigationTitle("Videos")
       .toolbar {

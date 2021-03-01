@@ -47,6 +47,7 @@ struct EpisodeView: View {
   var body: some View {
     HStack(alignment: .top, spacing: 0) {
       PlayButtonIcon(width: 40, height: 40, radius: 6)
+        .unredacted()
       VStack(alignment: .leading, spacing: 6) {
         Text(episode.name)
           .font(.headline)
