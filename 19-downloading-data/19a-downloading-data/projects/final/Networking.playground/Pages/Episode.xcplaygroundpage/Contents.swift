@@ -6,12 +6,6 @@ PlaygroundPage.current.needsIndefiniteExecution = true
 let baseUrlString = "https://api.raywenderlich.com/api/"
 var urlComponents = URLComponents(
   string: baseUrlString + "contents/")!
-urlComponents.queryItems = [
-  URLQueryItem(
-    name: "filter[subscription_types][]", value: "free"),
-  URLQueryItem(
-    name: "filter[content_types][]", value: "episode")
-]
 var baseParams = [
   "filter[subscription_types][]": "free",
   "filter[content_types][]": "episode",
@@ -20,6 +14,8 @@ var baseParams = [
   "filter[q]": ""
 ]
 urlComponents.setQueryItems(with: baseParams)
+urlComponents.queryItems! +=
+  [URLQueryItem(name: "filter[domain_ids][]", value: "1")]
 urlComponents.url?.absoluteString
 
 let contentsUrl = urlComponents.url!  // 1
@@ -28,9 +24,9 @@ decoder.dateDecodingStrategy = .formatted(.apiDateFormatter)
 // 2
 URLSession.shared.dataTask(with: contentsUrl) {
   data, response, error in
-  defer { PlaygroundPage.current.finishExecution() }
+  defer { PlaygroundPage.current.finishExecution() }  // 3
   if let data = data,
-     let response = response as? HTTPURLResponse {  // 3
+     let response = response as? HTTPURLResponse {  // 4
     print(response.statusCode)
     if let decodedResponse = try? decoder.decode(
         EpisodeStore.self, from: data) {
@@ -43,9 +39,9 @@ URLSession.shared.dataTask(with: contentsUrl) {
   }
   print(
     "Contents fetch failed: " +
-      "\(error?.localizedDescription ?? "Unknown error")")  // 4
+      "\(error?.localizedDescription ?? "Unknown error")")  // 5
 }
-.resume()  // 5
+.resume()  // 6
 
 struct EpisodeStore: Decodable {
   var episodes: [Episode] = []
