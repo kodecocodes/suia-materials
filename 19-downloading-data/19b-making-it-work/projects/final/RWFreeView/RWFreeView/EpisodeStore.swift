@@ -36,17 +36,17 @@ final class EpisodeStore: ObservableObject, Decodable {
   @Published var episodes: [Episode] = []
   @Published var loading = false
   @Published var domainFilters: [String: Bool] = [
-    "1": true,  // "filter[domain_ids][]": "1"
-    "2": false,  // "filter[domain_ids][]": "2"
-    "3": false,  // "filter[domain_ids][]": "3"
-    "5": false,  // "filter[domain_ids][]": "5"
-    "8": false,  // "filter[domain_ids][]": "8"
-    "9": false  // "filter[domain_ids][]": "9"
+    "1": true,
+    "2": false,
+    "3": false,
+    "5": false,
+    "8": false,
+    "9": false
   ]
   @Published var difficultyFilters: [String: Bool] = [
-    "advanced": false,  // "filter[difficulties][]": "advanced"
-    "beginner": true,  // "filter[difficulties][]": "beginner"
-    "intermediate": false  // "filter[difficulties][]": "intermediate"
+    "advanced": false,
+    "beginner": true,
+    "intermediate": false
   ]
 
   func queryDomain(_ id: String) -> URLQueryItem {
