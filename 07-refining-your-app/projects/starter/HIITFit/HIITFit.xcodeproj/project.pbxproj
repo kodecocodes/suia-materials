@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8252AABE25EDCA05006D7198 /* WelcomeImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8252AABD25EDCA05006D7198 /* WelcomeImages.swift */; };
 		CD0BEE1625245BC600937B4F /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0BEE1525245BC600937B4F /* SuccessView.swift */; };
 		CD30C924251474DC0049DB93 /* HIITFitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C923251474DC0049DB93 /* HIITFitApp.swift */; };
 		CD30C926251474DC0049DB93 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C925251474DC0049DB93 /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8252AABD25EDCA05006D7198 /* WelcomeImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeImages.swift; sourceTree = "<group>"; };
 		CD0BEE1525245BC600937B4F /* SuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		CD30C920251474DC0049DB93 /* HIITFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIITFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD30C923251474DC0049DB93 /* HIITFitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIITFitApp.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				CD74C96A2574ACDE004C8694 /* TimerView.swift */,
 				CDE2A32125148C5D00B12C73 /* HistoryView.swift */,
 				CD0BEE1525245BC600937B4F /* SuccessView.swift */,
+				8252AABD25EDCA05006D7198 /* WelcomeImages.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8252AABE25EDCA05006D7198 /* WelcomeImages.swift in Sources */,
 				CD74C96B2574ACDE004C8694 /* TimerView.swift in Sources */,
 				CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */,
 				CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */,
