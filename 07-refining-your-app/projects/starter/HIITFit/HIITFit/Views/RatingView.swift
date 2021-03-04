@@ -41,13 +41,10 @@ struct RatingView: View {
   let onColor = Color.red
   let offColor = Color.gray
 
-  // 1
   init(exerciseIndex: Int) {
     self.exerciseIndex = exerciseIndex
-    // 2
     let desiredLength = Exercise.exercises.count
     if ratings.count < desiredLength {
-      // 3
       ratings = ratings.padding(
         toLength: desiredLength,
         withPad: "0",
@@ -57,13 +54,19 @@ struct RatingView: View {
 
   // swiftlint:disable:next strict_fileprivate
   fileprivate func convertRating() {
-    // 2
     let index = ratings.index(
       ratings.startIndex,
       offsetBy: exerciseIndex)
     let character = ratings[index]
-    // 3
     rating = character.wholeNumberValue ?? 0
+  }
+
+  func updateRating(index: Int) {
+    rating = index
+    let index = ratings.index(
+      ratings.startIndex,
+      offsetBy: exerciseIndex)
+    ratings.replaceSubrange(index...index, with: String(rating))
   }
 
   var body: some View {
@@ -73,16 +76,11 @@ struct RatingView: View {
           .foregroundColor(
             index > rating ? offColor : onColor)
           .onTapGesture {
-            rating = index
-            let index = ratings.index(
-              ratings.startIndex,
-              offsetBy: exerciseIndex)
-            ratings.replaceSubrange(index...index, with: String(rating))
+            updateRating(index: index)
           }
           .onChange(of: ratings) { _ in
             convertRating()
           }
-          // 1
           .onAppear {
             convertRating()
           }
