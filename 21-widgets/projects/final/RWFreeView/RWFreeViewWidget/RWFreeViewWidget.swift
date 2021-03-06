@@ -158,7 +158,12 @@ struct RWFreeViewWidget: Widget {
 
 struct RWFreeViewWidget_Previews: PreviewProvider {
   static var previews: some View {
-    RWFreeViewWidgetEntryView(entry: SimpleEntry(date: Date(), episode: Provider().sampleEpisode))
-      .previewContext(WidgetPreviewContext(family: .systemMedium))
+    let view = RWFreeViewWidgetEntryView(
+      entry: SimpleEntry(
+        date: Date(),
+        episode: Provider().sampleEpisode))
+    view.previewContext(WidgetPreviewContext(family: .systemSmall))
+    view.previewContext(WidgetPreviewContext(family: .systemMedium))
+    view.previewContext(WidgetPreviewContext(family: .systemLarge))
   }
 }
