@@ -52,7 +52,9 @@ struct Provider: TimelineProvider {
 
     if let codeData = try? Data(contentsOf: archiveURL) {
       do {
-        episodes = try JSONDecoder().decode([MiniEpisode].self, from: codeData)
+        episodes = try JSONDecoder().decode(
+          [MiniEpisode].self,
+          from: codeData)
       } catch {
         print("Error: Can't decode contents")
       }

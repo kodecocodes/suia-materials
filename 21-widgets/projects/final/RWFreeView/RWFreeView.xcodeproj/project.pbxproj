@@ -515,7 +515,7 @@
 				CODE_SIGN_ENTITLEMENTS = RWFreeView/RWFreeView.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "RWFreeView/Preview\\ Content";
-				DEVELOPMENT_TEAM = 35ERK77LXE;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RWFreeView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -537,7 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = RWFreeView/RWFreeView.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "RWFreeView/Preview\\ Content";
-				DEVELOPMENT_TEAM = 35ERK77LXE;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RWFreeView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -558,7 +558,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = RWFreeViewWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 35ERK77LXE;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RWFreeViewWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -580,7 +580,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = RWFreeViewWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 35ERK77LXE;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RWFreeViewWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
