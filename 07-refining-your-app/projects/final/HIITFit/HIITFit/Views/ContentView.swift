@@ -53,13 +53,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      ContentView()
-        .environment(\.sizeCategory, .accessibilityLarge)
-
-      ContentView()
-        .environment(\.sizeCategory, .accessibilityLarge)
-        .previewDevice("iPod touch (7th generation)")
-    }
+    ContentView()
   }
 }

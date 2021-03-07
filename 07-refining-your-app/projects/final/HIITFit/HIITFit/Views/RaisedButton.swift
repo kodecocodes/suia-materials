@@ -61,35 +61,24 @@ struct RaisedButtonStyle: ButtonStyle {
   }
 }
 
-struct RaisedButton_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      ZStack {
-        RaisedButton(buttonText: "Get Started") {
-          print("Hello World")
-        }
-          .padding(20)
-      }
-      .preferredColorScheme(.light)
-      .background(Color("background"))
-      .previewLayout(.sizeThatFits)
-      ZStack {
-        RaisedButton(buttonText: "Get Started") {
-          print("Hello World")
-        }
-        .padding(20)
-      }
-      .preferredColorScheme(.dark)
-      .background(Color("background"))
-      .previewLayout(.sizeThatFits)
-    }
-  }
-}
-
 extension Text {
   func raisedButtonTextStyle() -> some View {
     self
     .font(.body)
     .fontWeight(.bold)
+  }
+}
+
+struct RaisedButton_Previews: PreviewProvider {
+  static var previews: some View {
+    ZStack {
+      RaisedButton(buttonText: "Get Started") {
+        print("Hello World")
+      }
+      .buttonStyle(RaisedButtonStyle())
+      .padding(20)
+    }
+    .background(Color("background"))
+    .previewLayout(.sizeThatFits)
   }
 }

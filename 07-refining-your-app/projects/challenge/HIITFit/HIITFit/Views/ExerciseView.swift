@@ -35,16 +35,17 @@ import AVKit
 
 struct ExerciseView: View {
   @EnvironmentObject var history: HistoryStore
-  @State private var showSuccess = false
   @Binding var selectedTab: Int
-  let index: Int
   @State private var timerDone = false
 
+  @State private var showSuccess = false
   @State private var showSheet = false
   @State private var showHistory = false
   @State private var showTimer = false
 
   @State private var exerciseSheet: ExerciseSheet?
+
+  let index: Int
 
   enum ExerciseSheet {
     case history, timer, success
@@ -80,18 +81,19 @@ struct ExerciseView: View {
             history.addDoneExercise(Exercise.exercises[index].exerciseName)
               timerDone = false
             }
-            showTimer.toggle()
+            showTimer = false
             if lastExercise {
-              showSuccess.toggle()
+              showSuccess = true
               showSheet = true
               exerciseSheet = .success
             } else {
               selectedTab += 1
             }
           } else {
-          exerciseSheet = nil
+            exerciseSheet = nil
           }
           showHistory = false
+          showSuccess = false
           showTimer = false
         }, content: {
           if let exerciseSheet = exerciseSheet {

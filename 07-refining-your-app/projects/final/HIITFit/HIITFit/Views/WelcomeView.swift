@@ -39,7 +39,9 @@ struct WelcomeView: View {
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        HeaderView(selectedTab: $selectedTab, titleText: "Welcome")
+        HeaderView(
+          selectedTab: $selectedTab,
+          titleText: "Welcome")
         Spacer()
         // container view
         ContainerView {
@@ -79,41 +81,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      WelcomeView(selectedTab: .constant(9))
-      WelcomeView(selectedTab: .constant(9))
-        .previewDevice("iPod touch (7th generation)")
-    }
+    WelcomeView(selectedTab: .constant(9))
   }
 }
-
-/*
-ZStack {
-  VStack {
-    HeaderView(selectedTab: $selectedTab, titleText: "Welcome")
-    Spacer()
-    historyButton
-      .sheet(isPresented: $showHistory) {
-        HistoryView(showHistory: $showHistory)
-      }
-      .padding(.bottom)
-  }
-  VStack {
-    HStack(alignment: .bottom) {
-      VStack(alignment: .leading) {
-        Text("Get fit")
-          .font(.largeTitle)
-        Text("with high intensity interval training")
-          .font(.headline)
-      }
-      Image("step-up")
-        .resizedToFill(width: 240, height: 240)
-        .clipShape(Circle())
-    }
-    RaisedButton(buttonText: "Get Started") {
-      selectedTab = 0
-    }
-    .padding()
-  }
-}
-*/

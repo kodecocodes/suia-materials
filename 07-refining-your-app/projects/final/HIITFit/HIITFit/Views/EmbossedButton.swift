@@ -63,6 +63,7 @@ struct EmbossedButtonStyle: ButtonStyle {
         .frame(
           width: max(size.width, size.height),
           height: max(size.width, size.height))
+        .offset(x: -1)
         .offset(y: -max(size.width, size.height) / 2 +
           min(size.width, size.height) / 2)
     case .capsule:
@@ -91,7 +92,7 @@ struct EmbossedButton_Previews: PreviewProvider {
             .fontWeight(.bold)
         })
         .preferredColorScheme(.dark)
-        .buttonStyle(EmbossedButtonStyle(buttonShape: .capsule))
+        .buttonStyle(EmbossedButtonStyle())
         .padding(40)
         .previewLayout(.sizeThatFits)
     }

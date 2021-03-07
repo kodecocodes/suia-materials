@@ -60,4 +60,25 @@ extension Date {
     dateFormatter.dateFormat = "EEEE"
     return dateFormatter.string(from: self)
   }
+
+  var truncatedDayName: String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEE"
+    return dateFormatter.string(from: self)
+  }
+
+  var truncatedDayMonth: String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd MMM"
+    return dateFormatter.string(from: self)
+  }
+
+  var lastSevenDays: [Date] {
+    (-6...0).map { day in
+      Calendar.current.date(
+        byAdding: .day,
+        value: day,
+        to: Date()) ?? Date()
+    }
+  }
 }

@@ -55,7 +55,7 @@ struct ExerciseView: View {
           .padding(.bottom)
         if let url = Bundle.main.url(
           forResource: Exercise.exercises[index].videoName,
-            withExtension: "mp4") {
+          withExtension: "mp4") {
           VideoPlayer(player: AVPlayer(url: url))
             .frame(height: geometry.size.height * 0.45)
         } else {
@@ -112,6 +112,7 @@ struct ExerciseView: View {
           .fontWeight(.bold)
           .padding([.leading, .trailing], 5)
       })
+      .padding(.bottom, 10)
       .buttonStyle(EmbossedButtonStyle())
   }
 }

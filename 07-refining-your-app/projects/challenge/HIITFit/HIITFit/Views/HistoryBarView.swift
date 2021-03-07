@@ -45,14 +45,10 @@ struct HistoryBarView: View {
   var body: some View {
     GeometryReader { geometry in
       VStack {
-  //      Spacer()
         HStack {
           ForEach(0..<7) { index in
             bar(day: index, size: geometry.size)
           }
-  //        ForEach(days, id: \.self) { date in
-  //          bar(date: date)
-  //        }
         }
         Divider()
         Spacer()
@@ -119,7 +115,5 @@ struct HistoryBarView: View {
 struct HistoryBarView_Previews: PreviewProvider {
   static var previews: some View {
     HistoryBarView(history: HistoryStore(debugData: true))
-      .previewDevice("iPhone 12 Pro Max")
-
   }
 }

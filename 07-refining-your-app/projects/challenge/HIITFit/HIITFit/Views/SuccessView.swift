@@ -36,8 +36,7 @@ struct SuccessView: View {
   @Environment(\.presentationMode) var presentationMode
   @Binding var selectedTab: Int
   var body: some View {
-    print("HERE")
-    return ZStack {
+    ZStack {
       VStack {
         Image(systemName: "hand.raised.fill")
           .resizedToFill(width: 75, height: 75)
@@ -55,13 +54,23 @@ struct SuccessView: View {
       }
       VStack {
         Spacer()
-        Button("Continue") {
-          selectedTab = 9
-          presentationMode.wrappedValue.dismiss()
-        }
-        .padding()
+        continueButton
       }
     }
+  }
+
+  var continueButton: some View {
+    Button(
+      action: {
+        selectedTab = 9
+        presentationMode.wrappedValue.dismiss()
+      }, label: {
+        Text("Continue")
+          .fontWeight(.bold)
+          .padding([.leading, .trailing], 5)
+      })
+      .padding(.bottom, 40)
+      .buttonStyle(EmbossedButtonStyle())
   }
 }
 

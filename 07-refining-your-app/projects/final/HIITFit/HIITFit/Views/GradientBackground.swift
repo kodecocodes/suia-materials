@@ -38,11 +38,12 @@ struct GradientBackground: View {
     let color2 = Color("gradient-bottom")
     let background = Color("background")
     return Gradient(
-      stops: [Gradient.Stop(color: color1, location: 0),
-              Gradient.Stop(color: color2, location: 0.9),
-              Gradient.Stop(color: background, location: 0.9),
-              Gradient.Stop(color: background, location: 1)
-             ])
+      stops: [
+        Gradient.Stop(color: color1, location: 0),
+        Gradient.Stop(color: color2, location: 0.9),
+        Gradient.Stop(color: background, location: 0.9),
+        Gradient.Stop(color: background, location: 1)
+      ])
   }
 
   var body: some View {
@@ -52,23 +53,7 @@ struct GradientBackground: View {
       endPoint: .bottom)
       .edgesIgnoringSafeArea(.all)
   }
-
-  var background: some View {
-    let color1 = Color.clear
-    let color2 = Color("background")
-    let gradient = Gradient(
-      stops: [Gradient.Stop(color: color1, location: 0),
-              Gradient.Stop(color: color1, location: 0.5),
-              Gradient.Stop(color: color2, location: 0.5),
-              Gradient.Stop(color: color2, location: 1)
-             ])
-    return LinearGradient(
-      gradient: gradient,
-      startPoint: .top, endPoint: .bottom)
-  }
-
 }
-
 
 struct GradientBackground_Previews: PreviewProvider {
   static var previews: some View {
