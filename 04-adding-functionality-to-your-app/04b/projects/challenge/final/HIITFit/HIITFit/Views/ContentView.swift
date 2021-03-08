@@ -45,9 +45,7 @@ struct ContentView: View {
           .tag(index)
       }
     }
-    .tabViewStyle(PageTabViewStyle())
-    .indexViewStyle(
-      PageIndexViewStyle(backgroundDisplayMode: .never))
+    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
   }
 }
 
