@@ -73,11 +73,7 @@ struct RatingView: View {
           .foregroundColor(
             index > rating ? offColor : onColor)
           .onTapGesture {
-            rating = index
-            let index = ratings.index(
-              ratings.startIndex,
-              offsetBy: exerciseIndex)
-            ratings.replaceSubrange(index...index, with: String(rating))
+            updateRating(index: index)
           }
           .onChange(of: ratings) { _ in
             convertRating()
@@ -89,6 +85,14 @@ struct RatingView: View {
       }
     }
     .font(.largeTitle)
+  }
+
+  func updateRating(index: Int) {
+    rating = index
+    let index = ratings.index(
+      ratings.startIndex,
+      offsetBy: exerciseIndex)
+    ratings.replaceSubrange(index...index, with: String(rating))
   }
 }
 
