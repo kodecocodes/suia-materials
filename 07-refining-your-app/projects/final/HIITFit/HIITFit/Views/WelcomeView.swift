@@ -51,6 +51,9 @@ struct WelcomeView: View {
             getStartedButton
             Spacer()
             historyButton
+              .sheet(isPresented: $showHistory) {
+                HistoryView(showHistory: $showHistory)
+              }
           }
         }
         .frame(height: geometry.size.height * 0.8)
