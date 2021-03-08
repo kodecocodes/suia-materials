@@ -60,9 +60,9 @@ struct HistoryView: View {
           .frame(height: geometry.size.height * 0.15)
           Spacer()
           if layoutType == .list {
-            HistoryListView(history: history)
+            HistoryListView()
           } else {
-            HistoryBarView(history: history)
+            HistoryBarView()
           }
         }
       }

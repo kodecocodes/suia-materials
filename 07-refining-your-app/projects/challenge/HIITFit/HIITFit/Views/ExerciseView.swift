@@ -76,6 +76,8 @@ struct ExerciseView: View {
         }
         .frame(height: geometry.size.height * 0.8)
         .sheet(isPresented: $showSheet, onDismiss: {
+          showSuccess = false
+          showHistory = false
           if exerciseSheet == .timer {
             if timerDone {
             history.addDoneExercise(Exercise.exercises[index].exerciseName)
@@ -92,8 +94,6 @@ struct ExerciseView: View {
           } else {
             exerciseSheet = nil
           }
-          showHistory = false
-          showSuccess = false
           showTimer = false
         }, content: {
           if let exerciseSheet = exerciseSheet {

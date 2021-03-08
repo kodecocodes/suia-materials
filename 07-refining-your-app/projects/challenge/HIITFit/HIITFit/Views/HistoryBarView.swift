@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct HistoryBarView: View {
-  let history: HistoryStore
+  @EnvironmentObject var history: HistoryStore
 
   @State private var days: [Date] = []
   @State private var exercisesForWeek: [ExerciseDay] = []
@@ -114,6 +114,7 @@ struct HistoryBarView: View {
 
 struct HistoryBarView_Previews: PreviewProvider {
   static var previews: some View {
-    HistoryBarView(history: HistoryStore(debugData: true))
+    HistoryBarView()
+      .environmentObject(HistoryStore(debugData: true))
   }
 }

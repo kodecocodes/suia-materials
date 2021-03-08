@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct HistoryListView: View {
-  let history: HistoryStore
+  @EnvironmentObject var history: HistoryStore
 
   var body: some View {
     ScrollView {
@@ -96,6 +96,7 @@ struct HistoryListView: View {
 
 struct HistoryListView_Previews: PreviewProvider {
   static var previews: some View {
-    HistoryListView(history: HistoryStore(debugData: true))
+    HistoryListView()
+      .environmentObject(HistoryStore(debugData: true))
   }
 }
