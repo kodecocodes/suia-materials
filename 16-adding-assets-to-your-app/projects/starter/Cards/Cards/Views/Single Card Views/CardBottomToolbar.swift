@@ -34,13 +34,12 @@ import SwiftUI
 
 struct ToolbarButtonView: View {
   let modal: CardModal
-  private let modalButton: [CardModal: (
-    text: String, imageName: String)] = [
-      CardModal.photoPicker: ("Photos", "photo"),
-      CardModal.framePicker: ("Frames", "square.on.circle"),
-      CardModal.stickerPicker: ("Stickers", "heart.circle"),
-      CardModal.textPicker: ("Text", "textformat")
-    ]
+  private let modalButton: [CardModal: (text: String, imageName: String)] = [
+    .photoPicker: ("Photos", "photo"),
+    .framePicker: ("Frames", "square.on.circle"),
+    .stickerPicker: ("Stickers", "heart.circle"),
+    .textPicker: ("Text", "textformat")
+  ]
 
   var body: some View {
     if let text = modalButton[modal]?.text,
