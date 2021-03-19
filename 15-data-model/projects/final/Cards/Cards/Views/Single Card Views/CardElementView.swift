@@ -63,7 +63,7 @@ struct TextElementView: View {
       Text(element.text)
         .font(.custom(element.textFont, size: 200))
         .foregroundColor(element.textColor)
-        .scaleableText()
+        .scalableText()
     }
   }
 }

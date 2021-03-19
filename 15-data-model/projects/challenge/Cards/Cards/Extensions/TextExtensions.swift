@@ -33,7 +33,7 @@
 import SwiftUI
 
 extension Text {
-  func scaleableText(font: Font = Font.system(size: 1000)) -> some View {
+  func scalableText(font: Font = Font.system(size: 1000)) -> some View {
     self
       .font(font)
       .minimumScaleFactor(0.01)
