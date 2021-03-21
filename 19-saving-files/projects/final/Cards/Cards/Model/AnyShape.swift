@@ -51,8 +51,9 @@ struct AnyShape: Shape {
 
 extension AnyShape: Equatable {
   static func == (lhs: AnyShape, rhs: AnyShape) -> Bool {
-    let lhsPath = lhs.path(in: .zero)
-    let rhsPath = rhs.path(in: .zero)
-    return lhsPath == rhsPath
+    let rect = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
+    let lhsPath = lhs.path(in: rect)
+    let rhsPath = rhs.path(in: rect)
+   return lhsPath == rhsPath
   }
 }
