@@ -40,10 +40,13 @@ struct AddThingView: View {
   var body: some View {
     VStack {
       TextField("Thing I Learned", text: $thing)
+        .disableAutocorrection(true)
         .textFieldStyle(RoundedBorderTextFieldStyle())
         .padding()
       Button("Done") {
-        someThings.things.append(thing)
+        if !thing.isEmpty {
+          someThings.things.append(thing)
+        }
         presentationMode.wrappedValue.dismiss()
       }
       Spacer()

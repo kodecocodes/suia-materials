@@ -12,6 +12,7 @@
 		CD74C9892578A422004C8694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD74C9882578A422004C8694 /* Assets.xcassets */; };
 		CD74C98C2578A422004C8694 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD74C98B2578A422004C8694 /* Preview Assets.xcassets */; };
 		CD74C9982579C149004C8694 /* AddThingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74C9972579C149004C8694 /* AddThingView.swift */; };
+		CDA02203260AE69800AF2BCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA02201260AE69800AF2BCF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CD74C98B2578A422004C8694 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD74C98D2578A422004C8694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD74C9972579C149004C8694 /* AddThingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThingView.swift; sourceTree = "<group>"; };
+		CDA02202260AE69800AF2BCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				CD74C9862578A41F004C8694 /* ContentView.swift */,
 				CD74C9972579C149004C8694 /* AddThingView.swift */,
 				CD74C9882578A422004C8694 /* Assets.xcassets */,
+				CDA02201260AE69800AF2BCF /* LaunchScreen.storyboard */,
 				CD74C98D2578A422004C8694 /* Info.plist */,
 				CD74C98A2578A422004C8694 /* Preview Content */,
 			);
@@ -130,6 +133,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA02203260AE69800AF2BCF /* LaunchScreen.storyboard in Resources */,
 				CD74C98C2578A422004C8694 /* Preview Assets.xcassets in Resources */,
 				CD74C9892578A422004C8694 /* Assets.xcassets in Resources */,
 			);
@@ -170,6 +174,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CDA02201260AE69800AF2BCF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDA02202260AE69800AF2BCF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CD74C98E2578A422004C8694 /* Debug */ = {
@@ -223,7 +238,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -278,7 +293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
