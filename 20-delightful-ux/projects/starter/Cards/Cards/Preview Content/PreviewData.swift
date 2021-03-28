@@ -45,10 +45,12 @@ let initialElements: [CardElement] = [
     transform: Transform(
       size: CGSize(width: 370, height: 266),
       rotation: .init(degrees: -6),
-      offset: CGSize(width: 4, height: -137)), image: Image("giraffe")),
+      offset: CGSize(width: 4, height: -137)),
+    image: Image("giraffe")),
   TextElement(
     transform: Transform(
       size: CGSize(width: 300, height: 100),
-      offset: CGSize(width: 12, height: 81)), text: "Snack time!",
+      offset: CGSize(width: 12, height: 81)),
+    text: "Snack time!",
     textColor: .blue)
 ]

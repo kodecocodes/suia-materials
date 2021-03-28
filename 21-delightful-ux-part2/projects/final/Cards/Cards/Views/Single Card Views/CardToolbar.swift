@@ -35,6 +35,7 @@ import SwiftUI
 struct CardToolbar: ViewModifier {
   @EnvironmentObject var viewState: ViewState
   @Binding var currentModal: CardModal?
+
   func body(content: Content) -> some View {
     content
     .toolbar {

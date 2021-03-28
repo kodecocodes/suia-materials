@@ -32,7 +32,6 @@
 
 import SwiftUI
 
-
 struct CardDetailView: View {
   @EnvironmentObject var viewState: ViewState
   @Environment(\.scenePhase) private var scenePhase

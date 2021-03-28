@@ -82,7 +82,7 @@ struct SplashScreen: View {
         .foregroundColor(.white)
       Text(letter)
         .fontWeight(.bold)
-        .scaleableText()
+        .scalableText()
         .foregroundColor(Color(color))
         .frame(width: 80)
     }
