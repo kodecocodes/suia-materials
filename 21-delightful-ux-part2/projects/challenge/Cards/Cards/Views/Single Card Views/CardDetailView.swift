@@ -39,32 +39,32 @@ struct CardDetailView: View {
   @Binding var card: Card
 
   var body: some View {
-    GeometryReader { proxy in
-      RenderableView(card: $card) {
+    RenderableView(card: $card) {
+      GeometryReader { proxy in
         content(size: proxy.size)
+          .onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .inactive {
+              card.save()
+            }
+          }
+          .onDisappear {
+            card.save()
+          }
+          .onDrop(
+            of: [.image],
+            delegate: CardDrop(
+              card: $card,
+              size: proxy.size,
+              frame: proxy.frame(in: .global)))
+          .frame(
+            width: calculateSize(proxy.size).width ,
+            height: calculateSize(proxy.size).height)
+          .clipped()
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
-      .onChange(of: scenePhase) { newScenePhase in
-        if newScenePhase == .inactive {
-          card.save()
-        }
-      }
-      .onDisappear {
-        card.save()
-      }
-      .onDrop(
-        of: [.image],
-        delegate: CardDrop(
-          card: $card,
-          size: proxy.size,
-          frame: proxy.frame(in: .global)))
-      .modifier(CardToolbar(currentModal: $currentModal))
-      .cardModals(card: $card, currentModal: $currentModal)
-      .frame(
-        width: calculateSize(proxy.size).width ,
-        height: calculateSize(proxy.size).height)
-      .clipped()
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+    .modifier(CardToolbar(currentModal: $currentModal))
+    .cardModals(card: $card, currentModal: $currentModal)
   }
 
   func content(size: CGSize) -> some View {

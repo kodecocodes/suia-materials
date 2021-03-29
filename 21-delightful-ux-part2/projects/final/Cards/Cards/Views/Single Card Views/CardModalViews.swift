@@ -80,12 +80,12 @@ struct CardModals: ViewModifier {
               textElement = TextElement()
             }
         case .shareSheet:
-          if let shareImage = viewState.shareImage {
+          if let shareImage = card.shareImage {
             ShareSheetView(
               activityItems: [shareImage],
               applicationActivities: nil)
             .onDisappear {
-              viewState.shareImage = nil
+              card.shareImage = nil
             }
           }
         }

@@ -65,6 +65,5 @@ class ViewState: ObservableObject {
   @Published var cardListState: CardListState = .list
 
   // For sharing the card with a screenshot - see `RenderableView`
-  var shareImage: UIImage?
   var shouldScreenshot = false
 }

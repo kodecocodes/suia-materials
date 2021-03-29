@@ -24,9 +24,9 @@
 		8242D29625CC0FA60088F348 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242D29325CC0FA50088F348 /* ShareSheetView.swift */; };
 		8242D29A25CC0FB10088F348 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242D29825CC0FB10088F348 /* TextView.swift */; };
 		8242D29B25CC0FB10088F348 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242D29925CC0FB10088F348 /* AppFonts.swift */; };
-		8242D2A125CC11F40088F348 /* AppLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242D2A025CC11F40088F348 /* AppLoadingView.swift */; };
-		8242D2A425CC11FD0088F348 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242D2A325CC11FD0088F348 /* SplashScreen.swift */; };
-		8242D2A725CC183C0088F348 /* ListSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242D2A625CC183C0088F348 /* ListSelectionView.swift */; };
+		824D96B426117934007124B5 /* AppLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824D96B326117934007124B5 /* AppLoadingView.swift */; };
+		824D96B72611793D007124B5 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824D96B62611793D007124B5 /* SplashScreen.swift */; };
+		824D96BB26117CDF007124B5 /* ListSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824D96BA26117CDF007124B5 /* ListSelectionView.swift */; };
 		824DCCB925C7BEF7001F67C7 /* AngleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824DCCB825C7BEF7001F67C7 /* AngleExtensions.swift */; };
 		824DCCBD25C7C70D001F67C7 /* TextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824DCCBC25C7C70D001F67C7 /* TextPicker.swift */; };
 		82C5EECE25C7ACAF00FF006A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C5EECD25C7ACAF00FF006A /* UIImageExtensions.swift */; };
@@ -73,9 +73,9 @@
 		8242D29325CC0FA50088F348 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		8242D29825CC0FB10088F348 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		8242D29925CC0FB10088F348 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
-		8242D2A025CC11F40088F348 /* AppLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingView.swift; sourceTree = "<group>"; };
-		8242D2A325CC11FD0088F348 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		8242D2A625CC183C0088F348 /* ListSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelectionView.swift; sourceTree = "<group>"; };
+		824D96B326117934007124B5 /* AppLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoadingView.swift; sourceTree = "<group>"; };
+		824D96B62611793D007124B5 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		824D96BA26117CDF007124B5 /* ListSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSelectionView.swift; sourceTree = "<group>"; };
 		824DCCB825C7BEF7001F67C7 /* AngleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleExtensions.swift; sourceTree = "<group>"; };
 		824DCCBC25C7C70D001F67C7 /* TextPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPicker.swift; sourceTree = "<group>"; };
 		82C5EECD25C7ACAF00FF006A /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -169,8 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				82F3FA9E25C62C1000BB30D0 /* CardsApp.swift */,
-				8242D2A025CC11F40088F348 /* AppLoadingView.swift */,
-				8242D2A325CC11FD0088F348 /* SplashScreen.swift */,
+				824D96B326117934007124B5 /* AppLoadingView.swift */,
+				824D96B62611793D007124B5 /* SplashScreen.swift */,
 				82F3FAD025C63DE100BB30D0 /* Views */,
 				82F3FAD225C63DFB00BB30D0 /* Model */,
 				82F3FAE925C65CA700BB30D0 /* Config */,
@@ -197,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				82F3FAC225C62FCB00BB30D0 /* CardsView.swift */,
-				8242D2A625CC183C0088F348 /* ListSelectionView.swift */,
+				824D96BA26117CDF007124B5 /* ListSelectionView.swift */,
 				82F3FAB225C62CDC00BB30D0 /* CardsListView.swift */,
 				82F3FAB525C62D6100BB30D0 /* CardThumbnailView.swift */,
 				82F3FAD525C652FD00BB30D0 /* ResizableView.swift */,
@@ -356,14 +356,14 @@
 				8225236C25C6799900A61DC3 /* TextExtensions.swift in Sources */,
 				82C5EED125C7ACD600FF006A /* FileManagerExtensions.swift in Sources */,
 				8242D29525CC0FA60088F348 /* RenderableView.swift in Sources */,
-				8242D2A725CC183C0088F348 /* ListSelectionView.swift in Sources */,
+				824D96BB26117CDF007124B5 /* ListSelectionView.swift in Sources */,
 				82D3B11F25C6D22500970C6A /* PencilView.swift in Sources */,
 				8225235725C65E8000A61DC3 /* CardToolbar.swift in Sources */,
 				8225236125C673B700A61DC3 /* CardStore.swift in Sources */,
 				82F3FAC325C62FCB00BB30D0 /* CardsView.swift in Sources */,
 				8225235E25C6738200A61DC3 /* Card.swift in Sources */,
 				820E12A325C78EE400929AD0 /* Shapes.swift in Sources */,
-				8242D2A125CC11F40088F348 /* AppLoadingView.swift in Sources */,
+				824D96B426117934007124B5 /* AppLoadingView.swift in Sources */,
 				8242D29B25CC0FB10088F348 /* AppFonts.swift in Sources */,
 				82F3FAB325C62CDC00BB30D0 /* CardsListView.swift in Sources */,
 				82F3FABC25C62F6200BB30D0 /* ViewState.swift in Sources */,
@@ -392,7 +392,7 @@
 				82F3FAC725C6371000BB30D0 /* CardDetailView.swift in Sources */,
 				82D3B10825C6C9A100970C6A /* PhotoPicker.swift in Sources */,
 				82F3FAEE25C65D8B00BB30D0 /* ColorExtensions.swift in Sources */,
-				8242D2A425CC11FD0088F348 /* SplashScreen.swift in Sources */,
+				824D96B72611793D007124B5 /* SplashScreen.swift in Sources */,
 				821854D525C7D19C00615F7D /* CardModalViews.swift in Sources */,
 				82C5EECE25C7ACAF00FF006A /* UIImageExtensions.swift in Sources */,
 			);

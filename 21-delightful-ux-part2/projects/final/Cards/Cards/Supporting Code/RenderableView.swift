@@ -58,7 +58,7 @@ struct RenderableView<Content>: View where Content: View {
       .onChange(of: viewState.shouldScreenshot) { _ in
         if viewState.shouldScreenshot {
           viewState.shouldScreenshot = false
-          viewState.shareImage = content().screenShot(size: Settings.cardSize)
+          card.shareImage = content().screenShot(size: Settings.cardSize)
         }
       }
       // Thumbnail

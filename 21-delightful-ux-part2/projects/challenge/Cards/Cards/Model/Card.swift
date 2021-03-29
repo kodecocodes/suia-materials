@@ -37,6 +37,7 @@ struct Card: Identifiable {
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
   var image: UIImage?
+  var shareImage: UIImage?
 
   func save() {
     do {
