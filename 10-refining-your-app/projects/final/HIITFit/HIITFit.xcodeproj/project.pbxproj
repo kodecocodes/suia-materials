@@ -163,10 +163,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD30C92F251474DD0049DB93 /* Build configuration list for PBXNativeTarget "HIITFit" */;
 			buildPhases = (
+				CD0BEE1225245B0F00937B4F /* SwiftLint */,
 				CD30C91C251474DC0049DB93 /* Sources */,
 				CD30C91D251474DC0049DB93 /* Frameworks */,
 				CD30C91E251474DC0049DB93 /* Resources */,
-				CD0BEE1225245B0F00937B4F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -185,6 +185,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
+				ORGANIZATIONNAME = "Ray Wenderlich";
 				TargetAttributes = {
 					CD30C91F251474DC0049DB93 = {
 						CreatedOnToolsVersion = 12.2;
@@ -226,7 +227,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD0BEE1225245B0F00937B4F /* ShellScript */ = {
+		CD0BEE1225245B0F00937B4F /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -235,6 +236,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (

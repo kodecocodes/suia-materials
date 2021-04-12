@@ -47,7 +47,7 @@ struct WelcomeView: View {
         .sheet(isPresented: $showHistory) {
           HistoryView(showHistory: $showHistory)
         }
-          .padding(.bottom)
+        .padding(.bottom)
       }
       VStack {
         HStack(alignment: .bottom) {
@@ -70,7 +70,7 @@ struct WelcomeView: View {
         .padding()
         .background(
           RoundedRectangle(cornerRadius: 20)
-          .stroke(Color.gray, lineWidth: 2))
+            .stroke(Color.gray, lineWidth: 2))
       }
     }
   }
