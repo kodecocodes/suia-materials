@@ -86,7 +86,7 @@ class HistoryStore: ObservableObject {
         options: [],
         format: nil)
       // 4
-      let convertedPlistData = plistData as? [[Any]] ?? [[Any]]()
+      let convertedPlistData = plistData as? [[Any]] ?? []
       // 5
       exerciseDays = convertedPlistData.map {
         ExerciseDay(
