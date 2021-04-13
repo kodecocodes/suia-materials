@@ -82,10 +82,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD74C9902578A422004C8694 /* Build configuration list for PBXNativeTarget "TIL" */;
 			buildPhases = (
+				CD74C9952578A4A1004C8694 /* SwiftLint */,
 				CD74C97D2578A41F004C8694 /* Sources */,
 				CD74C97E2578A41F004C8694 /* Frameworks */,
 				CD74C97F2578A41F004C8694 /* Resources */,
-				CD74C9952578A4A1004C8694 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -104,6 +104,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
+				ORGANIZATIONNAME = "Ray Wenderlich";
 				TargetAttributes = {
 					CD74C9802578A41F004C8694 = {
 						CreatedOnToolsVersion = 12.2;
@@ -142,7 +143,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD74C9952578A4A1004C8694 /* Run Script */ = {
+		CD74C9952578A4A1004C8694 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -151,14 +152,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
