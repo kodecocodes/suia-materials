@@ -115,7 +115,6 @@ struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
     HeaderView(count: 42)
       .environmentObject(EpisodeStore())
-      //.preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
   }
 }

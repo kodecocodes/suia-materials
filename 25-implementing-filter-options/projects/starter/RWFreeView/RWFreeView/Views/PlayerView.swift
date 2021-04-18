@@ -43,7 +43,7 @@ struct PlayerView: View {
   }
 
   var body: some View {
-    if let url = URL(string: episode.videoUrlString) {
+    if let url = URL(string: episode.videoURLString) {
       GeometryReader { proxy in
         VStack {
           VideoPlayer(player: AVPlayer(url: url))

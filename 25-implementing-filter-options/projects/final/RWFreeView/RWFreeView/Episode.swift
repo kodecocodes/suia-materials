@@ -45,10 +45,10 @@ struct Episode: Decodable, Identifiable {
   var domain = ""  // relationships: domains: data: id
 
   // send request to /videos endpoint with urlString
-  var videoUrl: VideoUrl?
+  var videoURL: VideoURL?
 
   // redirects to the real web page
-  var linkUrlString: String {
+  var linkURLString: String {
     "https://www.raywenderlich.com/redirect?uri=" + uri
   }
 
@@ -124,7 +124,7 @@ extension Episode {
     self.difficulty = difficulty
     self.description = description
     if let videoId = videoIdentifier {
-      self.videoUrl = VideoUrl(videoId: videoId)
+      self.videoURL = VideoURL(videoId: videoId)
     }
   }
 }

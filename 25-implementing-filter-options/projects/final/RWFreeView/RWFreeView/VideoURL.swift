@@ -32,14 +32,14 @@
 
 import Foundation
 
-class VideoUrl: ObservableObject {
+class VideoURL: ObservableObject {
   @Published var urlString = ""
 
   init(videoId: Int) {
-    let baseUrlString = "https://api.raywenderlich.com/api/videos/"
-    let queryUrlString = baseUrlString + String(videoId) + "/stream"
-    guard let queryUrl = URL(string: queryUrlString) else { return }
-    URLSession.shared.dataTask(with: queryUrl) { data, response, error in
+    let baseURLString = "https://api.raywenderlich.com/api/videos/"
+    let queryURLString = baseURLString + String(videoId) + "/stream"
+    guard let queryURL = URL(string: queryURLString) else { return }
+    URLSession.shared.dataTask(with: queryURL) { data, response, error in
       if let data = data, let response = response as? HTTPURLResponse {
         // 1
         if response.statusCode != 200 {
@@ -47,7 +47,7 @@ class VideoUrl: ObservableObject {
           return
         }
         if let decodedResponse = try? JSONDecoder().decode(
-          VideoUrlString.self, from: data) {
+          VideoURLString.self, from: data) {
           // 2
           self.urlString = decodedResponse.urlString
         }
@@ -59,7 +59,7 @@ class VideoUrl: ObservableObject {
   }
 }
 
-struct VideoUrlString {
+struct VideoURLString {
   // data: attributes: url
   var urlString: String
 
@@ -76,7 +76,7 @@ struct VideoAttributes: Codable {
   var url: String
 }
 
-extension VideoUrlString: Decodable {
+extension VideoURLString: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(  // 1
       keyedBy: CodingKeys.self)
