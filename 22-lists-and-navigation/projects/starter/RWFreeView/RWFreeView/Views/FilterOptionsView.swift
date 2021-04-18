@@ -146,6 +146,5 @@ struct FilterButtonStyle: ButtonStyle {
 struct FilterOptionsView_Previews: PreviewProvider {
   static var previews: some View {
     FilterOptionsView()
-      //.preferredColorScheme(.dark)
   }
 }

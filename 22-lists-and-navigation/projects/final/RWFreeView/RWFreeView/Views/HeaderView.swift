@@ -115,7 +115,6 @@ struct HeaderButtonStyle: ButtonStyle {
 struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
     HeaderView(count: 42)
-      //.preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
   }
 }
