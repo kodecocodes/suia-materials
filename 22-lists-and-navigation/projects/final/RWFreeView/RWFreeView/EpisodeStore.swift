@@ -48,9 +48,9 @@ struct Episode {
   let released: String  // released_at
   let domain: String  // enum
   let difficulty: String  // enum
-  let videoUrlString: String  // will be videoIdentifier: Int
+  let videoURLString: String  // will be videoIdentifier: Int
   let uri: String  // redirects to the real web page
-  var linkUrlString: String {
+  var linkURLString: String {
     "https://www.raywenderlich.com/redirect?uri=" + uri
   }
 }

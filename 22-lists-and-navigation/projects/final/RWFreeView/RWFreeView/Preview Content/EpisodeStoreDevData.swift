@@ -43,7 +43,7 @@ extension EpisodeStore {
         released: "Sept 2019",
         domain: "iOS & Swift",
         difficulty: "beginner",
-        videoUrlString: "https://player.vimeo.com/external/357115704.m3u8?s=19d68c614817e0266d6749271e5432675a45c559&oauth2_token_id=897711146",
+        videoURLString: "https://player.vimeo.com/external/357115704.m3u8?s=19d68c614817e0266d6749271e5432675a45c559&oauth2_token_id=897711146",
         uri: "rw://betamax/videos/3021"),
       Episode(
         name: "Challenge: Making a Programming To-Do List",
@@ -51,7 +51,7 @@ extension EpisodeStore {
         released: "Sept 2019",
         domain: "iOS & Swift",
         difficulty: "beginner",
-        videoUrlString: "https://player.vimeo.com/external/357115706.m3u8?s=e23cffbec2648d976c11be8ddb1729001f4ea179&oauth2_token_id=897711146",
+        videoURLString: "https://player.vimeo.com/external/357115706.m3u8?s=e23cffbec2648d976c11be8ddb1729001f4ea179&oauth2_token_id=897711146",
         uri: "rw://betamax/videos/3022"),
       Episode(
         name: "Introduction",
@@ -59,7 +59,7 @@ extension EpisodeStore {
         released: "Mar 2018",
         domain: "Android & Kotlin",
         difficulty: "beginner",
-        videoUrlString: "https://player.vimeo.com/external/257192338.m3u8?s=c3bcd1dbbfd6897317084fb21987af6b89f81ec5&oauth2_token_id=897711146",
+        videoURLString: "https://player.vimeo.com/external/257192338.m3u8?s=c3bcd1dbbfd6897317084fb21987af6b89f81ec5&oauth2_token_id=897711146",
         uri: "rw://betamax/videos/1450")
     ]
   }
