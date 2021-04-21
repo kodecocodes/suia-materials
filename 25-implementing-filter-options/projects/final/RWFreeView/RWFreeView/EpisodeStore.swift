@@ -113,21 +113,22 @@ final class EpisodeStore: ObservableObject, Decodable {
 
     loading = true
     URLSession.shared.dataTask(with: contentsURL) { data, response, error in
+      defer {
+        DispatchQueue.main.async {
+          self.loading = false
+        }
+      }
       if let data = data, let response = response as? HTTPURLResponse {
         print(response.statusCode)
         if let decodedResponse = try? JSONDecoder().decode(  // 1
           EpisodeStore.self, from: data) {
           DispatchQueue.main.async {
             self.episodes = decodedResponse.episodes  // 2
-            self.loading = false
           }
           return
         }
       }
       print("Contents fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-      DispatchQueue.main.async {
-        self.loading = false
-      }
     }
     .resume()
   }

@@ -47,8 +47,7 @@ struct ActivityIndicator: View {
         .stroke(
           AngularGradient(
             gradient: .init(colors: [color1, color2]),
-            center: .center
-        ),
+            center: .center),
           style: style)
         .rotationEffect(Angle(degrees: animate ? 360 : 0))
         .animation(
