@@ -102,6 +102,7 @@ struct FilterOptionsView: View {
             .padding(.bottom)
           }
         }
+        // swiftlint:enable force_unwrapping
         Spacer()
         HStack {
           Button("Clear All") { store.clearQueryFilters() }
@@ -140,6 +141,5 @@ struct FilterOptionsView_Previews: PreviewProvider {
   static var previews: some View {
     FilterOptionsView()
       .environmentObject(EpisodeStore())
-      //.preferredColorScheme(.dark)
   }
 }

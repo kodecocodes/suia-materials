@@ -75,7 +75,7 @@ final class EpisodeStore: ObservableObject, Decodable {
   ]
 
   // 1
-  let baseUrlString = "https://api.raywenderlich.com/api/contents"
+  let baseURLString = "https://api.raywenderlich.com/api/contents"
   // use baseParams dictionary for free, episode, sort, page size, search term
   var baseParams = [
     "filter[subscription_types][]": "free",
@@ -86,7 +86,7 @@ final class EpisodeStore: ObservableObject, Decodable {
   ]
   // 2
   func fetchContents() {
-    guard var urlComponents = URLComponents(string: baseUrlString) else { return }
+    guard var urlComponents = URLComponents(string: baseURLString) else { return }
     urlComponents.setQueryItems(with: baseParams)
     let selectedDomains = domainFilters.filter {
       $0.value
@@ -108,26 +108,27 @@ final class EpisodeStore: ObservableObject, Decodable {
     urlComponents.queryItems! += domainQueryItems
     // swiftlint:disable:next force_unwrapping
     urlComponents.queryItems! += difficultyQueryItems
-    guard let contentsUrl = urlComponents.url else { return }
-    print(contentsUrl)
+    guard let contentsURL = urlComponents.url else { return }
+    print(contentsURL)
 
     loading = true
-    URLSession.shared.dataTask(with: contentsUrl) { data, response, error in
+    URLSession.shared.dataTask(with: contentsURL) { data, response, error in
+      defer {
+        DispatchQueue.main.async {
+          self.loading = false
+        }
+      }
       if let data = data, let response = response as? HTTPURLResponse {
         print(response.statusCode)
         if let decodedResponse = try? JSONDecoder().decode(  // 1
           EpisodeStore.self, from: data) {
           DispatchQueue.main.async {
             self.episodes = decodedResponse.episodes  // 2
-            self.loading = false
           }
           return
         }
       }
       print("Contents fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-      DispatchQueue.main.async {
-        self.loading = false
-      }
     }
     .resume()
   }

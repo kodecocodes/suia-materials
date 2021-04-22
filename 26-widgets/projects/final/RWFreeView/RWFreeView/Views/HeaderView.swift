@@ -77,6 +77,7 @@ struct HeaderView: View {
             .buttonStyle(HeaderButtonStyle())
           }
         }
+        // swiftlint:enable force_unwrapping
         Spacer()
       }
       HStack {
@@ -171,7 +172,6 @@ struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
     HeaderView(count: 42)
       .environmentObject(EpisodeStore())
-      //.preferredColorScheme(.dark)
       .previewLayout(.sizeThatFits)
   }
 }

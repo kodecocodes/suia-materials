@@ -59,9 +59,7 @@ struct ContentView: View {
           .padding([.leading, .trailing], 20)
           .background(Color.listBkgd)
         }
-        .redacted(
-          reason: store.loading ? .placeholder : []
-        )
+        .redacted(reason: store.loading ? .placeholder : [])
       }
       .navigationTitle("Videos")
       .toolbar {
@@ -107,6 +105,5 @@ struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
       .environmentObject(EpisodeStore())
-    //.preferredColorScheme(.dark)
   }
 }
