@@ -73,6 +73,9 @@ struct TimerView: View {
           .padding(.bottom, 60)
           .disabled(!timerDone)
         }
+        .onAppear {
+          timerDone = false
+        }
       }
     }
   }
