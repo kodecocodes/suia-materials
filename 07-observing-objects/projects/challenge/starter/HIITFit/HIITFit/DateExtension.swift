@@ -1,4 +1,4 @@
-/// Copyright (c) 2020 Razeware LLC
+/// Copyright (c) 2021 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ import Foundation
 extension Date {
   /// Format a date using the specified format.
   ///   - parameters:
-  ///     - format: The other date.
+  ///     - format: A date pattern string like "MM dd".
   func formatted(as format: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = format
