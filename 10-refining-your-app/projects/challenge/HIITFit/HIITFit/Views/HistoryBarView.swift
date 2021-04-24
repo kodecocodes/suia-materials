@@ -77,7 +77,6 @@ struct HistoryBarView: View {
     guard days.count > day else {
       return AnyView(EmptyView())
     }
-    print(day, days)
     let date = days[day]
     let view = VStack {
       Spacer()
