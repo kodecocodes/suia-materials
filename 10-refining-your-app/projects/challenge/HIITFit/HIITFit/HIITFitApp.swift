@@ -34,8 +34,20 @@ import SwiftUI
 
 @main
 struct HIITFitApp: App {
-  @State private var historyStore = HistoryStore()
+  @StateObject private var historyStore: HistoryStore
   @State private var showAlert = false
+
+  init() {
+    let historyStore: HistoryStore
+    do {
+      historyStore = try HistoryStore(withChecking: true)
+    } catch {
+      print("Could not load history data")
+      historyStore = HistoryStore()
+      showAlert = true
+    }
+    _historyStore = StateObject(wrappedValue: historyStore)
+  }
 
   var body: some Scene {
     WindowGroup {
@@ -45,14 +57,6 @@ struct HIITFitApp: App {
           print(FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask))
-        }
-        .onAppear {
-          do {
-            historyStore = try HistoryStore(withChecking: true)
-          } catch {
-            print("Could not load history data")
-            showAlert = true
-          }
         }
         .alert(isPresented: $showAlert) {
           Alert(

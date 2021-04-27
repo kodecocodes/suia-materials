@@ -100,6 +100,7 @@ struct ExerciseView: View {
             switch exerciseSheet {
             case .history:
               HistoryView(showHistory: $showHistory)
+                .environmentObject(history)
             case .timer:
               TimerView(
                 timerDone: $timerDone,

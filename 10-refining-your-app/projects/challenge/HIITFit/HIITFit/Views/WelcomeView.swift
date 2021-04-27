@@ -33,6 +33,7 @@
 import SwiftUI
 
 struct WelcomeView: View {
+  @EnvironmentObject var history: HistoryStore
   @State private var showHistory = false
   @Binding var selectedTab: Int
 
@@ -54,6 +55,7 @@ struct WelcomeView: View {
       }
       .sheet(isPresented: $showHistory) {
         HistoryView(showHistory: $showHistory)
+          .environmentObject(history)
       }
     }
   }
