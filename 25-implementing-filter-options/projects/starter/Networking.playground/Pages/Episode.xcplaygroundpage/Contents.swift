@@ -2,16 +2,10 @@
 import Foundation
 import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
-
+//: [VideoURL ->](@next)
 let baseURLString = "https://api.raywenderlich.com/api/"
 var urlComponents = URLComponents(
   string: baseURLString + "contents/")!
-urlComponents.queryItems = [
-  URLQueryItem(
-    name: "filter[subscription_types][]", value: "free"),
-  URLQueryItem(
-    name: "filter[content_types][]", value: "episode")
-]
 var baseParams = [
   "filter[subscription_types][]": "free",
   "filter[content_types][]": "episode",
@@ -20,6 +14,8 @@ var baseParams = [
   "filter[q]": ""
 ]
 urlComponents.setQueryItems(with: baseParams)
+urlComponents.queryItems! +=
+  [URLQueryItem(name: "filter[domain_ids][]", value: "1")]
 urlComponents.url?.absoluteString
 
 let contentsURL = urlComponents.url!  // 1
@@ -28,12 +24,12 @@ decoder.dateDecodingStrategy = .formatted(.apiDateFormatter)
 // 2
 URLSession.shared
   .dataTask(with: contentsURL) { data, response, error in
-    defer { PlaygroundPage.current.finishExecution() }
+    defer { PlaygroundPage.current.finishExecution() }  // 3
     if let data = data,
-       let response = response as? HTTPURLResponse {  // 3
+       let response = response as? HTTPURLResponse {  // 4
       print(response.statusCode)
       if let decodedResponse = try? decoder.decode(
-          EpisodeStore.self, from: data) {
+        EpisodeStore.self, from: data) {
         DispatchQueue.main.async {
           print(decodedResponse.episodes[0].released)
           print(decodedResponse.episodes[0].domain)
@@ -43,9 +39,9 @@ URLSession.shared
     }
     print(
       "Contents fetch failed: " +
-        "\(error?.localizedDescription ?? "Unknown error")")  // 4
+        "\(error?.localizedDescription ?? "Unknown error")")  // 5
   }
-  .resume()  // 5
+  .resume()  // 6
 
 struct EpisodeStore: Decodable {
   var episodes: [Episode] = []
@@ -161,10 +157,10 @@ class VideoURL {  // 1
       data, response, error in
       //defer { PlaygroundPage.current.finishExecution() }  // 3
       if let data = data,
-         let response = response as? HTTPURLResponse {
+        let response = response as? HTTPURLResponse {
         print("\(videoId) \(response.statusCode)")
         if let decodedResponse = try? JSONDecoder().decode(
-            VideoURLString.self, from: data) {
+          VideoURLString.self, from: data) {
           DispatchQueue.main.async {
             self.urlString = decodedResponse.urlString  // 4
             print(self.urlString)
@@ -209,7 +205,6 @@ extension VideoURLString: Decodable {
   }
 }
 
-//: [VideoURL ->](@next)
 /// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -241,4 +236,4 @@ extension VideoURLString: Decodable {
 /// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
-
+//: [VideoURL ->](@next)
