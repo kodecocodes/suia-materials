@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject var store = EpisodeStore()
+  @StateObject private var store = EpisodeStore()
   @State private var showFilters = false
 
   var body: some View {
