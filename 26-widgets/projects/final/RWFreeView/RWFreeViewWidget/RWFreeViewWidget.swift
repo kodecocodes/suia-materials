@@ -90,7 +90,7 @@ struct Provider: TimelineProvider {
       entries.append(entry)
     }
 
-    let timeline = Timeline(entries: entries, policy: .never)
+    let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
   }
 }
