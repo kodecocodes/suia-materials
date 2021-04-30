@@ -40,7 +40,9 @@ struct ContentView: View {
     NavigationView {
       List {
         HeaderView(count: store.episodes.count)
-        if store.episodes.isEmpty { ActivityIndicator() }
+        if store.loading && store.episodes.isEmpty {
+          ActivityIndicator()
+        }
         ForEach(store.episodes) { episode in
           ZStack {
             NavigationLink(destination: PlayerView(episode: episode)) {
@@ -73,6 +75,7 @@ struct ContentView: View {
       }
       .sheet(isPresented: $showFilters) {
         FilterOptionsView()
+          .environmentObject(store)
       }
     }
     .navigationViewStyle(StackNavigationViewStyle())
