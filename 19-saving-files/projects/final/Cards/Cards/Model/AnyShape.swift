@@ -54,6 +54,6 @@ extension AnyShape: Equatable {
     let rect = CGRect(origin: .zero, size: CGSize(width: 100, height: 100))
     let lhsPath = lhs.path(in: rect)
     let rhsPath = rhs.path(in: rect)
-   return lhsPath == rhsPath
+    return lhsPath == rhsPath
   }
 }
