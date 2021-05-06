@@ -79,10 +79,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDF08BFC2542B70C0061DB4A /* Build configuration list for PBXNativeTarget "FirstApp" */;
 			buildPhases = (
+				CDF08C002542B82E0061DB4A /* SwiftLint */,
 				CDF08BE92542B7090061DB4A /* Sources */,
 				CDF08BEA2542B7090061DB4A /* Frameworks */,
 				CDF08BEB2542B7090061DB4A /* Resources */,
-				CDF08C002542B82E0061DB4A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -154,7 +154,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
