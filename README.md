@@ -9,4 +9,4 @@ Each edition has its own branch, named `editions/[EDITION]`. The default branch 
 | Branch                                                                            | Edition | Release Date |
 | --------------------------------------------------------------------------------- |:-------:|:------------:|
 | [editions/1.0](https://github.com/raywenderlich/suia-materials/tree/editions/1.0) | 1.0     | 2021-05-26   |
-
+| [editions/2.0](https://github.com/raywenderlich/suia-materials/tree/editions/2.0) | 2.0     | YYYY-MM-DD   |
