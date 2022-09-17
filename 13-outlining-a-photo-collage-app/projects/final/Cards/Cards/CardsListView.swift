@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,18 +33,21 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @EnvironmentObject var viewState: ViewState
+  @State private var isPresented = false
 
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack {
         ForEach(0..<10) { _ in
-          CardThumbnailView()
+          CardThumbnail()
             .onTapGesture {
-              viewState.showAllCards.toggle()
+              isPresented = true
             }
         }
       }
+    }
+    .fullScreenCover(isPresented: $isPresented) {
+      SingleCardView()
     }
   }
 }
@@ -52,6 +55,5 @@ struct CardsListView: View {
 struct CardsListView_Previews: PreviewProvider {
   static var previews: some View {
     CardsListView()
-      .environmentObject(ViewState())
   }
 }

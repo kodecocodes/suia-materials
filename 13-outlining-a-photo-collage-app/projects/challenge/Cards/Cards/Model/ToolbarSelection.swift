@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,18 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct CardThumbnailView: View {
-  var body: some View {
-    RoundedRectangle(cornerRadius: 15)
-      .foregroundColor(.gray)
-      .frame(width: 150, height: 250)
+enum ToolbarSelection: CaseIterable, Identifiable {
+  var id: Int {
+    hashValue
   }
-}
 
-struct CardThumbnailView_Previews: PreviewProvider {
-  static var previews: some View {
-    CardThumbnailView()
-  }
+  case photoModal, frameModal, stickerModal, textModal
 }

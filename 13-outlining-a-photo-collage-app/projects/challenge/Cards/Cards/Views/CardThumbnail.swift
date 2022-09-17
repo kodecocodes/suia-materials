@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,22 +32,17 @@
 
 import SwiftUI
 
-struct CardsView: View {
-  @EnvironmentObject var viewState: ViewState
 
+struct CardThumbnail: View {
   var body: some View {
-    ZStack {
-      CardsListView()
-      if !viewState.showAllCards {
-        SingleCardView()
-      }
-    }
+    RoundedRectangle(cornerRadius: 15)
+      .foregroundColor(.gray)
+      .frame(width: 150, height: 250)
   }
 }
 
-struct CardsView_Previews: PreviewProvider {
+struct CardThumbnail_Previews: PreviewProvider {
   static var previews: some View {
-    CardsView()
-      .environmentObject(ViewState())
+    CardThumbnail()
   }
 }
