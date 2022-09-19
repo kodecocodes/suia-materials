@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,20 +33,36 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @EnvironmentObject var viewState: ViewState
+  @State private var currentModal: ToolbarSelection?
 
   var body: some View {
-    NavigationView {
-      CardDetailView()
-        .navigationBarTitleDisplayMode(.inline)
+    NavigationStack {
+      content
+        .modifier(CardToolbar(currentModal: $currentModal))
     }
-    .navigationViewStyle(StackNavigationViewStyle())
+  }
+
+  var content: some View {
+    ZStack {
+      Group {
+        Capsule()
+          .foregroundColor(.yellow)
+        Text("Resize Me!")
+          .fontWeight(.bold)
+          .font(.system(size: 500))
+          .minimumScaleFactor(0.01)
+          .lineLimit(1)
+      }
+      .resizableView()
+      Circle()
+        .resizableView()
+        .offset(CGSize(width: 50, height: 200))
+    }
   }
 }
 
 struct SingleCardView_Previews: PreviewProvider {
   static var previews: some View {
     SingleCardView()
-      .environmentObject(ViewState())
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,20 +33,34 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @EnvironmentObject var viewState: ViewState
+  @Environment(\.presentationMode) var presentationMode
+  @State private var currentModal: ToolbarSelection?
 
   var body: some View {
-    NavigationView {
-      CardDetailView()
-        .navigationBarTitleDisplayMode(.inline)
+    NavigationStack {
+      Color.yellow
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("Done") {
+              presentationMode.wrappedValue.dismiss()
+            }
+          }
+          ToolbarItem(placement: .bottomBar) {
+            BottomToolbar(modal: $currentModal)
+          }
+        }
+        .sheet(item: $currentModal) { item in
+          switch item {
+          default:
+            Text(String(describing: item))
+          }
+        }
     }
-    .navigationViewStyle(StackNavigationViewStyle())
   }
 }
 
 struct SingleCardView_Previews: PreviewProvider {
   static var previews: some View {
     SingleCardView()
-      .environmentObject(ViewState())
   }
 }

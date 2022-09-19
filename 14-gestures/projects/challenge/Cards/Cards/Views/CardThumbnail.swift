@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,47 +33,18 @@
 import SwiftUI
 
 
-struct CardDetailView: View {
-  @EnvironmentObject var viewState: ViewState
-  @State private var currentModal: CardModal?
-
+struct CardThumbnail: View {
   var body: some View {
-    content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
-          Button(action: { viewState.showAllCards.toggle() }) {
-            Text("Done")
-          }
-        }
-        ToolbarItem(placement: .bottomBar) {
-          CardBottomToolbar(cardModal: $currentModal)
-        }
-      }
-  }
-
-  var content: some View {
-    ZStack {
-      Group {
-        Capsule()
-          .foregroundColor(.yellow)
-        Text("Resize Me!")
-          .fontWeight(.bold)
-          .font(.system(size: 500))
-          .minimumScaleFactor(0.01)
-          .lineLimit(1)
-      }
-      .resizableView()
-      Circle()
-        .resizableView()
-        .offset(CGSize(width: 50, height: 200))
-    }
+    RoundedRectangle(cornerRadius: 15)
+      .foregroundColor(.random())
+      .frame(
+        width: Settings.thumbnailSize.width,
+        height: Settings.thumbnailSize.height)
   }
 }
 
-struct CardDetailView_Previews: PreviewProvider {
+struct CardThumbnail_Previews: PreviewProvider {
   static var previews: some View {
-    CardDetailView()
-      .environmentObject(ViewState())
+    CardThumbnail()
   }
 }
