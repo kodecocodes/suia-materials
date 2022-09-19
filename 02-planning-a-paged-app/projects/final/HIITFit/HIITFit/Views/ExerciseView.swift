@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -36,14 +36,13 @@ struct ExerciseView: View {
   let videoNames = ["squat", "step-up", "burpee", "sun-salute"]
   let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
   let index: Int
-
-  var body: some View {
-    Text(exerciseNames[index])
-  }
+    var body: some View {
+        Text(exerciseNames[index])
+    }
 }
 
 struct ExerciseView_Previews: PreviewProvider {
-  static var previews: some View {
-    ExerciseView(index: 0)
-  }
+    static var previews: some View {
+      ExerciseView(index: 0)
+    }
 }
