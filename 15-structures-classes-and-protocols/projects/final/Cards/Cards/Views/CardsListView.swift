@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,28 +33,38 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @EnvironmentObject var viewState: ViewState
   @EnvironmentObject var store: CardStore
+  @State private var selectedCard: Card?
 
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack {
         ForEach(store.cards) { card in
-          CardThumbnailView(card: card)
+          CardThumbnail(card: card)
             .onTapGesture {
-              viewState.showAllCards.toggle()
-              viewState.selectedCard = card
+              selectedCard = card
             }
         }
       }
     }
+    .fullScreenCover(item: $selectedCard) { card in
+      if let index = store.index(for: card) {
+        SingleCardView(card: $store.cards[index])
+      } else {
+        fatalError("Unable to locate selected card")
+      }
+    }
+  }
+
+  func binding(card: Binding<Card?>) -> Binding<Card?> {
+    print(card)
+    return card
   }
 }
 
 struct CardsListView_Previews: PreviewProvider {
   static var previews: some View {
     CardsListView()
-      .environmentObject(ViewState())
       .environmentObject(CardStore(defaultData: true))
   }
 }

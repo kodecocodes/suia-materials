@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,18 +32,49 @@
 
 import SwiftUI
 
-struct CardThumbnailView: View {
+struct ToolbarButton: View {
+  let modal: ToolbarSelection
+  private let modalButton: [
+    ToolbarSelection: (text: String, imageName: String)
+  ] = [
+    .photoModal: ("Photos", "photo"),
+    .frameModal: ("Frames", "square.on.circle"),
+    .stickerModal: ("Stickers", "heart.circle"),
+    .textModal: ("Text", "textformat")
+  ]
+
   var body: some View {
-    RoundedRectangle(cornerRadius: 15)
-      .foregroundColor(.random())
-      .frame(
-        width: Settings.thumbnailSize.width,
-        height: Settings.thumbnailSize.height)
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+      VStack {
+        Image(systemName: imageName)
+          .font(.largeTitle)
+        Text(text)
+      }
+      .padding(.top)
+    }
   }
 }
 
-struct CardThumbnailView_Previews: PreviewProvider {
+struct BottomToolbar: View {
+  @Binding var modal: ToolbarSelection?
+
+  var body: some View {
+    HStack {
+      ForEach(ToolbarSelection.allCases) { selection in
+        Button {
+          modal = selection
+        } label: {
+          ToolbarButton(modal: selection)
+        }
+      }
+    }
+  }
+}
+
+struct BottomToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    CardThumbnailView()
+    BottomToolbar(modal: .constant(.stickerModal))
+      .padding()
   }
 }

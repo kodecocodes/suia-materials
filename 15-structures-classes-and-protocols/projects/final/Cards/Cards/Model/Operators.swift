@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,24 +32,28 @@
 
 import SwiftUI
 
-struct CardsView: View {
-  @EnvironmentObject var viewState: ViewState
-  @EnvironmentObject var store: CardStore
-
-  var body: some View {
-    ZStack {
-      CardsListView()
-      if !viewState.showAllCards {
-        SingleCardView()
-      }
-    }
-  }
+func + (left: CGSize, right: CGSize) -> CGSize {
+  CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
 }
 
-struct CardsView_Previews: PreviewProvider {
-  static var previews: some View {
-    CardsView()
-      .environmentObject(ViewState())
-      .environmentObject(CardStore(defaultData: true))
-  }
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right
+  )
+}
+
+func *= (left: inout CGSize, right: Double) {
+  left = CGSize(
+    width: left.width * right,
+    height: left.height * right)
+}
+
+func / (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width / right,
+    height: left.height / right
+  )
 }
