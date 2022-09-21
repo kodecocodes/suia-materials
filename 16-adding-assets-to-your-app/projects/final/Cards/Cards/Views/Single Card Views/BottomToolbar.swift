@@ -32,71 +32,49 @@
 
 import SwiftUI
 
-struct ResizableView: ViewModifier {
-  @Binding var transform: Transform
-  @State private var previousOffset: CGSize = .zero
-  @State private var previousRotation: Angle = .zero
-  @State private var scale: CGFloat = 1.0
+struct ToolbarButton: View {
+  let modal: ToolbarSelection
+  private let modalButton: [
+    ToolbarSelection: (text: String, imageName: String)
+  ] = [
+    .photoModal: ("Photos", "photo"),
+    .frameModal: ("Frames", "square.on.circle"),
+    .stickerModal: ("Stickers", "heart.circle"),
+    .textModal: ("Text", "textformat")
+  ]
 
-  var dragGesture: some Gesture {
-    DragGesture()
-      .onChanged { value in
-        transform.offset = value.translation + previousOffset
+  var body: some View {
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+      VStack {
+        Image(systemName: imageName)
+          .font(.largeTitle)
+        Text(text)
       }
-      .onEnded { _ in
-        previousOffset = transform.offset
-      }
-  }
-
-  var rotationGesture: some Gesture {
-    RotationGesture()
-      .onChanged { rotation in
-        transform.rotation += rotation - previousRotation
-        previousRotation = rotation
-      }
-      .onEnded { _ in
-        previousRotation = .zero
-      }
-  }
-
-  var scaleGesture: some Gesture {
-    MagnificationGesture()
-      .onChanged { scale in
-        self.scale = scale
-      }
-      .onEnded { scale in
-        transform.size.width *= scale
-        transform.size.height *= scale
-        self.scale = 1.0
-      }
-  }
-
-  func body(content: Content) -> some View {
-    content
-      .frame(
-        width: transform.size.width,
-        height: transform.size.height)
-      .rotationEffect(transform.rotation)
-      .scaleEffect(scale)
-      .offset(transform.offset)
-      .gesture(dragGesture)
-      .gesture(SimultaneousGesture(rotationGesture, scaleGesture))
-      .onAppear {
-        previousOffset = transform.offset
-      }
+      .padding(.top)
+    }
   }
 }
 
-struct ResizableView_Previews: PreviewProvider {
+struct BottomToolbar: View {
+  @Binding var modal: ToolbarSelection?
+
+  var body: some View {
+    HStack {
+      ForEach(ToolbarSelection.allCases) { selection in
+        Button {
+          modal = selection
+        } label: {
+          ToolbarButton(modal: selection)
+        }
+      }
+    }
+  }
+}
+
+struct BottomToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    RoundedRectangle(cornerRadius: 30.0)
-      .foregroundColor(Color.blue)
-      .resizableView(transform: .constant(Transform()))
-  }
-}
-
-extension View {
-  func resizableView(transform: Binding<Transform>) -> some View {
-    return modifier(ResizableView(transform: transform))
+    BottomToolbar(modal: .constant(.stickerModal))
+      .padding()
   }
 }

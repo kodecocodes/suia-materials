@@ -32,71 +32,21 @@
 
 import SwiftUI
 
-struct ResizableView: ViewModifier {
-  @Binding var transform: Transform
-  @State private var previousOffset: CGSize = .zero
-  @State private var previousRotation: Angle = .zero
-  @State private var scale: CGFloat = 1.0
 
-  var dragGesture: some Gesture {
-    DragGesture()
-      .onChanged { value in
-        transform.offset = value.translation + previousOffset
-      }
-      .onEnded { _ in
-        previousOffset = transform.offset
-      }
-  }
+struct CardThumbnail: View {
+  let card: Card
 
-  var rotationGesture: some Gesture {
-    RotationGesture()
-      .onChanged { rotation in
-        transform.rotation += rotation - previousRotation
-        previousRotation = rotation
-      }
-      .onEnded { _ in
-        previousRotation = .zero
-      }
-  }
-
-  var scaleGesture: some Gesture {
-    MagnificationGesture()
-      .onChanged { scale in
-        self.scale = scale
-      }
-      .onEnded { scale in
-        transform.size.width *= scale
-        transform.size.height *= scale
-        self.scale = 1.0
-      }
-  }
-
-  func body(content: Content) -> some View {
-    content
+  var body: some View {
+    RoundedRectangle(cornerRadius: 15)
+      .foregroundColor(card.backgroundColor)
       .frame(
-        width: transform.size.width,
-        height: transform.size.height)
-      .rotationEffect(transform.rotation)
-      .scaleEffect(scale)
-      .offset(transform.offset)
-      .gesture(dragGesture)
-      .gesture(SimultaneousGesture(rotationGesture, scaleGesture))
-      .onAppear {
-        previousOffset = transform.offset
-      }
+        width: Settings.thumbnailSize.width,
+        height: Settings.thumbnailSize.height)
   }
 }
 
-struct ResizableView_Previews: PreviewProvider {
+struct CardThumbnail_Previews: PreviewProvider {
   static var previews: some View {
-    RoundedRectangle(cornerRadius: 30.0)
-      .foregroundColor(Color.blue)
-      .resizableView(transform: .constant(Transform()))
-  }
-}
-
-extension View {
-  func resizableView(transform: Binding<Transform>) -> some View {
-    return modifier(ResizableView(transform: transform))
+    CardThumbnail(card: initialCards[0])
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,11 @@
 
 import SwiftUI
 
-struct Card: Identifiable {
+struct Card: Identifiable, Equatable {
+  static func == (lhs: Card, rhs: Card) -> Bool {
+    lhs.id == rhs.id
+  }
+
   let id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
