@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,50 +30,33 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct WelcomeView: View {
-  var body: some View {
-    ZStack {
-      VStack {
-        HeaderView(titleText: "Welcome")
-        Spacer()
-        Button("History") { }
-          .padding(.bottom)
-      }
+struct Exercise {
+  let exerciseName: String
+  let videoName: String
 
-      VStack {
-        HStack(alignment: .bottom) {
-          VStack(alignment: .leading) {
-            Text("Get fit")
-              .font(.largeTitle)
-            Text("with high intensity interval training")
-              .font(.headline)
-          }
-          Image("step-up")
-            .resizedToFill(width: 240, height: 240)
-//            .resizable()
-//            .aspectRatio(contentMode: .fill)
-//            .frame(width: 240.0, height: 240.0)
-            .clipShape(Circle())
-        }
-
-        Button(action: { }) {
-          Text("Get Started")
-          Image(systemName: "arrow.right.circle")
-        }
-        .font(.title2)
-        .padding()
-        .background(
-          RoundedRectangle(cornerRadius: 20)
-          .stroke(Color.gray, lineWidth: 2))
-      }
-    }
+  enum ExerciseEnum: String {
+    case squat = "Squat"
+    case stepUp = "Step Up"
+    case burpee = "Burpee"
+    case sunSalute = "Sun Salute"
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    WelcomeView()
-  }
+extension Exercise {
+  static let exercises = [
+    Exercise(
+      exerciseName: ExerciseEnum.squat.rawValue,
+      videoName: "squat"),
+    Exercise(
+      exerciseName: ExerciseEnum.stepUp.rawValue,
+      videoName: "step-up"),
+    Exercise(
+      exerciseName: ExerciseEnum.burpee.rawValue,
+      videoName: "burpee"),
+    Exercise(
+      exerciseName: ExerciseEnum.sunSalute.rawValue,
+      videoName: "sun-salute")
+  ]
 }
