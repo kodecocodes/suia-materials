@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,33 +31,24 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
-struct TimerView: View {
-  @State private var timeRemaining = 3 // 30
-  @Binding var timerDone: Bool
-  let timer = Timer.publish(
-    every: 1,
-    on: .main,
-    in: .common)
-    .autoconnect()
-
+struct VideoPlayerView: View {
+  let videoName: String
   var body: some View {
-    Text("\(timeRemaining)")
-      .font(.system(size: 90, design: .rounded))
-      .padding()
-      .onReceive(timer) { _ in
-        if self.timeRemaining > 0 {
-          self.timeRemaining -= 1
-        } else {
-          timerDone = true
-        }
-      }
+    if let url = Bundle.main.url(
+      forResource: videoName,
+      withExtension: "mp4") {
+      VideoPlayer(player: AVPlayer(url: url))
+    } else {
+      Text("Couldn’t find \(videoName).mp4")
+        .foregroundColor(.red)
+    }
   }
 }
 
-struct TimerView_Previews: PreviewProvider {
+struct VideoPlayerView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerView(timerDone: .constant(false))
-      .previewLayout(.sizeThatFits)
+    VideoPlayerView(videoName: "squat")
   }
 }

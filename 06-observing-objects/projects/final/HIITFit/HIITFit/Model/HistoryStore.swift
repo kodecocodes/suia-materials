@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -38,24 +38,12 @@ struct ExerciseDay: Identifiable {
   var exercises: [String] = []
 }
 
-class HistoryStore: ObservableObject {
-  @Published var exerciseDays: [ExerciseDay] = []
-
+struct HistoryStore {
+  var exerciseDays: [ExerciseDay] = []
+  
   init() {
     #if DEBUG
     createDevData()
     #endif
-  }
-
-  func addDoneExercise(_ exerciseName: String) {
-    let today = Date()
-    if today.isSameDay(as: exerciseDays[0].date) {
-      print("Adding \(exerciseName)")
-      exerciseDays[0].exercises.append(exerciseName)
-    } else {
-      exerciseDays.insert(
-        ExerciseDay(date: today, exercises: [exerciseName]),
-        at: 0)
-    }
   }
 }
