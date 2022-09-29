@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,10 @@
 
 import SwiftUI
 
-struct StickerPicker: View {
+struct StickerModal: View {
   @Environment(\.presentationMode) var presentationMode
-  @State private var stickerNames: [String] = []
   @Binding var stickerImage: UIImage?
+  @State private var stickerNames: [String] = []
   let columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
   ]
@@ -55,11 +55,11 @@ struct StickerPicker: View {
       }
     }
     .onAppear {
-      stickerNames = loadStickers()
+      stickerNames = Self.loadStickers()
     }
   }
 
-  func loadStickers() -> [String] {
+  static func loadStickers() -> [String] {
     var themes: [URL] = []
     var stickerNames: [String] = []
     // 1
@@ -69,7 +69,10 @@ struct StickerPicker: View {
       let enumerator = fileManager.enumerator(
         at: URL(fileURLWithPath: resourcePath + "/Stickers"),
         includingPropertiesForKeys: nil,
-        options: [.skipsSubdirectoryDescendants, .skipsHiddenFiles]) {
+        options: [
+          .skipsSubdirectoryDescendants,
+          .skipsHiddenFiles
+        ]) {
           // 3
           for case let url as URL in enumerator
           where url.hasDirectoryPath {
@@ -95,8 +98,8 @@ struct StickerPicker: View {
   }
 }
 
-struct StickerPicker_Previews: PreviewProvider {
+struct StickerModal_Previews: PreviewProvider {
   static var previews: some View {
-    StickerPicker(stickerImage: .constant(UIImage()))
+    StickerModal(stickerImage: .constant(UIImage()))
   }
 }

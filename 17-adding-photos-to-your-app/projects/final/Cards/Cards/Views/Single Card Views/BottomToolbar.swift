@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,57 +32,60 @@
 
 import SwiftUI
 
-struct ToolbarButtonView: View {
-  let modal: CardModal
-  private let modalButton: [CardModal: (text: String, imageName: String)] = [
-    .photoPicker: ("Photos", "photo"),
-    .framePicker: ("Frames", "square.on.circle"),
-    .stickerPicker: ("Stickers", "heart.circle"),
-    .textPicker: ("Text", "textformat")
+struct ToolbarButton: View {
+  let modal: ToolbarSelection
+  private let modalButton: [
+    ToolbarSelection: (text: String, imageName: String)
+  ] = [
+    .photoModal: ("Photos", "photo"),
+    .frameModal: ("Frames", "square.on.circle"),
+    .stickerModal: ("Stickers", "heart.circle"),
+    .textModal: ("Text", "textformat")
   ]
 
   var body: some View {
     if let text = modalButton[modal]?.text,
       let imageName = modalButton[modal]?.imageName {
-    VStack {
-      Image(systemName: imageName)
-        .font(.largeTitle)
-      Text(text)
-    }
-    .padding(.top)
+      VStack {
+        Image(systemName: imageName)
+          .font(.largeTitle)
+        Text(text)
+      }
+      .padding(.top)
     }
   }
 }
 
-struct CardBottomToolbar: View {
-  @Binding var cardModal: CardModal?
+struct BottomToolbar: View {
+  @Binding var card: Card
+  @Binding var modal: ToolbarSelection?
 
   var body: some View {
     HStack {
-      // swiftlint:disable:next multiple_closures_with_trailing_closure
-      Button(action: { cardModal = .photoPicker }) {
-        ToolbarButtonView(modal: .photoPicker)
-      }
-      // swiftlint:disable:next multiple_closures_with_trailing_closure
-      Button(action: { cardModal = .framePicker }) {
-        ToolbarButtonView(modal: .framePicker)
-      }
-      // swiftlint:disable:next multiple_closures_with_trailing_closure
-      Button(action: { cardModal = .stickerPicker }) {
-        ToolbarButtonView(modal: .stickerPicker)
-      }
-      // swiftlint:disable:next multiple_closures_with_trailing_closure
-      Button(action: { cardModal = .textPicker }) {
-        ToolbarButtonView(modal: .textPicker)
+      ForEach(ToolbarSelection.allCases) { selection in
+        switch selection {
+        case .photoModal:
+          Button {
+          } label: {
+            PhotosModal(card: $card)
+          }
+        default:
+          Button {
+            modal = selection
+          } label: {
+            ToolbarButton(modal: selection)
+          }
+        }
       }
     }
   }
 }
 
-struct CardBottomToolbar_Previews: PreviewProvider {
+struct BottomToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    CardBottomToolbar(cardModal: .constant(.stickerPicker))
-      .previewLayout(.sizeThatFits)
+    BottomToolbar(
+      card: .constant(Card()),
+      modal: .constant(.stickerModal))
       .padding()
   }
 }
