@@ -58,10 +58,6 @@ struct ExerciseView: View {
         selectedTab += 1
       }
     }
-    .sheet(isPresented: $showSuccess) {
-      SuccessView(selectedTab: $selectedTab)
-        .presentationDetents([.medium, .large])
-    }
   }
 
   let interval: TimeInterval = 30
@@ -82,6 +78,10 @@ struct ExerciseView: View {
         HStack(spacing: 150) {
           startButton
           doneButton
+            .sheet(isPresented: $showSuccess) {
+              SuccessView(selectedTab: $selectedTab)
+                .presentationDetents([.medium, .large])
+            }
         }
         .font(.title3)
         .padding()

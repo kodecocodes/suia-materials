@@ -27,6 +27,7 @@
 		CDBD94A928DBFD58000FE7AA /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94A828DBFD58000FE7AA /* HistoryStore.swift */; };
 		CDBD94AC28DBFFCC000FE7AA /* HistoryStoreDevData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94AB28DBFFCC000FE7AA /* HistoryStoreDevData.swift */; };
 		CDBD94AE28DC2354000FE7AA /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94AD28DC2354000FE7AA /* SuccessView.swift */; };
+		CDC56FC128E5DF51008266FF /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC56FC028E5DF51008266FF /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		CDBD94A828DBFD58000FE7AA /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
 		CDBD94AB28DBFFCC000FE7AA /* HistoryStoreDevData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStoreDevData.swift; sourceTree = "<group>"; };
 		CDBD94AD28DC2354000FE7AA /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
+		CDC56FC028E5DF51008266FF /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				CD30C925251474DC0049DB93 /* ContentView.swift */,
 				CD30C95025147E420049DB93 /* WelcomeView.swift */,
 				CD30C95325147E4B0049DB93 /* ExerciseView.swift */,
+				CDC56FC028E5DF51008266FF /* TimerView.swift */,
 				CDBD94A628DBFA45000FE7AA /* HistoryView.swift */,
 				CDBD94AD28DC2354000FE7AA /* SuccessView.swift */,
 				CDBD94A428DAEF86000FE7AA /* VideoPlayerView.swift */,
@@ -238,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDC56FC128E5DF51008266FF /* TimerView.swift in Sources */,
 				CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */,
 				CDBD94A128DA9BCD000FE7AA /* Exercise.swift in Sources */,
 				CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */,

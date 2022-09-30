@@ -33,9 +33,13 @@
 import SwiftUI
 
 struct ExerciseView: View {
+  @EnvironmentObject var history: HistoryStore
   @State private var rating = 0
   @State private var showHistory = false
   @State private var showSuccess = false
+  @State private var timerDone = false
+  @State private var showTimer = false
+
   @Binding var selectedTab: Int
   let index: Int
 
@@ -47,24 +51,24 @@ struct ExerciseView: View {
   }
 
   var startButton: some View {
-    Button("Start Exercise") { }
+    Button("Start Exercise") {
+      showTimer.toggle()
+    }
   }
 
   var doneButton: some View {
     Button("Done") {
+      history.addDoneExercise(Exercise.exercises[index].exerciseName)
+      timerDone = false
+      showTimer.toggle()
       if lastExercise {
         showSuccess.toggle()
       } else {
         selectedTab += 1
       }
     }
-    .sheet(isPresented: $showSuccess) {
-      SuccessView(selectedTab: $selectedTab)
-        .presentationDetents([.medium, .large])
-    }
   }
 
-  let interval: TimeInterval = 30
   var body: some View {
     GeometryReader { geometry in
       VStack {
@@ -76,20 +80,26 @@ struct ExerciseView: View {
         VideoPlayerView(videoName: exercise.videoName)
           .frame(height: geometry.size.height * 0.45)
 
-        Text(Date().addingTimeInterval(interval), style: .timer)
-          .font(.system(size: 90))
-
         HStack(spacing: 150) {
           startButton
           doneButton
+            .disabled(!timerDone)
+            .sheet(isPresented: $showSuccess) {
+              SuccessView(selectedTab: $selectedTab)
+                .presentationDetents([.medium, .large])
+            }
         }
         .font(.title3)
         .padding()
 
+        if showTimer {
+          TimerView(timerDone: $timerDone)
+        }
+
+        Spacer()
         RatingView(rating: $rating)
           .padding()
 
-        Spacer()
         Button("History") {
           showHistory.toggle()
         }
@@ -104,6 +114,7 @@ struct ExerciseView: View {
 
 struct ExerciseView_Previews: PreviewProvider {
   static var previews: some View {
-    ExerciseView(selectedTab: .constant(3), index: 3)
+    ExerciseView(selectedTab: .constant(0), index: 0)
+      .environmentObject(HistoryStore())
   }
 }

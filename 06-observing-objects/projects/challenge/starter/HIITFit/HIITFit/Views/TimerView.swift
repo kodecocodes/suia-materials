@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,32 +32,44 @@
 
 import SwiftUI
 
-struct TimerView: View {
-  @State private var timeRemaining = 3 // 30
-  @Binding var timerDone: Bool
-  let timer = Timer.publish(
-    every: 1,
-    on: .main,
-    in: .common)
-    .autoconnect()
+struct CountdownView: View {
+  let date: Date
+  @Binding var timeRemaining: Int
 
   var body: some View {
     Text("\(timeRemaining)")
       .font(.system(size: 90, design: .rounded))
       .padding()
-      .onReceive(timer) { _ in
-        if self.timeRemaining > 0 {
-          self.timeRemaining -= 1
-        } else {
-          timerDone = true
-        }
+      .onChange(of: date) { _ in
+        timeRemaining -= 1
       }
+  }
+}
+
+struct TimerView: View {
+  @State private var timeRemaining: Int = 3
+  @Binding var timerDone: Bool
+
+  var body: some View {
+    TimelineView(
+      .animation(
+        minimumInterval: 1.0,
+        paused: timeRemaining <= 0)) { context in
+          CountdownView(
+            date: context.date,
+            timeRemaining: $timeRemaining)
+        }
+//        .font(.system(size: 20))
+        .onChange(of: timeRemaining) { _ in
+          if timeRemaining < 1 {
+            timerDone = true
+          }
+        }
   }
 }
 
 struct TimerView_Previews: PreviewProvider {
   static var previews: some View {
     TimerView(timerDone: .constant(false))
-      .previewLayout(.sizeThatFits)
   }
 }
