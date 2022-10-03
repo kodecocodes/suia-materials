@@ -42,13 +42,6 @@ struct CardDetailView: View {
         .edgesIgnoringSafeArea(.all)
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
-          .contextMenu {
-            Button(role: .destructive) {
-              card.remove(element)
-            } label: {
-              Label("Delete", systemImage: "trash")
-            }
-          }
           .resizableView(transform: $element.transform)
           .frame(
             width: element.transform.size.width,
