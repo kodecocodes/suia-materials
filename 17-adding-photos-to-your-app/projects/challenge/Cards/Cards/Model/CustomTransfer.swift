@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,8 +32,18 @@
 
 import SwiftUI
 
-extension View {
-  func resizableView(transform: Binding<Transform>) -> some View {
-    return modifier(ResizableView(transform: transform))
+struct CustomTransfer: Transferable {
+  var image: UIImage?
+  var text: String?
+
+  public static var transferRepresentation: some TransferRepresentation {
+    DataRepresentation(importedContentType: .image) { data in
+      let image = UIImage(data: data) ?? UIImage(named: "error-image")
+      return CustomTransfer(image: image)
+    }
+    DataRepresentation(importedContentType: .text) { data in
+      let text = String(decoding: data, as: UTF8.self)
+      return CustomTransfer(text: text)
+    }
   }
 }

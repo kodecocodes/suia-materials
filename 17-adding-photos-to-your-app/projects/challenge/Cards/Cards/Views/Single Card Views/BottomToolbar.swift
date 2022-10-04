@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,19 +32,60 @@
 
 import SwiftUI
 
-class ViewState: ObservableObject {
-  @Published var showAllCards = true {
-    didSet {
-      if showAllCards {
-        selectedCard = nil
+struct ToolbarButton: View {
+  let modal: ToolbarSelection
+  private let modalButton: [
+    ToolbarSelection: (text: String, imageName: String)
+  ] = [
+    .photoModal: ("Photos", "photo"),
+    .frameModal: ("Frames", "square.on.circle"),
+    .stickerModal: ("Stickers", "heart.circle"),
+    .textModal: ("Text", "textformat")
+  ]
+
+  var body: some View {
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+      VStack {
+        Image(systemName: imageName)
+          .font(.largeTitle)
+        Text(text)
+      }
+      .padding(.top)
+    }
+  }
+}
+
+struct BottomToolbar: View {
+  @Binding var card: Card
+  @Binding var modal: ToolbarSelection?
+
+  var body: some View {
+    HStack {
+      ForEach(ToolbarSelection.allCases) { selection in
+        switch selection {
+        case .photoModal:
+          Button {
+          } label: {
+            PhotosModal(card: $card)
+          }
+        default:
+          Button {
+            modal = selection
+          } label: {
+            ToolbarButton(modal: selection)
+          }
+        }
       }
     }
   }
-  var selectedCard: Card?
+}
 
-  convenience init(card: Card) {
-    self.init()
-    showAllCards = false
-    selectedCard = card
+struct BottomToolbar_Previews: PreviewProvider {
+  static var previews: some View {
+    BottomToolbar(
+      card: .constant(Card()),
+      modal: .constant(.stickerModal))
+      .padding()
   }
 }
