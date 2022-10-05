@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,44 +32,60 @@
 
 import SwiftUI
 
-struct FramePicker: View {
-  @Environment(\.presentationMode) var presentationMode
-
-  // 1
-  @Binding var frame: AnyShape?
-  private let columns = [
-    GridItem(.adaptive(minimum: 120), spacing: 10)
+struct ToolbarButton: View {
+  let modal: ToolbarSelection
+  private let modalButton: [
+    ToolbarSelection: (text: String, imageName: String)
+  ] = [
+    .photoModal: ("Photos", "photo"),
+    .frameModal: ("Frames", "square.on.circle"),
+    .stickerModal: ("Stickers", "heart.circle"),
+    .textModal: ("Text", "textformat")
   ]
-  private let style = StrokeStyle(
-    lineWidth: 5, lineJoin: .round)
 
   var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns) {
-      // 2
-        ForEach(0..<Shapes.shapes.count, id: \.self) { index in
-          Shapes.shapes[index]
-          // 3
-            .stroke(Color.primary, style: style)
-            // 4
-            .background(
-              Shapes.shapes[index].fill(Color.secondary))
-            .frame(width: 100, height: 120)
-            .padding()
-            // 5
-            .onTapGesture {
-              frame = Shapes.shapes[index]
-              presentationMode.wrappedValue.dismiss()
-            }
-        }
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+      VStack {
+        Image(systemName: imageName)
+          .font(.largeTitle)
+        Text(text)
       }
+      .padding(.top)
     }
-    .padding(5)
   }
 }
 
-struct FramePicker_Previews: PreviewProvider {
+struct BottomToolbar: View {
+  @Binding var card: Card
+  @Binding var modal: ToolbarSelection?
+
+  var body: some View {
+    HStack {
+      ForEach(ToolbarSelection.allCases) { selection in
+        switch selection {
+        case .photoModal:
+          Button {
+          } label: {
+            PhotosModal(card: $card)
+          }
+        default:
+          Button {
+            modal = selection
+          } label: {
+            ToolbarButton(modal: selection)
+          }
+        }
+      }
+    }
+  }
+}
+
+struct BottomToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    FramePicker(frame: .constant(nil))
+    BottomToolbar(
+      card: .constant(Card()),
+      modal: .constant(.stickerModal))
+      .padding()
   }
 }

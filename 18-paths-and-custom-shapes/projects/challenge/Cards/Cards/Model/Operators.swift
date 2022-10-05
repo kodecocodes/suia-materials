@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,19 +32,28 @@
 
 import SwiftUI
 
-struct AnyShape: Shape {
-  private let path: (CGRect) -> Path
+func + (left: CGSize, right: CGSize) -> CGSize {
+  CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
+}
 
-  // 1
-  init<CustomShape: Shape>(_ shape: CustomShape) {
-  // 2
-    self.path = { rect in
-  // 3
-    shape.path(in: rect)
-    }
-  }
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right
+  )
+}
 
-  func path(in rect: CGRect) -> Path {
-    path(rect)
-  }
+func *= (left: inout CGSize, right: Double) {
+  left = CGSize(
+    width: left.width * right,
+    height: left.height * right)
+}
+
+func / (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width / right,
+    height: left.height / right
+  )
 }

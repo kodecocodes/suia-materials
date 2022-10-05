@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,8 @@ struct ImageElement: CardElement {
   let id = UUID()
   var transform = Transform()
   var image: Image
-  var frame: AnyShape?
+  var uiImage: UIImage?
+  var frameIndex: Int?
 }
 
 struct TextElement: CardElement {
@@ -55,5 +56,5 @@ struct TextElement: CardElement {
   var transform = Transform()
   var text = ""
   var textColor = Color.black
-  var textFont = "San Fransisco"
+  var textFont = "Gill Sans"
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,11 +30,20 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-enum CardModal: Identifiable {
-  var id: Int {
-    hashValue
+struct CustomTransfer: Transferable {
+  var image: UIImage?
+  var text: String?
+
+  public static var transferRepresentation: some TransferRepresentation {
+    DataRepresentation(importedContentType: .image) { data in
+      let image = UIImage(data: data) ?? UIImage(named: "error-image")
+      return CustomTransfer(image: image)
+    }
+    DataRepresentation(importedContentType: .text) { data in
+      let text = String(decoding: data, as: UTF8.self)
+      return CustomTransfer(text: text)
+    }
   }
-  case photoPicker, framePicker, stickerPicker, textPicker
 }

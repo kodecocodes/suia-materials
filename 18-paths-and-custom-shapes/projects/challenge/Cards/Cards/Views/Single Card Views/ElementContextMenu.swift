@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,15 +32,39 @@
 
 import SwiftUI
 
-func + (left: CGSize, right: CGSize) -> CGSize {
-  CGSize(
-    width: left.width + right.width,
-    height: left.height + right.height)
+struct ElementContextMenu: ViewModifier {
+  @Binding var card: Card
+  @Binding var element: CardElement
+
+  func body(content: Content) -> some View {
+    content
+      .contextMenu {
+        Button {
+          if let element = element as? TextElement {
+            UIPasteboard.general.string = element.text
+          } else if let element = element as? ImageElement,
+            let image = element.uiImage {
+            UIPasteboard.general.image = image
+          }
+        } label: {
+          Label("Copy", systemImage: "doc.on.doc")
+        }
+        Button(role: .destructive) {
+          card.remove(element)
+        } label: {
+          Label("Delete", systemImage: "trash")
+        }
+      }
+  }
 }
 
-func * (left: CGSize, right: CGFloat) -> CGSize {
-  CGSize(
-    width: left.width * right,
-    height: left.height * right
-  )
+extension View {
+  func elementContextMenu(
+    card: Binding<Card>,
+    element: Binding<CardElement>
+  ) -> some View {
+    modifier(ElementContextMenu(
+      card: card,
+      element: element))
+  }
 }
