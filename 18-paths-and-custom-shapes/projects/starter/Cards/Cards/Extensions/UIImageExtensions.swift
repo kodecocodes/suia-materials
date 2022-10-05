@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,24 +32,14 @@
 
 import SwiftUI
 
-struct CardsView: View {
-  @EnvironmentObject var viewState: ViewState
-  @EnvironmentObject var store: CardStore
-
-  var body: some View {
-    ZStack {
-      CardsListView()
-      if !viewState.showAllCards {
-        SingleCardView()
-      }
+extension UIImage: Transferable {
+  public static var transferRepresentation: some TransferRepresentation {
+    DataRepresentation(importedContentType: .text) {image in
+      UIImage(data: image) ?? errorImage
     }
   }
-}
 
-struct CardsView_Previews: PreviewProvider {
-  static var previews: some View {
-    CardsView()
-      .environmentObject(ViewState())
-      .environmentObject(CardStore(defaultData: true))
+  public static var errorImage: UIImage {
+    UIImage(named: "error-image") ?? UIImage()
   }
 }

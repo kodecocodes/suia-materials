@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,28 +32,28 @@
 
 import SwiftUI
 
-class ViewState: ObservableObject {
-  @Published var showAllCards = true {
-    didSet {
-      if showAllCards {
-        selectedCard = nil
-      }
-    }
-  }
-  @Published var selectedElement: CardElement?
+func + (left: CGSize, right: CGSize) -> CGSize {
+  CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
+}
 
-  var selectedCard: Card? {
-    didSet {
-      if selectedCard == nil {
-        selectedElement = nil
-      }
-    }
-  }
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right
+  )
+}
 
-  convenience init(card: Card) {
-    self.init()
-    showAllCards = false
-    selectedCard = card
-    selectedElement = nil
-  }
+func *= (left: inout CGSize, right: Double) {
+  left = CGSize(
+    width: left.width * right,
+    height: left.height * right)
+}
+
+func / (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width / right,
+    height: left.height / right
+  )
 }

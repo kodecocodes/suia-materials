@@ -1,4 +1,4 @@
-///// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,24 +33,33 @@
 import SwiftUI
 
 let initialCards: [Card] = [
-  Card(backgroundColor: .green, elements: initialElements),
-  Card(backgroundColor: .orange),
+  Card(backgroundColor: .yellow, elements: initialElements),
+  Card(backgroundColor: .teal),
   Card(backgroundColor: .red),
   Card(backgroundColor: .purple),
-  Card(backgroundColor: .yellow)
+  Card(backgroundColor: .orange)
 ]
 
 let initialElements: [CardElement] = [
   ImageElement(
     transform: Transform(
-      size: CGSize(width: 412, height: 296),
-      rotation: .init(degrees: -6),
-      offset: CGSize(width: 4, height: -137)),
-    image: Image("giraffe")),
+      size: CGSize(width: 250, height: 180),
+      offset: CGSize(width: 0, height: -175)),
+    image: Image("giraffe3")),
+  ImageElement(
+    transform: Transform(
+      size: CGSize(width: 450, height: 320),
+      offset: CGSize(width: -80, height: 25)),
+    image: Image("giraffe2")),
+  ImageElement(
+    transform: Transform(
+      size: CGSize(width: 250, height: 180),
+      offset: CGSize(width: 80, height: 225)),
+    image: Image("giraffe1")),
   TextElement(
     transform: Transform(
       size: Settings.defaultElementSize * 1.2,
-      offset: CGSize(width: 12, height: 81)),
-    text: "Snack time!",
-    textColor: .yellow)
+      offset: CGSize(width: 0, height: -306)),
+    text: "Giraffes!!!",
+    textColor: .black)
 ]

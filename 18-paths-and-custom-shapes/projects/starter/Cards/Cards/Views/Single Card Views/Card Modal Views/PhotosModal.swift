@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,24 +31,41 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PhotosUI
 
-struct CardDrop: DropDelegate {
+struct PhotosModal: View {
   @Binding var card: Card
+  @State private var selectedItems: [PhotosPickerItem] = []
 
-  func performDrop(info: DropInfo) -> Bool {
-    let itemProviders = info.itemProviders(for: [.image])
-
-    for item in itemProviders {
-      if item.canLoadObject(ofClass: UIImage.self) {
-        item.loadObject(ofClass: UIImage.self) { image, _ in
-          if let image = image as? UIImage {
-            DispatchQueue.main.async {
-              card.addElement(uiImage: image)
+  var body: some View {
+    PhotosPicker(
+      selection: $selectedItems,
+      matching: .images) {
+        ToolbarButton(modal: .photoModal)
+    }
+    .onChange(of: selectedItems) { items in
+      for item in items {
+        item.loadTransferable(type: Data.self) { result in
+          Task {
+            switch result {
+            case .success(let data):
+              if let data,
+                let uiImage = UIImage(data: data) {
+                card.addElement(uiImage: uiImage)
+              }
+            case .failure(let failure):
+              fatalError("Image transfer failed: \(failure)")
             }
           }
         }
       }
+      selectedItems = []
     }
-    return true
+  }
+}
+
+struct PhotosModal_Previews: PreviewProvider {
+  static var previews: some View {
+    PhotosModal(card: .constant(Card()))
   }
 }
