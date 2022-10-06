@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,20 +32,45 @@
 
 import SwiftUI
 
-struct CardThumbnailView: View {
-  let card: Card
+struct FrameModal: View {
+  @Environment(\.presentationMode) var presentationMode
+
+  // 1
+  @Binding var frameIndex: Int?
+  private let columns = [
+    GridItem(.adaptive(minimum: 120), spacing: 10)
+  ]
+  private let style = StrokeStyle(
+    lineWidth: 5,
+    lineJoin: .round)
 
   var body: some View {
-    RoundedRectangle(cornerRadius: 15)
-      .foregroundColor(card.backgroundColor)
-      .frame(
-        width: Settings.thumbnailSize.width,
-        height: Settings.thumbnailSize.height)
+    ScrollView {
+      LazyVGrid(columns: columns) {
+      // 2
+        ForEach(0..<Shapes.shapes.count, id: \.self) { index in
+          Shapes.shapes[index]
+          // 3
+            .stroke(Color.primary, style: style)
+            // 4
+            .background(
+              Shapes.shapes[index].fill(Color.secondary))
+            .frame(width: 100, height: 120)
+            .padding()
+            // 5
+            .onTapGesture {
+              frameIndex = index
+              presentationMode.wrappedValue.dismiss()
+            }
+        }
+      }
+    }
+    .padding(5)
   }
 }
 
-struct CardThumbnailView_Previews: PreviewProvider {
+struct FrameModal_Previews: PreviewProvider {
   static var previews: some View {
-    CardThumbnailView(card: initialCards[0])
+    FrameModal(frameIndex: .constant(nil))
   }
 }

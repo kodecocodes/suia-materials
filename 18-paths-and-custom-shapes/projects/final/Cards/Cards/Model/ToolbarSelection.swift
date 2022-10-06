@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,46 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct FramePicker: View {
-  @Environment(\.presentationMode) var presentationMode
-
-  // 1
-  @Binding var frame: AnyShape?
-  private let columns = [
-    GridItem(.adaptive(minimum: 120), spacing: 10)
-  ]
-  private let style = StrokeStyle(
-    lineWidth: 5, lineJoin: .round)
-
-  var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns) {
-      // 2
-        ForEach(0..<Shapes.shapes.count, id: \.self) { index in
-          Shapes.shapes[index]
-          // 3
-            .stroke(Color.primary, style: style)
-            // 4
-            .background(
-              Shapes.shapes[index].fill(Color.secondary))
-            .frame(width: 100, height: 120)
-            .padding()
-            // 5
-            .onTapGesture {
-              frame = Shapes.shapes[index]
-              presentationMode.wrappedValue.dismiss()
-            }
-        }
-      }
-    }
-    .padding(5)
+enum ToolbarSelection: CaseIterable, Identifiable {
+  var id: Int {
+    hashValue
   }
-}
 
-struct FramePicker_Previews: PreviewProvider {
-  static var previews: some View {
-    FramePicker(frame: .constant(nil))
-  }
+  case photoModal, frameModal, stickerModal, textModal
 }

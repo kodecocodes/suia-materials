@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,34 @@
 
 import SwiftUI
 
-struct Card: Identifiable {
+struct Card: Identifiable, Equatable {
+  static func == (lhs: Card, rhs: Card) -> Bool {
+    lhs.id == rhs.id
+  }
+
   let id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
+
+  mutating func addElement(uiImage: UIImage) {
+    let image = Image(uiImage: uiImage)
+    let element = ImageElement(image: image, uiImage: uiImage)
+    elements.append(element)
+  }
+
+  mutating func addElement(text: TextElement) {
+    elements.append(text)
+  }
+
+  mutating func addElements(from transfer: [CustomTransfer]) {
+    for element in transfer {
+      if let text = element.text {
+        addElement(text: TextElement(text: text))
+      } else if let image = element.image {
+        addElement(uiImage: image)
+      }
+    }
+  }
 
   mutating func remove(_ element: CardElement) {
     if let index = element.index(in: elements) {
@@ -43,17 +67,11 @@ struct Card: Identifiable {
     }
   }
 
-  mutating func addElement(uiImage: UIImage) {
-    let image = Image(uiImage: uiImage)
-    let element = ImageElement(image: image)
-    elements.append(element)
-  }
-
-  mutating func update(_ element: CardElement?, frame: AnyShape) {
+  mutating func update(_ element: CardElement?, frameIndex: Int) {
     if let element = element as? ImageElement,
       let index = element.index(in: elements) {
         var newElement = element
-        newElement.frame = frame
+        newElement.frameIndex = frameIndex
         elements[index] = newElement
     }
   }

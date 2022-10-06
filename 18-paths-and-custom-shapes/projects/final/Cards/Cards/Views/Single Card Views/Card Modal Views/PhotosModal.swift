@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,25 +31,41 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PhotosUI
 
-struct CardsView: View {
-  @EnvironmentObject var viewState: ViewState
-  @EnvironmentObject var store: CardStore
+struct PhotosModal: View {
+  @Binding var card: Card
+  @State private var selectedItems: [PhotosPickerItem] = []
 
   var body: some View {
-    ZStack {
-      CardsListView()
-      if !viewState.showAllCards {
-        SingleCardView()
+    PhotosPicker(
+      selection: $selectedItems,
+      matching: .images) {
+        ToolbarButton(modal: .photoModal)
+    }
+    .onChange(of: selectedItems) { items in
+      for item in items {
+        item.loadTransferable(type: Data.self) { result in
+          Task {
+            switch result {
+            case .success(let data):
+              if let data,
+                let uiImage = UIImage(data: data) {
+                card.addElement(uiImage: uiImage)
+              }
+            case .failure(let failure):
+              fatalError("Image transfer failed: \(failure)")
+            }
+          }
+        }
       }
+      selectedItems = []
     }
   }
 }
 
-struct CardsView_Previews: PreviewProvider {
+struct PhotosModal_Previews: PreviewProvider {
   static var previews: some View {
-    CardsView()
-      .environmentObject(ViewState())
-      .environmentObject(CardStore(defaultData: true))
+    PhotosModal(card: .constant(Card()))
   }
 }

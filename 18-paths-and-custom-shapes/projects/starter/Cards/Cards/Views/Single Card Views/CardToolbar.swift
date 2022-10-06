@@ -79,19 +79,5 @@ struct CardToolbar: ViewModifier {
             modal: $currentModal)
         }
       }
-      .sheet(item: $currentModal) { item in
-        switch item {
-        case .stickerModal:
-          StickerModal(stickerImage: $stickerImage)
-            .onDisappear {
-              if let stickerImage = stickerImage {
-                card.addElement(uiImage: stickerImage)
-              }
-              stickerImage = nil
-            }
-        default:
-          Text(String(describing: item))
-        }
-      }
   }
 }

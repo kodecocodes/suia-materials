@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,23 +32,21 @@
 
 import SwiftUI
 
-struct CardDrop: DropDelegate {
-  @Binding var card: Card
 
-  func performDrop(info: DropInfo) -> Bool {
-    let itemProviders = info.itemProviders(for: [.image])
+struct CardThumbnail: View {
+  let card: Card
 
-    for item in itemProviders {
-      if item.canLoadObject(ofClass: UIImage.self) {
-        item.loadObject(ofClass: UIImage.self) { image, _ in
-          if let image = image as? UIImage {
-            DispatchQueue.main.async {
-              card.addElement(uiImage: image)
-            }
-          }
-        }
-      }
-    }
-    return true
+  var body: some View {
+    RoundedRectangle(cornerRadius: 15)
+      .foregroundColor(card.backgroundColor)
+      .frame(
+        width: Settings.thumbnailSize.width,
+        height: Settings.thumbnailSize.height)
+  }
+}
+
+struct CardThumbnail_Previews: PreviewProvider {
+  static var previews: some View {
+    CardThumbnail(card: initialCards[0])
   }
 }

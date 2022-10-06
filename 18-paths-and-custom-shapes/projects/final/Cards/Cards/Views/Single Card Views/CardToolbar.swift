@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,21 +33,51 @@
 import SwiftUI
 
 struct CardToolbar: ViewModifier {
-  @EnvironmentObject var viewState: ViewState
-  @Binding var currentModal: CardModal?
+  @Environment(\.presentationMode) var presentationMode
+  @Binding var currentModal: ToolbarSelection?
+  @Binding var card: Card
+  @State private var stickerImage: UIImage?
 
   func body(content: Content) -> some View {
     content
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-        Button(action: { viewState.showAllCards.toggle() }) {
-          Text("Done")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Menu {
+            Button(
+              action: {
+                if UIPasteboard.general.hasImages {
+                  if let images = UIPasteboard.general.images {
+                    for image in images {
+                      card.addElement(uiImage: image)
+                    }
+                  }
+                } else if UIPasteboard.general.hasStrings {
+                  if let strings = UIPasteboard.general.strings {
+                    for text in strings {
+                      card.addElement(text: TextElement(text: text))
+                    }
+                  }
+                }
+              },
+              label: {
+                Label("Paste", systemImage: "doc.on.clipboard")
+              })
+            .disabled(!UIPasteboard.general.hasImages
+              && !UIPasteboard.general.hasStrings)
+          } label: {
+            Label("Add", systemImage: "ellipsis.circle")
+          }
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button("Done") {
+            presentationMode.wrappedValue.dismiss()
+          }
+        }
+        ToolbarItem(placement: .bottomBar) {
+          BottomToolbar(
+            card: $card,
+            modal: $currentModal)
         }
       }
-      ToolbarItem(placement: .bottomBar) {
-        CardBottomToolbar(cardModal: $currentModal)
-      }
-    }
   }
 }

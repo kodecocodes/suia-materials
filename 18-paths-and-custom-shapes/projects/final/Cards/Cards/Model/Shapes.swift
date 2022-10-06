@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,10 +32,17 @@
 
 import SwiftUI
 
-struct Shapes: View {
-  let currentShape = Lens()
+enum Shapes {
+  static let shapes: [AnyShape] = [
+    AnyShape(Circle()), AnyShape(Rectangle()),
+    AnyShape(Cone()), AnyShape(Lens())
+  ]
+}
 
-  var body: some View {
+struct Shapes_Previews: PreviewProvider {
+  static let currentShape = Lens()
+
+  static var previews: some View {
     currentShape
       .stroke(
         Color.primary,
@@ -43,14 +50,8 @@ struct Shapes: View {
       .padding()
       .aspectRatio(1, contentMode: .fit)
       .background(Color.yellow)
+      .previewLayout(.sizeThatFits)
   }
-}
-
-extension Shapes {
-  static let shapes: [AnyShape] = [
-    AnyShape(Circle()), AnyShape(Rectangle()),
-    AnyShape(Cone()), AnyShape(Lens())
-  ]
 }
 
 struct Triangle: Shape {
@@ -71,7 +72,6 @@ struct Triangle: Shape {
 struct Cone: Shape {
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    // path code goes here
     let radius = min(rect.midX, rect.midY)
     path.addArc(
       center: CGPoint(x: rect.midX, y: rect.midY),
@@ -89,7 +89,6 @@ struct Cone: Shape {
 struct Lens: Shape {
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    // path code goes here
     path.move(to: CGPoint(x: 0, y: rect.midY))
     path.addQuadCurve(
       to: CGPoint(x: rect.width, y: rect.midY),
@@ -99,13 +98,5 @@ struct Lens: Shape {
       control: CGPoint(x: rect.midX, y: rect.height))
     path.closeSubpath()
     return path
-  }
-}
-
-
-struct Shapes_Previews: PreviewProvider {
-  static var previews: some View {
-    Shapes()
-      .previewLayout(.sizeThatFits)
   }
 }

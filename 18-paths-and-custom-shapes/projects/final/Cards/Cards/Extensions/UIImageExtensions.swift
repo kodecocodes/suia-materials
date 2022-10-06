@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,28 +32,14 @@
 
 import SwiftUI
 
-class ViewState: ObservableObject {
-  @Published var showAllCards = true {
-    didSet {
-      if showAllCards {
-        selectedCard = nil
-      }
-    }
-  }
-  @Published var selectedElement: CardElement?
-
-  var selectedCard: Card? {
-    didSet {
-      if selectedCard == nil {
-        selectedElement = nil
-      }
+extension UIImage: Transferable {
+  public static var transferRepresentation: some TransferRepresentation {
+    DataRepresentation(importedContentType: .text) {image in
+      UIImage(data: image) ?? errorImage
     }
   }
 
-  convenience init(card: Card) {
-    self.init()
-    showAllCards = false
-    selectedCard = card
-    selectedElement = nil
+  public static var errorImage: UIImage {
+    UIImage(named: "error-image") ?? UIImage()
   }
 }
