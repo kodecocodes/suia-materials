@@ -41,7 +41,7 @@ struct ContentView: View {
   let tempThings = ["YOLO", "BTW"]
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack(spacing: 20) {
         ForEach(tempThings, id: \.self) { thing in
           Text(thing)

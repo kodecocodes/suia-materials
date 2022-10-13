@@ -3,31 +3,30 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CD74C9852578A41F004C8694 /* TILApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74C9842578A41F004C8694 /* TILApp.swift */; };
-		CD74C9872578A41F004C8694 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74C9862578A41F004C8694 /* ContentView.swift */; };
-		CD74C9892578A422004C8694 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD74C9882578A422004C8694 /* Assets.xcassets */; };
-		CD74C98C2578A422004C8694 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD74C98B2578A422004C8694 /* Preview Assets.xcassets */; };
-		CD74C9982579C149004C8694 /* AddThingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74C9972579C149004C8694 /* AddThingView.swift */; };
-		CDA02208260AE6C700AF2BCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDA02206260AE6C700AF2BCF /* LaunchScreen.storyboard */; };
+		CD9D53E328F811AD00CC122B /* TILApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D53E228F811AD00CC122B /* TILApp.swift */; };
+		CD9D53E528F811AD00CC122B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D53E428F811AD00CC122B /* ContentView.swift */; };
+		CD9D53E728F811AE00CC122B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9D53E628F811AE00CC122B /* Assets.xcassets */; };
+		CD9D53EA28F811AE00CC122B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD9D53E928F811AE00CC122B /* Preview Assets.xcassets */; };
+		CD9D53F128F8122200CC122B /* AddThingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9D53F028F8122200CC122B /* AddThingView.swift */; };
+		CD9D53F328F812D100CC122B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD9D53F228F812D100CC122B /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CD74C9812578A41F004C8694 /* TIL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIL.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD74C9842578A41F004C8694 /* TILApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILApp.swift; sourceTree = "<group>"; };
-		CD74C9862578A41F004C8694 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CD74C9882578A422004C8694 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CD74C98B2578A422004C8694 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CD74C98D2578A422004C8694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD74C9972579C149004C8694 /* AddThingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThingView.swift; sourceTree = "<group>"; };
-		CDA02207260AE6C700AF2BCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CD9D53DF28F811AD00CC122B /* TIL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD9D53E228F811AD00CC122B /* TILApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILApp.swift; sourceTree = "<group>"; };
+		CD9D53E428F811AD00CC122B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CD9D53E628F811AE00CC122B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD9D53E928F811AE00CC122B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CD9D53F028F8122200CC122B /* AddThingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThingView.swift; sourceTree = "<group>"; };
+		CD9D53F228F812D100CC122B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CD74C97E2578A41F004C8694 /* Frameworks */ = {
+		CD9D53DC28F811AD00CC122B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,40 +36,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CD74C9782578A41F004C8694 = {
+		CD9D53D628F811AD00CC122B = {
 			isa = PBXGroup;
 			children = (
-				CD74C9832578A41F004C8694 /* TIL */,
-				CD74C9822578A41F004C8694 /* Products */,
+				CD9D53E128F811AD00CC122B /* TIL */,
+				CD9D53E028F811AD00CC122B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		CD74C9822578A41F004C8694 /* Products */ = {
+		CD9D53E028F811AD00CC122B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CD74C9812578A41F004C8694 /* TIL.app */,
+				CD9D53DF28F811AD00CC122B /* TIL.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CD74C9832578A41F004C8694 /* TIL */ = {
+		CD9D53E128F811AD00CC122B /* TIL */ = {
 			isa = PBXGroup;
 			children = (
-				CD74C9842578A41F004C8694 /* TILApp.swift */,
-				CD74C9862578A41F004C8694 /* ContentView.swift */,
-				CD74C9972579C149004C8694 /* AddThingView.swift */,
-				CD74C9882578A422004C8694 /* Assets.xcassets */,
-				CDA02206260AE6C700AF2BCF /* LaunchScreen.storyboard */,
-				CD74C98D2578A422004C8694 /* Info.plist */,
-				CD74C98A2578A422004C8694 /* Preview Content */,
+				CD9D53E228F811AD00CC122B /* TILApp.swift */,
+				CD9D53E428F811AD00CC122B /* ContentView.swift */,
+				CD9D53F028F8122200CC122B /* AddThingView.swift */,
+				CD9D53E628F811AE00CC122B /* Assets.xcassets */,
+				CD9D53F228F812D100CC122B /* Launch Screen.storyboard */,
+				CD9D53E828F811AE00CC122B /* Preview Content */,
 			);
 			path = TIL;
 			sourceTree = "<group>";
 		};
-		CD74C98A2578A422004C8694 /* Preview Content */ = {
+		CD9D53E828F811AE00CC122B /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				CD74C98B2578A422004C8694 /* Preview Assets.xcassets */,
+				CD9D53E928F811AE00CC122B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -78,14 +76,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CD74C9802578A41F004C8694 /* TIL */ = {
+		CD9D53DE28F811AD00CC122B /* TIL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD74C9902578A422004C8694 /* Build configuration list for PBXNativeTarget "TIL" */;
+			buildConfigurationList = CD9D53ED28F811AE00CC122B /* Build configuration list for PBXNativeTarget "TIL" */;
 			buildPhases = (
-				CD74C9952578A4A1004C8694 /* SwiftLint */,
-				CD74C97D2578A41F004C8694 /* Sources */,
-				CD74C97E2578A41F004C8694 /* Frameworks */,
-				CD74C97F2578A41F004C8694 /* Resources */,
+				CD9D53DB28F811AD00CC122B /* Sources */,
+				CD9D53DC28F811AD00CC122B /* Frameworks */,
+				CD9D53DD28F811AD00CC122B /* Resources */,
+				CD9D53F428F8138C00CC122B /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -93,57 +91,57 @@
 			);
 			name = TIL;
 			productName = TIL;
-			productReference = CD74C9812578A41F004C8694 /* TIL.app */;
+			productReference = CD9D53DF28F811AD00CC122B /* TIL.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CD74C9792578A41F004C8694 /* Project object */ = {
+		CD9D53D728F811AD00CC122B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
-				ORGANIZATIONNAME = "Ray Wenderlich";
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
-					CD74C9802578A41F004C8694 = {
-						CreatedOnToolsVersion = 12.2;
+					CD9D53DE28F811AD00CC122B = {
+						CreatedOnToolsVersion = 14.1;
 					};
 				};
 			};
-			buildConfigurationList = CD74C97C2578A41F004C8694 /* Build configuration list for PBXProject "TIL" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = CD9D53DA28F811AD00CC122B /* Build configuration list for PBXProject "TIL" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = CD74C9782578A41F004C8694;
-			productRefGroup = CD74C9822578A41F004C8694 /* Products */;
+			mainGroup = CD9D53D628F811AD00CC122B;
+			productRefGroup = CD9D53E028F811AD00CC122B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CD74C9802578A41F004C8694 /* TIL */,
+				CD9D53DE28F811AD00CC122B /* TIL */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CD74C97F2578A41F004C8694 /* Resources */ = {
+		CD9D53DD28F811AD00CC122B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDA02208260AE6C700AF2BCF /* LaunchScreen.storyboard in Resources */,
-				CD74C98C2578A422004C8694 /* Preview Assets.xcassets in Resources */,
-				CD74C9892578A422004C8694 /* Assets.xcassets in Resources */,
+				CD9D53F328F812D100CC122B /* Launch Screen.storyboard in Resources */,
+				CD9D53EA28F811AE00CC122B /* Preview Assets.xcassets in Resources */,
+				CD9D53E728F811AE00CC122B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD74C9952578A4A1004C8694 /* SwiftLint */ = {
+		CD9D53F428F8138C00CC122B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -160,43 +158,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CD74C97D2578A41F004C8694 /* Sources */ = {
+		CD9D53DB28F811AD00CC122B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD74C9872578A41F004C8694 /* ContentView.swift in Sources */,
-				CD74C9852578A41F004C8694 /* TILApp.swift in Sources */,
-				CD74C9982579C149004C8694 /* AddThingView.swift in Sources */,
+				CD9D53E528F811AD00CC122B /* ContentView.swift in Sources */,
+				CD9D53E328F811AD00CC122B /* TILApp.swift in Sources */,
+				CD9D53F128F8122200CC122B /* AddThingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		CDA02206260AE6C700AF2BCF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDA02207260AE6C700AF2BCF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		CD74C98E2578A422004C8694 /* Debug */ = {
+		CD9D53EB28F811AE00CC122B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -240,7 +226,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -250,14 +236,13 @@
 			};
 			name = Debug;
 		};
-		CD74C98F2578A422004C8694 /* Release */ = {
+		CD9D53EC28F811AE00CC122B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -295,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -305,43 +290,59 @@
 			};
 			name = Release;
 		};
-		CD74C9912578A422004C8694 /* Debug */ = {
+		CD9D53EE28F811AE00CC122B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TIL/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = TIL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodeco.TIL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		CD74C9922578A422004C8694 /* Release */ = {
+		CD9D53EF28F811AE00CC122B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TIL/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = TIL/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodeco.TIL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -350,25 +351,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CD74C97C2578A41F004C8694 /* Build configuration list for PBXProject "TIL" */ = {
+		CD9D53DA28F811AD00CC122B /* Build configuration list for PBXProject "TIL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CD74C98E2578A422004C8694 /* Debug */,
-				CD74C98F2578A422004C8694 /* Release */,
+				CD9D53EB28F811AE00CC122B /* Debug */,
+				CD9D53EC28F811AE00CC122B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD74C9902578A422004C8694 /* Build configuration list for PBXNativeTarget "TIL" */ = {
+		CD9D53ED28F811AE00CC122B /* Build configuration list for PBXNativeTarget "TIL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CD74C9912578A422004C8694 /* Debug */,
-				CD74C9922578A422004C8694 /* Release */,
+				CD9D53EE28F811AE00CC122B /* Debug */,
+				CD9D53EF28F811AE00CC122B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = CD74C9792578A41F004C8694 /* Project object */;
+	rootObject = CD9D53D728F811AD00CC122B /* Project object */;
 }

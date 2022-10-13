@@ -41,7 +41,7 @@ struct ContentView: View {
   @StateObject private var myThings = ThingStore()
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack(spacing: 20) {
         if myThings.things.isEmpty {
           Text("Add acronyms you learn")
