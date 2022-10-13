@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,23 +33,43 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @EnvironmentObject var viewState: ViewState
+  @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject var store: CardStore
+  @State private var selectedCard: Card?
 
   var body: some View {
-    ScrollView(showsIndicators: false) {
-      ForEach(store.cards) { card in
-        CardThumbnailView(card: card)
-          .contextMenu {
-            // swiftlint:disable:next multiple_closures_with_trailing_closure
-            Button(action: { store.remove(card) }) {
-              Label("Delete", systemImage: "trash")
+    VStack {
+      ScrollView(showsIndicators: false) {
+        VStack {
+          ForEach(store.cards) { card in
+            CardThumbnail(card: card)
+              .contextMenu {
+                Button(role: .destructive) {
+                  store.remove(card)
+                } label: {
+                  Label("Delete", systemImage: "trash")
+                }
+              }
+              .onTapGesture {
+                selectedCard = card
+              }
+          }
+        }
+      }
+      .fullScreenCover(item: $selectedCard) { card in
+        if let index = store.index(for: card) {
+          SingleCardView(card: $store.cards[index])
+            .onChange(of: scenePhase) { newScenePhase in
+              if newScenePhase == .inactive {
+                card.save()
+              }
             }
-          }
-          .onTapGesture {
-            viewState.showAllCards.toggle()
-            viewState.selectedCard = card
-          }
+        } else {
+          fatalError("Unable to locate selected card")
+        }
+      }
+      Button("Add") {
+        selectedCard = store.addCard()
       }
     }
   }
@@ -58,7 +78,6 @@ struct CardsListView: View {
 struct CardsListView_Previews: PreviewProvider {
   static var previews: some View {
     CardsListView()
-      .environmentObject(ViewState())
       .environmentObject(CardStore(defaultData: true))
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,43 +33,106 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @EnvironmentObject var viewState: ViewState
+  @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject var store: CardStore
+  @State private var selectedCard: Card?
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  @Environment(\.verticalSizeClass) var verticalSizeClass
 
-  var body: some View {
-    GeometryReader { proxy in
-      ScrollView(showsIndicators: false) {
-        LazyVGrid(columns: columns(size: proxy.size), spacing: 30) {
-          ForEach(store.cards) { card in
-            CardThumbnailView(card: card, size: proxy.size)
-              .contextMenu {
-                // swiftlint:disable:next multiple_closures_with_trailing_closure
-                Button(action: { store.remove(card) }) {
-                  Label("Delete", systemImage: "trash")
-                }
-              }
-              .onTapGesture {
-                viewState.showAllCards.toggle()
-                viewState.selectedCard = card
-              }
-          }
-        }
-      }
+  var thumbnailSize: CGSize {
+    var scale: CGFloat = 1
+    if let verticalSizeClass,
+      let horizontalSizeClass,
+      verticalSizeClass == .regular,
+      horizontalSizeClass == .regular {
+      scale = 1.5
     }
+    return Settings.thumbnailSize * scale
   }
 
-  func columns(size: CGSize) -> [GridItem] {
+  var columns: [GridItem] {
     [
       GridItem(.adaptive(
-        minimum: Settings.thumbnailSize(size: size).width))
+        minimum: thumbnailSize.width))
     ]
+  }
+
+  var createButton: some View {
+    Button {
+      selectedCard = store.addCard()
+    } label: {
+      Label("Create New", systemImage: "plus")
+        .frame(maxWidth: .infinity)
+    }
+    .font(.system(size: 16, weight: .bold))
+    .padding([.top, .bottom], 10)
+    .background(Color("barColor"))
+    .accentColor(.white)
+  }
+
+  var body: some View {
+    VStack {
+      if !store.cards.isEmpty {
+        ScrollView(showsIndicators: false) {
+          LazyVGrid(columns: columns, spacing: 30) {
+            ForEach(store.cards) { card in
+              CardThumbnail(card: card)
+                .contextMenu {
+                  Button(role: .destructive) {
+                    store.remove(card)
+                  } label: {
+                    Label("Delete", systemImage: "trash")
+                  }
+                }
+                .onTapGesture {
+                  selectedCard = card
+                }
+                .frame(
+                  width: thumbnailSize.width,
+                  height: thumbnailSize.height)
+            }
+          }
+        }
+        .padding(.top, 20)
+        .fullScreenCover(item: $selectedCard) { card in
+          if let index = store.index(for: card) {
+            SingleCardView(card: $store.cards[index])
+              .onChange(of: scenePhase) { newScenePhase in
+                if newScenePhase == .inactive {
+                  card.save()
+                }
+              }
+          } else {
+            fatalError("Unable to locate selected card")
+          }
+        }
+      } else {
+        Spacer()
+        let card = Card(backgroundColor: .white)
+        ZStack {
+          CardThumbnail(card: card)
+          Image(systemName: "plus.circle.fill")
+            .font(.largeTitle)
+        }
+        .frame(
+          width: thumbnailSize.width * 1.5,
+          height: thumbnailSize.height * 1.5)
+        .onTapGesture {
+          selectedCard = store.addCard()
+        }
+        Spacer()
+      }
+      createButton
+    }
+    .background(
+      Color("background")
+        .ignoresSafeArea())
   }
 }
 
 struct CardsListView_Previews: PreviewProvider {
   static var previews: some View {
     CardsListView()
-      .environmentObject(ViewState())
       .environmentObject(CardStore(defaultData: true))
   }
 }
