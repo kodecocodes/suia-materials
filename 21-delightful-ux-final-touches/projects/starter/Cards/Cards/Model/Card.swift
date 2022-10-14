@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -36,22 +36,32 @@ struct Card: Identifiable {
   var id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
-  var image: UIImage?
-  var shareImage: UIImage?
 
-  func save() {
-    do {
-      let encoder = JSONEncoder()
-      encoder.outputFormatting = .prettyPrinted
-      let data = try encoder.encode(self)
-      let filename = "\(id).rwcard"
-      if let url = FileManager.documentURL?
-        .appendingPathComponent(filename) {
-        try data.write(to: url)
+  mutating func addElement(uiImage: UIImage, at offset: CGSize = .zero) {
+    let imageFilename = uiImage.save()
+    let transform = Transform(offset: offset)
+    let element = ImageElement(
+      transform: transform,
+      uiImage: uiImage,
+      imageFilename: imageFilename)
+    elements.append(element)
+    save()
+  }
+
+  mutating func addElement(text: TextElement) {
+    elements.append(text)
+    save()
+  }
+
+  mutating func addElements(from transfer: [CustomTransfer], at offset: CGSize) {
+    for element in transfer {
+      if let text = element.text {
+        addElement(text: TextElement(text: text))
+      } else if let image = element.image {
+        addElement(uiImage: image, at: offset)
       }
-    } catch {
-      print(error.localizedDescription)
     }
+    save()
   }
 
   mutating func remove(_ element: CardElement) {
@@ -64,33 +74,27 @@ struct Card: Identifiable {
     save()
   }
 
-  mutating func addElement(_ textElement: TextElement) {
-    elements.append(textElement)
-    save()
-  }
-
-  mutating func addElement(
-    uiImage: UIImage,
-    transform: Transform = Transform()
-  ) {
-    let imageFilename = uiImage.save()
-    let image = Image(uiImage: uiImage)
-    let element = ImageElement(
-      transform: transform,
-      image: image,
-      imageFilename: imageFilename)
-    elements.append(element)
-    save()
-  }
-
-  mutating func update(_ element: CardElement?, frame: AnyShape) {
+  mutating func update(_ element: CardElement?, frameIndex: Int) {
     if let element = element as? ImageElement,
       let index = element.index(in: elements) {
         var newElement = element
-        newElement.frame = frame
+        newElement.frameIndex = frameIndex
         elements[index] = newElement
     }
     save()
+  }
+
+  func save() {
+    do {
+      let encoder = JSONEncoder()
+      let data = try encoder.encode(self)
+      let filename = "\(id).rwcard"
+      let url = URL.documentsDirectory
+        .appendingPathComponent(filename)
+      try data.write(to: url)
+    } catch {
+      print(error.localizedDescription)
+    }
   }
 }
 
@@ -100,17 +104,13 @@ extension Card: Codable {
   }
 
   init(from decoder: Decoder) throws {
-    let container =
-      try decoder.container(keyedBy: CodingKeys.self)
+    let container = try decoder
+      .container(keyedBy: CodingKeys.self)
     let id = try container.decode(String.self, forKey: .id)
     self.id = UUID(uuidString: id) ?? UUID()
     elements += try container.decode(
       [ImageElement].self, forKey: .imageElements)
-
-    // Challenge 2 - load the text elements
     elements += try container.decode([TextElement].self, forKey: .textElements)
-
-    // Challenge 1 - load the background color
     let components = try container.decode([CGFloat].self, forKey: .backgroundColor)
     backgroundColor = Color.color(components: components)
   }
@@ -121,13 +121,9 @@ extension Card: Codable {
     let imageElements: [ImageElement] =
       elements.compactMap { $0 as? ImageElement }
     try container.encode(imageElements, forKey: .imageElements)
-
-    // Challenge 2 - save the text elements
     let textElements: [TextElement] =
       elements.compactMap { $0 as? TextElement }
     try container.encode(textElements, forKey: .textElements)
-
-    // Challenge 1 - save the background color
     let components = backgroundColor.colorComponents()
     try container.encode(components, forKey: .backgroundColor)
   }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,34 +33,65 @@
 import SwiftUI
 
 struct CardToolbar: ViewModifier {
-  @EnvironmentObject var viewState: ViewState
-  @Binding var currentModal: CardModal?
+  @Environment(\.presentationMode) var presentationMode
+  @Binding var currentModal: ToolbarSelection?
+  @Binding var card: Card
 
   func body(content: Content) -> some View {
     content
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button(action: {
-          withAnimation {
-            viewState.showAllCards = true
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Menu {
+            Button(
+              action: {
+                if UIPasteboard.general.hasImages {
+                  if let images = UIPasteboard.general.images {
+                    for image in images {
+                      card.addElement(uiImage: image)
+                    }
+                  }
+                } else if UIPasteboard.general.hasStrings {
+                  if let strings = UIPasteboard.general.strings {
+                    for text in strings {
+                      card.addElement(text: TextElement(text: text))
+                    }
+                  }
+                }
+              },
+              label: {
+                Label("Paste", systemImage: "doc.on.clipboard")
+              })
+            .disabled(!UIPasteboard.general.hasImages
+              && !UIPasteboard.general.hasStrings)
+          } label: {
+            Label("Add", systemImage: "ellipsis.circle")
           }
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
-        }) {
-          Text("Done")
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button("Done") {
+            card.save()
+            presentationMode.wrappedValue.dismiss()
+          }
+        }
+        ToolbarItem(placement: .navigationBarLeading) {
+          let cardView = ShareCardView(card: card)
+          let content = cardView.content(size: Settings.cardSize)
+          let renderer = ImageRenderer(content: content)
+          let uiImage = renderer.uiImage ?? UIImage.errorImage
+          let image = Image(uiImage: uiImage)
+          ShareLink(
+            item: image,
+            preview: SharePreview(
+              "Card",
+              image: image)) {
+                Image(systemName: "square.and.arrow.up")
+          }
+        }
+        ToolbarItem(placement: .bottomBar) {
+          BottomToolbar(
+            card: $card,
+            modal: $currentModal)
         }
       }
-      ToolbarItem(placement: .bottomBar) {
-        CardBottomToolbar(cardModal: $currentModal)
-      }
-      ToolbarItem(placement: .navigationBarLeading) {
-        Button(action: {
-          viewState.shouldScreenshot = true
-          currentModal = .shareSheet
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
-        }) {
-          Image(systemName: "square.and.arrow.up")
-        }
-      }
-    }
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,25 +33,39 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @EnvironmentObject var store: CardStore
-  @EnvironmentObject var viewState: ViewState
+  @State private var currentModal: ToolbarSelection?
+  @Binding var card: Card
 
   var body: some View {
-    if let selectedCard = viewState.selectedCard,
-      let index = store.index(for: selectedCard) {
-    NavigationView {
-      CardDetailView(card: $store.cards[index])
-        .navigationBarTitleDisplayMode(.inline)
-    }
-    .navigationViewStyle(StackNavigationViewStyle())
+    NavigationStack {
+      GeometryReader { proxy in
+        CardDetailView(
+          card: $card,
+          viewScale: Settings.calculateScale(proxy.size),
+          proxy: proxy)
+          .modifier(CardToolbar(
+            currentModal: $currentModal, card: $card))
+          .modifier(CardModalSheet(
+            currentModal: $currentModal, card: $card))
+          .frame(
+            width: Settings.calculateSize(proxy.size).width ,
+            height: Settings.calculateSize(proxy.size).height)
+          .clipped()
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+      }
     }
   }
 }
 
 struct SingleCardView_Previews: PreviewProvider {
+  struct SingleCardPreview: View {
+    @EnvironmentObject var store: CardStore
+    var body: some View {
+      SingleCardView(card: $store.cards[1])
+    }
+  }
   static var previews: some View {
-    SingleCardView()
-      .environmentObject(ViewState(card: initialCards[0]))
+    SingleCardPreview()
       .environmentObject(CardStore(defaultData: true))
   }
 }

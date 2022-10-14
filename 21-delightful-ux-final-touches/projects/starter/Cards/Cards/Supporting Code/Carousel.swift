@@ -34,7 +34,13 @@ import SwiftUI
 
 struct Carousel: View {
   @EnvironmentObject var store: CardStore
-  @EnvironmentObject var viewState: ViewState
+  @Binding var selectedCard: Card?
+
+  let thumbnailScale: CGFloat = 0.7
+  func cardSize(from proxySize: CGSize) -> CGSize {
+    let cardSize = Settings.calculateSize(proxySize)
+    return cardSize * thumbnailScale
+  }
 
   var body: some View {
     GeometryReader { proxy in
@@ -42,17 +48,14 @@ struct Carousel: View {
         ForEach((0..<store.cards.count), id: \.self) { index in
           cardView(store.cards[index])
             .frame(
-              width: calculateSize(proxy.size).width,
-              height: calculateSize(proxy.size).height)
+              width: cardSize(from: proxy.size).width,
+              height: cardSize(from: proxy.size).height)
             .cornerRadius(15)
             .shadow(
               color: Color(white: 0.5, opacity: 0.7),
               radius: 5)
             .onTapGesture {
-              viewState.selectedCard = store.cards[index]
-              withAnimation {
-                viewState.showAllCards = false
-              }
+              selectedCard = store.cards[index]
             }
             .offset(y: -proxy.size.height * 0.05)
         }
@@ -80,27 +83,11 @@ struct Carousel: View {
     }
     return nil
   }
-
-  func calculateSize(_ size: CGSize) -> CGSize {
-    var newSize = size
-    let ratio =
-      Settings.cardSize.width / Settings.cardSize.height
-
-    if size.width < size.height {
-      newSize.height = min(size.height, newSize.width / ratio)
-      newSize.width = min(size.width, newSize.height * ratio)
-    } else {
-      newSize.width = min(size.width, newSize.height * ratio)
-      newSize.height = min(size.height, newSize.width / ratio)
-    }
-    return newSize * 0.7
-  }
 }
 
 struct Carousel_Previews: PreviewProvider {
   static var previews: some View {
-    Carousel()
+    Carousel(selectedCard: .constant(Card()))
       .environmentObject(CardStore(defaultData: true))
-      .environmentObject(ViewState())
   }
 }

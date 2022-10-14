@@ -1,4 +1,4 @@
-///// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -40,13 +40,29 @@ struct ResizableView: ViewModifier {
 
   let viewScale: CGFloat
 
-  init(transform: Binding<Transform>, viewScale: CGFloat = 1) {
-    _transform = transform
-    self.viewScale = viewScale
+  var dragGesture: some Gesture {
+    DragGesture()
+      .onChanged { value in
+        transform.offset = value.translation / viewScale + previousOffset
+      }
+      .onEnded { _ in
+        previousOffset = transform.offset
+      }
   }
 
-  func body(content: Content) -> some View {
-    let scaleGesture = MagnificationGesture()
+  var rotationGesture: some Gesture {
+    RotationGesture()
+      .onChanged { rotation in
+        transform.rotation += rotation - previousRotation
+        previousRotation = rotation
+      }
+      .onEnded { _ in
+        previousRotation = .zero
+      }
+  }
+
+  var scaleGesture: some Gesture {
+    MagnificationGesture()
       .onChanged { scale in
         self.scale = scale
       }
@@ -55,22 +71,10 @@ struct ResizableView: ViewModifier {
         transform.size.height *= scale
         self.scale = 1.0
       }
-    let rotationGesture = RotationGesture()
-      .onChanged { rotation in
-        transform.rotation += rotation - previousRotation
-        previousRotation = rotation
-      }
-      .onEnded { _ in
-        previousRotation = .zero
-      }
-    let dragGesture = DragGesture()
-      .onChanged { value in
-        transform.offset = value.translation / viewScale + previousOffset
-      }
-      .onEnded { _ in
-        previousOffset = transform.offset
-      }
-    return content
+  }
+
+  func body(content: Content) -> some View {
+    content
       .frame(
         width: transform.size.width * viewScale,
         height: transform.size.height * viewScale)
@@ -86,13 +90,20 @@ struct ResizableView: ViewModifier {
 }
 
 struct ResizableView_Previews: PreviewProvider {
-  static let color = Color.random()
-  static let content = Rectangle()
-
   static var previews: some View {
-    content
-      .foregroundColor(color)
-      .modifier(ResizableView(
-        transform: .constant(Transform())))
+    RoundedRectangle(cornerRadius: 30.0)
+      .foregroundColor(Color.blue)
+      .resizableView(transform: .constant(Transform()))
+  }
+}
+
+extension View {
+  func resizableView(
+    transform: Binding<Transform>,
+    viewScale: CGFloat = 1.0
+  ) -> some View {
+    modifier(ResizableView(
+      transform: transform,
+      viewScale: viewScale))
   }
 }

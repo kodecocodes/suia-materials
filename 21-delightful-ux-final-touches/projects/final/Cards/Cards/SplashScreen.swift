@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,11 @@ private struct SplashAnimation: ViewModifier {
   @State private var animating = true
   let finalYPosition: CGFloat
   let delay: Double
+  let animation = Animation.interpolatingSpring(
+    mass: 0.2,
+    stiffness: 80,
+    damping: 5,
+    initialVelocity: 0.0)
 
   func body(content: Content) -> some View {
     content
@@ -43,13 +48,7 @@ private struct SplashAnimation: ViewModifier {
       .rotationEffect(
         animating ? .zero
           : Angle(degrees: Double.random(in: -10...10)))
-      .animation(
-        Animation.interpolatingSpring(
-          mass: 0.2,
-          stiffness: 80,
-          damping: 5,
-          initialVelocity: 0.0)
-          .delay(delay))
+      .animation(animation.delay(delay), value: animating)
       .onAppear {
         animating = false
       }
@@ -60,17 +59,17 @@ struct SplashScreen: View {
   var body: some View {
     ZStack {
       Color("background")
-        .edgesIgnoringSafeArea(.all)
+        .ignoresSafeArea()
       card(letter: "S", color: "appColor1")
-        .modifier(SplashAnimation(finalYPosition: 240, delay: 0))
+        .splashAnimation(finalYposition: 240, delay: 0)
       card(letter: "D", color: "appColor2")
-        .modifier(SplashAnimation(finalYPosition: 120, delay: 0.2))
+        .splashAnimation(finalYposition: 120, delay: 0.2)
       card(letter: "R", color: "appColor3")
-        .modifier(SplashAnimation(finalYPosition: 0, delay: 0.4))
+        .splashAnimation(finalYposition: 0, delay: 0.4)
       card(letter: "A", color: "appColor6")
-        .modifier(SplashAnimation(finalYPosition: -120, delay: 0.6))
+        .splashAnimation(finalYposition: -120, delay: 0.6)
       card(letter: "C", color: "appColor7")
-        .modifier(SplashAnimation(finalYPosition: -240, delay: 0.8))
+        .splashAnimation(finalYposition: -240, delay: 0.8)
     }
   }
 
@@ -93,4 +92,14 @@ struct SplashScreen_Previews: PreviewProvider {
   static var previews: some View {
     SplashScreen()
   }
+}
+
+private extension View {
+  func splashAnimation(
+    finalYposition: CGFloat,
+    delay: Double
+  ) -> some View {
+    modifier(SplashAnimation(
+      finalYPosition: finalYposition,
+      delay: delay))  }
 }
