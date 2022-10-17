@@ -48,9 +48,6 @@ struct ContentView: View {
         }
         Spacer()
       }
-      .sheet(isPresented: $showAddThing) {
-        AddThingView()
-      }
       .navigationTitle("TIL")
       .toolbar {
         ToolbarItem {
@@ -61,6 +58,11 @@ struct ContentView: View {
           }
         }
       }
+      .alert("Add a Thing", isPresented: $showAddThing, actions: {
+        // TODO: Add TextField
+        Button("Add") { /* TODO */ }
+        Button("Cancel", role: .cancel) { /* no action */ }
+      }) { /* no message */ }
     }
   }
 }

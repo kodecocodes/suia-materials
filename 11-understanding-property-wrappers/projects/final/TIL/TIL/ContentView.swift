@@ -39,6 +39,7 @@ final class ThingStore: ObservableObject {
 struct ContentView: View {
   @State private var showAddThing = false
   @StateObject private var myThings = ThingStore()
+  @State private var thing = ""
 
   var body: some View {
     NavigationStack {
@@ -48,12 +49,9 @@ struct ContentView: View {
             .foregroundColor(.gray)
         }
         ForEach(myThings.things, id: \.self) { thing in
-          Text(thing)
+          Text(thing.uppercased())
         }
         Spacer()
-      }
-      .sheet(isPresented: $showAddThing) {
-        AddThingView(someThings: myThings)
       }
       .navigationTitle("TIL")
       .toolbar {
@@ -65,6 +63,18 @@ struct ContentView: View {
           }
         }
       }
+      .alert("Add a Thing", isPresented: $showAddThing, actions: {
+        // DONE: Add TextField
+        TextField("Thing I Learned", text: $thing)
+          .disableAutocorrection(true)
+        Button("Add") {
+          if !thing.isEmpty {
+            myThings.things.append(thing)
+            thing = ""
+          }
+        }
+        Button("Cancel", role: .cancel) { /* no action */ }
+      }) { /* no message */ }
     }
   }
 }
@@ -72,6 +82,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
-      .environment(\.textCase, .uppercase)
   }
 }

@@ -34,6 +34,7 @@ import SwiftUI
 
 struct AddThingView: View {
   @State private var thing = ""
+  @FocusState private var thingIsFocused: Bool
   @Environment(\.presentationMode) var presentationMode
   @ObservedObject var someThings: ThingStore
 
@@ -43,6 +44,7 @@ struct AddThingView: View {
         .textFieldStyle(RoundedBorderTextFieldStyle())  // 2
         .padding()  // 3
         .disableAutocorrection(true)
+        .focused($thingIsFocused)
       Button("Done") {
         if !thing.isEmpty {
           someThings.things.append(thing)
@@ -52,6 +54,9 @@ struct AddThingView: View {
       Spacer()
     }
     .environment(\.textCase, nil)
+    .onAppear {
+      thingIsFocused = true
+    }
   }
 }
 
