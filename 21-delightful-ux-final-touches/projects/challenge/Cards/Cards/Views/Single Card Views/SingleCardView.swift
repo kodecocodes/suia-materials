@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @State private var currentModal: ToolbarSelection?
   @Binding var card: Card
+  @State private var currentModal: ToolbarSelection?
 
   var body: some View {
     NavigationStack {
@@ -43,15 +43,22 @@ struct SingleCardView: View {
           card: $card,
           viewScale: Settings.calculateScale(proxy.size),
           proxy: proxy)
-          .modifier(CardToolbar(
-            currentModal: $currentModal, card: $card))
-          .modifier(CardModalSheet(
-            currentModal: $currentModal, card: $card))
           .frame(
             width: Settings.calculateSize(proxy.size).width ,
             height: Settings.calculateSize(proxy.size).height)
           .clipped()
           .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .modifier(CardToolbar(
+            currentModal: $currentModal,
+            card: $card))
+          .onDisappear {
+            let uiImage = UIImage.screenshot(
+              card: card,
+              size: Settings.cardSize * 0.2)
+            _ = uiImage.save(to: card.id.uuidString)
+            card.uiImage = uiImage
+            card.save()
+          }
       }
     }
   }
@@ -61,7 +68,7 @@ struct SingleCardView_Previews: PreviewProvider {
   struct SingleCardPreview: View {
     @EnvironmentObject var store: CardStore
     var body: some View {
-      SingleCardView(card: $store.cards[1])
+      SingleCardView(card: $store.cards[0])
     }
   }
   static var previews: some View {

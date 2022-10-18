@@ -56,6 +56,11 @@ struct ShareCardView: View {
     let viewScale = Settings.calculateScale(size)
     return ForEach(card.elements, id: \.id) { element in
       CardElementView(element: element)
+        .clip(element: element)
+        .contentShape(element: element)
+        .overlay(
+          element: element,
+          isSelected: false)
         .frame(
           width: element.transform.size.width,
           height: element.transform.size.height)

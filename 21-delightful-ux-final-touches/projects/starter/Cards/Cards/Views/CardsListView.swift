@@ -33,11 +33,11 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject var store: CardStore
-  @State private var selectedCard: Card?
+  @Environment(\.scenePhase) private var scenePhase
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   @Environment(\.verticalSizeClass) var verticalSizeClass
+  @State private var selectedCard: Card?
 
   var thumbnailSize: CGSize {
     var scale: CGFloat = 1
@@ -57,38 +57,26 @@ struct CardsListView: View {
     ]
   }
 
-  var createButton: some View {
-    Button {
-      selectedCard = store.addCard()
-    } label: {
-      Label("Create New", systemImage: "plus")
-        .frame(maxWidth: .infinity)
-    }
-    .font(.system(size: 16, weight: .bold))
-    .padding([.top, .bottom], 10)
-    .background(Color("barColor"))
-    .accentColor(.white)
-  }
-
   var body: some View {
     VStack {
-      if !store.cards.isEmpty {
-        list
-        .padding(.top, 20)
-        .fullScreenCover(item: $selectedCard) { card in
-          if let index = store.index(for: card) {
-            SingleCardView(card: $store.cards[index])
-              .onChange(of: scenePhase) { newScenePhase in
-                if newScenePhase == .inactive {
-                  card.save()
-                }
-              }
-          } else {
-            fatalError("Unable to locate selected card")
-          }
+      Group {
+        if store.cards.isEmpty {
+          initialView
+        } else {
+          list
         }
-      } else {
-        emptyList
+      }
+      .fullScreenCover(item: $selectedCard) { card in
+        if let index = store.index(for: card) {
+          SingleCardView(card: $store.cards[index])
+            .onChange(of: scenePhase) { newScenePhase in
+              if newScenePhase == .inactive {
+                card.save()
+              }
+            }
+        } else {
+          fatalError("Unable to locate selected card")
+        }
       }
       createButton
     }
@@ -97,13 +85,12 @@ struct CardsListView: View {
         .ignoresSafeArea())
   }
 
-  var emptyList: some View {
+  var initialView: some View {
     VStack {
       Spacer()
+      let card = Card(backgroundColor: .white)
       ZStack {
-        Color.primary.colorInvert()
-          .cornerRadius(20)
-          .shadow(color: Color("shadow-color"), radius: 3)
+        CardThumbnail(card: card)
         Image(systemName: "plus.circle.fill")
           .font(.largeTitle)
       }
@@ -129,15 +116,29 @@ struct CardsListView: View {
                 Label("Delete", systemImage: "trash")
               }
             }
-            .onTapGesture {
-              selectedCard = card
-            }
             .frame(
               width: thumbnailSize.width,
               height: thumbnailSize.height)
+            .onTapGesture {
+              selectedCard = card
+            }
         }
       }
     }
+    .padding(20)
+  }
+
+  var createButton: some View {
+    Button {
+      selectedCard = store.addCard()
+    } label: {
+      Label("Create New", systemImage: "plus")
+        .frame(maxWidth: .infinity)
+    }
+    .font(.system(size: 16, weight: .bold))
+    .padding([.top, .bottom], 10)
+    .background(Color("barColor"))
+    .accentColor(.white)
   }
 }
 

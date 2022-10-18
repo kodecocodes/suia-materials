@@ -44,7 +44,7 @@ struct ElementContextMenu: ViewModifier {
             UIPasteboard.general.string = element.text
           } else if let element = element as? ImageElement,
             let image = element.uiImage {
-            UIPasteboard.general.image = image
+              UIPasteboard.general.image = image
           }
         } label: {
           Label("Copy", systemImage: "doc.on.doc")

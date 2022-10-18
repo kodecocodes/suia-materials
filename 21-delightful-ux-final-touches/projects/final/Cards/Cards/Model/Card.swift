@@ -87,6 +87,7 @@ struct Card: Identifiable {
   func save() {
     do {
       let encoder = JSONEncoder()
+      encoder.outputFormatting = .prettyPrinted
       let data = try encoder.encode(self)
       let filename = "\(id).rwcard"
       let url = URL.documentsDirectory

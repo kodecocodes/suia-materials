@@ -33,12 +33,11 @@
 import SwiftUI
 
 struct CardsListView: View {
-  @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject var store: CardStore
-  @State private var selectedCard: Card?
+  @Environment(\.scenePhase) private var scenePhase
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   @Environment(\.verticalSizeClass) var verticalSizeClass
-
+  @State private var selectedCard: Card?
   @State private var listState = ListState.list
 
   var thumbnailSize: CGSize {
@@ -53,36 +52,40 @@ struct CardsListView: View {
   }
 
   var columns: [GridItem] {
-    [GridItem(.adaptive(minimum: thumbnailSize.width))]
+    [
+      GridItem(.adaptive(
+        minimum: thumbnailSize.width))
+    ]
   }
 
   var body: some View {
     VStack {
       ListSelection(listState: $listState)
-      if !store.cards.isEmpty {
-        Group {
-          switch listState {
-          case .list:
-            list
-          case .carousel:
-            Carousel(selectedCard: $selectedCard)
+      Group {
+        if store.cards.isEmpty {
+          initialView
+        } else {
+          Group {
+            switch listState {
+            case .list:
+              list
+            case .carousel:
+              Carousel(selectedCard: $selectedCard)
+            }
           }
         }
-        .padding(.top, 20)
-        .fullScreenCover(item: $selectedCard) { card in
-          if let index = store.index(for: card) {
-            SingleCardView(card: $store.cards[index])
-              .onChange(of: scenePhase) { newScenePhase in
-                if newScenePhase == .inactive {
-                  card.save()
-                }
+      }
+      .fullScreenCover(item: $selectedCard) { card in
+        if let index = store.index(for: card) {
+          SingleCardView(card: $store.cards[index])
+            .onChange(of: scenePhase) { newScenePhase in
+              if newScenePhase == .inactive {
+                card.save()
               }
-          } else {
-            fatalError("Unable to locate selected card")
-          }
+            }
+        } else {
+          fatalError("Unable to locate selected card")
         }
-      } else {
-        emptyList
       }
       createButton
     }
@@ -91,20 +94,7 @@ struct CardsListView: View {
         .ignoresSafeArea())
   }
 
-  var createButton: some View {
-    Button {
-      selectedCard = store.addCard()
-    } label: {
-      Label("Create New", systemImage: "plus")
-        .frame(maxWidth: .infinity)
-    }
-    .font(.system(size: 16, weight: .bold))
-    .padding([.top, .bottom], 10)
-    .background(Color("barColor"))
-    .accentColor(.white)
-  }
-
-  var emptyList: some View {
+  var initialView: some View {
     VStack {
       Spacer()
       let card = Card(backgroundColor: .white)
@@ -135,15 +125,29 @@ struct CardsListView: View {
                 Label("Delete", systemImage: "trash")
               }
             }
-            .onTapGesture {
-              selectedCard = card
-            }
             .frame(
               width: thumbnailSize.width,
               height: thumbnailSize.height)
+            .onTapGesture {
+              selectedCard = card
+            }
         }
       }
     }
+    .padding(20)
+  }
+
+  var createButton: some View {
+    Button {
+      selectedCard = store.addCard()
+    } label: {
+      Label("Create New", systemImage: "plus")
+        .frame(maxWidth: .infinity)
+    }
+    .font(.system(size: 16, weight: .bold))
+    .padding([.top, .bottom], 10)
+    .background(Color("barColor"))
+    .accentColor(.white)
   }
 }
 

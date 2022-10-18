@@ -37,54 +37,25 @@ struct CardToolbar: ViewModifier {
   @Environment(\.presentationMode) var presentationMode
   @Binding var currentModal: ToolbarSelection?
   @Binding var card: Card
+  @State private var stickerImage: UIImage?
+  @State private var frameIndex: Int?
+  @State private var textElement = TextElement()
 
   func body(content: Content) -> some View {
     content
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Menu {
-            Button(
-              action: {
-                if UIPasteboard.general.hasImages {
-                  if let images = UIPasteboard.general.images {
-                    for image in images {
-                      card.addElement(uiImage: image)
-                    }
-                  }
-                } else if UIPasteboard.general.hasStrings {
-                  if let strings = UIPasteboard.general.strings {
-                    for text in strings {
-                      card.addElement(text: TextElement(text: text))
-                    }
-                  }
-                }
-              },
-              label: {
-                Label("Paste", systemImage: "doc.on.clipboard")
-              })
-            .disabled(!UIPasteboard.general.hasImages
-              && !UIPasteboard.general.hasStrings)
-          } label: {
-            Label("Add", systemImage: "ellipsis.circle")
-          }
+          menu
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("Done") {
-            let cardView = ShareCardView(card: card)
-            let content = cardView.content(size: Settings.cardSize * 0.2)
-            let renderer = ImageRenderer(content: content)
-            let uiImage = renderer.uiImage ?? UIImage.errorImage
-            _ = uiImage.save(to: card.id.uuidString)
-            card.uiImage = uiImage
-            card.save()
             presentationMode.wrappedValue.dismiss()
           }
         }
         ToolbarItem(placement: .navigationBarLeading) {
-          let cardView = ShareCardView(card: card)
-          let content = cardView.content(size: Settings.cardSize)
-          let renderer = ImageRenderer(content: content)
-          let uiImage = renderer.uiImage ?? UIImage.errorImage
+          let uiImage = UIImage.screenshot(
+            card: card,
+            size: Settings.cardSize)
           let image = Image(uiImage: uiImage)
           ShareLink(
             item: image,
@@ -100,5 +71,63 @@ struct CardToolbar: ViewModifier {
             modal: $currentModal)
         }
       }
+      .sheet(item: $currentModal) { item in
+        switch item {
+        case .frameModal:
+          FrameModal(frameIndex: $frameIndex)
+            .onDisappear {
+              if let frameIndex {
+                card.update(
+                  store.selectedElement,
+                  frameIndex: frameIndex)
+              }
+              frameIndex = nil
+            }
+        case .stickerModal:
+          StickerModal(stickerImage: $stickerImage)
+            .onDisappear {
+              if let stickerImage = stickerImage {
+                card.addElement(uiImage: stickerImage)
+              }
+              stickerImage = nil
+            }
+        case .textModal:
+          TextModal(textElement: $textElement)
+            .onDisappear {
+              if !textElement.text.isEmpty {
+                card.addElement(text: textElement)
+              }
+              textElement = TextElement()
+            }
+        default:
+          Text(String(describing: item))
+        }
+      }
+  }
+
+  var menu: some View {
+    Menu {
+      Button {
+        if UIPasteboard.general.hasImages {
+          if let images = UIPasteboard.general.images {
+            for image in images {
+              card.addElement(uiImage: image)
+            }
+          }
+        } else if UIPasteboard.general.hasStrings {
+          if let strings = UIPasteboard.general.strings {
+            for text in strings {
+              card.addElement(text: TextElement(text: text))
+            }
+          }
+        }
+    } label: {
+      Label("Paste", systemImage: "doc.on.clipboard")
+      }
+      .disabled(!UIPasteboard.general.hasImages
+        && !UIPasteboard.general.hasStrings)
+    } label: {
+      Label("Add", systemImage: "ellipsis.circle")
+    }
   }
 }

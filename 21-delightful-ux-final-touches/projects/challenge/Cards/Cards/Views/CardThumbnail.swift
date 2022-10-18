@@ -32,7 +32,6 @@
 
 import SwiftUI
 
-
 struct CardThumbnail: View {
   let card: Card
 

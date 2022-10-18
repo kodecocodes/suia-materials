@@ -43,14 +43,14 @@ let initialCards: [Card] = [
 let initialElements: [CardElement] = [
   ImageElement(
     transform: Transform(
-      size: CGSize(width: 370, height: 266),
+      size: Settings.defaultElementSize * 0.9,
       rotation: .init(degrees: -6),
       offset: CGSize(width: 4, height: -137)),
     uiImage: UIImage(named: "giraffe1")),
   TextElement(
     transform: Transform(
-      size: CGSize(width: 300, height: 100),
-      offset: CGSize(width: 12, height: 81)),
+      size: CGSize(width: 600, height: 300),
+      offset: CGSize(width: 12, height: 400)),
     text: "Snack time!",
     textColor: .blue)
 ]
