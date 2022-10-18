@@ -94,6 +94,6 @@ struct ResizableView_Previews: PreviewProvider {
 
 extension View {
   func resizableView() -> some View {
-    return modifier(ResizableView())
+    modifier(ResizableView())
   }
 }

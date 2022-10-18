@@ -88,15 +88,21 @@ struct ResizableView: ViewModifier {
 }
 
 struct ResizableView_Previews: PreviewProvider {
+  struct ResizableViewPreview: View {
+    @State var transform = Transform()
+    var body: some View {
+      RoundedRectangle(cornerRadius: 30.0)
+        .foregroundColor(Color.blue)
+        .resizableView(transform: $transform)
+    }
+  }
   static var previews: some View {
-    RoundedRectangle(cornerRadius: 30.0)
-      .foregroundColor(Color.blue)
-      .resizableView(transform: .constant(Transform()))
+    ResizableViewPreview()
   }
 }
 
 extension View {
   func resizableView(transform: Binding<Transform>) -> some View {
-    return modifier(ResizableView(transform: transform))
+    modifier(ResizableView(transform: transform))
   }
 }
