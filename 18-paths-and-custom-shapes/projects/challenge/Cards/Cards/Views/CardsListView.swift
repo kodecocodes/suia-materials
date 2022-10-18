@@ -37,6 +37,17 @@ struct CardsListView: View {
   @State private var selectedCard: Card?
 
   var body: some View {
+    list
+      .fullScreenCover(item: $selectedCard) { card in
+        if let index = store.index(for: card) {
+          SingleCardView(card: $store.cards[index])
+        } else {
+          fatalError("Unable to locate selected card")
+        }
+      }
+  }
+
+  var list: some View {
     ScrollView(showsIndicators: false) {
       VStack {
         ForEach(store.cards) { card in
@@ -54,18 +65,6 @@ struct CardsListView: View {
         }
       }
     }
-    .fullScreenCover(item: $selectedCard) { card in
-      if let index = store.index(for: card) {
-        SingleCardView(card: $store.cards[index])
-      } else {
-        fatalError("Unable to locate selected card")
-      }
-    }
-  }
-
-  func binding(card: Binding<Card?>) -> Binding<Card?> {
-    print(card)
-    return card
   }
 }
 

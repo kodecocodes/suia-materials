@@ -32,18 +32,13 @@
 
 import SwiftUI
 
-struct Card: Identifiable, Equatable {
-  static func == (lhs: Card, rhs: Card) -> Bool {
-    lhs.id == rhs.id
-  }
-
+struct Card: Identifiable {
   let id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
 
   mutating func addElement(uiImage: UIImage) {
-    let image = Image(uiImage: uiImage)
-    let element = ImageElement(image: image, uiImage: uiImage)
+    let element = ImageElement(uiImage: uiImage)
     elements.append(element)
   }
 

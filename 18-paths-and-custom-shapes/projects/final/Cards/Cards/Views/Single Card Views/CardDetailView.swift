@@ -31,12 +31,10 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct CardDetailView: View {
   @EnvironmentObject var store: CardStore
   @Binding var card: Card
-  @State private var showAlert = false
 
   func isSelected(_ element: CardElement) -> Bool {
     if let selected = store.selectedElement,
@@ -49,7 +47,6 @@ struct CardDetailView: View {
   var body: some View {
     ZStack {
       card.backgroundColor
-        .edgesIgnoringSafeArea(.all)
         .onTapGesture {
           store.selectedElement = nil
         }
@@ -59,9 +56,6 @@ struct CardDetailView: View {
           .border(
             Settings.borderColor,
             width: isSelected(element) ? Settings.borderWidth : 0)
-          .onTapGesture {
-            store.selectedElement = element
-          }
           .elementContextMenu(
             card: $card,
             element: $element)
@@ -69,12 +63,14 @@ struct CardDetailView: View {
           .frame(
             width: element.transform.size.width,
             height: element.transform.size.height)
+          .onTapGesture {
+            store.selectedElement = element
+          }
       }
     }
     .onDisappear {
       store.selectedElement = nil
     }
-
     .dropDestination(for: CustomTransfer.self) { items, location in
       print(location)
       Task {
@@ -99,15 +95,11 @@ struct CardDetailView_Previews: PreviewProvider {
   }
 }
 
-// 1
-private extension View {
-// 2
+extension View {
   @ViewBuilder
   func clip(element: CardElement) -> some View {
-    // 3
     if let element = element as? ImageElement,
       let frameIndex = element.frameIndex {
-      // 4
       self.clipShape(Shapes.shapes[frameIndex])
     } else {
       self

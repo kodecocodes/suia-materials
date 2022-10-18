@@ -42,31 +42,7 @@ struct CardToolbar: ViewModifier {
     content
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Menu {
-            Button(
-              action: {
-                if UIPasteboard.general.hasImages {
-                  if let images = UIPasteboard.general.images {
-                    for image in images {
-                      card.addElement(uiImage: image)
-                    }
-                  }
-                } else if UIPasteboard.general.hasStrings {
-                  if let strings = UIPasteboard.general.strings {
-                    for text in strings {
-                      card.addElement(text: TextElement(text: text))
-                    }
-                  }
-                }
-              },
-              label: {
-                Label("Paste", systemImage: "doc.on.clipboard")
-              })
-            .disabled(!UIPasteboard.general.hasImages
-              && !UIPasteboard.general.hasStrings)
-          } label: {
-            Label("Add", systemImage: "ellipsis.circle")
-          }
+          menu
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("Done") {
@@ -79,5 +55,45 @@ struct CardToolbar: ViewModifier {
             modal: $currentModal)
         }
       }
+      .sheet(item: $currentModal) { item in
+        switch item {
+        case .stickerModal:
+          StickerModal(stickerImage: $stickerImage)
+            .onDisappear {
+              if let stickerImage = stickerImage {
+                card.addElement(uiImage: stickerImage)
+              }
+              stickerImage = nil
+            }
+        default:
+          Text(String(describing: item))
+        }
+      }
+  }
+
+  var menu: some View {
+    Menu {
+      Button {
+        if UIPasteboard.general.hasImages {
+          if let images = UIPasteboard.general.images {
+            for image in images {
+              card.addElement(uiImage: image)
+            }
+          }
+        } else if UIPasteboard.general.hasStrings {
+          if let strings = UIPasteboard.general.strings {
+            for text in strings {
+              card.addElement(text: TextElement(text: text))
+            }
+          }
+        }
+    } label: {
+      Label("Paste", systemImage: "doc.on.clipboard")
+      }
+      .disabled(!UIPasteboard.general.hasImages
+        && !UIPasteboard.general.hasStrings)
+    } label: {
+      Label("Add", systemImage: "ellipsis.circle")
+    }
   }
 }

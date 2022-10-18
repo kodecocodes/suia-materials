@@ -38,7 +38,8 @@ struct CustomTransfer: Transferable {
 
   public static var transferRepresentation: some TransferRepresentation {
     DataRepresentation(importedContentType: .image) { data in
-      let image = UIImage(data: data) ?? UIImage(named: "error-image")
+      let image = UIImage(data: data)
+        ?? UIImage(named: "error-image")
       return CustomTransfer(image: image)
     }
     DataRepresentation(importedContentType: .text) { data in
