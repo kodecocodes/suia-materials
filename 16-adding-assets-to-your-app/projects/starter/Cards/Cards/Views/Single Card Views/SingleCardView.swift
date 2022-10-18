@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @State private var currentModal: ToolbarSelection?
   @Binding var card: Card
+  @State private var currentModal: ToolbarSelection?
 
   var body: some View {
     NavigationStack {
@@ -42,14 +42,17 @@ struct SingleCardView: View {
         .modifier(CardToolbar(currentModal: $currentModal))
     }
   }
-
-  var content: some View {
-    card.backgroundColor
-  }
 }
 
 struct SingleCardView_Previews: PreviewProvider {
+  struct SingleCardPreview: View {
+    @EnvironmentObject var store: CardStore
+    var body: some View {
+      SingleCardView(card: $store.cards[0])
+    }
+  }
   static var previews: some View {
-    SingleCardView(card: .constant(initialCards[0]))
+    SingleCardPreview()
+      .environmentObject(CardStore(defaultData: true))
   }
 }
