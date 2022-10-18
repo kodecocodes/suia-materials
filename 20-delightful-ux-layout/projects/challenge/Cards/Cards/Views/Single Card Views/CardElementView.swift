@@ -49,8 +49,7 @@ struct ImageElementView: View {
   let element: ImageElement
 
   var body: some View {
-    let uiImage = element.uiImage ?? UIImage.errorImage
-    Image(uiImage: uiImage)
+    element.image
       .resizable()
       .aspectRatio(contentMode: .fit)
   }
@@ -71,6 +70,6 @@ struct TextElementView: View {
 
 struct CardElementView_Previews: PreviewProvider {
   static var previews: some View {
-    CardElementView(element: initialElements[3])
+    CardElementView(element: initialElements[0])
   }
 }

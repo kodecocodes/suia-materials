@@ -31,12 +31,10 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct CardDetailView: View {
   @EnvironmentObject var store: CardStore
   @Binding var card: Card
-  @State private var showAlert = false
   var viewScale: CGFloat = 1
 
   func isSelected(_ element: CardElement) -> Bool {
@@ -50,13 +48,16 @@ struct CardDetailView: View {
   var body: some View {
     ZStack {
       card.backgroundColor
-        .edgesIgnoringSafeArea(.all)
         .onTapGesture {
           store.selectedElement = nil
         }
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
-          .clip(element: element, isSelected: isSelected(element))
+          .clip(element: element)
+          .contentShape(element: element)
+          .overlay(
+            element: element,
+            isSelected: isSelected(element))
           .elementContextMenu(
             card: $card,
             element: $element)
@@ -74,7 +75,6 @@ struct CardDetailView: View {
     .onDisappear {
       store.selectedElement = nil
     }
-
     .dropDestination(for: CustomTransfer.self) { items, location in
       print(location)
       Task {
@@ -99,24 +99,43 @@ struct CardDetailView_Previews: PreviewProvider {
   }
 }
 
-private extension View {
+extension View {
   @ViewBuilder
-  func clip(element: CardElement, isSelected: Bool = false) -> some View {
-    let borderWidth = isSelected ? Settings.borderWidth : 0
+  func clip(element: CardElement) -> some View {
     if let element = element as? ImageElement,
       let frameIndex = element.frameIndex {
       self.clipShape(Shapes.shapes[frameIndex])
-        .contentShape(Shapes.shapes[frameIndex])
-        .overlay(Shapes.shapes[frameIndex]
-          .stroke(
-          Settings.borderColor,
-          lineWidth: borderWidth)
-        )
+    } else {
+      self
+    }
+  }
+
+  @ViewBuilder
+  func overlay(
+    element: CardElement,
+    isSelected: Bool
+  ) -> some View {
+    if isSelected,
+      let element = element as? ImageElement,
+      let frameIndex = element.frameIndex {
+      self.overlay(Shapes.shapes[frameIndex]
+        .stroke(lineWidth: Settings.borderWidth)
+        .foregroundColor(Settings.borderColor))
     } else {
       self
         .border(
           Settings.borderColor,
-          width: borderWidth)
+          width: isSelected ? Settings.borderWidth : 0)
+    }
+  }
+
+  @ViewBuilder
+  func contentShape(element: CardElement) -> some View {
+    if let element = element as? ImageElement,
+      let frameIndex = element.frameIndex {
+      self.contentShape(Shapes.shapes[frameIndex])
+    } else {
+      self
     }
   }
 }

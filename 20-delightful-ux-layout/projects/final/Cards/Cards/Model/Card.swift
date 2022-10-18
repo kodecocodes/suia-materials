@@ -32,11 +32,7 @@
 
 import SwiftUI
 
-struct Card: Identifiable, Equatable {
-  static func == (lhs: Card, rhs: Card) -> Bool {
-    lhs.id == rhs.id
-  }
-
+struct Card: Identifiable {
   var id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
@@ -89,6 +85,7 @@ struct Card: Identifiable, Equatable {
   func save() {
     do {
       let encoder = JSONEncoder()
+      encoder.outputFormatting = .prettyPrinted
       let data = try encoder.encode(self)
       let filename = "\(id).rwcard"
       let url = URL.documentsDirectory
@@ -112,11 +109,7 @@ extension Card: Codable {
     self.id = UUID(uuidString: id) ?? UUID()
     elements += try container.decode(
       [ImageElement].self, forKey: .imageElements)
-
-    // Challenge 2 - load the text elements
     elements += try container.decode([TextElement].self, forKey: .textElements)
-
-    // Challenge 1 - load the background color
     let components = try container.decode([CGFloat].self, forKey: .backgroundColor)
     backgroundColor = Color.color(components: components)
   }
@@ -127,8 +120,9 @@ extension Card: Codable {
     let imageElements: [ImageElement] =
       elements.compactMap { $0 as? ImageElement }
     try container.encode(imageElements, forKey: .imageElements)
-
-    // Challenge 1 - save the background color
+    let textElements: [TextElement] =
+      elements.compactMap { $0 as? TextElement }
+    try container.encode(textElements, forKey: .textElements)
     let components = backgroundColor.colorComponents()
     try container.encode(components, forKey: .backgroundColor)
   }

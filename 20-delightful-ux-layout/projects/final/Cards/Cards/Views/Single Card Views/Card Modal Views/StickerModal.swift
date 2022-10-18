@@ -88,7 +88,7 @@ struct StickerModal: View {
   }
 
   func image(from path: String) -> UIImage {
-    return UIImage(named: path)
+    UIImage(named: path)
       ?? UIImage(named: "error-image")
       ?? UIImage()
   }

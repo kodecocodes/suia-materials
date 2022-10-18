@@ -34,9 +34,8 @@ import SwiftUI
 
 struct FrameModal: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var store: CardStore
-
   @Binding var frameIndex: Int?
+
   private let columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
   ]
@@ -68,6 +67,5 @@ struct FrameModal: View {
 struct FrameModal_Previews: PreviewProvider {
   static var previews: some View {
     FrameModal(frameIndex: .constant(nil))
-      .environmentObject(CardStore())
   }
 }
