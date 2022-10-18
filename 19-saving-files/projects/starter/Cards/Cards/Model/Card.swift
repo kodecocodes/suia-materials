@@ -32,11 +32,7 @@
 
 import SwiftUI
 
-struct Card: Identifiable, Equatable {
-  static func == (lhs: Card, rhs: Card) -> Bool {
-    lhs.id == rhs.id
-  }
-
+struct Card: Identifiable {
   let id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
@@ -73,9 +69,5 @@ struct Card: Identifiable, Equatable {
         newElement.frameIndex = frameIndex
         elements[index] = newElement
     }
-  }
-
-  func save() {
-    print("Saving data")
   }
 }

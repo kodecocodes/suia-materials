@@ -34,7 +34,7 @@ import SwiftUI
 
 @main
 struct CardsApp: App {
-  @StateObject var store = CardStore(defaultData: false)
+  @StateObject var store = CardStore()
 
   var body: some Scene {
     WindowGroup {

@@ -44,22 +44,22 @@ let initialElements: [CardElement] = [
   ImageElement(
     transform: Transform(
       size: CGSize(width: 250, height: 180),
-      offset: CGSize(width: 0, height: -175)),
-  uiImage: UIImage(named: "giraffe3")),
+      offset: CGSize(width: 27, height: -140)),
+    uiImage: UIImage(named: "giraffe3")),
   ImageElement(
     transform: Transform(
-      size: CGSize(width: 450, height: 320),
+      size: CGSize(width: 380, height: 270),
       offset: CGSize(width: -80, height: 25)),
     uiImage: UIImage(named: "giraffe2")),
   ImageElement(
     transform: Transform(
       size: CGSize(width: 250, height: 180),
-      offset: CGSize(width: 80, height: 225)),
+      offset: CGSize(width: 80, height: 205)),
     uiImage: UIImage(named: "giraffe1")),
   TextElement(
     transform: Transform(
-      size: Settings.defaultElementSize * 1.2,
-      offset: CGSize(width: 0, height: -306)),
+      size: Settings.defaultElementSize * 1.1,
+      offset: CGSize(width: 10, height: -275)),
     text: "Giraffes!!!",
     textColor: .black)
 ]

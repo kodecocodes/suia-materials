@@ -32,19 +32,13 @@
 
 import SwiftUI
 
-struct Card: Identifiable, Equatable {
-  static func == (lhs: Card, rhs: Card) -> Bool {
-    lhs.id == rhs.id
-  }
-
+struct Card: Identifiable {
   var id = UUID()
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
 
   mutating func addElement(uiImage: UIImage) {
-  // 1
     let imageFilename = uiImage.save()
-    // 2
     let element = ImageElement(
       uiImage: uiImage,
       imageFilename: imageFilename)
@@ -90,15 +84,12 @@ struct Card: Identifiable, Equatable {
 
   func save() {
     do {
-    // 1
       let encoder = JSONEncoder()
-      // 2
+      encoder.outputFormatting = .prettyPrinted
       let data = try encoder.encode(self)
-      // 3
       let filename = "\(id).rwcard"
       let url = URL.documentsDirectory
         .appendingPathComponent(filename)
-      // 4
       try data.write(to: url)
     } catch {
       print(error.localizedDescription)
@@ -114,10 +105,8 @@ extension Card: Codable {
   init(from decoder: Decoder) throws {
     let container = try decoder
       .container(keyedBy: CodingKeys.self)
-    // 1
     let id = try container.decode(String.self, forKey: .id)
     self.id = UUID(uuidString: id) ?? UUID()
-    // 2
     elements += try container
       .decode([ImageElement].self, forKey: .imageElements)
   }

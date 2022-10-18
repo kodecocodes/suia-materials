@@ -62,10 +62,8 @@ struct StickerModal: View {
   static func loadStickers() -> [String] {
     var themes: [URL] = []
     var stickerNames: [String] = []
-    // 1
     let fileManager = FileManager.default
     if let resourcePath = Bundle.main.resourcePath,
-      // 2
       let enumerator = fileManager.enumerator(
         at: URL(fileURLWithPath: resourcePath + "/Stickers"),
         includingPropertiesForKeys: nil,
@@ -73,7 +71,6 @@ struct StickerModal: View {
           .skipsSubdirectoryDescendants,
           .skipsHiddenFiles
         ]) {
-          // 3
           for case let url as URL in enumerator
           where url.hasDirectoryPath {
             themes.append(url)
@@ -91,8 +88,7 @@ struct StickerModal: View {
   }
 
   func image(from path: String) -> UIImage {
-    print("loading:", path)
-    return UIImage(named: path)
+    UIImage(named: path)
       ?? UIImage(named: "error-image")
       ?? UIImage()
   }

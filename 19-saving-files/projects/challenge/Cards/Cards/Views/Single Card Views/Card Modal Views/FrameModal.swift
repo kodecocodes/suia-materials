@@ -34,10 +34,8 @@ import SwiftUI
 
 struct FrameModal: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var store: CardStore
-
-  // 1
   @Binding var frameIndex: Int?
+
   private let columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
   ]
@@ -48,17 +46,13 @@ struct FrameModal: View {
   var body: some View {
     ScrollView {
       LazyVGrid(columns: columns) {
-      // 2
         ForEach(0..<Shapes.shapes.count, id: \.self) { index in
           Shapes.shapes[index]
-          // 3
             .stroke(Color.primary, style: style)
-            // 4
             .background(
               Shapes.shapes[index].fill(Color.secondary))
             .frame(width: 100, height: 120)
             .padding()
-            // 5
             .onTapGesture {
               frameIndex = index
               presentationMode.wrappedValue.dismiss()
@@ -73,6 +67,5 @@ struct FrameModal: View {
 struct FrameModal_Previews: PreviewProvider {
   static var previews: some View {
     FrameModal(frameIndex: .constant(nil))
-      .environmentObject(CardStore())
   }
 }
