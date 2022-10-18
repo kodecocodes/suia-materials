@@ -35,6 +35,7 @@ import SwiftUI
 struct CardToolbar: ViewModifier {
   @Environment(\.presentationMode) var presentationMode
   @Binding var currentModal: ToolbarSelection?
+
   func body(content: Content) -> some View {
     content
       .toolbar {
