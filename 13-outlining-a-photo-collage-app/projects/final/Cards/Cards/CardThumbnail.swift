@@ -32,7 +32,6 @@
 
 import SwiftUI
 
-
 struct CardThumbnail: View {
   var body: some View {
     RoundedRectangle(cornerRadius: 15)
