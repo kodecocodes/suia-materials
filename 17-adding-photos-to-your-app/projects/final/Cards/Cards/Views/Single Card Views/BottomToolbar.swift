@@ -86,6 +86,6 @@ struct BottomToolbar_Previews: PreviewProvider {
     BottomToolbar(
       card: .constant(Card()),
       modal: .constant(.stickerModal))
-      .padding()
+    .padding()
   }
 }

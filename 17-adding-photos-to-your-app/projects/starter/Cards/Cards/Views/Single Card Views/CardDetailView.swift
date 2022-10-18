@@ -39,7 +39,6 @@ struct CardDetailView: View {
   var body: some View {
     ZStack {
       card.backgroundColor
-        .edgesIgnoringSafeArea(.all)
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
           .resizableView(transform: $element.transform)

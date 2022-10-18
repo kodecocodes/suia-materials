@@ -31,18 +31,14 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct CardDetailView: View {
   @EnvironmentObject var store: CardStore
   @Binding var card: Card
-  @State private var showAlert = false
-
 
   var body: some View {
     ZStack {
       card.backgroundColor
-        .edgesIgnoringSafeArea(.all)
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
           .elementContextMenu(
@@ -54,7 +50,6 @@ struct CardDetailView: View {
             height: element.transform.size.height)
       }
     }
-
     .dropDestination(for: CustomTransfer.self) { items, location in
       print(location)
       Task {

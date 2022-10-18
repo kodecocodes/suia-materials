@@ -70,6 +70,6 @@ struct TextElementView: View {
 
 struct CardElementView_Previews: PreviewProvider {
   static var previews: some View {
-    CardElementView(element: initialElements[3])
+    CardElementView(element: initialElements[0])
   }
 }

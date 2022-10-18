@@ -42,31 +42,7 @@ struct CardToolbar: ViewModifier {
     content
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Menu {
-            Button(
-              action: {
-                if UIPasteboard.general.hasImages {
-                  if let images = UIPasteboard.general.images {
-                    for image in images {
-                      card.addElement(uiImage: image)
-                    }
-                  }
-                } else if UIPasteboard.general.hasStrings {
-                  if let strings = UIPasteboard.general.strings {
-                    for text in strings {
-                      card.addElement(text: TextElement(text: text))
-                    }
-                  }
-                }
-              },
-              label: {
-                Label("Paste", systemImage: "doc.on.clipboard")
-              })
-            .disabled(!UIPasteboard.general.hasImages
-              && !UIPasteboard.general.hasStrings)
-          } label: {
-            Label("Add", systemImage: "ellipsis.circle")
-          }
+          menu
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("Done") {
@@ -93,5 +69,31 @@ struct CardToolbar: ViewModifier {
           Text(String(describing: item))
         }
       }
+  }
+
+  var menu: some View {
+    Menu {
+      Button {
+        if UIPasteboard.general.hasImages {
+          if let images = UIPasteboard.general.images {
+            for image in images {
+              card.addElement(uiImage: image)
+            }
+          }
+        } else if UIPasteboard.general.hasStrings {
+          if let strings = UIPasteboard.general.strings {
+            for text in strings {
+              card.addElement(text: TextElement(text: text))
+            }
+          }
+        }
+    } label: {
+      Label("Paste", systemImage: "doc.on.clipboard")
+      }
+      .disabled(!UIPasteboard.general.hasImages
+        && !UIPasteboard.general.hasStrings)
+    } label: {
+      Label("Add", systemImage: "ellipsis.circle")
+    }
   }
 }
