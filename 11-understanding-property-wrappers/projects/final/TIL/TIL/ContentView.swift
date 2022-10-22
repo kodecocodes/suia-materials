@@ -39,7 +39,6 @@ final class ThingStore: ObservableObject {
 struct ContentView: View {
   @State private var showAddThing = false
   @StateObject private var myThings = ThingStore()
-  @State private var thing = ""
 
   var body: some View {
     NavigationStack {
@@ -49,32 +48,22 @@ struct ContentView: View {
             .foregroundColor(.gray)
         }
         ForEach(myThings.things, id: \.self) { thing in
-          Text(thing.uppercased())
+          Text(thing)
         }
         Spacer()
       }
       .navigationTitle("TIL")
       .toolbar {
         ToolbarItem {
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
           Button(action: { showAddThing.toggle() }) {
             Image(systemName: "plus.circle")
               .font(.title)
           }
         }
       }
-      .alert("Add a Thing", isPresented: $showAddThing, actions: {
-        // DONE: Add TextField
-        TextField("Thing I Learned", text: $thing)
-          .disableAutocorrection(true)
-        Button("Add") {
-          if !thing.isEmpty {
-            myThings.things.append(thing)
-            thing = ""
-          }
-        }
-        Button("Cancel", role: .cancel) { /* no action */ }
-      }) { /* no message */ }
+      .sheet(isPresented: $showAddThing) {
+        AddThingView(someThings: myThings)
+      }
     }
   }
 }
@@ -82,5 +71,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     ContentView()
+      .environment(\.textCase, .uppercase)
   }
 }

@@ -33,9 +33,9 @@
 import SwiftUI
 
 struct AddThingView: View {
+  @Environment(\.presentationMode) var presentationMode
   @State private var thing = ""
   @FocusState private var thingIsFocused: Bool
-  @Environment(\.presentationMode) var presentationMode
   @ObservedObject var someThings: ThingStore
 
   var body: some View {
@@ -43,8 +43,10 @@ struct AddThingView: View {
       TextField("Thing I Learned", text: $thing)  // 1
         .textFieldStyle(RoundedBorderTextFieldStyle())  // 2
         .padding()  // 3
+//        .autocapitalization(.allCharacters)
         .disableAutocorrection(true)
         .focused($thingIsFocused)
+        .onAppear() { thingIsFocused = true }
       Button("Done") {
         if !thing.isEmpty {
           someThings.things.append(thing)
@@ -54,9 +56,6 @@ struct AddThingView: View {
       Spacer()
     }
     .environment(\.textCase, nil)
-    .onAppear {
-      thingIsFocused = true
-    }
   }
 }
 

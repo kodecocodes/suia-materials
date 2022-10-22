@@ -58,9 +58,11 @@ struct ContentView: View {
           }
         }
       }
-      .sheet(isPresented: $showAddThing) {
-        AddThingView()
-      }
+      .alert("Add a Thing", isPresented: $showAddThing, actions: {
+        // TODO: Add TextField
+        Button("Add") { /* TODO */ }
+        Button("Cancel", role: .cancel) { /* no action */ }
+      }) { /* no message */ }
     }
   }
 }

@@ -32,41 +32,22 @@
 
 import SwiftUI
 
-struct ThingStore {
-  var things: [String] = []
-}
-
-struct ContentView: View {
-  @State private var showAddThing = false
-  let tempThings = ["YOLO", "BTW"]
+struct AddThingView: View {
+  @Environment(\.presentationMode) var presentationMode
 
   var body: some View {
-    NavigationStack {
-      VStack(spacing: 20) {
-        ForEach(tempThings, id: \.self) { thing in
-          Text(thing)
-        }
-        Spacer()
+    VStack {
+      Button("Done") {
+        presentationMode.wrappedValue.dismiss()
       }
-      .navigationTitle("TIL")
-      .toolbar {
-        ToolbarItem {
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
-          Button(action: { showAddThing.toggle() }) {
-            Image(systemName: "plus.circle")
-              .font(.title)
-          }
-        }
-      }
-      .sheet(isPresented: $showAddThing) {
-        AddThingView()
-      }
+      Spacer()
     }
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct AddThingView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    AddThingView()
   }
 }
+
