@@ -33,7 +33,6 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @Environment(\.presentationMode) var presentationMode
   @State private var currentModal: ToolbarSelection?
 
   var body: some View {
