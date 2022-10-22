@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8202EE432903B1DD00A66885 /* StickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8202EE422903B1DD00A66885 /* StickerModal.swift */; };
+		8202EE472903B64500A66885 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 8202EE462903B64500A66885 /* Stickers */; };
 		8212B4D128FA64E50065D5E9 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8212B4D028FA64E50065D5E9 /* license.txt */; };
 		8269128D28FA3A2000FA1DA4 /* CardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269128C28FA3A2000FA1DA4 /* CardsApp.swift */; };
 		8269128F28FA3A2000FA1DA4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8269128E28FA3A2000FA1DA4 /* ContentView.swift */; };
@@ -20,8 +22,6 @@
 		826912A828FA414700FA1DA4 /* ResizableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826912A728FA414700FA1DA4 /* ResizableView.swift */; };
 		826912AB28FA421900FA1DA4 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826912AA28FA421900FA1DA4 /* Transform.swift */; };
 		826912AF28FA42A900FA1DA4 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826912AE28FA42A900FA1DA4 /* Operators.swift */; };
-		82849C1F28FB917D007DB055 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 82849C1E28FB917D007DB055 /* Stickers */; };
-		82849C2228FB91A2007DB055 /* StickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82849C2128FB91A2007DB055 /* StickerModal.swift */; };
 		82BA0F6728FA44FF0080C311 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F6628FA44FF0080C311 /* Settings.swift */; };
 		82BA0F6A28FA462D0080C311 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F6928FA462D0080C311 /* ColorExtensions.swift */; };
 		82BA0F6C28FA47790080C311 /* CardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F6B28FA47790080C311 /* CardToolbar.swift */; };
@@ -35,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8202EE3E2903AFF400A66885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8202EE422903B1DD00A66885 /* StickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerModal.swift; sourceTree = "<group>"; };
+		8202EE462903B64500A66885 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = ../../../../assets/Stickers; sourceTree = "<group>"; };
 		8212B4D028FA64E50065D5E9 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		8269128928FA3A2000FA1DA4 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8269128C28FA3A2000FA1DA4 /* CardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApp.swift; sourceTree = "<group>"; };
@@ -49,9 +52,6 @@
 		826912A728FA414700FA1DA4 /* ResizableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableView.swift; sourceTree = "<group>"; };
 		826912AA28FA421900FA1DA4 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		826912AE28FA42A900FA1DA4 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		82849C1D28FB90EF007DB055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		82849C1E28FB917D007DB055 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = ../../../../assets/Stickers; sourceTree = "<group>"; };
-		82849C2128FB91A2007DB055 /* StickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerModal.swift; sourceTree = "<group>"; };
 		82BA0F6628FA44FF0080C311 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		82BA0F6928FA462D0080C311 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		82BA0F6B28FA47790080C311 /* CardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardToolbar.swift; sourceTree = "<group>"; };
@@ -75,6 +75,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8202EE412903B1CA00A66885 /* Card Modal Views */ = {
+			isa = PBXGroup;
+			children = (
+				8202EE422903B1DD00A66885 /* StickerModal.swift */,
+			);
+			path = "Card Modal Views";
+			sourceTree = "<group>";
+		};
 		8269128028FA3A2000FA1DA4 = {
 			isa = PBXGroup;
 			children = (
@@ -94,13 +102,13 @@
 		8269128B28FA3A2000FA1DA4 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
-				82849C1D28FB90EF007DB055 /* Info.plist */,
+				8202EE3E2903AFF400A66885 /* Info.plist */,
 				8269128C28FA3A2000FA1DA4 /* CardsApp.swift */,
 				826912A528FA3F6800FA1DA4 /* Views */,
 				826912A928FA41CC00FA1DA4 /* Model */,
 				82BA0F6828FA461E0080C311 /* Extensions */,
 				82BA0F6528FA44F10080C311 /* Config */,
-				82849C1E28FB917D007DB055 /* Stickers */,
+				8202EE462903B64500A66885 /* Stickers */,
 				8269129028FA3A2100FA1DA4 /* Assets.xcassets */,
 				8269129228FA3A2100FA1DA4 /* Preview Content */,
 			);
@@ -133,11 +141,11 @@
 			children = (
 				8269129F28FA3B4A00FA1DA4 /* SingleCardView.swift */,
 				82BA0F7928FA5E1A0080C311 /* CardDetailView.swift */,
-				82BA0F7B28FA62DF0080C311 /* CardElementView.swift */,
 				826912A328FA3CA600FA1DA4 /* BottomToolbar.swift */,
 				826912A128FA3C9500FA1DA4 /* ToolbarSelection.swift */,
 				82BA0F6B28FA47790080C311 /* CardToolbar.swift */,
-				82849C2028FB9192007DB055 /* Card Modal Views */,
+				82BA0F7B28FA62DF0080C311 /* CardElementView.swift */,
+				8202EE412903B1CA00A66885 /* Card Modal Views */,
 			);
 			path = "Single Card Views";
 			sourceTree = "<group>";
@@ -152,14 +160,6 @@
 				826912AE28FA42A900FA1DA4 /* Operators.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		82849C2028FB9192007DB055 /* Card Modal Views */ = {
-			isa = PBXGroup;
-			children = (
-				82849C2128FB91A2007DB055 /* StickerModal.swift */,
-			);
-			path = "Card Modal Views";
 			sourceTree = "<group>";
 		};
 		82BA0F6528FA44F10080C311 /* Config */ = {
@@ -239,7 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82849C1F28FB917D007DB055 /* Stickers in Resources */,
+				8202EE472903B64500A66885 /* Stickers in Resources */,
 				8212B4D128FA64E50065D5E9 /* license.txt in Resources */,
 				8269129428FA3A2100FA1DA4 /* Preview Assets.xcassets in Resources */,
 				8269129128FA3A2100FA1DA4 /* Assets.xcassets in Resources */,
@@ -277,6 +277,7 @@
 			files = (
 				8269129E28FA3AFD00FA1DA4 /* CardThumbnail.swift in Sources */,
 				82BA0F7628FA5C250080C311 /* Card.swift in Sources */,
+				8202EE432903B1DD00A66885 /* StickerModal.swift in Sources */,
 				826912AF28FA42A900FA1DA4 /* Operators.swift in Sources */,
 				82BA0F6C28FA47790080C311 /* CardToolbar.swift in Sources */,
 				8269128F28FA3A2000FA1DA4 /* ContentView.swift in Sources */,
@@ -295,7 +296,6 @@
 				82BA0F6728FA44FF0080C311 /* Settings.swift in Sources */,
 				8269128D28FA3A2000FA1DA4 /* CardsApp.swift in Sources */,
 				82BA0F6A28FA462D0080C311 /* ColorExtensions.swift in Sources */,
-				82849C2228FB91A2007DB055 /* StickerModal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
