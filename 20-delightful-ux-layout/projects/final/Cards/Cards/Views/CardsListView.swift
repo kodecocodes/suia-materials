@@ -71,7 +71,7 @@ struct CardsListView: View {
           SingleCardView(card: $store.cards[index])
             .onChange(of: scenePhase) { newScenePhase in
               if newScenePhase == .inactive {
-                card.save()
+                store.cards[index].save()
               }
             }
         } else {
@@ -88,15 +88,16 @@ struct CardsListView: View {
   var initialView: some View {
     VStack {
       Spacer()
-      let card = Card(backgroundColor: .white)
+      let card = Card(
+        backgroundColor: Color(uiColor: .systemBackground))
       ZStack {
         CardThumbnail(card: card)
         Image(systemName: "plus.circle.fill")
           .font(.largeTitle)
       }
       .frame(
-        width: thumbnailSize.width * 1.5,
-        height: thumbnailSize.height * 1.5)
+        width: thumbnailSize.width * 1.2,
+        height: thumbnailSize.height * 1.2)
       .onTapGesture {
         selectedCard = store.addCard()
       }
@@ -125,7 +126,7 @@ struct CardsListView: View {
         }
       }
     }
-    .padding(20)
+    .padding(.top, 20)
   }
 
   var createButton: some View {

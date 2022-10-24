@@ -26,8 +26,8 @@
 		82849C2A28FBAF62007DB055 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82849C2928FBAF62007DB055 /* UIImageExtensions.swift */; };
 		82849C2C28FBB01D007DB055 /* CustomTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82849C2B28FBB01D007DB055 /* CustomTransfer.swift */; };
 		82849C2E28FBB17D007DB055 /* ElementContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82849C2D28FBB17D007DB055 /* ElementContextMenu.swift */; };
+		82AD8F2629061C070000B455 /* TextModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD8F2529061C070000B455 /* TextModal.swift */; };
 		82B2C7A628FCCD2E00787409 /* AngleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B2C7A528FCCD2E00787409 /* AngleExtensions.swift */; };
-		82B2C7A828FCD30F00787409 /* TextModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B2C7A728FCD30F00787409 /* TextModal.swift */; };
 		82BA0F6728FA44FF0080C311 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F6628FA44FF0080C311 /* Settings.swift */; };
 		82BA0F6A28FA462D0080C311 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F6928FA462D0080C311 /* ColorExtensions.swift */; };
 		82BA0F6C28FA47790080C311 /* CardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F6B28FA47790080C311 /* CardToolbar.swift */; };
@@ -64,8 +64,8 @@
 		82849C2928FBAF62007DB055 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		82849C2B28FBB01D007DB055 /* CustomTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransfer.swift; sourceTree = "<group>"; };
 		82849C2D28FBB17D007DB055 /* ElementContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementContextMenu.swift; sourceTree = "<group>"; };
+		82AD8F2529061C070000B455 /* TextModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModal.swift; sourceTree = "<group>"; };
 		82B2C7A528FCCD2E00787409 /* AngleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleExtensions.swift; sourceTree = "<group>"; };
-		82B2C7A728FCD30F00787409 /* TextModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModal.swift; sourceTree = "<group>"; };
 		82BA0F6628FA44FF0080C311 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		82BA0F6928FA462D0080C311 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		82BA0F6B28FA47790080C311 /* CardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardToolbar.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				82849C2128FB91A2007DB055 /* StickerModal.swift */,
 				82849C2728FBA057007DB055 /* PhotosModal.swift */,
 				82D9187328FBBC9A00B15F82 /* FrameModal.swift */,
-				82B2C7A728FCD30F00787409 /* TextModal.swift */,
+				82AD8F2529061C070000B455 /* TextModal.swift */,
 			);
 			path = "Card Modal Views";
 			sourceTree = "<group>";
@@ -311,7 +311,7 @@
 				826912A828FA414700FA1DA4 /* ResizableView.swift in Sources */,
 				82BA0F7A28FA5E1A0080C311 /* CardDetailView.swift in Sources */,
 				82849C2E28FBB17D007DB055 /* ElementContextMenu.swift in Sources */,
-				82B2C7A828FCD30F00787409 /* TextModal.swift in Sources */,
+				82AD8F2629061C070000B455 /* TextModal.swift in Sources */,
 				82BA0F7028FA5AB10080C311 /* PreviewData.swift in Sources */,
 				8269129B28FA3A5B00FA1DA4 /* CardsListView.swift in Sources */,
 				826912A028FA3B4A00FA1DA4 /* SingleCardView.swift in Sources */,
@@ -456,7 +456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cards/Preview Content\"";
-				DEVELOPMENT_TEAM = 3E7TCD55JT;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cards/Info.plist;
@@ -485,7 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Cards/Preview Content\"";
-				DEVELOPMENT_TEAM = 3E7TCD55JT;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cards/Info.plist;

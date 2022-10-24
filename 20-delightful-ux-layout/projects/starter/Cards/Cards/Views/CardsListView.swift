@@ -45,7 +45,7 @@ struct CardsListView: View {
             SingleCardView(card: $store.cards[index])
               .onChange(of: scenePhase) { newScenePhase in
                 if newScenePhase == .inactive {
-                  card.save()
+                  store.cards[index].save()
                 }
               }
           } else {
