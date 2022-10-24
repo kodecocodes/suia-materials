@@ -48,7 +48,6 @@ struct Card: Identifiable {
 
   mutating func addElement(text: TextElement) {
     elements.append(text)
-    save()
   }
 
   mutating func addElements(from transfer: [CustomTransfer]) {
@@ -59,7 +58,6 @@ struct Card: Identifiable {
         addElement(uiImage: image)
       }
     }
-    save()
   }
 
   mutating func remove(_ element: CardElement) {
@@ -79,7 +77,6 @@ struct Card: Identifiable {
         newElement.frameIndex = frameIndex
         elements[index] = newElement
     }
-    save()
   }
 
   func save() {
