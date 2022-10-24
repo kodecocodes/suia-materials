@@ -58,15 +58,12 @@ struct ShareCardView: View {
       CardElementView(element: element)
         .clip(element: element)
         .contentShape(element: element)
-        .overlay(
-          element: element,
-          isSelected: false)
         .frame(
           width: element.transform.size.width,
           height: element.transform.size.height)
-        .offset(element.transform.offset)
         .rotationEffect(element.transform.rotation)
         .scaleEffect(viewScale)
+        .offset(element.transform.offset * viewScale)
     }
   }
 }

@@ -108,8 +108,8 @@ struct CardToolbar: ViewModifier {
             }
           }
         }
-    } label: {
-      Label("Paste", systemImage: "doc.on.clipboard")
+      } label: {
+        Label("Paste", systemImage: "doc.on.clipboard")
       }
       .disabled(!UIPasteboard.general.hasImages
         && !UIPasteboard.general.hasStrings)
