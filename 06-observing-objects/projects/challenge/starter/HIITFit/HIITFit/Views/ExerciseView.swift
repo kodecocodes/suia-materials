@@ -69,7 +69,7 @@ struct ExerciseView: View {
 
   var body: some View {
     GeometryReader { geometry in
-      VStack {
+      VStack(spacing: 0) {
         HeaderView(
           selectedTab: $selectedTab,
           titleText: Exercise.exercises[index].exerciseName)
@@ -91,7 +91,8 @@ struct ExerciseView: View {
         .padding()
 
         if showTimer {
-          TimerView(timerDone: $timerDone)
+          TimerView(timerDone: $timerDone,
+                    size: geometry.size.height * 0.07)
         }
 
         Spacer()
