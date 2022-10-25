@@ -56,7 +56,7 @@ struct ExerciseView: View {
         }
 
         Text(Date().addingTimeInterval(interval), style: .timer)
-          .font(.system(size: 90))
+          .font(.system(size: geometry.size.height * 0.07))
 
         Button("Start/Done") { }
           .font(.title3)
