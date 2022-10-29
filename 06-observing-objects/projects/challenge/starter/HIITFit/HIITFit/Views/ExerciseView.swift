@@ -91,8 +91,9 @@ struct ExerciseView: View {
         .padding()
 
         if showTimer {
-          TimerView(timerDone: $timerDone,
-                    size: geometry.size.height * 0.07)
+          TimerView(
+            timerDone: $timerDone,
+            size: geometry.size.height * 0.07)
         }
 
         Spacer()

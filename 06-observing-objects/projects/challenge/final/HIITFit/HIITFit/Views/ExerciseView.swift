@@ -58,6 +58,7 @@ struct ExerciseView: View {
 
   var doneButton: some View {
     Button("Done") {
+      history.addDoneExercise(Exercise.exercises[index].exerciseName)
       timerDone = false
       showTimer.toggle()
       if lastExercise {
@@ -92,8 +93,9 @@ struct ExerciseView: View {
         .padding()
 
         if showTimer {
-          TimerView(timerDone: $timerDone,
-                    size: geometry.size.height * 0.07)
+          TimerView(
+            timerDone: $timerDone,
+            size: geometry.size.height * 0.07)
         }
 
         Spacer()
