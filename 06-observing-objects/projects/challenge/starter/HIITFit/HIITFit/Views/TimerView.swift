@@ -61,12 +61,12 @@ struct TimerView: View {
             date: context.date,
             timeRemaining: $timeRemaining,
             size: size)
-        }
-        .onChange(of: timeRemaining) { _ in
-          if timeRemaining < 1 {
-            timerDone = true
-          }
-        }
+    }
+    .onChange(of: timeRemaining) { _ in
+      if timeRemaining < 1 {
+        timerDone = true
+      }
+    }
   }
 }
 
