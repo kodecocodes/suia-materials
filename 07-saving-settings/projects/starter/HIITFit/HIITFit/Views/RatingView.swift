@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ struct RatingView: View {
 
   var body: some View {
     HStack {
-      ForEach(1 ..< maximumRating + 1) { index in
+      ForEach(1 ..< maximumRating + 1, id: \.self) { index in
         Image(systemName: "waveform.path.ecg")
           .foregroundColor(
             index > rating ? offColor : onColor)
