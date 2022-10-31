@@ -38,6 +38,7 @@ struct HistoryView: View {
 
   var body: some View {
     ZStack(alignment: .topTrailing) {
+      // swiftlint:disable:next multiple_closures_with_trailing_closure
       Button(action: { showHistory.toggle() }) {
         Image(systemName: "xmark.circle")
       }

@@ -60,12 +60,12 @@ struct WelcomeView: View {
           }
           Image("step-up")
             .resizedToFill(width: 240, height: 240)
+            .clipShape(Circle())
+        }
 //            .resizable()
 //            .aspectRatio(contentMode: .fill)
 //            .frame(width: 240.0, height: 240.0)
-            .clipShape(Circle())
-        }
-
+        // swiftlint:disable:next multiple_closures_with_trailing_closure
         Button(action: { selectedTab = 0 }) {
           Text("Get Started")
           Image(systemName: "arrow.right.circle")
