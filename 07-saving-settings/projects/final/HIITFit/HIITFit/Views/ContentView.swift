@@ -39,7 +39,7 @@ struct ContentView: View {
     TabView(selection: $selectedTab) {
       WelcomeView(selectedTab: $selectedTab)
         .tag(9)
-      ForEach(0 ..< Exercise.exercises.count) { index in
+      ForEach(Exercise.exercises.indices, id: \.self) { index in
         ExerciseView(selectedTab: $selectedTab, index: index)
           .tag(index)
       }
