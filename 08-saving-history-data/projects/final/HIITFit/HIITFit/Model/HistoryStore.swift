@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -39,13 +39,11 @@ struct ExerciseDay: Identifiable {
 }
 
 class HistoryStore: ObservableObject {
-  // swiftlint:disable:next array_constructor
   @Published var exerciseDays: [ExerciseDay] = []
 
   enum FileError: Error {
     case loadFailure
     case saveFailure
-    case urlFailure
   }
 
   init() {}
@@ -61,33 +59,21 @@ class HistoryStore: ObservableObject {
     }
   }
 
-  func getURL() -> URL? {
-    // 1
-    guard let documentsURL = FileManager.default.urls(
-      for: .documentDirectory, in: .userDomainMask).first else {
-      // 2
-      return nil
-    }
-    // 3
-    return documentsURL.appendingPathComponent("history.plist")
+  var dataUrl: URL {
+    URL.documentsDirectory
+      .appendingPathComponent("history.plist")
   }
 
   func load() throws {
-    // 1
-    guard let dataURL = getURL() else {
-      throw FileError.urlFailure
+    guard let data = try? Data(contentsOf: dataUrl) else {
+      return
     }
     do {
-      // 2
-      let data = try Data(contentsOf: dataURL)
-      // 3
       let plistData = try PropertyListSerialization.propertyList(
         from: data,
         options: [],
         format: nil)
-      // 4
       let convertedPlistData = plistData as? [[Any]] ?? []
-      // 5
       exerciseDays = convertedPlistData.map {
         ExerciseDay(
           date: $0[1] as? Date ?? Date(),
@@ -99,22 +85,16 @@ class HistoryStore: ObservableObject {
   }
 
   func save() throws {
-    guard let dataURL = getURL() else {
-      throw FileError.urlFailure
-    }
     let plistData = exerciseDays.map {
       [$0.id.uuidString, $0.date, $0.exercises]
     }
     do {
-      // 1
       let data = try PropertyListSerialization.data(
         fromPropertyList: plistData,
         format: .binary,
         options: .zero)
-      // 2
-      try data.write(to: dataURL, options: .atomic)
+      try data.write(to: dataUrl, options: .atomic)
     } catch {
-      // 3
       throw FileError.saveFailure
     }
   }
