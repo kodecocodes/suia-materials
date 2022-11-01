@@ -47,8 +47,9 @@ struct WelcomeView: View {
         .sheet(isPresented: $showHistory) {
           HistoryView(showHistory: $showHistory)
         }
-          .padding(.bottom)
+        .padding(.bottom)
       }
+
       VStack {
         HStack(alignment: .bottom) {
           VStack(alignment: .leading) {

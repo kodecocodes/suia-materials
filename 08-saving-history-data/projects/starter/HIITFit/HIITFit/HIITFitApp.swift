@@ -38,9 +38,7 @@ struct HIITFitApp: App {
     WindowGroup {
       ContentView()
         .onAppear {
-          print(FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask))
+          print(URL.documentsDirectory)
         }
     }
   }
