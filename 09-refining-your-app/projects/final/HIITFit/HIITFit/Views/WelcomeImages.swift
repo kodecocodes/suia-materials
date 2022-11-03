@@ -74,6 +74,7 @@ extension WelcomeView {
           .font(.headline)
           .fontWeight(.medium)
           .kerning(2)
+          .fixedSize(horizontal: false, vertical: true)
       }
     }
   }

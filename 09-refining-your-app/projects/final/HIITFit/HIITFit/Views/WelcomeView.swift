@@ -45,18 +45,26 @@ struct WelcomeView: View {
         Spacer()
         // container view
         ContainerView {
-          VStack {
-            WelcomeView.images
-            WelcomeView.welcomeText
-            getStartedButton
-            Spacer()
-            historyButton
-              .sheet(isPresented: $showHistory) {
-                HistoryView(showHistory: $showHistory)
-              }
+          ViewThatFits {
+            VStack {
+              WelcomeView.images
+              WelcomeView.welcomeText
+              getStartedButton
+              Spacer()
+              historyButton
+            }
+            VStack {
+              WelcomeView.welcomeText
+              getStartedButton
+              Spacer()
+              historyButton
+            }
           }
         }
         .frame(height: geometry.size.height * 0.8)
+      }
+      .sheet(isPresented: $showHistory) {
+        HistoryView(showHistory: $showHistory)
       }
     }
   }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -50,8 +50,9 @@ struct EmbossedButtonStyle: ButtonStyle {
             .foregroundColor(Color("background"))
             .shadow(color: shadow, radius: 1, x: 2, y: 2)
             .shadow(color: highlight, radius: 1, x: -2, y: -2)
-            .offset(x: -1, y: -1)
-        })
+          .offset(x: -1, y: -1)
+        }
+      )
   }
 
   @ViewBuilder
@@ -75,26 +76,14 @@ struct EmbossedButtonStyle: ButtonStyle {
 
 struct EmbossedButton_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      Button(
-        action: {},
-        label: {
-        Text("History")
-          .fontWeight(.bold)
-        })
-        .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
-        .padding(40)
-        .previewLayout(.sizeThatFits)
-      Button(
-        action: {},
-        label: {
-          Text("History")
-            .fontWeight(.bold)
-        })
-        .preferredColorScheme(.dark)
-        .buttonStyle(EmbossedButtonStyle())
-        .padding(40)
-        .previewLayout(.sizeThatFits)
-    }
+    Button(
+      action: {},
+      label: {
+      Text("History")
+        .fontWeight(.bold)
+      })
+    .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
+    .padding(40)
+    .previewLayout(.sizeThatFits)
   }
 }
