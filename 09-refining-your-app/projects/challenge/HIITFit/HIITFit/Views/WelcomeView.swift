@@ -33,29 +33,38 @@
 import SwiftUI
 
 struct WelcomeView: View {
-  @EnvironmentObject var history: HistoryStore
   @State private var showHistory = false
   @Binding var selectedTab: Int
 
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        HeaderView(selectedTab: $selectedTab, titleText: "Welcome")
+        HeaderView(
+          selectedTab: $selectedTab,
+          titleText: "Welcome")
         Spacer()
+        // container view
         ContainerView {
-          VStack {
-            WelcomeView.images
-            WelcomeView.welcomeText
-            getStartedButton
-            Spacer()
-            historyButton
+          ViewThatFits {
+            VStack {
+              WelcomeView.images
+              WelcomeView.welcomeText
+              getStartedButton
+              Spacer()
+              historyButton
+            }
+            VStack {
+              WelcomeView.welcomeText
+              getStartedButton
+              Spacer()
+              historyButton
+            }
           }
         }
         .frame(height: geometry.size.height * 0.8)
       }
       .sheet(isPresented: $showHistory) {
         HistoryView(showHistory: $showHistory)
-          .environmentObject(history)
       }
     }
   }
@@ -83,10 +92,6 @@ struct WelcomeView: View {
 
 struct WelcomeView_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      WelcomeView(selectedTab: .constant(9))
-      WelcomeView(selectedTab: .constant(9))
-        .previewDevice("iPod touch (7th generation)")
-    }
+    WelcomeView(selectedTab: .constant(9))
   }
 }

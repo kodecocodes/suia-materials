@@ -54,16 +54,14 @@ struct HIITFitApp: App {
       ContentView()
         .environmentObject(historyStore)
         .onAppear {
-          print(FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask))
+          print(URL.documentsDirectory)
         }
         .alert(isPresented: $showAlert) {
           Alert(
             title: Text("History"),
             message: Text(
               """
-              Unfortunately we can't load your past history.
+              Unfortunately we can’t load your past history.
               Email support:
                 support@xyz.com
               """))

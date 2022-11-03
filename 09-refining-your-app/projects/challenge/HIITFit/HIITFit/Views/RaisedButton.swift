@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,70 +43,27 @@ struct RaisedButton: View {
       Text(buttonText)
         .raisedButtonTextStyle()
     })
-    .buttonStyle(RaisedButtonStyle())
+    .buttonStyle(.raised)
+  }
+}
+
+extension ButtonStyle where Self == RaisedButtonStyle {
+  static var raised: RaisedButtonStyle {
+    .init()
   }
 }
 
 struct RaisedButtonStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
-      .offset(y: configuration.isPressed ? 2 : 0)
-      .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
       .frame(maxWidth: .infinity)
       .padding([.top, .bottom], 12)
-      .buttonPress(configuration.isPressed)
-      .animation(.none)
-  }
-}
-
-private extension View {
-  func buttonPress(_ isPressed: Bool) -> some View {
-    self
       .background(
-        !isPressed ? AnyView(normal()) : AnyView(pressed())
+        Capsule()
+          .foregroundColor(Color("background"))
+          .shadow(color: Color("drop-shadow"), radius: 4, x: 6, y: 6)
+          .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6)
       )
-  }
-
-  func normal() -> some View {
-    Capsule()
-      .shadow(color: Color("drop-shadow"), radius: 8, x: 6, y: 6)
-      .shadow(color: Color("drop-highlight"), radius: 8, x: -6, y: -6)
-      .foregroundColor(Color("background"))
-  }
-
-  func pressed() -> some View {
-    Capsule()
-      .inset(by: -4)
-      .stroke(Color("background"), lineWidth: 8)
-      .shadow(color: Color("drop-shadow"), radius: 4, x: 6, y: 6)
-      .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6)
-      .foregroundColor(Color("background"))
-      .clipShape(Capsule())
-  }
-}
-
-struct RaisedButton_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      ZStack {
-        RaisedButton(buttonText: "Get Started") {
-          print("Hello World")
-        }
-          .padding(20)
-      }
-      .preferredColorScheme(.light)
-      .background(Color("background"))
-      .previewLayout(.sizeThatFits)
-      ZStack {
-        RaisedButton(buttonText: "Get Started") {
-          print("Hello World")
-        }
-        .padding(20)
-      }
-      .preferredColorScheme(.dark)
-      .background(Color("background"))
-      .previewLayout(.sizeThatFits)
-    }
   }
 }
 
@@ -115,5 +72,19 @@ extension Text {
     self
     .font(.body)
     .fontWeight(.bold)
+  }
+}
+
+struct RaisedButton_Previews: PreviewProvider {
+  static var previews: some View {
+    ZStack {
+      RaisedButton(buttonText: "Get Started") {
+        print("Hello World")
+      }
+      .buttonStyle(.raised)
+      .padding(20)
+    }
+    .background(Color("background"))
+    .previewLayout(.sizeThatFits)
   }
 }
