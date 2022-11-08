@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -101,7 +101,6 @@ struct ExerciseView: View {
             Spacer()
             RatingView(exerciseIndex: index)
               .padding()
-
             historyButton
               .sheet(isPresented: $showHistory) {
                 HistoryView(showHistory: $showHistory)
@@ -109,6 +108,7 @@ struct ExerciseView: View {
               .padding(.bottom)
           }
         }
+        .frame(height: geometry.size.height * 0.8)
       }
     }
   }
