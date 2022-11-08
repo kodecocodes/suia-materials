@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		82F6AF2E2911EF4800F30202 /* WelcomeImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F6AF2D2911EF4800F30202 /* WelcomeImages.swift */; };
+		82358F05291A1948003518E2 /* WelcomeImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82358F04291A1948003518E2 /* WelcomeImages.swift */; };
 		CD30C924251474DC0049DB93 /* HIITFitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C923251474DC0049DB93 /* HIITFitApp.swift */; };
 		CD30C926251474DC0049DB93 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C925251474DC0049DB93 /* ContentView.swift */; };
 		CD30C928251474DD0049DB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD30C927251474DD0049DB93 /* Assets.xcassets */; };
@@ -32,7 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		82F6AF2D2911EF4800F30202 /* WelcomeImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeImages.swift; sourceTree = "<group>"; };
+		82358F04291A1948003518E2 /* WelcomeImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeImages.swift; sourceTree = "<group>"; };
 		CD30C920251474DC0049DB93 /* HIITFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIITFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD30C923251474DC0049DB93 /* HIITFitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIITFitApp.swift; sourceTree = "<group>"; };
 		CD30C925251474DC0049DB93 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 				CDBD94A428DAEF86000FE7AA /* VideoPlayerView.swift */,
 				CDBD94A228DAB99F000FE7AA /* RatingView.swift */,
 				CDBD949C28D97F09000FE7AA /* HeaderView.swift */,
-				82F6AF2D2911EF4800F30202 /* WelcomeImages.swift */,
+				82358F04291A1948003518E2 /* WelcomeImages.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 		CD0BEE002524570D00937B4F /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -244,7 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82F6AF2E2911EF4800F30202 /* WelcomeImages.swift in Sources */,
+				82358F05291A1948003518E2 /* WelcomeImages.swift in Sources */,
 				CDC56FC128E5DF51008266FF /* TimerView.swift in Sources */,
 				CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */,
 				CDBD94A128DA9BCD000FE7AA /* Exercise.swift in Sources */,
