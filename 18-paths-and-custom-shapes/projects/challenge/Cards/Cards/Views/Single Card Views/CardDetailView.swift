@@ -37,11 +37,7 @@ struct CardDetailView: View {
   @Binding var card: Card
 
   func isSelected(_ element: CardElement) -> Bool {
-    if let selected = store.selectedElement,
-      element.id == selected.id {
-      return true
-    }
-    return false
+    store.selectedElement?.id == element.id
   }
 
   var body: some View {
