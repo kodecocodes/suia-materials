@@ -53,8 +53,6 @@ struct CardDetailView: View {
         }
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
-          .clip(element: element)
-          .contentShape(element: element)
           .overlay(
             element: element,
             isSelected: isSelected(element))
@@ -99,17 +97,7 @@ struct CardDetailView_Previews: PreviewProvider {
   }
 }
 
-extension View {
-  @ViewBuilder
-  func clip(element: CardElement) -> some View {
-    if let element = element as? ImageElement,
-      let frameIndex = element.frameIndex {
-      self.clipShape(Shapes.shapes[frameIndex])
-    } else {
-      self
-    }
-  }
-
+private extension View {
   @ViewBuilder
   func overlay(
     element: CardElement,
@@ -118,7 +106,8 @@ extension View {
     if isSelected,
       let element = element as? ImageElement,
       let frameIndex = element.frameIndex {
-      self.overlay(Shapes.shapes[frameIndex]
+      let shape = Shapes.shapes[frameIndex]
+      self.overlay(shape
         .stroke(lineWidth: Settings.borderWidth)
         .foregroundColor(Settings.borderColor))
     } else {
@@ -126,16 +115,6 @@ extension View {
         .border(
           Settings.borderColor,
           width: isSelected ? Settings.borderWidth : 0)
-    }
-  }
-
-  @ViewBuilder
-  func contentShape(element: CardElement) -> some View {
-    if let element = element as? ImageElement,
-      let frameIndex = element.frameIndex {
-      self.contentShape(Shapes.shapes[frameIndex])
-    } else {
-      self
     }
   }
 }
