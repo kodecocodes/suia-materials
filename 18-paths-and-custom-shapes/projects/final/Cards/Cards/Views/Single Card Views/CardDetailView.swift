@@ -48,7 +48,6 @@ struct CardDetailView: View {
         }
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
-          .clip(element: element)
           .border(
             Settings.borderColor,
             width: isSelected(element) ? Settings.borderWidth : 0)
@@ -88,17 +87,5 @@ struct CardDetailView_Previews: PreviewProvider {
   static var previews: some View {
     CardDetailPreview()
       .environmentObject(CardStore(defaultData: true))
-  }
-}
-
-extension View {
-  @ViewBuilder
-  func clip(element: CardElement) -> some View {
-    if let element = element as? ImageElement,
-      let frameIndex = element.frameIndex {
-      self.clipShape(Shapes.shapes[frameIndex])
-    } else {
-      self
-    }
   }
 }

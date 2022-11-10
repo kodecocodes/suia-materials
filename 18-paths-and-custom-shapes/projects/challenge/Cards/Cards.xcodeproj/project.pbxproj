@@ -20,6 +20,8 @@
 		826912A828FA414700FA1DA4 /* ResizableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826912A728FA414700FA1DA4 /* ResizableView.swift */; };
 		826912AB28FA421900FA1DA4 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826912AA28FA421900FA1DA4 /* Transform.swift */; };
 		826912AF28FA42A900FA1DA4 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826912AE28FA42A900FA1DA4 /* Operators.swift */; };
+		82791ADE291CB4360033655E /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82791ADD291CB4360033655E /* Shapes.swift */; };
+		82791AE0291CB5D40033655E /* FrameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82791ADF291CB5D40033655E /* FrameModal.swift */; };
 		82849C1F28FB917D007DB055 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 82849C1E28FB917D007DB055 /* Stickers */; };
 		82849C2228FB91A2007DB055 /* StickerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82849C2128FB91A2007DB055 /* StickerModal.swift */; };
 		82849C2828FBA057007DB055 /* PhotosModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82849C2728FBA057007DB055 /* PhotosModal.swift */; };
@@ -36,8 +38,6 @@
 		82BA0F7828FA5C370080C311 /* CardStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F7728FA5C370080C311 /* CardStore.swift */; };
 		82BA0F7A28FA5E1A0080C311 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F7928FA5E1A0080C311 /* CardDetailView.swift */; };
 		82BA0F7C28FA62DF0080C311 /* CardElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BA0F7B28FA62DF0080C311 /* CardElementView.swift */; };
-		82D9187228FBBA0000B15F82 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D9187128FBBA0000B15F82 /* Shapes.swift */; };
-		82D9187428FBBC9A00B15F82 /* FrameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D9187328FBBC9A00B15F82 /* FrameModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +55,8 @@
 		826912A728FA414700FA1DA4 /* ResizableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableView.swift; sourceTree = "<group>"; };
 		826912AA28FA421900FA1DA4 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		826912AE28FA42A900FA1DA4 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		82791ADD291CB4360033655E /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
+		82791ADF291CB5D40033655E /* FrameModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameModal.swift; sourceTree = "<group>"; };
 		82849C1D28FB90EF007DB055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		82849C1E28FB917D007DB055 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Stickers; sourceTree = "<group>"; };
 		82849C2128FB91A2007DB055 /* StickerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerModal.swift; sourceTree = "<group>"; };
@@ -72,8 +74,6 @@
 		82BA0F7728FA5C370080C311 /* CardStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStore.swift; sourceTree = "<group>"; };
 		82BA0F7928FA5E1A0080C311 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 		82BA0F7B28FA62DF0080C311 /* CardElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardElementView.swift; sourceTree = "<group>"; };
-		82D9187128FBBA0000B15F82 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
-		82D9187328FBBC9A00B15F82 /* FrameModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +164,7 @@
 				826912AA28FA421900FA1DA4 /* Transform.swift */,
 				826912AE28FA42A900FA1DA4 /* Operators.swift */,
 				82849C2B28FBB01D007DB055 /* CustomTransfer.swift */,
-				82D9187128FBBA0000B15F82 /* Shapes.swift */,
+				82791ADD291CB4360033655E /* Shapes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,7 +174,7 @@
 			children = (
 				82849C2128FB91A2007DB055 /* StickerModal.swift */,
 				82849C2728FBA057007DB055 /* PhotosModal.swift */,
-				82D9187328FBBC9A00B15F82 /* FrameModal.swift */,
+				82791ADF291CB5D40033655E /* FrameModal.swift */,
 			);
 			path = "Card Modal Views";
 			sourceTree = "<group>";
@@ -228,6 +228,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
+				ORGANIZATIONNAME = Kodeco;
 				TargetAttributes = {
 					8269128828FA3A2000FA1DA4 = {
 						CreatedOnToolsVersion = 14.0.1;
@@ -298,7 +299,7 @@
 				826912AF28FA42A900FA1DA4 /* Operators.swift in Sources */,
 				82BA0F6C28FA47790080C311 /* CardToolbar.swift in Sources */,
 				8269128F28FA3A2000FA1DA4 /* ContentView.swift in Sources */,
-				82D9187428FBBC9A00B15F82 /* FrameModal.swift in Sources */,
+				82791AE0291CB5D40033655E /* FrameModal.swift in Sources */,
 				82BA0F7228FA5ACB0080C311 /* TextExtensions.swift in Sources */,
 				82BA0F7C28FA62DF0080C311 /* CardElementView.swift in Sources */,
 				82849C2A28FBAF62007DB055 /* UIImageExtensions.swift in Sources */,
@@ -317,7 +318,7 @@
 				8269128D28FA3A2000FA1DA4 /* CardsApp.swift in Sources */,
 				82BA0F6A28FA462D0080C311 /* ColorExtensions.swift in Sources */,
 				82849C2828FBA057007DB055 /* PhotosModal.swift in Sources */,
-				82D9187228FBBA0000B15F82 /* Shapes.swift in Sources */,
+				82791ADE291CB4360033655E /* Shapes.swift in Sources */,
 				82849C2228FB91A2007DB055 /* StickerModal.swift in Sources */,
 				82849C2C28FBB01D007DB055 /* CustomTransfer.swift in Sources */,
 			);
