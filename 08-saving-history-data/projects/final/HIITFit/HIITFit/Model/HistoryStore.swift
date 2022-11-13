@@ -64,8 +64,10 @@ class HistoryStore: ObservableObject {
   }
 
   func load() throws {
+    guard let data = try? Data(contentsOf: dataUrl) else {
+      return
+    }
     do {
-      let data = try Data(contentsOf: dataUrl)
       let plistData = try PropertyListSerialization.propertyList(
         from: data,
         options: [],
