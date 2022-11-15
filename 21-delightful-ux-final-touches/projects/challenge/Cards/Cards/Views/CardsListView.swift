@@ -42,9 +42,7 @@ struct CardsListView: View {
 
   var thumbnailSize: CGSize {
     var scale: CGFloat = 1
-    if let verticalSizeClass,
-      let horizontalSizeClass,
-      verticalSizeClass == .regular,
+    if verticalSizeClass == .regular,
       horizontalSizeClass == .regular {
       scale = 1.5
     }
