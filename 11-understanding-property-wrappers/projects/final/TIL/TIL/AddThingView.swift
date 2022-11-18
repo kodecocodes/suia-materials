@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,10 +43,10 @@ struct AddThingView: View {
       TextField("Thing I Learned", text: $thing)  // 1
         .textFieldStyle(RoundedBorderTextFieldStyle())  // 2
         .padding()  // 3
-//        .autocapitalization(.allCharacters)
+        // .autocapitalization(.allCharacters)
         .disableAutocorrection(true)
         .focused($thingIsFocused)
-        .onAppear() { thingIsFocused = true }
+        .onAppear { thingIsFocused = true }
       Button("Done") {
         if !thing.isEmpty {
           someThings.things.append(thing)
@@ -64,4 +64,3 @@ struct AddThingView_Previews: PreviewProvider {
     AddThingView(someThings: ThingStore())
   }
 }
-

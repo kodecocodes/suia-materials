@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -55,6 +55,7 @@ struct ContentView: View {
       .navigationTitle("TIL")
       .toolbar {
         ToolbarItem {
+          // swiftlint:disable:next multiple_closures_with_trailing_closure
           Button(action: { showAddThing.toggle() }) {
             Image(systemName: "plus.circle")
               .font(.title)
