@@ -60,4 +60,13 @@ extension Date {
     dateFormatter.dateFormat = "EEEE"
     return dateFormatter.string(from: self)
   }
+
+  var lastSevenDays: [Date] {
+    (-6...0).map { day in
+      Calendar.current.date(
+        byAdding: .day,
+        value: day,
+        to: Date()) ?? Date()
+    }
+  }
 }

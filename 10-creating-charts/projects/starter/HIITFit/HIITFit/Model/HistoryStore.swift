@@ -34,29 +34,35 @@ import Foundation
 
 struct ExerciseDay: Identifiable {
   let id = UUID()
-  let date: Date
+  var date: Date
   var exercises: [String] = []
 }
 
 class HistoryStore: ObservableObject {
   @Published var exerciseDays: [ExerciseDay] = []
+  @Published var loadingError = false
 
   enum FileError: Error {
     case loadFailure
     case saveFailure
   }
 
-  init() {}
-
-  init(withChecking: Bool) throws {
-    #if DEBUG
-    // createDevData()
-    #endif
+  init(preview: Bool = false) {
     do {
       try load()
     } catch {
-      throw error
+      loadingError = true
     }
+    #if DEBUG
+    if preview {
+      createDevData()
+    } else {
+      if exerciseDays.isEmpty {
+        copyHistoryTestData()
+        try? load()
+      }
+    }
+    #endif
   }
 
   var dataUrl: URL {

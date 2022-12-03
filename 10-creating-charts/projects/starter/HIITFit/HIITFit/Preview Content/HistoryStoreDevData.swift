@@ -50,15 +50,36 @@ extension HistoryStore {
         exercises: [
           Exercise.exercises[2].exerciseName,
           Exercise.exercises[2].exerciseName,
-          Exercise.exercises[0].exerciseName
+          Exercise.exercises[3].exerciseName
+        ]),
+      ExerciseDay(
+        date: Date().addingTimeInterval(-86400 * 3),
+        exercises: [
+          Exercise.exercises[0].exerciseName,
+          Exercise.exercises[1].exerciseName,
+          Exercise.exercises[3].exerciseName,
+          Exercise.exercises[3].exerciseName
         ])
     ]
   }
 
-  // If history.plist doesn't exist,
-  // a button will show on WelcomeView
-  // to create the data. When tapped
-  // this data is created.
+  // copy history.plist to Documents directory
+  func copyHistoryTestData() {
+    let filename = "history.plist"
+    if let resourceURL = Bundle.main.resourceURL {
+      let sourceURL = resourceURL.appending(component: filename)
+      let documentsURL = URL.documentsDirectory
+      let destinationURL = documentsURL.appending(component: filename)
+      do {
+        try FileManager.default.copyItem(at: sourceURL, to: destinationURL)
+      } catch {
+        print("Failed to copy", filename)
+      }
+      print("Sample History data copied to Documents directory")
+    }
+  }
+
+  // This method creates random test data.
   func createHistoryTestData() {
     print("Data construction started")
     exerciseDays = []

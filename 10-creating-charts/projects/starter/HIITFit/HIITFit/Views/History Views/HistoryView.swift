@@ -36,30 +36,43 @@ struct HistoryView: View {
   @EnvironmentObject var history: HistoryStore
   @Binding var showHistory: Bool
 
-  var body: some View {
-    ZStack(alignment: .topTrailing) {
-      // swiftlint:disable:next multiple_closures_with_trailing_closure
-      Button(action: { showHistory.toggle() }) {
+  var headerView: some View {
+    HStack {
+      Spacer()
+      Text("History")
+        .font(.title)
+      Spacer()
+      Button {
+        showHistory.toggle()
+      } label: {
         Image(systemName: "xmark.circle")
       }
       .font(.title)
-      .padding()
+    }
+  }
 
-      VStack {
-        Text("History")
-          .font(.title)
-          .padding()
-        Form {
-          ForEach(history.exerciseDays) { day in
-            Section(
-              header:
-                Text(day.date.formatted(as: "MMM d"))
-                .font(.headline)) {
-              ForEach(day.exercises, id: \.self) { exercise in
-                Text(exercise)
-              }
-            }
-          }
+  func dayView(day: ExerciseDay) -> some View {
+    Section(
+      header:
+        Text(day.date.formatted(as: "MMM d"))
+        .font(.headline)) {
+          exerciseView(day: day)
+    }
+  }
+
+  func exerciseView(day: ExerciseDay) -> some View {
+    ForEach(day.exercises, id: \.self) { exercise in
+      Text(exercise)
+    }
+  }
+
+  var body: some View {
+    VStack {
+      headerView
+        .padding()
+      Form {
+        ForEach(history.exerciseDays) { day in
+          dayView(day: day)
         }
       }
     }
@@ -67,13 +80,9 @@ struct HistoryView: View {
 }
 
 struct HistoryView_Previews: PreviewProvider {
-  static var historyStore: HistoryStore {
-    let historyStore = HistoryStore()
-    historyStore.createDevData()
-    return historyStore
-  }
+  static var history = HistoryStore(preview: true)
   static var previews: some View {
     HistoryView(showHistory: .constant(true))
-      .environmentObject(historyStore)
+      .environmentObject(history)
   }
 }

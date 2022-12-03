@@ -52,18 +52,12 @@ struct WelcomeView: View {
               WelcomeView.welcomeText
               getStartedButton
               Spacer()
-              #if DEBUG
-              createDataButton
-              #endif
               historyButton
             }
             VStack {
               WelcomeView.welcomeText
               getStartedButton
               Spacer()
-              #if DEBUG
-              createDataButton
-              #endif
               historyButton
             }
           }
@@ -72,18 +66,6 @@ struct WelcomeView: View {
       }
       .sheet(isPresented: $showHistory) {
         HistoryView(showHistory: $showHistory)
-      }
-    }
-  }
-
-  var createDataButton: some View {
-    Group {
-      if historyStore.exerciseDays.isEmpty {
-        Button {
-          historyStore.createHistoryTestData()
-        } label: {
-          Text("Create History Data")
-        }
       }
     }
   }
