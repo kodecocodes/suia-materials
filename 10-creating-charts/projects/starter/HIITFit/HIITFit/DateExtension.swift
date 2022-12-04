@@ -61,7 +61,7 @@ extension Date {
     return dateFormatter.string(from: self)
   }
 
-  var lastSevenDays: [Date] {
+  var previousSevenDays: [Date] {
     (-6...0).map { day in
       Calendar.current.date(
         byAdding: .day,

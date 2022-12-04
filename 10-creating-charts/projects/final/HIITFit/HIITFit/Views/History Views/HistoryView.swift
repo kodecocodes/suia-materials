@@ -57,12 +57,11 @@ struct HistoryView: View {
       }
       .font(.title)
     }
-    .padding()
   }
 
   func dayView(day: ExerciseDay) -> some View {
     DisclosureGroup {
-      BarChartView(day: day)
+      BarChartDayView(day: day)
         .deleteDisabled(true)
     } label: {
       Text(day.date.formatted(as: "d MMM YYYY"))
@@ -79,12 +78,15 @@ struct HistoryView: View {
 
   var body: some View {
     VStack {
-      if addMode {
-        Text("History")
-          .font(.title)
-      } else {
-        headerView
+      Group {
+        if addMode {
+          Text("History")
+            .font(.title)
+        } else {
+          headerView
+        }
       }
+      .padding()
       List($history.exerciseDays, editActions: [.delete]) { $day in
         dayView(day: day)
       }

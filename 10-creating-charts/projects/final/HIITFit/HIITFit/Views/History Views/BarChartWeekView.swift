@@ -33,28 +33,10 @@
 import SwiftUI
 import Charts
 
-struct BarChartView: View {
-  let day: ExerciseDay
-  var body: some View {
-    let exerciseNames = Exercise.exercises.map {
-      $0.exerciseName
-    }
-    Chart {
-      ForEach(exerciseNames, id: \.self) { name in
-        BarMark(
-          x: .value(name, name),
-          y: .value("Total Count", day.countExercise(exercise: name)))
-      }
-      RuleMark(y: .value("Exercise", 1))
-        .foregroundStyle(.red)
-    }
-    .padding()
-  }
-}
-
 struct BarChartWeekView: View {
   @EnvironmentObject var history: HistoryStore
   @State private var weekData: [ExerciseDay] = []
+
   var body: some View {
     Chart(weekData) { day in
       ForEach(Exercise.names, id: \.self) { name in
@@ -70,6 +52,7 @@ struct BarChartWeekView: View {
       "Step Up": Color("chart-step-up"),
       "Sun Salute": Color("chart-sun-salute")
     ])
+    .padding()
     .onAppear {
       let firstDate = history.exerciseDays.first?.date ?? Date()
       let dates = firstDate.previousSevenDays
@@ -80,14 +63,12 @@ struct BarChartWeekView: View {
         ?? ExerciseDay(date: date)
       }
     }
-    .padding()
   }
 }
 
-struct BarChartView_Previews: PreviewProvider {
-  static var history = HistoryStore(preview: true)
+struct BarChartWeekView_Previews: PreviewProvider {
   static var previews: some View {
     BarChartWeekView()
-      .environmentObject(history)
+      .environmentObject(HistoryStore(preview: true))
   }
 }

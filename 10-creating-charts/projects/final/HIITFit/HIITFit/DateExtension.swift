@@ -57,7 +57,7 @@ extension Date {
 
   var dayName: String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEE"
+    dateFormatter.dateFormat = "EEEE"
     return dateFormatter.string(from: self)
   }
 
@@ -66,7 +66,7 @@ extension Date {
       Calendar.current.date(
         byAdding: .day,
         value: day,
-        to: self) ?? Date()
+        to: Date()) ?? Date()
     }
   }
 }

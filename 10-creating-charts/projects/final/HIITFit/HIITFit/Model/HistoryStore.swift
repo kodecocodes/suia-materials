@@ -134,14 +134,11 @@ class HistoryStore: ObservableObject {
     if let index = exerciseDays.firstIndex(
       where: { $0.date.yearMonthDay <= date.yearMonthDay }) {
       if date.isSameDay(as: exerciseDays[index].date) {
-        print("condition 1")
         exerciseDays[index].exercises.append(exerciseName)
       } else {
-        print("condition 2")
         exerciseDays.insert(exerciseDay, at: index)
       }
     } else {
-      print("condition 3")
       exerciseDays.append(exerciseDay)
     }
     try? save()

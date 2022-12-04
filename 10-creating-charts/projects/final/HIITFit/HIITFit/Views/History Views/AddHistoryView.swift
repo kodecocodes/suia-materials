@@ -78,6 +78,6 @@ struct ButtonsView: View {
 struct AddHistoryView_Previews: PreviewProvider {
   static var previews: some View {
     AddHistoryView(addMode: .constant(true))
-      .environmentObject(HistoryStore())
+      .environmentObject(HistoryStore(preview: true))
   }
 }

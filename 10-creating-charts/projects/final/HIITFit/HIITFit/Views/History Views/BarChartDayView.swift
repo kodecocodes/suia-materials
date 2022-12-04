@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Kodeco LLC
+///// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,40 +30,31 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import Charts
+import SwiftUI
 
-struct Exercise {
-  let exerciseName: String
-  let videoName: String
+struct BarChartDayView: View {
+  let day: ExerciseDay
 
-  enum ExerciseEnum: String {
-    case squat = "Squat"
-    case stepUp = "Step Up"
-    case burpee = "Burpee"
-    case sunSalute = "Sun Salute"
+  var body: some View {
+    Chart {
+      ForEach(Exercise.names, id: \.self) { name in
+        BarMark(
+          x: .value(name, name),
+          y: .value("Total Count", day.countExercise(exercise: name)))
+        .foregroundStyle(Color("history-bar"))
+      }
+      RuleMark(y: .value("Exercise", 1))
+        .foregroundStyle(.red)
+    }
+    .padding()
   }
 }
 
-extension Exercise {
-  static let exercises = [
-    Exercise(
-      exerciseName: ExerciseEnum.squat.rawValue,
-      videoName: "squat"),
-    Exercise(
-      exerciseName: ExerciseEnum.stepUp.rawValue,
-      videoName: "step-up"),
-    Exercise(
-      exerciseName: ExerciseEnum.burpee.rawValue,
-      videoName: "burpee"),
-    Exercise(
-      exerciseName: ExerciseEnum.sunSalute.rawValue,
-      videoName: "sun-salute")
-  ]
-
-  static let names: [String] = [
-    ExerciseEnum.squat.rawValue,
-    ExerciseEnum.stepUp.rawValue,
-    ExerciseEnum.burpee.rawValue,
-    ExerciseEnum.sunSalute.rawValue
-  ]
+struct BarChartDayView_Previews: PreviewProvider {
+  static var history = HistoryStore(preview: true)
+  static var previews: some View {
+    BarChartDayView(day: history.exerciseDays[0])
+      .environmentObject(history)
+  }
 }
