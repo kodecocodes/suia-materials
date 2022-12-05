@@ -75,7 +75,6 @@ struct BarChartWeekView: View {
     .onAppear {
       let firstDate = history.exerciseDays.first?.date ?? Date()
       let dates = firstDate.previousSevenDays
-      print(dates)
       weekData = dates.map { date in
         // swiftlint:disable:next trailing_closure
         history.exerciseDays.first(
