@@ -76,14 +76,10 @@ struct EmbossedButtonStyle: ButtonStyle {
 
 struct EmbossedButton_Previews: PreviewProvider {
   static var previews: some View {
-    Button(
-      action: {},
-      label: {
-      Text("History")
-        .fontWeight(.bold)
-      })
-    .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
-    .padding(40)
-    .previewLayout(.sizeThatFits)
+    Button("History") {}
+      .fontWeight(.bold)
+      .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
+      .padding(40)
+      .previewLayout(.sizeThatFits)
   }
 }

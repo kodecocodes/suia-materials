@@ -103,9 +103,9 @@ struct ExerciseView: View {
           .padding()
 
         historyButton
-        .sheet(isPresented: $showHistory) {
-          HistoryView(showHistory: $showHistory)
-        }
+          .sheet(isPresented: $showHistory) {
+            HistoryView(showHistory: $showHistory)
+          }
           .padding(.bottom)
       }
     }

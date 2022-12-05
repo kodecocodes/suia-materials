@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		82358F05291A1948003518E2 /* WelcomeImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82358F04291A1948003518E2 /* WelcomeImages.swift */; };
-		82358F07291A2388003518E2 /* RaisedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82358F06291A2388003518E2 /* RaisedButton.swift */; };
-		82358F09291A25D8003518E2 /* EmbossedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82358F08291A25D8003518E2 /* EmbossedButton.swift */; };
-		8283FA8D291A287000D0B5AD /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283FA8C291A287000D0B5AD /* ContainerView.swift */; };
-		8283FA8F291A2A0300D0B5AD /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8283FA8E291A2A0300D0B5AD /* GradientBackground.swift */; };
+		82C99450293D94950028F8C9 /* RaisedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9944F293D94950028F8C9 /* RaisedButton.swift */; };
+		82C99452293D99390028F8C9 /* EmbossedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C99451293D99390028F8C9 /* EmbossedButton.swift */; };
+		82C99454293D9B610028F8C9 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C99453293D9B610028F8C9 /* ContainerView.swift */; };
+		82C99456293D9C8D0028F8C9 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C99455293D9C8D0028F8C9 /* GradientBackground.swift */; };
 		CD30C924251474DC0049DB93 /* HIITFitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C923251474DC0049DB93 /* HIITFitApp.swift */; };
 		CD30C926251474DC0049DB93 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C925251474DC0049DB93 /* ContentView.swift */; };
 		CD30C928251474DD0049DB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD30C927251474DD0049DB93 /* Assets.xcassets */; };
@@ -37,10 +37,10 @@
 
 /* Begin PBXFileReference section */
 		82358F04291A1948003518E2 /* WelcomeImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeImages.swift; sourceTree = "<group>"; };
-		82358F06291A2388003518E2 /* RaisedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisedButton.swift; sourceTree = "<group>"; };
-		82358F08291A25D8003518E2 /* EmbossedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbossedButton.swift; sourceTree = "<group>"; };
-		8283FA8C291A287000D0B5AD /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
-		8283FA8E291A2A0300D0B5AD /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
+		82C9944F293D94950028F8C9 /* RaisedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisedButton.swift; sourceTree = "<group>"; };
+		82C99451293D99390028F8C9 /* EmbossedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbossedButton.swift; sourceTree = "<group>"; };
+		82C99453293D9B610028F8C9 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		82C99455293D9C8D0028F8C9 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		CD30C920251474DC0049DB93 /* HIITFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HIITFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD30C923251474DC0049DB93 /* HIITFitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIITFitApp.swift; sourceTree = "<group>"; };
 		CD30C925251474DC0049DB93 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,10 +142,10 @@
 				CDBD94A228DAB99F000FE7AA /* RatingView.swift */,
 				CDBD949C28D97F09000FE7AA /* HeaderView.swift */,
 				82358F04291A1948003518E2 /* WelcomeImages.swift */,
-				82358F06291A2388003518E2 /* RaisedButton.swift */,
-				82358F08291A25D8003518E2 /* EmbossedButton.swift */,
-				8283FA8C291A287000D0B5AD /* ContainerView.swift */,
-				8283FA8E291A2A0300D0B5AD /* GradientBackground.swift */,
+				82C9944F293D94950028F8C9 /* RaisedButton.swift */,
+				82C99451293D99390028F8C9 /* EmbossedButton.swift */,
+				82C99453293D9B610028F8C9 /* ContainerView.swift */,
+				82C99455293D9C8D0028F8C9 /* GradientBackground.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -261,21 +261,21 @@
 				CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */,
 				CDBD94A128DA9BCD000FE7AA /* Exercise.swift in Sources */,
 				CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */,
-				8283FA8F291A2A0300D0B5AD /* GradientBackground.swift in Sources */,
+				82C99456293D9C8D0028F8C9 /* GradientBackground.swift in Sources */,
 				CDBD94A328DAB99F000FE7AA /* RatingView.swift in Sources */,
 				CDBD94A928DBFD58000FE7AA /* HistoryStore.swift in Sources */,
 				CDBD94AC28DBFFCC000FE7AA /* HistoryStoreDevData.swift in Sources */,
 				CDBD94AE28DC2354000FE7AA /* SuccessView.swift in Sources */,
 				CD30C926251474DC0049DB93 /* ContentView.swift in Sources */,
-				82358F07291A2388003518E2 /* RaisedButton.swift in Sources */,
+				82C99450293D94950028F8C9 /* RaisedButton.swift in Sources */,
 				CDBD94A728DBFA45000FE7AA /* HistoryView.swift in Sources */,
 				CD30C93F25147A8C0049DB93 /* DateExtension.swift in Sources */,
-				8283FA8D291A287000D0B5AD /* ContainerView.swift in Sources */,
+				82C99454293D9B610028F8C9 /* ContainerView.swift in Sources */,
 				CD30C924251474DC0049DB93 /* HIITFitApp.swift in Sources */,
 				CD30C94025147A8C0049DB93 /* ImageExtension.swift in Sources */,
 				CDBD949D28D97F09000FE7AA /* HeaderView.swift in Sources */,
 				CDBD94A528DAEF86000FE7AA /* VideoPlayerView.swift in Sources */,
-				82358F09291A25D8003518E2 /* EmbossedButton.swift in Sources */,
+				82C99452293D99390028F8C9 /* EmbossedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,9 +403,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HIITFit/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3E7TCD55JT;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HIITFit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -426,9 +427,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HIITFit/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3E7TCD55JT;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HIITFit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
