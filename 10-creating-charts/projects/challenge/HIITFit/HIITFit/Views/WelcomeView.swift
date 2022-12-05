@@ -76,7 +76,9 @@ struct WelcomeView: View {
 
   var getStartedButton: some View {
     RaisedButton(buttonText: "Get Started") {
-      selectedTab = 0
+      withAnimation {
+        selectedTab = 0
+      }
     }
     .padding()
   }

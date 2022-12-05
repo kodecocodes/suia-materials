@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Kodeco LLC
+///// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,47 +32,58 @@
 
 import SwiftUI
 
-struct CountdownView: View {
-  let date: Date
-  @Binding var timeRemaining: Int
-  let size: Double
+struct IndentView<Content: View>: View {
+  var content: Content
 
-  var body: some View {
-    Text("\(timeRemaining)")
-      .font(.system(size: size, design: .rounded))
-      .padding()
-      .onChange(of: date) { _ in
-        timeRemaining -= 1
-      }
+  init(@ViewBuilder content: () -> Content) {
+    self.content = content()
   }
-}
-
-struct TimerView: View {
-  @State private var timeRemaining: Int = 3
-  @Binding var timerDone: Bool
-  let size: Double
 
   var body: some View {
-    TimelineView(
-      .animation(
-        minimumInterval: 1.0,
-        paused: timeRemaining <= 0)) { context in
-          CountdownView(
-            date: context.date,
-            timeRemaining: $timeRemaining,
-            size: size
-          )
-    }
-    .onChange(of: timeRemaining) { _ in
-      if timeRemaining < 1 {
-        timerDone = true
-      }
+    ZStack {
+      content
+        .background(
+          GeometryReader { geometry in
+            Circle()
+              .inset(by: -4)
+              .stroke(Color("background"), lineWidth: 8)
+              .shadow(color: Color("drop-shadow").opacity(0.5), radius: 6, x: 6, y: 6)
+              .shadow(color: Color("drop-highlight"), radius: 6, x: -6, y: -6)
+              .foregroundColor(Color("background"))
+              .clipShape(Circle().inset(by: -1))
+              .resized(size: geometry.size)
+          }
+        )
     }
   }
 }
 
-struct TimerView_Previews: PreviewProvider {
+private extension View {
+  func resized(size: CGSize) -> some View {
+    self
+      .frame(
+        width: max(size.width, size.height),
+        height: max(size.width, size.height))
+      .offset(y: -max(size.width, size.height) / 2
+        + min(size.width, size.height) / 2)
+  }
+}
+
+struct IndentView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerView(timerDone: .constant(false), size: 90)
+    VStack {
+      IndentView {
+        Text("5")
+          .font(.system(size: 90, design: .rounded))
+          .frame(width: 120, height: 120)
+      }
+      .padding(.bottom, 50)
+      IndentView {
+        Image(systemName: "hare.fill")
+          .font(.largeTitle)
+          .foregroundColor(.purple)
+          .padding(20)
+      }
+    }
   }
 }

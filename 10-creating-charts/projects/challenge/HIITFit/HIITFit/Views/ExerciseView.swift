@@ -69,11 +69,12 @@ struct ExerciseView: View {
   }
 
   var body: some View {
+    let exerciseName = Exercise.exercises[index].exerciseName
     GeometryReader { geometry in
       VStack(spacing: 0) {
         HeaderView(
           selectedTab: $selectedTab,
-          titleText: Exercise.exercises[index].exerciseName)
+          titleText: exerciseName)
           .padding(.bottom)
         Spacer()
         ContainerView {
@@ -83,8 +84,25 @@ struct ExerciseView: View {
               .padding(20)
             HStack(spacing: 150) {
               startButton
-              doneButton
-                .disabled(!timerDone)
+                .padding([.leading, .trailing], geometry.size.width * 0.1)
+                .sheet(isPresented: $showTimer) {
+                  TimerView(
+                    timerDone: $timerDone,
+                    exerciseName: exerciseName)
+                  .onDisappear {
+                    if timerDone {
+                      history.addDoneExercise(Exercise.exercises[index].exerciseName)
+                      timerDone = false
+                      if lastExercise {
+                        showSuccess.toggle()
+                      } else {
+                        withAnimation {
+                          selectedTab += 1
+                        }
+                      }
+                    }
+                  }
+                }
                 .sheet(isPresented: $showSuccess) {
                   SuccessView(selectedTab: $selectedTab)
                     .presentationDetents([.medium, .large])
@@ -92,12 +110,6 @@ struct ExerciseView: View {
             }
             .font(.title3)
             .padding()
-            if showTimer {
-              TimerView(
-                timerDone: $timerDone,
-                size: geometry.size.height * 0.07
-              )
-            }
             Spacer()
             RatingView(exerciseIndex: index)
               .padding()
