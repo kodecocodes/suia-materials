@@ -71,7 +71,7 @@ struct ButtonsView: View {
         }
       }
     }
-    .buttonStyle(EmbossedButtonStyle())
+    .buttonStyle(EmbossedButtonStyle(buttonScale: 1.5))
   }
 }
 
