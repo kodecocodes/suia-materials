@@ -48,12 +48,12 @@ struct SuccessView: View {
           So eat well and get some rest.
           """)
         .foregroundColor(.gray)
-          .multilineTextAlignment(.center)
+        .multilineTextAlignment(.center)
       }
       VStack {
         Spacer()
         Button("Continue") { }
-        .padding()
+          .padding()
       }
     }
   }
