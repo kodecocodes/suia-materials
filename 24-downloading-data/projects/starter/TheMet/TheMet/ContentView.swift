@@ -83,10 +83,11 @@ struct ContentView: View {
           ObjectView(object: object)
         }
         .navigationDestination(for: String.self) { urlString in
+          // swiftlint:disable:next force_unwrapping
           SafariView(url: URL(string: urlString)!)
             .navigationBarTitleDisplayMode(.inline)
             .ignoresSafeArea()
-      }
+        }
       }
     }
   }
