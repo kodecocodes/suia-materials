@@ -45,17 +45,18 @@ struct ContentView: View {
           .background(Color.metForeground)
           .cornerRadius(10)
         List(store.objects, id: \.objectID) { object in
-          if object.isPublicDomain {
-            NavigationLink(value: object) {
-              Text(object.title)
-            }
-            .listRowBackground(Color.metForeground)
-          } else {
-            NavigationLink(value: object.objectURL) {
+          if !object.isPublicDomain,
+             let url = URL(string: object.objectURL) {
+            NavigationLink(value: url) {
               WebIndicatorView(title: object.title)
             }
             .listRowBackground(Color.metBackground)
             .foregroundColor(.white)
+          } else {
+            NavigationLink(value: object) {
+              Text(object.title)
+            }
+            .listRowBackground(Color.metForeground)
           }
         }
         .navigationTitle("The Met")
@@ -79,14 +80,14 @@ struct ContentView: View {
             Button("Search") { }
           }
         )
+        .navigationDestination(for: URL.self) { url in
+          SafariView(url: url)
+            .navigationBarTitleDisplayMode(.inline)
+            .ignoresSafeArea()
+        }
         .navigationDestination(for: Object.self) { object in
           ObjectView(object: object)
         }
-        .navigationDestination(for: String.self) { urlString in
-          SafariView(url: URL(string: urlString)!)
-            .navigationBarTitleDisplayMode(.inline)
-            .ignoresSafeArea()
-      }
       }
     }
   }
