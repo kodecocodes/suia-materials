@@ -46,7 +46,7 @@ struct ContentView: View {
           .cornerRadius(10)
         List(store.objects, id: \.objectID) { object in
           if !object.isPublicDomain,
-             let url = URL(string: object.objectURL) {
+            let url = URL(string: object.objectURL) {
             NavigationLink(value: url) {
               WebIndicatorView(title: object.title)
             }
@@ -72,14 +72,10 @@ struct ContentView: View {
               .stroke(Color.metBackground, lineWidth: 2)
           )
         }
-        .alert(
-          "Search the Met",
-          isPresented: $showQueryField,
-          actions: {
-            TextField("Search the Met", text: $query)
-            Button("Search") { }
-          }
-        )
+        .alert("Search the Met", isPresented: $showQueryField) {
+          TextField("Search the Met", text: $query)
+          Button("Search") { }
+        }
         .navigationDestination(for: URL.self) { url in
           SafariView(url: url)
             .navigationBarTitleDisplayMode(.inline)
