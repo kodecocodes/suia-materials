@@ -46,17 +46,18 @@ struct ContentView: View {
           .background(Color.metForeground)
           .cornerRadius(10)
         List(store.objects, id: \.objectID) { object in
-          if object.isPublicDomain {
-            NavigationLink(value: object) {
-              Text(object.title)
-            }
-            .listRowBackground(Color.metForeground)
-          } else {
-            NavigationLink(value: object.objectURL) {
+          if !object.isPublicDomain,
+            let url = URL(string: object.objectURL) {
+            NavigationLink(value: url) {
               WebIndicatorView(title: object.title)
             }
             .listRowBackground(Color.metBackground)
             .foregroundColor(.white)
+          } else {
+            NavigationLink(value: object) {
+              Text(object.title)
+            }
+            .listRowBackground(Color.metForeground)
           }
         }
         .navigationTitle("The Met")

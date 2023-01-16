@@ -37,17 +37,23 @@ struct ObjectView: View {
 
   var body: some View {
     VStack {
-      // swiftlint:disable:next force_unwrapping
-      Link(destination: URL(string: object.objectURL)!) {
-        WebIndicatorView(title: object.title)
+      if let url = URL(string: object.objectURL) {
+        Link(destination: url) {
+          WebIndicatorView(title: object.title)
+            .multilineTextAlignment(.leading)
+            .font(.callout)
+            .frame(minHeight: 44)
+          // add these four modifiers
+            .padding()
+            .background(Color.metBackground)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+        }
+      } else {
+        Text(object.title)
           .multilineTextAlignment(.leading)
           .font(.callout)
           .frame(minHeight: 44)
-        // add these four modifiers
-          .padding()
-          .background(Color.metBackground)
-          .foregroundColor(.white)
-          .cornerRadius(10)
       }
 
       if object.isPublicDomain {
@@ -56,12 +62,10 @@ struct ObjectView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
         } placeholder: {
-          Rectangle()
-            .inset(by: 7)
-            .fill(Color.metForeground)
-            .border(Color.metBackground, width: 7)
-            .padding()
+          PlaceholderView(note: "Display image here")
         }
+      } else {
+        PlaceholderView(note: "Not in public domain. URL not valid.")
       }
 
       Text(object.creditLine)
@@ -71,6 +75,21 @@ struct ObjectView: View {
         .cornerRadius(10)
     }
     .padding(.vertical)
+  }
+}
+
+struct PlaceholderView: View {
+  let note: String
+  var body: some View {
+    ZStack {
+      Rectangle()
+        .inset(by: 7)
+        .fill(Color.metForeground)
+        .border(Color.metBackground, width: 7)
+        .padding()
+      Text(note)
+        .foregroundColor(.metBackground)
+    }
   }
 }
 
