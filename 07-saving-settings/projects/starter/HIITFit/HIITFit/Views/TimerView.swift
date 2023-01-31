@@ -60,8 +60,7 @@ struct TimerView: View {
           CountdownView(
             date: context.date,
             timeRemaining: $timeRemaining,
-            size: size
-          )
+            size: size)
     }
     .onChange(of: timeRemaining) { _ in
       if timeRemaining < 1 {
