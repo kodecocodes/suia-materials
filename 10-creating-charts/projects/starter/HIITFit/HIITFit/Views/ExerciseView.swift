@@ -95,8 +95,7 @@ struct ExerciseView: View {
             if showTimer {
               TimerView(
                 timerDone: $timerDone,
-                size: geometry.size.height * 0.07
-              )
+                size: geometry.size.height * 0.07)
             }
             Spacer()
             RatingView(exerciseIndex: index)

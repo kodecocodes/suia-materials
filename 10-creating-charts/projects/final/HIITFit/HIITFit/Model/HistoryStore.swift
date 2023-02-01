@@ -72,13 +72,13 @@ class HistoryStore: ObservableObject {
     #endif
   }
 
-  var dataUrl: URL {
+  var dataURL: URL {
     URL.documentsDirectory
       .appendingPathComponent("history.plist")
   }
 
   func load() throws {
-    guard let data = try? Data(contentsOf: dataUrl) else {
+    guard let data = try? Data(contentsOf: dataURL) else {
       return
     }
     do {
@@ -106,7 +106,7 @@ class HistoryStore: ObservableObject {
         fromPropertyList: plistData,
         format: .binary,
         options: .zero)
-      try data.write(to: dataUrl, options: .atomic)
+      try data.write(to: dataURL, options: .atomic)
     } catch {
       throw FileError.saveFailure
     }
