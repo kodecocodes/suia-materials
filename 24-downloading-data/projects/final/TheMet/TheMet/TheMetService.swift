@@ -69,15 +69,18 @@ struct TheMetService {
   func getObject(from objectID: Int) async throws -> Object? {
     let object: Object?  // 1
 
-    let objectURLString = baseURLString + "/objects/\(objectID)"  // 2
+    let objectURLString = baseURLString + "objects/\(objectID)"  // 2
     guard let objectURL = URL(string: objectURLString) else { return nil }
     let objectRequest = URLRequest(url: objectURL)
 
     let (data, response) = try await session.data(for: objectRequest)  // 3
-    guard let response = response as? HTTPURLResponse,
-          (200..<300).contains(response.statusCode) else {
-      print(">>> getObject response outside bounds")
-      return nil
+    if let response = response as? HTTPURLResponse {
+      let statusCode = response.statusCode
+      if !(200..<300).contains(statusCode) {
+        print(">>> getObject response \(statusCode) outside bounds")
+        print(">>> \(objectURLString)")
+        return nil
+      }
     }
 
     do {  // 4

@@ -73,9 +73,6 @@ struct ContentView: View {
               .stroke(Color.metBackground, lineWidth: 2)
           )
         }
-        .overlay {
-          if store.objects.isEmpty { ProgressView() }
-        }
         .alert(
           "Search the Met",
           isPresented: $showQueryField,
@@ -100,6 +97,9 @@ struct ContentView: View {
         .navigationDestination(for: Object.self) { object in
           ObjectView(object: object)
         }
+      }
+      .overlay {
+        if store.objects.isEmpty { ProgressView() }
       }
     }
     .task {
