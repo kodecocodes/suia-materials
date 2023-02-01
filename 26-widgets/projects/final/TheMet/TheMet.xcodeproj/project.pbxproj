@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1839F4B025190F2A00BB00F1 /* TheMetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839F4AF25190F2A00BB00F1 /* TheMetApp.swift */; };
+		18D775C522AD944300AE281E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D775C422AD944300AE281E /* ContentView.swift */; };
+		18D775C722AD944400AE281E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
+		18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C922AD944400AE281E /* Preview Assets.xcassets */; };
+		18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18D775DA22AD963800AE281E /* LaunchScreen.storyboard */; };
+		CD1488F12961427B00332CAE /* URLComponentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1488F02961427B00332CAE /* URLComponentsExtension.swift */; };
+		CD1488F5296CD01F00332CAE /* TheMetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1488F4296CD01F00332CAE /* TheMetService.swift */; };
+		CDBC26B0298A0728006CEB62 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBC26AF298A0727006CEB62 /* WidgetKit.framework */; };
+		CDBC26B2298A0728006CEB62 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBC26B1298A0728006CEB62 /* SwiftUI.framework */; };
+		CDBC26B5298A0728006CEB62 /* TheMetWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC26B4298A0728006CEB62 /* TheMetWidgetBundle.swift */; };
+		CDBC26B7298A0728006CEB62 /* TheMetWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC26B6298A0728006CEB62 /* TheMetWidget.swift */; };
+		CDBC26B9298A0729006CEB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDBC26B8298A0729006CEB62 /* Assets.xcassets */; };
+		CDBC26BD298A0729006CEB62 /* TheMetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CDBC26AD298A0727006CEB62 /* TheMetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CDBC26C2298A085B006CEB62 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC22939C7A90022CE9A /* Object.swift */; };
+		CDBC26C4298A0A0E006CEB62 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC26C3298A0A0E006CEB62 /* WidgetView.swift */; };
+		CDC839EB298A125F001C6553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D775C622AD944400AE281E /* Assets.xcassets */; };
+		CDC839EC298A126C001C6553 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC42939C8290022CE9A /* ColorExtension.swift */; };
+		CDC839EE298A1291001C6553 /* SupportingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC839ED298A1291001C6553 /* SupportingViews.swift */; };
+		CDC839EF298A12E5001C6553 /* SupportingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC839ED298A1291001C6553 /* SupportingViews.swift */; };
+		CDC839F0298A1577001C6553 /* TheMetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC02939C7930022CE9A /* TheMetStore.swift */; };
+		CDC839F1298A157A001C6553 /* TheMetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1488F4296CD01F00332CAE /* TheMetService.swift */; };
+		CDC839F2298A157C001C6553 /* URLComponentsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1488F02961427B00332CAE /* URLComponentsExtension.swift */; };
+		CDDCFFC12939C7930022CE9A /* TheMetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC02939C7930022CE9A /* TheMetStore.swift */; };
+		CDDCFFC32939C7A90022CE9A /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC22939C7A90022CE9A /* Object.swift */; };
+		CDDCFFC52939C8290022CE9A /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC42939C8290022CE9A /* ColorExtension.swift */; };
+		CDDCFFC72939C83B0022CE9A /* ObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC62939C83B0022CE9A /* ObjectView.swift */; };
+		CDDCFFC92939C8500022CE9A /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDCFFC82939C8500022CE9A /* SafariView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CDBC26BB298A0729006CEB62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18D775B522AD944300AE281E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDBC26AC298A0727006CEB62;
+			remoteInfo = TheMetWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CDBC26BE298A0729006CEB62 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CDBC26BD298A0729006CEB62 /* TheMetWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1839F4AF25190F2A00BB00F1 /* TheMetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMetApp.swift; sourceTree = "<group>"; };
+		18D775BD22AD944300AE281E /* TheMet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D775C422AD944300AE281E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		18D775C622AD944400AE281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18D775C922AD944400AE281E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		18D775CE22AD944400AE281E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D775DE22AD96B400AE281E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CD1488F02961427B00332CAE /* URLComponentsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLComponentsExtension.swift; sourceTree = "<group>"; };
+		CD1488F4296CD01F00332CAE /* TheMetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheMetService.swift; sourceTree = "<group>"; };
+		CDBC26AD298A0727006CEB62 /* TheMetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TheMetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDBC26AF298A0727006CEB62 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		CDBC26B1298A0728006CEB62 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		CDBC26B4298A0728006CEB62 /* TheMetWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMetWidgetBundle.swift; sourceTree = "<group>"; };
+		CDBC26B6298A0728006CEB62 /* TheMetWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMetWidget.swift; sourceTree = "<group>"; };
+		CDBC26B8298A0729006CEB62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CDBC26BA298A0729006CEB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDBC26C3298A0A0E006CEB62 /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
+		CDC839ED298A1291001C6553 /* SupportingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportingViews.swift; sourceTree = "<group>"; };
+		CDC839F3298A281F001C6553 /* TheMet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheMet.entitlements; sourceTree = "<group>"; };
+		CDC839F4298A288B001C6553 /* TheMetWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheMetWidgetExtension.entitlements; sourceTree = "<group>"; };
+		CDDCFFC02939C7930022CE9A /* TheMetStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheMetStore.swift; sourceTree = "<group>"; };
+		CDDCFFC22939C7A90022CE9A /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		CDDCFFC42939C8290022CE9A /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		CDDCFFC62939C83B0022CE9A /* ObjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectView.swift; sourceTree = "<group>"; };
+		CDDCFFC82939C8500022CE9A /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18D775BA22AD944300AE281E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDBC26AA298A0727006CEB62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDBC26B2298A0728006CEB62 /* SwiftUI.framework in Frameworks */,
+				CDBC26B0298A0728006CEB62 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18D775B422AD944300AE281E = {
+			isa = PBXGroup;
+			children = (
+				CDC839F4298A288B001C6553 /* TheMetWidgetExtension.entitlements */,
+				18D775BF22AD944300AE281E /* TheMet */,
+				CDBC26B3298A0728006CEB62 /* TheMetWidget */,
+				CDBC26AE298A0727006CEB62 /* Frameworks */,
+				18D775BE22AD944300AE281E /* Products */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+		};
+		18D775BE22AD944300AE281E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18D775BD22AD944300AE281E /* TheMet.app */,
+				CDBC26AD298A0727006CEB62 /* TheMetWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18D775BF22AD944300AE281E /* TheMet */ = {
+			isa = PBXGroup;
+			children = (
+				CDC839F3298A281F001C6553 /* TheMet.entitlements */,
+				1839F4AF25190F2A00BB00F1 /* TheMetApp.swift */,
+				CDC839F5298A2F10001C6553 /* Views */,
+				CDC839F6298A2F1E001C6553 /* Model */,
+				CDC839F7298A2F2C001C6553 /* Networking */,
+				18D775C622AD944400AE281E /* Assets.xcassets */,
+				18D775DA22AD963800AE281E /* LaunchScreen.storyboard */,
+				18D775CE22AD944400AE281E /* Info.plist */,
+				18D775C822AD944400AE281E /* Preview Content */,
+			);
+			path = TheMet;
+			sourceTree = "<group>";
+		};
+		18D775C822AD944400AE281E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				18D775C922AD944400AE281E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CDBC26AE298A0727006CEB62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDBC26AF298A0727006CEB62 /* WidgetKit.framework */,
+				CDBC26B1298A0728006CEB62 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDBC26B3298A0728006CEB62 /* TheMetWidget */ = {
+			isa = PBXGroup;
+			children = (
+				CDBC26B4298A0728006CEB62 /* TheMetWidgetBundle.swift */,
+				CDBC26B6298A0728006CEB62 /* TheMetWidget.swift */,
+				CDBC26C3298A0A0E006CEB62 /* WidgetView.swift */,
+				CDBC26B8298A0729006CEB62 /* Assets.xcassets */,
+				CDBC26BA298A0729006CEB62 /* Info.plist */,
+			);
+			path = TheMetWidget;
+			sourceTree = "<group>";
+		};
+		CDC839F5298A2F10001C6553 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				18D775C422AD944300AE281E /* ContentView.swift */,
+				CDDCFFC62939C83B0022CE9A /* ObjectView.swift */,
+				CDDCFFC82939C8500022CE9A /* SafariView.swift */,
+				CDC839ED298A1291001C6553 /* SupportingViews.swift */,
+				CDDCFFC42939C8290022CE9A /* ColorExtension.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CDC839F6298A2F1E001C6553 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CDDCFFC22939C7A90022CE9A /* Object.swift */,
+				CDDCFFC02939C7930022CE9A /* TheMetStore.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CDC839F7298A2F2C001C6553 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				CD1488F4296CD01F00332CAE /* TheMetService.swift */,
+				CD1488F02961427B00332CAE /* URLComponentsExtension.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18D775BC22AD944300AE281E /* TheMet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "TheMet" */;
+			buildPhases = (
+				181FE31D248EA6C900A180EA /* SwiftLint */,
+				18D775B922AD944300AE281E /* Sources */,
+				18D775BA22AD944300AE281E /* Frameworks */,
+				18D775BB22AD944300AE281E /* Resources */,
+				CDBC26BE298A0729006CEB62 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDBC26BC298A0729006CEB62 /* PBXTargetDependency */,
+			);
+			name = TheMet;
+			productName = MyRWTutorial;
+			productReference = 18D775BD22AD944300AE281E /* TheMet.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CDBC26AC298A0727006CEB62 /* TheMetWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDBC26C1298A0729006CEB62 /* Build configuration list for PBXNativeTarget "TheMetWidgetExtension" */;
+			buildPhases = (
+				CDBC26A9298A0727006CEB62 /* Sources */,
+				CDBC26AA298A0727006CEB62 /* Frameworks */,
+				CDBC26AB298A0727006CEB62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheMetWidgetExtension;
+			productName = TheMetWidgetExtension;
+			productReference = CDBC26AD298A0727006CEB62 /* TheMetWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18D775B522AD944300AE281E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = Kodeco;
+				TargetAttributes = {
+					18D775BC22AD944300AE281E = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					CDBC26AC298A0727006CEB62 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 18D775B822AD944300AE281E /* Build configuration list for PBXProject "TheMet" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18D775B422AD944300AE281E;
+			productRefGroup = 18D775BE22AD944300AE281E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18D775BC22AD944300AE281E /* TheMet */,
+				CDBC26AC298A0727006CEB62 /* TheMetWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18D775BB22AD944300AE281E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */,
+				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
+				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDBC26AB298A0727006CEB62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDC839EB298A125F001C6553 /* Assets.xcassets in Resources */,
+				CDBC26B9298A0729006CEB62 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		181FE31D248EA6C900A180EA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18D775B922AD944300AE281E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDDCFFC12939C7930022CE9A /* TheMetStore.swift in Sources */,
+				CDDCFFC72939C83B0022CE9A /* ObjectView.swift in Sources */,
+				CD1488F12961427B00332CAE /* URLComponentsExtension.swift in Sources */,
+				18D775C522AD944300AE281E /* ContentView.swift in Sources */,
+				CDDCFFC32939C7A90022CE9A /* Object.swift in Sources */,
+				1839F4B025190F2A00BB00F1 /* TheMetApp.swift in Sources */,
+				CD1488F5296CD01F00332CAE /* TheMetService.swift in Sources */,
+				CDC839EE298A1291001C6553 /* SupportingViews.swift in Sources */,
+				CDDCFFC52939C8290022CE9A /* ColorExtension.swift in Sources */,
+				CDDCFFC92939C8500022CE9A /* SafariView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDBC26A9298A0727006CEB62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDBC26B7298A0728006CEB62 /* TheMetWidget.swift in Sources */,
+				CDC839EF298A12E5001C6553 /* SupportingViews.swift in Sources */,
+				CDC839F2298A157C001C6553 /* URLComponentsExtension.swift in Sources */,
+				CDBC26C2298A085B006CEB62 /* Object.swift in Sources */,
+				CDBC26C4298A0A0E006CEB62 /* WidgetView.swift in Sources */,
+				CDBC26B5298A0728006CEB62 /* TheMetWidgetBundle.swift in Sources */,
+				CDC839F0298A1577001C6553 /* TheMetStore.swift in Sources */,
+				CDC839F1298A157A001C6553 /* TheMetService.swift in Sources */,
+				CDC839EC298A126C001C6553 /* ColorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDBC26BC298A0729006CEB62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDBC26AC298A0727006CEB62 /* TheMetWidgetExtension */;
+			targetProxy = CDBC26BB298A0729006CEB62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18D775DA22AD963800AE281E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18D775DE22AD96B400AE281E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18D775CF22AD944400AE281E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		18D775D022AD944400AE281E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18D775D222AD944400AE281E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TheMet/TheMet.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "TheMet/Preview\\ Content";
+				DEVELOPMENT_TEAM = W5MFPM65T9;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TheMet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TheMet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18D775D322AD944400AE281E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TheMet/TheMet.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "TheMet/Preview\\ Content";
+				DEVELOPMENT_TEAM = W5MFPM65T9;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TheMet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TheMet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CDBC26BF298A0729006CEB62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TheMetWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5MFPM65T9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TheMetWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TheMetWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Kodeco. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TheMet.TheMetWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDBC26C0298A0729006CEB62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TheMetWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W5MFPM65T9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TheMetWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TheMetWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Kodeco. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.TheMet.TheMetWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18D775B822AD944300AE281E /* Build configuration list for PBXProject "TheMet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D775CF22AD944400AE281E /* Debug */,
+				18D775D022AD944400AE281E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18D775D122AD944400AE281E /* Build configuration list for PBXNativeTarget "TheMet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18D775D222AD944400AE281E /* Debug */,
+				18D775D322AD944400AE281E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDBC26C1298A0729006CEB62 /* Build configuration list for PBXNativeTarget "TheMetWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDBC26BF298A0729006CEB62 /* Debug */,
+				CDBC26C0298A0729006CEB62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18D775B522AD944300AE281E /* Project object */;
+}
