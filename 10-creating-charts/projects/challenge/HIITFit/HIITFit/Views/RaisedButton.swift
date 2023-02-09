@@ -62,8 +62,7 @@ struct RaisedButtonStyle: ButtonStyle {
         Capsule()
           .foregroundColor(Color("background"))
           .shadow(color: Color("drop-shadow"), radius: 4, x: 6, y: 6)
-          .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6)
-      )
+          .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6))
   }
 }
 

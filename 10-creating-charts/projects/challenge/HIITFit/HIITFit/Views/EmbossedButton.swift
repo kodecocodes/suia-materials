@@ -52,8 +52,7 @@ struct EmbossedButtonStyle: ButtonStyle {
             .shadow(color: shadow, radius: 1, x: 2, y: 2)
             .shadow(color: highlight, radius: 1, x: -2, y: -2)
           .offset(x: -1, y: -1)
-        }
-      )
+        })
       .scaleEffect(configuration.isPressed ? buttonScale : 1.0)
   }
 
