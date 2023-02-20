@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct SuccessView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Binding var selectedTab: Int
 
   var body: some View {
@@ -59,7 +59,7 @@ struct SuccessView: View {
           withAnimation {
             selectedTab = 9
           }
-          presentationMode.wrappedValue.dismiss()
+          dismiss()
         }
         .padding()
       }

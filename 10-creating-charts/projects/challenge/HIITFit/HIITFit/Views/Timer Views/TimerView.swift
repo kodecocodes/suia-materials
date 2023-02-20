@@ -54,7 +54,7 @@ struct CountdownView: View {
 }
 
 struct TimerView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @State private var timeRemaining: Int = 3
   @Binding var timerDone: Bool
   let exerciseName: String
@@ -101,7 +101,7 @@ struct TimerView: View {
         VStack {
           Spacer()
           RaisedButton(buttonText: "Done") {
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
           }
           .opacity(timerDone ? 1 : 0)
           .padding([.leading, .trailing], 30)
