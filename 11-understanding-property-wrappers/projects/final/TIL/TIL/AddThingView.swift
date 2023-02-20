@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct AddThingView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @State private var thing = ""
   @FocusState private var thingIsFocused: Bool
   @ObservedObject var someThings: ThingStore
@@ -41,7 +41,7 @@ struct AddThingView: View {
   var body: some View {
     VStack {
       TextField("Thing I Learned", text: $thing)  // 1
-        .textFieldStyle(RoundedBorderTextFieldStyle())  // 2
+        .textFieldStyle(.roundedBorder)  // 2
         .padding()  // 3
         // .autocapitalization(.allCharacters)
         .disableAutocorrection(true)
@@ -51,7 +51,7 @@ struct AddThingView: View {
         if !thing.isEmpty {
           someThings.things.append(thing)
         }
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
       }
       Spacer()
     }

@@ -33,12 +33,12 @@
 import SwiftUI
 
 struct AddThingView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
 
   var body: some View {
     VStack {
       Button("Done") {
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
       }
       Spacer()
     }
