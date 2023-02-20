@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct SingleCardView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @State private var currentModal: ToolbarSelection?
 
   var body: some View {
@@ -42,7 +42,7 @@ struct SingleCardView: View {
         .toolbar {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("Done") {
-              presentationMode.wrappedValue.dismiss()
+              dismiss()
             }
           }
           ToolbarItem(placement: .bottomBar) {
