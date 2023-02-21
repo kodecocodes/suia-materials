@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct CardToolbar: ViewModifier {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Binding var currentModal: ToolbarSelection?
 
   func body(content: Content) -> some View {
@@ -41,7 +41,7 @@ struct CardToolbar: ViewModifier {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("Done") {
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
           }
         }
         ToolbarItem(placement: .bottomBar) {
