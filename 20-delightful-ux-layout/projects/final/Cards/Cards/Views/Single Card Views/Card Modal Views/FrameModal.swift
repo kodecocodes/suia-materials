@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct FrameModal: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Binding var frameIndex: Int?
 
   private let columns = [
@@ -55,7 +55,7 @@ struct FrameModal: View {
             .padding()
             .onTapGesture {
               frameIndex = index
-              presentationMode.wrappedValue.dismiss()
+              dismiss()
             }
         }
       }
