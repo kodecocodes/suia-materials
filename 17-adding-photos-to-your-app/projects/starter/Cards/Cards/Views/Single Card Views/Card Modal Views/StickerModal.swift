@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct StickerModal: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Binding var stickerImage: UIImage?
   @State private var stickerNames: [String] = []
   let columns = [
@@ -49,7 +49,7 @@ struct StickerModal: View {
             .aspectRatio(contentMode: .fit)
             .onTapGesture {
               stickerImage = image(from: sticker)
-              presentationMode.wrappedValue.dismiss()
+              dismiss()
             }
         }
       }
