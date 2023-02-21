@@ -33,12 +33,12 @@
 import SwiftUI
 
 struct TextModal: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Binding var textElement: TextElement
 
   var body: some View {
     let onCommit = {
-      presentationMode.wrappedValue.dismiss()
+      dismiss()
     }
     TextField(
       "Enter text", text: $textElement.text, onCommit: onCommit)
