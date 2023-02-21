@@ -90,6 +90,7 @@
 			buildConfigurationList = 821BAD0029A4334300DF7122 /* Build configuration list for PBXNativeTarget "Cards" */;
 			buildPhases = (
 				821BACEE29A4334200DF7122 /* Sources */,
+				8283074A29A47C53001755D5 /* SwiftLint */,
 				821BACEF29A4334200DF7122 /* Frameworks */,
 				821BACF029A4334200DF7122 /* Resources */,
 			);
@@ -147,6 +148,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8283074A29A47C53001755D5 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		821BACEE29A4334200DF7122 /* Sources */ = {
