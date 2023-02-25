@@ -43,7 +43,7 @@ struct SingleCardView: View {
           card: $card,
           viewScale: Settings.calculateScale(proxy.size))
           .frame(
-            width: Settings.calculateSize(proxy.size).width ,
+            width: Settings.calculateSize(proxy.size).width,
             height: Settings.calculateSize(proxy.size).height)
           .clipped()
           .frame(maxWidth: .infinity, maxHeight: .infinity)

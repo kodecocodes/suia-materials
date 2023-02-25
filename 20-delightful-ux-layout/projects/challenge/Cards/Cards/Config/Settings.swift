@@ -70,7 +70,8 @@ extension Settings {
     proxy: GeometryProxy?,
     location: CGPoint
   ) -> CGSize {
-    guard let proxy,
+    guard
+      let proxy,
       proxy.size.width > 0 && proxy.size.height > 0
     else { return .zero }
 
