@@ -34,10 +34,10 @@ import SwiftUI
 
 struct ContentView: View {
   @StateObject private var store = TheMetStore()
-  @State private var query = "persimmon"
+  @State private var query = "peony"
   @State private var showQueryField = false
   @State private var fetchObjectsTask: Task<Void, Error>?
-  @State private var path: [Object] = []
+  @State private var path = NavigationPath()
 
   var body: some View {
     NavigationStack(path: $path) {
@@ -107,7 +107,13 @@ struct ContentView: View {
       if let id = url.host,
          let object = store.objects.first(
           where: { String($0.objectID) == id }) {
-        path.append(object)
+        if object.isPublicDomain {
+          path.append(object)
+        } else {
+          if let url = URL(string: object.objectURL) {
+            path.append(url)
+          }
+        }
       }
     }
     .task {
