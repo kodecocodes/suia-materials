@@ -84,8 +84,7 @@ struct TextView: View {
           .stroke(Color.white, lineWidth: 1.0)
           .overlay(
             Circle()
-              .foregroundColor(color == currentColor ? currentColor : .white)
-          )
+              .foregroundColor(color == currentColor ? currentColor : .white))
           .frame(
             width: 44,
             height: 44)
@@ -93,11 +92,10 @@ struct TextView: View {
           .stroke(lineWidth: color == currentColor ? 0 : 1)
           .overlay(
             Circle()
-              .foregroundColor(currentColor)
-          )
+              .foregroundColor(currentColor))
           .frame(
-            width: color == currentColor ? 50: 40,
-            height: color == currentColor ? 50: 40)
+            width: color == currentColor ? 50 : 40,
+            height: color == currentColor ? 50 : 40)
       }
       .onTapGesture {
         withAnimation {

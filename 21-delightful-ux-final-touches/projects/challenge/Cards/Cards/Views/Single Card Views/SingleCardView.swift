@@ -44,7 +44,7 @@ struct SingleCardView: View {
           viewScale: Settings.calculateScale(proxy.size),
           proxy: proxy)
           .frame(
-            width: Settings.calculateSize(proxy.size).width ,
+            width: Settings.calculateSize(proxy.size).width,
             height: Settings.calculateSize(proxy.size).height)
           .clipped()
           .frame(maxWidth: .infinity, maxHeight: .infinity)

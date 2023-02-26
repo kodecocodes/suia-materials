@@ -114,8 +114,8 @@ struct Heart: Shape {
     path.move(to: CGPoint(x: rect.midX, y: rect.maxY ))
     path.addCurve(
       to: CGPoint(x: rect.minX, y: rect.height * 0.25),
-      control1: CGPoint(x: rect.midX * 0.7, y: rect.height * 0.9) ,
-      control2: CGPoint(x: rect.minX, y: rect.midY) )
+      control1: CGPoint(x: rect.midX * 0.7, y: rect.height * 0.9),
+      control2: CGPoint(x: rect.minX, y: rect.midY))
     path.addArc(
       center: CGPoint(
         x: rect.width * 0.25,
@@ -135,7 +135,7 @@ struct Heart: Shape {
     path.addCurve(
       to: CGPoint(x: rect.midX, y: rect.height),
       control1: CGPoint(x: rect.width, y: rect.midY),
-      control2: CGPoint(x: rect.midX * 1.3, y: rect.height * 0.9) )
+      control2: CGPoint(x: rect.midX * 1.3, y: rect.height * 0.9))
     path.closeSubpath()
     return path
   }
