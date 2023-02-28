@@ -76,8 +76,7 @@ struct ContentView: View {
         }
         .alert(
           "Search the Met",
-          isPresented: $showQueryField,
-          actions: {
+          isPresented: $showQueryField) {
             TextField("Search the Met", text: $query)
             Button("Search") {
               fetchObjectsTask?.cancel()
@@ -88,8 +87,7 @@ struct ContentView: View {
                 } catch {}
               }
             }
-          }
-        )
+        }
         .navigationDestination(for: URL.self) { url in
           SafariView(url: url)
             .navigationBarTitleDisplayMode(.inline)
@@ -105,7 +103,7 @@ struct ContentView: View {
     }
     .onOpenURL { url in
       if let id = url.host,
-         let object = store.objects.first(
+        let object = store.objects.first(
           where: { String($0.objectID) == id }) {
         if object.isPublicDomain {
           path.append(object)

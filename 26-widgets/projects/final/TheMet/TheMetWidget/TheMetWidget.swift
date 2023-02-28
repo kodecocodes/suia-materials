@@ -53,17 +53,6 @@ struct Provider: TimelineProvider {
     let currentDate = Date()
     let interval = 3
 
-//    Task {
-//      do {
-//        try await store.fetchObjects(for: query)
-//      } catch {
-//        store.objects = [
-//          Object.sample(isPublicDomain: true),
-//          Object.sample(isPublicDomain: false)
-//        ]
-//      }
-//    }
-
     let objects = readObjects()
     for index in 0 ..< objects.count {
       let entryDate = Calendar.current.date(

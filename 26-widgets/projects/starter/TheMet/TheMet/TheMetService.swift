@@ -52,7 +52,7 @@ struct TheMetService {
 
     let (data, response) = try await session.data(for: request)  // 1
     guard let response = response as? HTTPURLResponse,
-          (200..<300).contains(response.statusCode) else {
+      (200..<300).contains(response.statusCode) else {
       print(">>> getObjectIDs response outside bounds")
       return nil
     }
