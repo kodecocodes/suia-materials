@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -38,11 +38,7 @@ struct CardDetailView: View {
   var viewScale: CGFloat = 1
 
   func isSelected(_ element: CardElement) -> Bool {
-    if let selected = store.selectedElement,
-      element.id == selected.id {
-      return true
-    }
-    return false
+    store.selectedElement?.id == element.id
   }
 
   var body: some View {
