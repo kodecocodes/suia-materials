@@ -96,17 +96,9 @@ struct SimpleEntry: TimelineEntry {
 
 struct TheMetWidgetEntryView: View {
   var entry: Provider.Entry
-  @Environment(\.widgetFamily) var family
 
   var body: some View {
-    switch family {
-    case .systemMedium:
-      WidgetView(entry: entry)
-    case .systemLarge:
-      WidgetView(entry: entry)
-    default:
-      Text("Not implemented!")
-    }
+    WidgetView(entry: entry)
   }
 }
 
