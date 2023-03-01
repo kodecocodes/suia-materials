@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -115,7 +115,7 @@ struct Heart: Shape {
     path.addCurve(
       to: CGPoint(x: rect.minX, y: rect.height * 0.25),
       control1: CGPoint(x: rect.midX * 0.7, y: rect.height * 0.9),
-      control2: CGPoint(x: rect.minX, y: rect.midY) )
+      control2: CGPoint(x: rect.minX, y: rect.midY))
     path.addArc(
       center: CGPoint(
         x: rect.width * 0.25,

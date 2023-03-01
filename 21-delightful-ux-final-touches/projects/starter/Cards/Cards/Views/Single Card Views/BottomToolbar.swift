@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -116,7 +116,7 @@ struct BottomToolbar_Previews: PreviewProvider {
     BottomToolbar(
       card: .constant(Card()),
       modal: .constant(.stickerModal))
-      .padding()
-      .environmentObject(CardStore())
+    .padding()
+    .environmentObject(CardStore())
   }
 }
