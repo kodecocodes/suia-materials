@@ -69,8 +69,10 @@ var objects: [Object] = []
 
 Task {  // 4
   let (data, response) = try await session.data(for: request)
-  guard let response = response as? HTTPURLResponse,
-        (200..<300).contains(response.statusCode) else {
+  guard
+    let response = response as? HTTPURLResponse,
+    (200..<300).contains(response.statusCode)
+  else {
     print(">>> response outside bounds")
     return
   }
@@ -82,8 +84,10 @@ Task {  // 4
     let objectURL = URL(string: objectURLString)
     let objectRequest = URLRequest(url: objectURL!)
     let (data, response) = try await session.data(for: objectRequest)
-    guard let response = response as? HTTPURLResponse,
-          (200..<300).contains(response.statusCode) else {
+    guard
+      let response = response as? HTTPURLResponse,
+      (200..<300).contains(response.statusCode)
+    else {
       print(">>> response outside bounds")
       return
     }

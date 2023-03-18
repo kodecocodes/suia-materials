@@ -70,8 +70,7 @@ struct ContentView: View {
           .padding(.horizontal)
           .background(
             RoundedRectangle(cornerRadius: 8)
-              .stroke(Color.metBackground, lineWidth: 2)
-          )
+              .stroke(Color.metBackground, lineWidth: 2))
         }
         .alert(
           "Search the Met",
@@ -87,8 +86,7 @@ struct ContentView: View {
                 } catch {}
               }
             }
-          }
-        )
+          })
         .navigationDestination(for: URL.self) { url in
           SafariView(url: url)
             .navigationBarTitleDisplayMode(.inline)
