@@ -88,7 +88,6 @@ struct ObjectView_Previews: PreviewProvider {
           creditLine: "Gift of Arthur A. Houghton Jr., 1970",
           objectURL: "https://www.metmuseum.org/art/collection/search/452174",
           isPublicDomain: true,
-          primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg")
-    )
+          primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg"))
   }
 }
