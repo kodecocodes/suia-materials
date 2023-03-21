@@ -34,9 +34,6 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-//  let store = TheMetStore(6)
-  let query = "persimmon"
-
   func placeholder(in context: Context) -> SimpleEntry {
     SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: true))
   }
