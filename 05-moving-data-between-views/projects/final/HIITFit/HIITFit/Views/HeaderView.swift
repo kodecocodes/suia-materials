@@ -32,48 +32,31 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct HeaderView: View {
+  @Binding var selectedTab: Int  // 1
+  let titleText: String
+
   var body: some View {
-    ZStack {
-      VStack {
-        HeaderView(titleText: "Welcome")
-        Spacer()
-        Button("History") { }
-          .padding(.bottom)
-      }
-
-      VStack {
-        HStack(alignment: .bottom) {
-          VStack(alignment: .leading) {
-            Text("Get fit")
-              .font(.largeTitle)
-            Text("with high intensity interval training")
-              .font(.headline)
-          }
-          Image("step-up")
-            .resizedToFill(width: 240, height: 240)
-//            .resizable()
-//            .aspectRatio(contentMode: .fill)
-//            .frame(width: 240.0, height: 240.0)
-            .clipShape(Circle())
+    VStack {
+      Text(titleText)
+        .font(.largeTitle)
+      HStack {  // 2
+        ForEach(Exercise.exercises.indices, id: \.self) { index in  // 3
+          let fill = index == selectedTab ? ".fill" : ""
+          Image(systemName: "\(index + 1).circle\(fill)")  // 4
+            .onTapGesture {
+              selectedTab = index
+            }
         }
-
-        Button(action: { }) {
-          Text("Get Started")
-          Image(systemName: "arrow.right.circle")
-        }
-        .font(.title2)
-        .padding()
-        .background(
-          RoundedRectangle(cornerRadius: 20)
-          .stroke(Color.gray, lineWidth: 2))
       }
+      .font(.title2)
     }
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    WelcomeView()
+    HeaderView(selectedTab: .constant(0), titleText: "Squat")
+      .previewLayout(.sizeThatFits)
   }
 }

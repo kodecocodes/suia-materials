@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ struct ContentView: View {
   var body: some View {
     TabView {
       WelcomeView()
-      ForEach(0 ..< 4) { index in
+      ForEach(Exercise.exercises.indices, id: \.self) { index in
         ExerciseView(index: index)
       }
     }

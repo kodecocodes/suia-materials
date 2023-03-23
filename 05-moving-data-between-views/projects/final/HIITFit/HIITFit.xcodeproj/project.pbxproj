@@ -168,9 +168,10 @@
 		CD30C918251474DC0049DB93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = Kodeco;
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
-				ORGANIZATIONNAME = Kodeco;
+				ORGANIZATIONNAME = "Ray Wenderlich";
 				TargetAttributes = {
 					CD30C91F251474DC0049DB93 = {
 						CreatedOnToolsVersion = 12.2;
