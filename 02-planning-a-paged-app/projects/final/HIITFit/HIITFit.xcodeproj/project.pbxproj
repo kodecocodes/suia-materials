@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,8 +17,8 @@
 		CD30C94725147AEF0049DB93 /* burpee.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CD30C94325147AEF0049DB93 /* burpee.mp4 */; };
 		CD30C94825147AEF0049DB93 /* squat.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CD30C94425147AEF0049DB93 /* squat.mp4 */; };
 		CD30C94925147AEF0049DB93 /* sun-salute.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CD30C94525147AEF0049DB93 /* sun-salute.mp4 */; };
-		CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C95025147E420049DB93 /* WelcomeView.swift */; };
-		CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C95325147E4B0049DB93 /* ExerciseView.swift */; };
+		CDF6E7F028D8271B00C20EBD /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6E7EF28D8271B00C20EBD /* WelcomeView.swift */; };
+		CDF6E7F228D8273100C20EBD /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF6E7F128D8273100C20EBD /* ExerciseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +34,8 @@
 		CD30C94325147AEF0049DB93 /* burpee.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = burpee.mp4; sourceTree = "<group>"; };
 		CD30C94425147AEF0049DB93 /* squat.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = squat.mp4; sourceTree = "<group>"; };
 		CD30C94525147AEF0049DB93 /* sun-salute.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sun-salute.mp4"; sourceTree = "<group>"; };
-		CD30C95025147E420049DB93 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		CD30C95325147E4B0049DB93 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		CDF6E7EF28D8271B00C20EBD /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		CDF6E7F128D8273100C20EBD /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				CD30C923251474DC0049DB93 /* HIITFitApp.swift */,
-				CD30C95625147EFA0049DB93 /* Views */,
+				CDF6E7F328D8289A00C20EBD /* Views */,
 				CD30C93D25147A8C0049DB93 /* DateExtension.swift */,
 				CD30C93E25147A8C0049DB93 /* ImageExtension.swift */,
 				CD30C927251474DD0049DB93 /* Assets.xcassets */,
@@ -99,12 +99,12 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
-		CD30C95625147EFA0049DB93 /* Views */ = {
+		CDF6E7F328D8289A00C20EBD /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CD30C925251474DC0049DB93 /* ContentView.swift */,
-				CD30C95025147E420049DB93 /* WelcomeView.swift */,
-				CD30C95325147E4B0049DB93 /* ExerciseView.swift */,
+				CDF6E7EF28D8271B00C20EBD /* WelcomeView.swift */,
+				CDF6E7F128D8273100C20EBD /* ExerciseView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,7 +116,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD30C92F251474DD0049DB93 /* Build configuration list for PBXNativeTarget "HIITFit" */;
 			buildPhases = (
-				CD0BEE002524570D00937B4F /* SwiftLint */,
+				CD0BEDFE2524567A00937B4F /* SwiftLint */,
 				CD30C91C251474DC0049DB93 /* Sources */,
 				CD30C91D251474DC0049DB93 /* Frameworks */,
 				CD30C91E251474DC0049DB93 /* Resources */,
@@ -138,7 +138,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
-				ORGANIZATIONNAME = "Ray Wenderlich";
+				ORGANIZATIONNAME = Kodeco;
 				TargetAttributes = {
 					CD30C91F251474DC0049DB93 = {
 						CreatedOnToolsVersion = 12.2;
@@ -146,7 +146,7 @@
 				};
 			};
 			buildConfigurationList = CD30C91B251474DC0049DB93 /* Build configuration list for PBXProject "HIITFit" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -180,8 +180,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD0BEE002524570D00937B4F /* SwiftLint */ = {
+		CD0BEDFE2524567A00937B4F /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -205,8 +206,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */,
-				CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */,
+				CDF6E7F228D8273100C20EBD /* ExerciseView.swift in Sources */,
+				CDF6E7F028D8271B00C20EBD /* WelcomeView.swift in Sources */,
 				CD30C926251474DC0049DB93 /* ContentView.swift in Sources */,
 				CD30C93F25147A8C0049DB93 /* DateExtension.swift in Sources */,
 				CD30C924251474DC0049DB93 /* HIITFitApp.swift in Sources */,
@@ -268,7 +269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -323,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -338,17 +339,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"HIITFit/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HIITFit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HIITFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kodeco.HIITFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -359,17 +363,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"HIITFit/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HIITFit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HIITFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kodeco.HIITFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
