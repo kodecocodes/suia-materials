@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,48 +32,49 @@
 
 import SwiftUI
 
-
-struct CardDetailView: View {
-  @EnvironmentObject var viewState: ViewState
-  @State private var currentModal: CardModal?
+struct ToolbarButton: View {
+  let modal: ToolbarSelection
+  private let modalButton: [
+    ToolbarSelection: (text: String, imageName: String)
+  ] = [
+    .photoModal: ("Photos", "photo"),
+    .frameModal: ("Frames", "square.on.circle"),
+    .stickerModal: ("Stickers", "heart.circle"),
+    .textModal: ("Text", "textformat")
+  ]
 
   var body: some View {
-    content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          // swiftlint:disable:next multiple_closures_with_trailing_closure
-          Button(action: { viewState.showAllCards.toggle() }) {
-            Text("Done")
-          }
-        }
-        ToolbarItem(placement: .bottomBar) {
-          CardBottomToolbar(cardModal: $currentModal)
-        }
+    if let text = modalButton[modal]?.text,
+      let imageName = modalButton[modal]?.imageName {
+      VStack {
+        Image(systemName: imageName)
+          .font(.largeTitle)
+        Text(text)
       }
-  }
-
-  var content: some View {
-    ZStack {
-      Group {
-        Capsule()
-          .foregroundColor(.yellow)
-        Text("Resize Me!")
-          .fontWeight(.bold)
-          .font(.system(size: 500))
-          .minimumScaleFactor(0.01)
-          .lineLimit(1)
-      }
-      .resizableView()
-      Circle()
-        .resizableView()
-        .offset(CGSize(width: 50, height: 200))
+      .padding(.top)
     }
   }
 }
 
-struct CardDetailView_Previews: PreviewProvider {
+struct BottomToolbar: View {
+  @Binding var modal: ToolbarSelection?
+
+  var body: some View {
+    HStack {
+      ForEach(ToolbarSelection.allCases) { selection in
+        Button {
+          modal = selection
+        } label: {
+          ToolbarButton(modal: selection)
+        }
+      }
+    }
+  }
+}
+
+struct BottomToolbar_Previews: PreviewProvider {
   static var previews: some View {
-    CardDetailView()
-      .environmentObject(ViewState())
+    BottomToolbar(modal: .constant(.stickerModal))
+      .padding()
   }
 }

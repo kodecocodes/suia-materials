@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,10 @@
 
 import Foundation
 
-enum CardModal {
-  case photoPicker, framePicker, stickerPicker, textPicker
+enum ToolbarSelection: CaseIterable, Identifiable {
+  var id: Int {
+    hashValue
+  }
+
+  case photoModal, frameModal, stickerModal, textModal
 }
