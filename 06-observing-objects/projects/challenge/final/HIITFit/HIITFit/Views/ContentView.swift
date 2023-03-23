@@ -38,11 +38,11 @@ struct ContentView: View {
 
   var body: some View {
     TabView(selection: $selectedTab) {
-      WelcomeView(history: history, selectedTab: $selectedTab)
-        .tag(9)
-      ForEach(0 ..< Exercise.exercises.count) { index in
+      WelcomeView(history: history, selectedTab: $selectedTab)  // 1
+        .tag(9)  // 2
+      ForEach(Exercise.exercises.indices, id: \.self) { index in
         ExerciseView(history: $history, selectedTab: $selectedTab, index: index)
-          .tag(index)
+          .tag(index)  // 3
       }
     }
     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

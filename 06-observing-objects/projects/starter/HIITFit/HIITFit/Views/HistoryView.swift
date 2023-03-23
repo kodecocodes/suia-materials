@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -38,12 +38,12 @@ struct HistoryView: View {
 
   var body: some View {
     ZStack(alignment: .topTrailing) {
-      // swiftlint:disable:next multiple_closures_with_trailing_closure
       Button(action: { showHistory.toggle() }) {
         Image(systemName: "xmark.circle")
       }
       .font(.title)
-      .padding(.trailing)
+      .padding()
+
       VStack {
         Text("History")
           .font(.title)

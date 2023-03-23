@@ -47,8 +47,9 @@ struct WelcomeView: View {
         .sheet(isPresented: $showHistory) {
           HistoryView(showHistory: $showHistory)
         }
-          .padding(.bottom)
+        .padding(.bottom)
       }
+
       VStack {
         HStack(alignment: .bottom) {
           VStack(alignment: .leading) {
@@ -61,6 +62,9 @@ struct WelcomeView: View {
             .resizedToFill(width: 240, height: 240)
             .clipShape(Circle())
         }
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 240.0, height: 240.0)
         // swiftlint:disable:next multiple_closures_with_trailing_closure
         Button(action: { selectedTab = 0 }) {
           Text("Get Started")
@@ -70,7 +74,7 @@ struct WelcomeView: View {
         .padding()
         .background(
           RoundedRectangle(cornerRadius: 20)
-            .stroke(Color.gray, lineWidth: 2))
+          .stroke(Color.gray, lineWidth: 2))
       }
     }
   }

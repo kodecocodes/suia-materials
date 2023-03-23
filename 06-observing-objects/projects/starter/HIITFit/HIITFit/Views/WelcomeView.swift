@@ -47,8 +47,9 @@ struct WelcomeView: View {
         .sheet(isPresented: $showHistory) {
           HistoryView(showHistory: $showHistory)
         }
-          .padding(.bottom)
+        .padding(.bottom)
       }
+
       VStack {
         HStack(alignment: .bottom) {
           VStack(alignment: .leading) {
@@ -59,9 +60,12 @@ struct WelcomeView: View {
           }
           Image("step-up")
             .resizedToFill(width: 240, height: 240)
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 240.0, height: 240.0)
             .clipShape(Circle())
         }
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
+
         Button(action: { selectedTab = 0 }) {
           Text("Get Started")
           Image(systemName: "arrow.right.circle")
@@ -70,7 +74,7 @@ struct WelcomeView: View {
         .padding()
         .background(
           RoundedRectangle(cornerRadius: 20)
-            .stroke(Color.gray, lineWidth: 2))
+          .stroke(Color.gray, lineWidth: 2))
       }
     }
   }
