@@ -30,29 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-protocol CardElement {
-  var id: UUID { get }
-  var transform: Transform { get set }
-}
-
-extension CardElement {
-  func index(in array: [CardElement]) -> Int? {
-    array.firstIndex { $0.id == id }
+enum ToolbarSelection: CaseIterable, Identifiable {
+  var id: Int {
+    hashValue
   }
-}
 
-struct ImageElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var image: Image
-}
-
-struct TextElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var text = ""
-  var textColor = Color.black
-  var textFont = "Gill Sans"
+  case photoModal, frameModal, stickerModal, textModal
 }

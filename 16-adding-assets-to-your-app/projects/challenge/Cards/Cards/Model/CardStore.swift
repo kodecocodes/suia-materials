@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,11 +43,5 @@ class CardStore: ObservableObject {
 
   func index(for card: Card) -> Int? {
     cards.firstIndex { $0.id == card.id }
-  }
-
-  func remove(_ card: Card) {
-    if let index = index(for: card) {
-      cards.remove(at: index)
-    }
   }
 }

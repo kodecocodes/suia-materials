@@ -32,27 +32,26 @@
 
 import SwiftUI
 
-protocol CardElement {
-  var id: UUID { get }
-  var transform: Transform { get set }
+func + (left: CGSize, right: CGSize) -> CGSize {
+  CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
 }
 
-extension CardElement {
-  func index(in array: [CardElement]) -> Int? {
-    array.firstIndex { $0.id == id }
-  }
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right)
 }
 
-struct ImageElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var image: Image
+func *= (left: inout CGSize, right: Double) {
+  left = CGSize(
+    width: left.width * right,
+    height: left.height * right)
 }
 
-struct TextElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var text = ""
-  var textColor = Color.black
-  var textFont = "Gill Sans"
+func / (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width / right,
+    height: left.height / right)
 }

@@ -32,27 +32,20 @@
 
 import SwiftUI
 
-protocol CardElement {
-  var id: UUID { get }
-  var transform: Transform { get set }
-}
+struct CardThumbnail: View {
+  let card: Card
 
-extension CardElement {
-  func index(in array: [CardElement]) -> Int? {
-    array.firstIndex { $0.id == id }
+  var body: some View {
+    RoundedRectangle(cornerRadius: 15)
+      .foregroundColor(card.backgroundColor)
+      .frame(
+        width: Settings.thumbnailSize.width,
+        height: Settings.thumbnailSize.height)
   }
 }
 
-struct ImageElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var image: Image
-}
-
-struct TextElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var text = ""
-  var textColor = Color.black
-  var textFont = "Gill Sans"
+struct CardThumbnail_Previews: PreviewProvider {
+  static var previews: some View {
+    CardThumbnail(card: initialCards[0])
+  }
 }
