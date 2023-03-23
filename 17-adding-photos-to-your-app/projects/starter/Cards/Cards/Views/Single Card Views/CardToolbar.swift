@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,21 +33,36 @@
 import SwiftUI
 
 struct CardToolbar: ViewModifier {
-  @EnvironmentObject var viewState: ViewState
-  @Binding var currentModal: CardModal?
+  @Environment(\.dismiss) var dismiss
+  @Binding var currentModal: ToolbarSelection?
+  @Binding var card: Card
+  @State private var stickerImage: UIImage?
 
   func body(content: Content) -> some View {
     content
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-        Button(action: { viewState.showAllCards.toggle() }) {
-          Text("Done")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button("Done") {
+            dismiss()
+          }
+        }
+        ToolbarItem(placement: .bottomBar) {
+          BottomToolbar(modal: $currentModal)
         }
       }
-      ToolbarItem(placement: .bottomBar) {
-        CardBottomToolbar(cardModal: $currentModal)
+      .sheet(item: $currentModal) { item in
+        switch item {
+        case .stickerModal:
+          StickerModal(stickerImage: $stickerImage)
+            .onDisappear {
+              if let stickerImage = stickerImage {
+                card.addElement(uiImage: stickerImage)
+              }
+              stickerImage = nil
+            }
+        default:
+          Text(String(describing: item))
+        }
       }
-    }
   }
 }
