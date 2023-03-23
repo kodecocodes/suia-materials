@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 
 import SwiftUI
 
-extension Shapes {
+enum Shapes {
   static let shapes: [AnyShape] = [
     AnyShape(Circle()), AnyShape(Rectangle()),
     AnyShape(RoundedRectangle(cornerRadius: 25.0)),
@@ -45,10 +45,10 @@ extension Shapes {
   ]
 }
 
-struct Shapes: View {
-  let currentShape = Lens()
+struct Shapes_Previews: PreviewProvider {
+  static let currentShape = Lens()
 
-  var body: some View {
+  static var previews: some View {
     currentShape
       .stroke(
         Color.primary,
@@ -56,6 +56,7 @@ struct Shapes: View {
       .padding()
       .aspectRatio(1, contentMode: .fit)
       .background(Color.yellow)
+      .previewLayout(.sizeThatFits)
   }
 }
 
@@ -77,7 +78,6 @@ struct Triangle: Shape {
 struct Cone: Shape {
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    // path code goes here
     let radius = min(rect.midX, rect.midY)
     path.addArc(
       center: CGPoint(x: rect.midX, y: rect.midY),
@@ -95,7 +95,6 @@ struct Cone: Shape {
 struct Lens: Shape {
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    // path code goes here
     path.move(to: CGPoint(x: 0, y: rect.midY))
     path.addQuadCurve(
       to: CGPoint(x: rect.width, y: rect.midY),
@@ -115,8 +114,8 @@ struct Heart: Shape {
     path.move(to: CGPoint(x: rect.midX, y: rect.maxY ))
     path.addCurve(
       to: CGPoint(x: rect.minX, y: rect.height * 0.25),
-      control1: CGPoint(x: rect.midX * 0.7, y: rect.height * 0.9) ,
-      control2: CGPoint(x: rect.minX, y: rect.midY) )
+      control1: CGPoint(x: rect.midX * 0.7, y: rect.height * 0.9),
+      control2: CGPoint(x: rect.minX, y: rect.midY))
     path.addArc(
       center: CGPoint(
         x: rect.width * 0.25,
@@ -136,7 +135,7 @@ struct Heart: Shape {
     path.addCurve(
       to: CGPoint(x: rect.midX, y: rect.height),
       control1: CGPoint(x: rect.width, y: rect.midY),
-      control2: CGPoint(x: rect.midX * 1.3, y: rect.height * 0.9) )
+      control2: CGPoint(x: rect.midX * 1.3, y: rect.height * 0.9))
     path.closeSubpath()
     return path
   }
@@ -224,13 +223,5 @@ struct Polygon: Shape {
     }
     path.closeSubpath()
     return path
-  }
-}
-
-
-struct Shapes_Previews: PreviewProvider {
-  static var previews: some View {
-    Shapes()
-      .previewLayout(.sizeThatFits)
   }
 }

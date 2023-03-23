@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -35,15 +35,13 @@ import SwiftUI
 @main
 struct CardsApp: App {
   @StateObject var store = CardStore()
-  @StateObject var viewState = ViewState()
 
   var body: some Scene {
     WindowGroup {
-      CardsView()
-        .environmentObject(viewState)
+      CardsListView()
         .environmentObject(store)
         .onAppear {
-          print(FileManager.documentURL ?? "")
+          print(URL.documentsDirectory)
         }
     }
   }

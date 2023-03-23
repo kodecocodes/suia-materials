@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,16 +34,10 @@ import SwiftUI
 
 class CardStore: ObservableObject {
   @Published var cards: [Card] = []
+  @Published var selectedElement: CardElement?
 
   init(defaultData: Bool = false) {
     cards = defaultData ? initialCards : load()
-  }
-
-  func addCard() -> Card {
-    let card = Card(backgroundColor: Color.random())
-    cards.append(card)
-    card.save()
-    return card
   }
 
   func index(for card: Card) -> Int? {
@@ -55,27 +49,30 @@ class CardStore: ObservableObject {
       cards.remove(at: index)
     }
   }
+
+  func addCard() -> Card {
+    let card = Card(backgroundColor: Color.random())
+    cards.append(card)
+    card.save()
+    return card
+  }
 }
 
 extension CardStore {
-  // 1
   func load() -> [Card] {
     var cards: [Card] = []
-    // 2
-    guard let path = FileManager.documentURL?.path,
-      let enumerator =
-        FileManager.default.enumerator(atPath: path),
-          let files = enumerator.allObjects as? [String]
+    let path = URL.documentsDirectory.path
+    guard
+      let enumerator = FileManager.default
+        .enumerator(atPath: path),
+      let files = enumerator.allObjects as? [String]
     else { return cards }
-    // 3
     let cardFiles = files.filter { $0.contains(".rwcard") }
     for cardFile in cardFiles {
       do {
-        // 4
         let path = path + "/" + cardFile
         let data =
           try Data(contentsOf: URL(fileURLWithPath: path))
-        // 5
         let decoder = JSONDecoder()
         let card = try decoder.decode(Card.self, from: data)
         cards.append(card)
