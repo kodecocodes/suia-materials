@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,9 @@
 import SwiftUI
 
 struct SuccessView: View {
-  @Environment(\.presentationMode) var presentationMode
+  @Environment(\.dismiss) var dismiss
   @Binding var selectedTab: Int
+
   var body: some View {
     ZStack {
       VStack {
@@ -43,34 +44,24 @@ struct SuccessView: View {
           .foregroundColor(.purple)
         Text("High Five!")
           .font(.largeTitle)
-          .fontWeight(.heavy)
+          .fontWeight(.bold)
         Text("""
           Good job completing all four exercises!
           Remember tomorrow's another day.
           So eat well and get some rest.
           """)
-          .multilineTextAlignment(.center)
           .foregroundColor(.gray)
+          .multilineTextAlignment(.center)
       }
       VStack {
         Spacer()
-        continueButton
+        Button("Continue") {
+          selectedTab = 9
+          dismiss()
+        }
+        .padding()
       }
     }
-  }
-
-  var continueButton: some View {
-    Button(
-      action: {
-        selectedTab = 9
-        presentationMode.wrappedValue.dismiss()
-      }, label: {
-        Text("Continue")
-          .fontWeight(.bold)
-          .padding([.leading, .trailing], 5)
-      })
-      .padding(.bottom, 40)
-      .buttonStyle(EmbossedButtonStyle())
   }
 }
 

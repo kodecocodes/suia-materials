@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,12 +43,12 @@ struct HeaderView: View {
         .fontWeight(.black)
         .foregroundColor(.white)
       HStack {
-        ForEach(0 ..< Exercise.exercises.count) { index in
+        ForEach(Exercise.exercises.indices, id: \.self) { index in
           ZStack {
             Circle()
               .frame(width: 32, height: 32)
               .foregroundColor(.white)
-              .opacity(index == selectedTab ? 0.5 : 0)
+              .opacity(index == selectedTab ? 0.5 : 0.0)
             Circle()
               .frame(width: 16, height: 16)
               .foregroundColor(.white)
@@ -58,19 +58,14 @@ struct HeaderView: View {
           }
         }
       }
+      .font(.title2)
     }
   }
 }
 
 struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      HeaderView(selectedTab: .constant(0), titleText: "Squat")
-        .previewLayout(.sizeThatFits)
-      HeaderView(selectedTab: .constant(1), titleText: "Step Up")
-        .preferredColorScheme(.dark)
-        .environment(\.sizeCategory, .accessibilityLarge)
-        .previewLayout(.sizeThatFits)
-    }
+    HeaderView(selectedTab: .constant(0), titleText: "Squat")
+      .previewLayout(.sizeThatFits)
   }
 }

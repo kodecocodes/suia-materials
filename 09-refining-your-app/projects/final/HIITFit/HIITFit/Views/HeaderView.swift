@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ struct HeaderView: View {
       Text(titleText)
         .font(.largeTitle)
       HStack {
-        ForEach(0 ..< Exercise.exercises.count) { index in
+        ForEach(Exercise.exercises.indices, id: \.self) { index in
           let fill = index == selectedTab ? ".fill" : ""
           Image(systemName: "\(index + 1).circle\(fill)")
             .onTapGesture {
@@ -56,13 +56,7 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      HeaderView(selectedTab: .constant(0), titleText: "Squat")
-        .previewLayout(.sizeThatFits)
-      HeaderView(selectedTab: .constant(1), titleText: "Step Up")
-        .preferredColorScheme(.dark)
-        .environment(\.sizeCategory, .accessibilityLarge)
-        .previewLayout(.sizeThatFits)
-    }
+    HeaderView(selectedTab: .constant(0), titleText: "Squat")
+      .previewLayout(.sizeThatFits)
   }
 }

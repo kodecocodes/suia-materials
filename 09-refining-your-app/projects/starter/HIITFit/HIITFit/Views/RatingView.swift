@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -61,17 +61,9 @@ struct RatingView: View {
     rating = character.wholeNumberValue ?? 0
   }
 
-  func updateRating(index: Int) {
-    rating = index
-    let index = ratings.index(
-      ratings.startIndex,
-      offsetBy: exerciseIndex)
-    ratings.replaceSubrange(index...index, with: String(rating))
-  }
-
   var body: some View {
     HStack {
-      ForEach(1 ..< maximumRating + 1) { index in
+      ForEach(1 ..< maximumRating + 1, id: \.self) { index in
         Image(systemName: "waveform.path.ecg")
           .foregroundColor(
             index > rating ? offColor : onColor)
@@ -87,6 +79,14 @@ struct RatingView: View {
       }
     }
     .font(.largeTitle)
+  }
+
+  func updateRating(index: Int) {
+    rating = index
+    let index = ratings.index(
+      ratings.startIndex,
+      offsetBy: exerciseIndex)
+    ratings.replaceSubrange(index...index, with: String(rating))
   }
 }
 

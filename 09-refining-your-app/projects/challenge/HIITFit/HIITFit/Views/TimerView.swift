@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,88 +32,46 @@
 
 import SwiftUI
 
-struct TimerView: View {
-  @Environment(\.presentationMode) var presentationMode
-  @Binding var timerDone: Bool
-  @State private var timeRemaining = 3 // 30
-  let exerciseName: String
-  let timer = Timer.publish(
-    every: 1,
-    on: .main,
-    in: .common)
-    .autoconnect()
-
+struct CountdownView: View {
+  let date: Date
+  @Binding var timeRemaining: Int
+  let size: Double
 
   var body: some View {
-    GeometryReader { geometry in
-      ZStack {
-        Color("background")
-          .edgesIgnoringSafeArea(.all)
-        circle(size: geometry.size)
-          .overlay(
-            GradientBackground()
-              .mask(circle(size: geometry.size))
-          )
-        VStack {
-          Text(exerciseName)
-            .font(.largeTitle)
-            .fontWeight(.black)
-            .foregroundColor(.white)
-            .padding(.top, 20)
-          Spacer()
-          IndentView {
-            timerText
-          }
-          Spacer()
-          RaisedButton(buttonText: "Done") {
-            presentationMode.wrappedValue.dismiss()
-          }
-          .opacity(timerDone ? 1 : 0)
-          .padding([.leading, .trailing], 30)
-          .padding(.bottom, 60)
-          .disabled(!timerDone)
-        }
-        .onAppear {
-          timerDone = false
-        }
+    Text("\(timeRemaining)")
+      .font(.system(size: size, design: .rounded))
+      .padding()
+      .onChange(of: date) { _ in
+        timeRemaining -= 1
+      }
+  }
+}
+
+struct TimerView: View {
+  @State private var timeRemaining: Int = 3
+  @Binding var timerDone: Bool
+  let size: Double
+
+  var body: some View {
+    TimelineView(
+      .animation(
+        minimumInterval: 1.0,
+        paused: timeRemaining <= 0)) { context in
+          CountdownView(
+            date: context.date,
+            timeRemaining: $timeRemaining,
+            size: size)
+    }
+    .onChange(of: timeRemaining) { _ in
+      if timeRemaining < 1 {
+        timerDone = true
       }
     }
-  }
-
-  var timerText: some View {
-    Text("\(timeRemaining)")
-      .font(.system(size: 90, design: .rounded))
-      .fontWeight(.heavy)
-      .frame(
-        minWidth: 180,
-        maxWidth: 200,
-        minHeight: 180,
-        maxHeight: 200)
-      .padding()
-      .onReceive(timer) { _ in
-        if self.timeRemaining > 0 {
-          self.timeRemaining -= 1
-        } else {
-          timerDone = true
-        }
-      }
-  }
-
-  func circle(size: CGSize) -> some View {
-    Circle()
-      .frame(
-        width: size.width,
-        height: size.height)
-      .position(
-        x: size.width * 0.5,
-        y: -size.width * 0.2)
   }
 }
 
 struct TimerView_Previews: PreviewProvider {
   static var previews: some View {
-    TimerView(
-      timerDone: .constant(false),
-      exerciseName: "Step Up")
+    TimerView(timerDone: .constant(false), size: 90)
   }
 }

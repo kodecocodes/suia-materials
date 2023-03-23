@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+///// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,13 @@ struct RaisedButton: View {
       Text(buttonText)
         .raisedButtonTextStyle()
     })
-    .buttonStyle(RaisedButtonStyle())
+    .buttonStyle(.raised)
+  }
+}
+
+extension ButtonStyle where Self == RaisedButtonStyle {
+  static var raised: RaisedButtonStyle {
+    .init()
   }
 }
 
@@ -56,8 +62,7 @@ struct RaisedButtonStyle: ButtonStyle {
         Capsule()
           .foregroundColor(Color("background"))
           .shadow(color: Color("drop-shadow"), radius: 4, x: 6, y: 6)
-          .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6)
-      )
+          .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6))
   }
 }
 
@@ -75,7 +80,7 @@ struct RaisedButton_Previews: PreviewProvider {
       RaisedButton(buttonText: "Get Started") {
         print("Hello World")
       }
-      .buttonStyle(RaisedButtonStyle())
+      .buttonStyle(.raised)
       .padding(20)
     }
     .background(Color("background"))

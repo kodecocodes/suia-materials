@@ -1,15 +1,15 @@
 /// Copyright (c) 2022 Kodeco LLC
-///
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -31,28 +31,24 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
-@main
-struct HIITFitApp: App {
-  @StateObject private var historyStore = HistoryStore()
-
-  var body: some Scene {
-    WindowGroup {
-      ContentView()
-        .environmentObject(historyStore)
-        .onAppear {
-          print(URL.documentsDirectory)
-        }
-        .alert(isPresented: $historyStore.loadingError) {
-          Alert(
-            title: Text("History"),
-            message: Text(
-              """
-              Unfortunately we can’t load your past history.
-              Email support:
-                support@xyz.com
-              """))
-        }
+struct VideoPlayerView: View {
+  let videoName: String
+  var body: some View {
+    if let url = Bundle.main.url(
+      forResource: videoName,
+      withExtension: "mp4") {
+      VideoPlayer(player: AVPlayer(url: url))
+    } else {
+      Text("Couldn’t find \(videoName).mp4")
+        .foregroundColor(.red)
     }
+  }
+}
+
+struct VideoPlayerView_Previews: PreviewProvider {
+  static var previews: some View {
+    VideoPlayerView(videoName: "squat")
   }
 }

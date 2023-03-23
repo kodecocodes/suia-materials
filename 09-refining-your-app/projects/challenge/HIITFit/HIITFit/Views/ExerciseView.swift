@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,33 +31,46 @@
 /// THE SOFTWARE.
 
 import SwiftUI
-import AVKit
 
 struct ExerciseView: View {
   @EnvironmentObject var history: HistoryStore
-  @Binding var selectedTab: Int
-  @State private var timerDone = false
-
-  @State private var showSuccess = false
-  @State private var showSheet = false
   @State private var showHistory = false
+  @State private var showSuccess = false
+  @State private var timerDone = false
   @State private var showTimer = false
 
-  @State private var exerciseSheet: ExerciseSheet?
-
+  @Binding var selectedTab: Int
   let index: Int
 
-  enum ExerciseSheet {
-    case history, timer, success
+  var exercise: Exercise {
+    Exercise.exercises[index]
   }
-
   var lastExercise: Bool {
     index + 1 == Exercise.exercises.count
   }
 
+  var startButton: some View {
+    RaisedButton(buttonText: "Start Exercise") {
+      showTimer.toggle()
+    }
+  }
+
+  var doneButton: some View {
+    Button("Done") {
+      history.addDoneExercise(Exercise.exercises[index].exerciseName)
+      timerDone = false
+      showTimer.toggle()
+      if lastExercise {
+        showSuccess.toggle()
+      } else {
+        selectedTab += 1
+      }
+    }
+  }
+
   var body: some View {
     GeometryReader { geometry in
-      VStack {
+      VStack(spacing: 0) {
         HeaderView(
           selectedTab: $selectedTab,
           titleText: Exercise.exercises[index].exerciseName)
@@ -65,85 +78,44 @@ struct ExerciseView: View {
         Spacer()
         ContainerView {
           VStack {
-            video(size: geometry.size)
-            startExerciseButton
+            VideoPlayerView(videoName: exercise.videoName)
+              .frame(height: geometry.size.height * 0.35)
               .padding(20)
+            HStack(spacing: 150) {
+              startButton
+              doneButton
+                .disabled(!timerDone)
+                .sheet(isPresented: $showSuccess) {
+                  SuccessView(selectedTab: $selectedTab)
+                    .presentationDetents([.medium, .large])
+                }
+            }
+            .font(.title3)
+            .padding()
+            if showTimer {
+              TimerView(
+                timerDone: $timerDone,
+                size: geometry.size.height * 0.07)
+            }
+            Spacer()
             RatingView(exerciseIndex: index)
               .padding()
-            Spacer()
             historyButton
+              .sheet(isPresented: $showHistory) {
+                HistoryView(showHistory: $showHistory)
+              }
+              .padding(.bottom)
           }
         }
         .frame(height: geometry.size.height * 0.8)
-        .sheet(isPresented: $showSheet, onDismiss: {
-          showSuccess = false
-          showHistory = false
-          if exerciseSheet == .timer {
-            if timerDone {
-            history.addDoneExercise(Exercise.exercises[index].exerciseName)
-              timerDone = false
-            }
-            showTimer = false
-            if lastExercise {
-              showSuccess = true
-              showSheet = true
-              exerciseSheet = .success
-            } else {
-              selectedTab += 1
-            }
-          } else {
-            exerciseSheet = nil
-          }
-          showTimer = false
-        }, content: {
-          if let exerciseSheet = exerciseSheet {
-            switch exerciseSheet {
-            case .history:
-              HistoryView(showHistory: $showHistory)
-                .environmentObject(history)
-            case .timer:
-              TimerView(
-                timerDone: $timerDone,
-                exerciseName: Exercise.exercises[index].exerciseName)
-            case .success:
-              SuccessView(selectedTab: $selectedTab)
-            }
-          }
-        })
       }
-    }
-  }
-
-  @ViewBuilder
-  func video(size: CGSize) -> some View {
-    if let url = Bundle.main.url(
-      forResource: Exercise.exercises[index].videoName,
-        withExtension: "mp4") {
-      VideoPlayer(player: AVPlayer(url: url))
-        .frame(height: size.height * 0.25)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(20)
-    } else {
-      Text(
-        "Couldn't find \(Exercise.exercises[index].videoName).mp4")
-        .foregroundColor(.red)
-    }
-  }
-
-  var startExerciseButton: some View {
-    RaisedButton(buttonText: "Start Exercise") {
-      showTimer.toggle()
-      showSheet = true
-      exerciseSheet = .timer
     }
   }
 
   var historyButton: some View {
     Button(
       action: {
-        showSheet = true
         showHistory = true
-        exerciseSheet = .history
       }, label: {
         Text("History")
           .fontWeight(.bold)

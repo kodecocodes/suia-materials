@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+///// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -63,6 +63,7 @@ struct EmbossedButtonStyle: ButtonStyle {
         .frame(
           width: max(size.width, size.height),
           height: max(size.width, size.height))
+        .offset(x: -1)
         .offset(y: -max(size.width, size.height) / 2 +
           min(size.width, size.height) / 2)
     case .capsule:
@@ -74,26 +75,10 @@ struct EmbossedButtonStyle: ButtonStyle {
 
 struct EmbossedButton_Previews: PreviewProvider {
   static var previews: some View {
-    Group {
-      Button(
-        action: {},
-        label: {
-        Text("History")
-          .fontWeight(.bold)
-        })
-        .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
-        .padding(40)
-        .previewLayout(.sizeThatFits)
-      Button(
-        action: {},
-        label: {
-          Text("History")
-            .fontWeight(.bold)
-        })
-        .preferredColorScheme(.dark)
-        .buttonStyle(EmbossedButtonStyle(buttonShape: .capsule))
-        .padding(40)
-        .previewLayout(.sizeThatFits)
-    }
+    Button("History") {}
+      .fontWeight(.bold)
+      .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
+      .padding(40)
+      .previewLayout(.sizeThatFits)
   }
 }
