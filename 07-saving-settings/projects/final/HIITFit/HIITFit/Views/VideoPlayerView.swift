@@ -31,32 +31,24 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
-struct RatingView: View {
-  @Binding var rating: Int
-  let maximumRating = 5
-
-  let onColor = Color.red
-  let offColor = Color.gray
-
+struct VideoPlayerView: View {
+  let videoName: String
   var body: some View {
-    HStack {
-      ForEach(1 ..< maximumRating + 1, id: \.self) { index in
-        Image(systemName: "waveform.path.ecg")
-          .foregroundColor(
-            index > rating ? offColor : onColor)
-          .onTapGesture {
-            rating = index
-          }
-      }
+    if let url = Bundle.main.url(
+      forResource: videoName,
+      withExtension: "mp4") {
+      VideoPlayer(player: AVPlayer(url: url))
+    } else {
+      Text("Couldn’t find \(videoName).mp4")
+        .foregroundColor(.red)
     }
-    .font(.largeTitle)
   }
 }
 
-struct RatingView_Previews: PreviewProvider {
+struct VideoPlayerView_Previews: PreviewProvider {
   static var previews: some View {
-    RatingView(rating: .constant(3))
-      .previewLayout(.sizeThatFits)
+    VideoPlayerView(videoName: "squat")
   }
 }
