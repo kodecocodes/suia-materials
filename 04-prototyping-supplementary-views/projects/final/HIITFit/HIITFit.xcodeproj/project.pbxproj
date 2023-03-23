@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,9 +19,13 @@
 		CD30C94925147AEF0049DB93 /* sun-salute.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CD30C94525147AEF0049DB93 /* sun-salute.mp4 */; };
 		CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C95025147E420049DB93 /* WelcomeView.swift */; };
 		CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C95325147E4B0049DB93 /* ExerciseView.swift */; };
-		CD30C959251486730049DB93 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD30C958251486730049DB93 /* HeaderView.swift */; };
-		CDE2A31F25148B4C00B12C73 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A31E25148B4C00B12C73 /* RatingView.swift */; };
-		CDE2A32225148C5D00B12C73 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2A32125148C5D00B12C73 /* HistoryView.swift */; };
+		CDBD949D28D97F09000FE7AA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD949C28D97F09000FE7AA /* HeaderView.swift */; };
+		CDBD94A128DA9BCD000FE7AA /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94A028DA9BCD000FE7AA /* Exercise.swift */; };
+		CDBD94A328DAB99F000FE7AA /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94A228DAB99F000FE7AA /* RatingView.swift */; };
+		CDBD94A528DAEF86000FE7AA /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94A428DAEF86000FE7AA /* VideoPlayerView.swift */; };
+		CDBD94A728DBFA45000FE7AA /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94A628DBFA45000FE7AA /* HistoryView.swift */; };
+		CDBD94A928DBFD58000FE7AA /* HistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94A828DBFD58000FE7AA /* HistoryStore.swift */; };
+		CDBD94AC28DBFFCC000FE7AA /* HistoryStoreDevData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBD94AB28DBFFCC000FE7AA /* HistoryStoreDevData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +43,13 @@
 		CD30C94525147AEF0049DB93 /* sun-salute.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sun-salute.mp4"; sourceTree = "<group>"; };
 		CD30C95025147E420049DB93 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		CD30C95325147E4B0049DB93 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
-		CD30C958251486730049DB93 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		CDE2A31E25148B4C00B12C73 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
-		CDE2A32125148C5D00B12C73 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		CDBD949C28D97F09000FE7AA /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		CDBD94A028DA9BCD000FE7AA /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		CDBD94A228DAB99F000FE7AA /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		CDBD94A428DAEF86000FE7AA /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		CDBD94A628DBFA45000FE7AA /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		CDBD94A828DBFD58000FE7AA /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStore.swift; sourceTree = "<group>"; };
+		CDBD94AB28DBFFCC000FE7AA /* HistoryStoreDevData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStoreDevData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +84,7 @@
 			children = (
 				CD30C923251474DC0049DB93 /* HIITFitApp.swift */,
 				CD30C95625147EFA0049DB93 /* Views */,
+				CDBD94AA28DBFD73000FE7AA /* Model */,
 				CD30C93D25147A8C0049DB93 /* DateExtension.swift */,
 				CD30C93E25147A8C0049DB93 /* ImageExtension.swift */,
 				CD30C927251474DD0049DB93 /* Assets.xcassets */,
@@ -90,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				CD30C92A251474DD0049DB93 /* Preview Assets.xcassets */,
+				CDBD94AB28DBFFCC000FE7AA /* HistoryStoreDevData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -111,11 +121,21 @@
 				CD30C925251474DC0049DB93 /* ContentView.swift */,
 				CD30C95025147E420049DB93 /* WelcomeView.swift */,
 				CD30C95325147E4B0049DB93 /* ExerciseView.swift */,
-				CD30C958251486730049DB93 /* HeaderView.swift */,
-				CDE2A31E25148B4C00B12C73 /* RatingView.swift */,
-				CDE2A32125148C5D00B12C73 /* HistoryView.swift */,
+				CDBD94A628DBFA45000FE7AA /* HistoryView.swift */,
+				CDBD94A428DAEF86000FE7AA /* VideoPlayerView.swift */,
+				CDBD94A228DAB99F000FE7AA /* RatingView.swift */,
+				CDBD949C28D97F09000FE7AA /* HeaderView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CDBD94AA28DBFD73000FE7AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CDBD94A028DA9BCD000FE7AA /* Exercise.swift */,
+				CDBD94A828DBFD58000FE7AA /* HistoryStore.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +145,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD30C92F251474DD0049DB93 /* Build configuration list for PBXNativeTarget "HIITFit" */;
 			buildPhases = (
-				CD0BEE1225245B0F00937B4F /* SwiftLint */,
+				CD0BEE002524570D00937B4F /* SwiftLint */,
 				CD30C91C251474DC0049DB93 /* Sources */,
 				CD30C91D251474DC0049DB93 /* Frameworks */,
 				CD30C91E251474DC0049DB93 /* Resources */,
@@ -147,7 +167,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
-				ORGANIZATIONNAME = "Ray Wenderlich";
+				ORGANIZATIONNAME = Kodeco;
 				TargetAttributes = {
 					CD30C91F251474DC0049DB93 = {
 						CreatedOnToolsVersion = 12.2;
@@ -155,7 +175,7 @@
 				};
 			};
 			buildConfigurationList = CD30C91B251474DC0049DB93 /* Build configuration list for PBXProject "HIITFit" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -189,8 +209,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD0BEE1225245B0F00937B4F /* SwiftLint */ = {
+		CD0BEE002524570D00937B4F /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -215,14 +236,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD30C95425147E4B0049DB93 /* ExerciseView.swift in Sources */,
+				CDBD94A128DA9BCD000FE7AA /* Exercise.swift in Sources */,
 				CD30C95125147E420049DB93 /* WelcomeView.swift in Sources */,
+				CDBD94A328DAB99F000FE7AA /* RatingView.swift in Sources */,
+				CDBD94A928DBFD58000FE7AA /* HistoryStore.swift in Sources */,
+				CDBD94AC28DBFFCC000FE7AA /* HistoryStoreDevData.swift in Sources */,
 				CD30C926251474DC0049DB93 /* ContentView.swift in Sources */,
-				CDE2A31F25148B4C00B12C73 /* RatingView.swift in Sources */,
+				CDBD94A728DBFA45000FE7AA /* HistoryView.swift in Sources */,
 				CD30C93F25147A8C0049DB93 /* DateExtension.swift in Sources */,
 				CD30C924251474DC0049DB93 /* HIITFitApp.swift in Sources */,
 				CD30C94025147A8C0049DB93 /* ImageExtension.swift in Sources */,
-				CDE2A32225148C5D00B12C73 /* HistoryView.swift in Sources */,
-				CD30C959251486730049DB93 /* HeaderView.swift in Sources */,
+				CDBD949D28D97F09000FE7AA /* HeaderView.swift in Sources */,
+				CDBD94A528DAEF86000FE7AA /* VideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +305,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -335,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -350,17 +375,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"HIITFit/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HIITFit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HIITFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kodeco.HIITFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -371,17 +398,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_ASSET_PATHS = "\"HIITFit/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HIITFit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.HIITFit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kodeco.HIITFit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

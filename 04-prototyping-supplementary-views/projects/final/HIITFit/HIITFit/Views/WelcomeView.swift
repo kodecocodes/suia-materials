@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,7 @@ struct WelcomeView: View {
         Button("History") { }
           .padding(.bottom)
       }
+
       VStack {
         HStack(alignment: .bottom) {
           VStack(alignment: .leading) {
@@ -51,9 +52,12 @@ struct WelcomeView: View {
           }
           Image("step-up")
             .resizedToFill(width: 240, height: 240)
+//            .resizable()
+//            .aspectRatio(contentMode: .fill)
+//            .frame(width: 240.0, height: 240.0)
             .clipShape(Circle())
         }
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
+
         Button(action: { }) {
           Text("Get Started")
           Image(systemName: "arrow.right.circle")

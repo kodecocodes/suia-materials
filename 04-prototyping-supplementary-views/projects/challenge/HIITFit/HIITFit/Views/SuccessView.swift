@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,19 +41,19 @@ struct SuccessView: View {
           .foregroundColor(.purple)
         Text("High Five!")
           .font(.largeTitle)
-          .fontWeight(.heavy)
+          .fontWeight(.bold)
         Text("""
           Good job completing all four exercises!
           Remember tomorrow's another day.
           So eat well and get some rest.
           """)
-          .multilineTextAlignment(.center)
-          .foregroundColor(.gray)
+        .foregroundColor(.gray)
+        .multilineTextAlignment(.center)
       }
       VStack {
         Spacer()
         Button("Continue") { }
-        .padding()
+          .padding()
       }
     }
   }
