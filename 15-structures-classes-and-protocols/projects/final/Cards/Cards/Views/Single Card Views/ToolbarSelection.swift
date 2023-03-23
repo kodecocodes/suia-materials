@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -30,12 +30,12 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct Transform {
-  var size = CGSize(
-    width: Settings.defaultElementSize.width,
-    height: Settings.defaultElementSize.height)
-  var rotation: Angle = .zero
-  var offset: CGSize = .zero
+enum ToolbarSelection: CaseIterable, Identifiable {
+  var id: Int {
+    hashValue
+  }
+
+  case photoModal, frameModal, stickerModal, textModal
 }
