@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -37,8 +37,7 @@ extension Image {
   ///   - parameters:
   ///     - width: Frame width.
   ///     - height: Frame height.
-  func resizedToFill(width: CGFloat, height: CGFloat)
-  -> some View {
+  func resizedToFill(width: CGFloat, height: CGFloat) -> some View {
     self
       .resizable()
       .aspectRatio(contentMode: .fill)

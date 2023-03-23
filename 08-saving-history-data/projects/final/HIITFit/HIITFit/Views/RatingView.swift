@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,13 +41,10 @@ struct RatingView: View {
   let onColor = Color.red
   let offColor = Color.gray
 
-  // 1
   init(exerciseIndex: Int) {
     self.exerciseIndex = exerciseIndex
-    // 2
     let desiredLength = Exercise.exercises.count
     if ratings.count < desiredLength {
-      // 3
       ratings = ratings.padding(
         toLength: desiredLength,
         withPad: "0",
@@ -57,18 +54,16 @@ struct RatingView: View {
 
   // swiftlint:disable:next strict_fileprivate
   fileprivate func convertRating() {
-    // 2
     let index = ratings.index(
       ratings.startIndex,
       offsetBy: exerciseIndex)
     let character = ratings[index]
-    // 3
     rating = character.wholeNumberValue ?? 0
   }
 
   var body: some View {
     HStack {
-      ForEach(1 ..< maximumRating + 1) { index in
+      ForEach(1 ..< maximumRating + 1, id: \.self) { index in
         Image(systemName: "waveform.path.ecg")
           .foregroundColor(
             index > rating ? offColor : onColor)
@@ -78,7 +73,6 @@ struct RatingView: View {
           .onChange(of: ratings) { _ in
             convertRating()
           }
-          // 1
           .onAppear {
             convertRating()
           }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct HistoryView: View {
-  @Binding var showHistory: Bool
   @EnvironmentObject var history: HistoryStore
+  @Binding var showHistory: Bool
 
   var body: some View {
     ZStack(alignment: .topTrailing) {
@@ -43,7 +43,8 @@ struct HistoryView: View {
         Image(systemName: "xmark.circle")
       }
       .font(.title)
-      .padding(.trailing)
+      .padding()
+
       VStack {
         Text("History")
           .font(.title)

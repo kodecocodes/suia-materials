@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,17 +31,24 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
-extension Image {
-  /// Resize an image with fill aspect ratio and specified frame dimensions.
-  ///   - parameters:
-  ///     - width: Frame width.
-  ///     - height: Frame height.
-  func resizedToFill(width: CGFloat, height: CGFloat)
-  -> some View {
-    self
-      .resizable()
-      .aspectRatio(contentMode: .fill)
-      .frame(width: width, height: height)
+struct VideoPlayerView: View {
+  let videoName: String
+  var body: some View {
+    if let url = Bundle.main.url(
+      forResource: videoName,
+      withExtension: "mp4") {
+      VideoPlayer(player: AVPlayer(url: url))
+    } else {
+      Text("Couldn’t find \(videoName).mp4")
+        .foregroundColor(.red)
+    }
+  }
+}
+
+struct VideoPlayerView_Previews: PreviewProvider {
+  static var previews: some View {
+    VideoPlayerView(videoName: "squat")
   }
 }

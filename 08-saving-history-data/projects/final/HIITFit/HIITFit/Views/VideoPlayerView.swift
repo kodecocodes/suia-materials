@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,53 +31,24 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
-struct WelcomeView: View {
-  @State private var showHistory = false
-  @Binding var selectedTab: Int
-
+struct VideoPlayerView: View {
+  let videoName: String
   var body: some View {
-    ZStack {
-      VStack {
-        HeaderView(selectedTab: $selectedTab, titleText: "Welcome")
-        Spacer()
-        Button("History") {
-          showHistory.toggle()
-        }
-        .sheet(isPresented: $showHistory) {
-          HistoryView(showHistory: $showHistory)
-        }
-          .padding(.bottom)
-      }
-      VStack {
-        HStack(alignment: .bottom) {
-          VStack(alignment: .leading) {
-            Text("Get fit")
-              .font(.largeTitle)
-            Text("with high intensity interval training")
-              .font(.headline)
-          }
-          Image("step-up")
-            .resizedToFill(width: 240, height: 240)
-            .clipShape(Circle())
-        }
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
-        Button(action: { selectedTab = 0 }) {
-          Text("Get Started")
-          Image(systemName: "arrow.right.circle")
-        }
-        .font(.title2)
-        .padding()
-        .background(
-          RoundedRectangle(cornerRadius: 20)
-          .stroke(Color.gray, lineWidth: 2))
-      }
+    if let url = Bundle.main.url(
+      forResource: videoName,
+      withExtension: "mp4") {
+      VideoPlayer(player: AVPlayer(url: url))
+    } else {
+      Text("Couldn’t find \(videoName).mp4")
+        .foregroundColor(.red)
     }
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct VideoPlayerView_Previews: PreviewProvider {
   static var previews: some View {
-    WelcomeView(selectedTab: .constant(9))
+    VideoPlayerView(videoName: "squat")
   }
 }
