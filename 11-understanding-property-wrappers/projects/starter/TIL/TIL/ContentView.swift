@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,15 +41,12 @@ struct ContentView: View {
   let tempThings = ["YOLO", "BTW"]
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack(spacing: 20) {
         ForEach(tempThings, id: \.self) { thing in
           Text(thing)
         }
         Spacer()
-      }
-      .sheet(isPresented: $showAddThing) {
-        AddThingView()
       }
       .navigationTitle("TIL")
       .toolbar {
@@ -60,6 +57,9 @@ struct ContentView: View {
               .font(.title)
           }
         }
+      }
+      .sheet(isPresented: $showAddThing) {
+        AddThingView()
       }
     }
   }

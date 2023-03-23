@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ struct ContentView: View {
   @StateObject private var myThings = ThingStore()
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack(spacing: 20) {
         if myThings.things.isEmpty {
           Text("Add acronyms you learn")
@@ -52,9 +52,6 @@ struct ContentView: View {
         }
         Spacer()
       }
-      .sheet(isPresented: $showAddThing) {
-        AddThingView(someThings: myThings)
-      }
       .navigationTitle("TIL")
       .toolbar {
         ToolbarItem {
@@ -64,6 +61,9 @@ struct ContentView: View {
               .font(.title)
           }
         }
+      }
+      .sheet(isPresented: $showAddThing) {
+        AddThingView(someThings: myThings)
       }
     }
   }
