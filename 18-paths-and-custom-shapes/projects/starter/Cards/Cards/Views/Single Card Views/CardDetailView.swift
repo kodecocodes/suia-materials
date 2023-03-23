@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,88 +32,44 @@
 
 import SwiftUI
 
-
 struct CardDetailView: View {
-  @EnvironmentObject var viewState: ViewState
-  @State private var currentModal: CardModal?
-  @State private var stickerImage: UIImage?
-  @State private var images: [UIImage] = []
+  @EnvironmentObject var store: CardStore
   @Binding var card: Card
 
   var body: some View {
-    content
-      .onDrop(of: [.image], delegate: CardDrop(card: $card))
-      .modifier(CardToolbar(currentModal: $currentModal))
-      .sheet(item: $currentModal) { item in
-        switch item {
-        case .stickerPicker:
-          StickerPicker(stickerImage: $stickerImage)
-            .onDisappear {
-              if let stickerImage = stickerImage {
-                card.addElement(uiImage: stickerImage)
-              }
-              stickerImage = nil
-            }
-        case .photoPicker:
-          PhotoPicker(images: $images)
-          .onDisappear {
-            for image in images {
-              card.addElement(uiImage: image)
-            }
-            images = []
-          }
-        default:
-          EmptyView()
-        }
-      }
-  }
-
-  var content: some View {
     ZStack {
       card.backgroundColor
-        .edgesIgnoringSafeArea(.all)
-        .onTapGesture {
-          viewState.selectedElement = nil
-        }
-      ForEach(card.elements, id: \.id) { element in
-        CardElementView(
-          element: element,
-          selected: viewState.selectedElement?.id == element.id)
-          .contextMenu {
-            // swiftlint:disable:next multiple_closures_with_trailing_closure
-            Button(action: { card.remove(element) }) {
-              Label("Delete", systemImage: "trash")
-            }
-          }
-          .resizableView(transform: bindingTransform(for: element))
+      ForEach($card.elements, id: \.id) { $element in
+        CardElementView(element: element)
+          .elementContextMenu(
+            card: $card,
+            element: $element)
+          .resizableView(transform: $element.transform)
           .frame(
             width: element.transform.size.width,
             height: element.transform.size.height)
-          .onTapGesture {
-            viewState.selectedElement = element
-          }
       }
     }
-  }
-
-  func bindingTransform(for element: CardElement)
-    -> Binding<Transform> {
-    guard let index = element.index(in: card.elements) else {
-      fatalError("Element does not exist")
+    .dropDestination(for: CustomTransfer.self) { items, location in
+      print(location)
+      Task {
+        card.addElements(from: items)
+      }
+      return !items.isEmpty
     }
-    return $card.elements[index].transform
   }
 }
 
 struct CardDetailView_Previews: PreviewProvider {
   struct CardDetailPreview: View {
-    @State private var card = initialCards[0]
+    @EnvironmentObject var store: CardStore
     var body: some View {
-      CardDetailView(card: $card)
-        .environmentObject(ViewState(card: card))
+      CardDetailView(card: $store.cards[0])
     }
   }
+
   static var previews: some View {
     CardDetailPreview()
+      .environmentObject(CardStore(defaultData: true))
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -37,15 +37,28 @@ struct Card: Identifiable {
   var backgroundColor: Color = .yellow
   var elements: [CardElement] = []
 
+  mutating func addElement(uiImage: UIImage) {
+    let element = ImageElement(uiImage: uiImage)
+    elements.append(element)
+  }
+
+  mutating func addElement(text: TextElement) {
+    elements.append(text)
+  }
+
+  mutating func addElements(from transfer: [CustomTransfer]) {
+    for element in transfer {
+      if let text = element.text {
+        addElement(text: TextElement(text: text))
+      } else if let image = element.image {
+        addElement(uiImage: image)
+      }
+    }
+  }
+
   mutating func remove(_ element: CardElement) {
     if let index = element.index(in: elements) {
       elements.remove(at: index)
     }
-  }
-
-  mutating func addElement(uiImage: UIImage) {
-    let image = Image(uiImage: uiImage)
-    let element = ImageElement(image: image)
-    elements.append(element)
   }
 }
