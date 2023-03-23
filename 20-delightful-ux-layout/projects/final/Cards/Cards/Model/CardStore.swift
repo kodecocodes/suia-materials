@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,9 +34,30 @@ import SwiftUI
 
 class CardStore: ObservableObject {
   @Published var cards: [Card] = []
+  @Published var selectedElement: CardElement?
 
   init(defaultData: Bool = false) {
     cards = defaultData ? initialCards : load()
+  }
+
+  func index(for card: Card) -> Int? {
+    cards.firstIndex { $0.id == card.id }
+  }
+
+  func remove(_ card: Card) {
+    guard let index = index(for: card) else { return }
+    // remove the elements
+    // remove(_:) removes the element images on disk
+    for element in cards[index].elements {
+      cards[index].remove(element)
+    }
+    // remove the card image (if there is one)
+    UIImage.remove(name: card.id.uuidString)
+    // remove the card details
+    let path = URL.documentsDirectory
+      .appendingPathComponent("\(card.id.uuidString).rwcard")
+    try? FileManager.default.removeItem(at: path)
+    cards.remove(at: index)
   }
 
   func addCard() -> Card {
@@ -45,33 +66,16 @@ class CardStore: ObservableObject {
     card.save()
     return card
   }
-
-  func index(for card: Card) -> Int? {
-    cards.firstIndex { $0.id == card.id }
-  }
-
-  func remove(_ card: Card) {
-    if let index = index(for: card) {
-      for element in cards[index].elements {
-        cards[index].remove(element)
-      }
-      UIImage.remove(name: card.id.uuidString)
-      if let filepath = FileManager.documentURL?
-        .absoluteURL.appendingPathComponent("\(card.id.uuidString).rwcard") {
-        try? FileManager.default.removeItem(at: filepath)
-      }
-      cards.remove(at: index)
-    }
-  }
 }
 
 extension CardStore {
   func load() -> [Card] {
     var cards: [Card] = []
-    guard let path = FileManager.documentURL?.path,
-      let enumerator =
-        FileManager.default.enumerator(atPath: path),
-          let files = enumerator.allObjects as? [String]
+    let path = URL.documentsDirectory.path
+    guard
+      let enumerator = FileManager.default
+        .enumerator(atPath: path),
+      let files = enumerator.allObjects as? [String]
     else { return cards }
     let cardFiles = files.filter { $0.contains(".rwcard") }
     for cardFile in cardFiles {

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,106 +32,85 @@
 
 import SwiftUI
 
-
 struct CardDetailView: View {
-  @EnvironmentObject var viewState: ViewState
-  @Environment(\.scenePhase) private var scenePhase
-  @State private var currentModal: CardModal?
+  @EnvironmentObject var store: CardStore
   @Binding var card: Card
+  var viewScale: CGFloat = 1
 
-  var body: some View {
-    GeometryReader { proxy in
-      content(size: proxy.size)
-        .onChange(of: scenePhase) { newScenePhase in
-          if newScenePhase == .inactive {
-            card.save()
-          }
-        }
-        .onDisappear {
-          card.save()
-        }
-        .onDrop(of: [.image], delegate: CardDrop(card: $card))
-        .modifier(CardToolbar(currentModal: $currentModal))
-        .cardModals(card: $card, currentModal: $currentModal)
-        // 1
-        .frame(
-          width: calculateSize(proxy.size).width ,
-          height: calculateSize(proxy.size).height)
-        // 2
-        .clipped()
-        // 3
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
+  func isSelected(_ element: CardElement) -> Bool {
+    store.selectedElement?.id == element.id
   }
 
-  func content(size: CGSize) -> some View {
+  var body: some View {
     ZStack {
       card.backgroundColor
-        .edgesIgnoringSafeArea(.all)
         .onTapGesture {
-          viewState.selectedElement = nil
+          store.selectedElement = nil
         }
-      ForEach(card.elements, id: \.id) { element in
-        CardElementView(
-          element: element,
-          selected: viewState.selectedElement?.id == element.id)
-          .contextMenu {
-            // swiftlint:disable:next multiple_closures_with_trailing_closure
-            Button(action: { card.remove(element) }) {
-              Label("Delete", systemImage: "trash")
-            }
-          }
+      ForEach($card.elements, id: \.id) { $element in
+        CardElementView(element: element)
+          .overlay(
+            element: element,
+            isSelected: isSelected(element))
+          .elementContextMenu(
+            card: $card,
+            element: $element)
           .resizableView(
-            transform: bindingTransform(for: element),
-            viewScale: calculateScale(size))
+            transform: $element.transform,
+            viewScale: viewScale)
           .frame(
             width: element.transform.size.width,
             height: element.transform.size.height)
           .onTapGesture {
-            viewState.selectedElement = element
+            store.selectedElement = element
           }
       }
     }
-  }
-
-  func bindingTransform(for element: CardElement)
-    -> Binding<Transform> {
-    guard let index = element.index(in: card.elements) else {
-      fatalError("Element does not exist")
+    .onDisappear {
+      store.selectedElement = nil
     }
-    return $card.elements[index].transform
-  }
-
-  func calculateSize(_ size: CGSize) -> CGSize {
-    var newSize = size
-    let ratio =
-      Settings.cardSize.width / Settings.cardSize.height
-
-    if size.width < size.height {
-      newSize.height = min(size.height, newSize.width / ratio)
-      newSize.width = min(size.width, newSize.height * ratio)
-    } else {
-      newSize.width = min(size.width, newSize.height * ratio)
-      newSize.height = min(size.height, newSize.width / ratio)
+    .dropDestination(for: CustomTransfer.self) { items, location in
+      print(location)
+      Task {
+        card.addElements(from: items)
+      }
+      return !items.isEmpty
     }
-    return newSize
-  }
-
-  func calculateScale(_ size: CGSize) -> CGFloat {
-    let newSize = calculateSize(size)
-    return newSize.width / Settings.cardSize.width
   }
 }
 
 struct CardDetailView_Previews: PreviewProvider {
   struct CardDetailPreview: View {
-    @State private var card = initialCards[0]
+    @EnvironmentObject var store: CardStore
     var body: some View {
-      CardDetailView(card: $card)
-        .environmentObject(ViewState(card: card))
+      CardDetailView(card: $store.cards[0])
     }
   }
+
   static var previews: some View {
     CardDetailPreview()
+      .environmentObject(CardStore(defaultData: true))
+  }
+}
+
+private extension View {
+  @ViewBuilder
+  func overlay(
+    element: CardElement,
+    isSelected: Bool
+  ) -> some View {
+    if isSelected,
+      let element = element as? ImageElement,
+      let frameIndex = element.frameIndex {
+      let shape = Shapes.shapes[frameIndex]
+      self.overlay(shape
+        .stroke(lineWidth: Settings.borderWidth)
+        .foregroundColor(Settings.borderColor))
+    } else {
+      self
+        .border(
+          Settings.borderColor,
+          width: isSelected ? Settings.borderWidth : 0)
+    }
   }
 }

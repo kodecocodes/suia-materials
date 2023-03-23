@@ -1,15 +1,15 @@
-///// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2023 Kodeco
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -40,13 +40,29 @@ struct ResizableView: ViewModifier {
 
   let viewScale: CGFloat
 
-  init(transform: Binding<Transform>, viewScale: CGFloat = 1) {
-    _transform = transform
-    self.viewScale = viewScale
+  var dragGesture: some Gesture {
+    DragGesture()
+      .onChanged { value in
+        transform.offset = value.translation / viewScale + previousOffset
+      }
+      .onEnded { _ in
+        previousOffset = transform.offset
+      }
   }
 
-  func body(content: Content) -> some View {
-    let scaleGesture = MagnificationGesture()
+  var rotationGesture: some Gesture {
+    RotationGesture()
+      .onChanged { rotation in
+        transform.rotation += rotation - previousRotation
+        previousRotation = rotation
+      }
+      .onEnded { _ in
+        previousRotation = .zero
+      }
+  }
+
+  var scaleGesture: some Gesture {
+    MagnificationGesture()
       .onChanged { scale in
         self.scale = scale
       }
@@ -55,22 +71,10 @@ struct ResizableView: ViewModifier {
         transform.size.height *= scale
         self.scale = 1.0
       }
-    let rotationGesture = RotationGesture()
-      .onChanged { rotation in
-        transform.rotation += rotation - previousRotation
-        previousRotation = rotation
-      }
-      .onEnded { _ in
-        previousRotation = .zero
-      }
-    let dragGesture = DragGesture()
-      .onChanged { value in
-        transform.offset = value.translation / viewScale + previousOffset
-      }
-      .onEnded { _ in
-        previousOffset = transform.offset
-      }
-    return content
+  }
+
+  func body(content: Content) -> some View {
+    content
       .frame(
         width: transform.size.width * viewScale,
         height: transform.size.height * viewScale)
@@ -86,13 +90,26 @@ struct ResizableView: ViewModifier {
 }
 
 struct ResizableView_Previews: PreviewProvider {
-  static let color = Color.random()
-  static let content = Rectangle()
-
+  struct ResizableViewPreview: View {
+    @State var transform = Transform()
+    var body: some View {
+      RoundedRectangle(cornerRadius: 30.0)
+        .foregroundColor(Color.blue)
+        .resizableView(transform: $transform)
+    }
+  }
   static var previews: some View {
-    content
-      .foregroundColor(color)
-      .modifier(ResizableView(
-        transform: .constant(Transform())))
+    ResizableViewPreview()
+  }
+}
+
+extension View {
+  func resizableView(
+    transform: Binding<Transform>,
+    viewScale: CGFloat = 1.0
+  ) -> some View {
+    modifier(ResizableView(
+      transform: transform,
+      viewScale: viewScale))
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2023 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -39,8 +39,8 @@ extension Angle: Codable {
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    let degrees =
-      try container.decode(Double.self, forKey: .degrees)
+    let degrees = try container
+      .decode(Double.self, forKey: .degrees)
     self.init(degrees: degrees)
   }
 
