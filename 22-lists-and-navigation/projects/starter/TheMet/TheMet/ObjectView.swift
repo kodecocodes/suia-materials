@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -73,16 +73,14 @@ struct PlaceholderView: View {
   }
 }
 
-struct ObjectView_Previews: PreviewProvider {
-  static var previews: some View {
-    ObjectView(
-      object:
-        Object(
-          objectID: 452174,
-          title: "Bahram Gur Slays the Rhino-Wolf",
-          creditLine: "Gift of Arthur A. Houghton Jr., 1970",
-          objectURL: "https://www.metmuseum.org/art/collection/search/452174",
-          isPublicDomain: true,
-          primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg"))
-  }
+#Preview {
+  ObjectView(
+    object:
+      Object(
+        objectID: 452174,
+        title: "Bahram Gur Slays the Rhino-Wolf",
+        creditLine: "Gift of Arthur A. Houghton Jr., 1970",
+        objectURL: "https://www.metmuseum.org/art/collection/search/452174",
+        isPublicDomain: true,
+        primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg"))
 }

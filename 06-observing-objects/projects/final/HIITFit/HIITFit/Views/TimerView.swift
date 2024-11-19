@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -38,40 +38,38 @@ struct CountdownView: View {
   let size: Double
 
   var body: some View {
-    Text("\(timeRemaining)")
+    Text("\(timeRemaining)")  // 5
       .font(.system(size: size, design: .rounded))
       .padding()
-      .onChange(of: date) { _ in
+      .onChange(of: date) {  // 6
         timeRemaining -= 1
       }
   }
 }
 
 struct TimerView: View {
-  @State private var timeRemaining: Int = 3
-  @Binding var timerDone: Bool
+  @State private var timeRemaining: Int = 3  // 1
+  @Binding var timerDone: Bool  // 2
   let size: Double
 
   var body: some View {
-    TimelineView(
+    TimelineView(  // 3
       .animation(
         minimumInterval: 1.0,
         paused: timeRemaining <= 0)) { context in
-          CountdownView(
+          CountdownView(  // 4
             date: context.date,
             timeRemaining: $timeRemaining,
             size: size)
-    }
-    .onChange(of: timeRemaining) { _ in
-      if timeRemaining < 1 {
-        timerDone = true
-      }
-    }
+        }
+        .onChange(of: timeRemaining) {
+          if timeRemaining < 1 {
+            timerDone = true  // 7
+          }
+        }
   }
 }
 
-struct TimerView_Previews: PreviewProvider {
-  static var previews: some View {
-    TimerView(timerDone: .constant(false), size: 90)
-  }
+#Preview {
+  TimerView(timerDone: .constant(false), size: 90)
 }

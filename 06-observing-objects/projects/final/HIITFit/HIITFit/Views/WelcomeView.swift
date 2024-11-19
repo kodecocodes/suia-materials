@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -47,9 +47,8 @@ struct WelcomeView: View {
         .sheet(isPresented: $showHistory) {
           HistoryView(showHistory: $showHistory)
         }
-        .padding(.bottom)
+          .padding(.bottom)
       }
-
       VStack {
         HStack(alignment: .bottom) {
           VStack(alignment: .leading) {
@@ -62,10 +61,6 @@ struct WelcomeView: View {
             .resizedToFill(width: 240, height: 240)
             .clipShape(Circle())
         }
-//            .resizable()
-//            .aspectRatio(contentMode: .fill)
-//            .frame(width: 240.0, height: 240.0)
-        // swiftlint:disable:next multiple_closures_with_trailing_closure
         Button(action: { selectedTab = 0 }) {
           Text("Get Started")
           Image(systemName: "arrow.right.circle")
@@ -80,8 +75,6 @@ struct WelcomeView: View {
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    WelcomeView(selectedTab: .constant(9))
-  }
+#Preview {
+  WelcomeView(selectedTab: .constant(9))
 }

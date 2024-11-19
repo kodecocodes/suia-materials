@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,7 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
 struct ExerciseView: View {
   let index: Int
@@ -38,6 +39,7 @@ struct ExerciseView: View {
     Exercise.exercises[index]
   }
   let interval: TimeInterval = 30
+
   var body: some View {
     GeometryReader { geometry in
       VStack {
@@ -65,8 +67,6 @@ struct ExerciseView: View {
   }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
-  static var previews: some View {
-    ExerciseView(index: 0)
-  }
+#Preview {
+  ExerciseView(index: 0)
 }

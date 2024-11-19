@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2024 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -37,19 +37,17 @@ struct ContentView: View {
 
   var body: some View {
     TabView(selection: $selectedTab) {
-      WelcomeView(selectedTab: $selectedTab)  // 1
-        .tag(9)  // 2
+      WelcomeView(selectedTab: $selectedTab)
+        .tag(9)
       ForEach(Exercise.exercises.indices, id: \.self) { index in
         ExerciseView(selectedTab: $selectedTab, index: index)
-          .tag(index)  // 3
+          .tag(index)
       }
     }
     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ContentView()
 }

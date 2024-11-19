@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,7 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import AVKit
 
 struct ExerciseView: View {
   @State private var rating = 0
@@ -38,14 +39,12 @@ struct ExerciseView: View {
   @State private var showSuccess = false
   @Binding var selectedTab: Int
   let index: Int
-
   var exercise: Exercise {
     Exercise.exercises[index]
   }
   var lastExercise: Bool {
     index + 1 == Exercise.exercises.count
   }
-
   var startButton: some View {
     Button("Start Exercise") { }
   }
@@ -59,15 +58,15 @@ struct ExerciseView: View {
       }
     }
   }
-
   let interval: TimeInterval = 30
+
   var body: some View {
     GeometryReader { geometry in
       VStack {
         HeaderView(
           selectedTab: $selectedTab,
           titleText: Exercise.exercises[index].exerciseName)
-          .padding(.bottom)
+        .padding(.bottom)
 
         VideoPlayerView(videoName: exercise.videoName)
           .frame(height: geometry.size.height * 0.45)
@@ -102,8 +101,6 @@ struct ExerciseView: View {
   }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
-  static var previews: some View {
-    ExerciseView(selectedTab: .constant(3), index: 3)
-  }
+#Preview {
+  ExerciseView(selectedTab: .constant(3), index: 3)
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ struct HistoryView: View {
       }
       .font(.title)
       .padding(.trailing)
-
+       
       VStack {
         Text("History")
           .font(.title)
@@ -53,10 +53,10 @@ struct HistoryView: View {
               header:
                 Text(day.date.formatted(as: "MMM d"))
                 .font(.headline)) {
-              ForEach(day.exercises, id: \.self) { exercise in
-                Text(exercise)
-              }
-            }
+                  ForEach(day.exercises, id: \.self) { exercise in
+                    Text(exercise)
+                  }
+                }
           }
         }
       }
@@ -64,8 +64,6 @@ struct HistoryView: View {
   }
 }
 
-struct HistoryView_Previews: PreviewProvider {
-  static var previews: some View {
-    HistoryView()
-  }
+#Preview {
+  HistoryView()
 }

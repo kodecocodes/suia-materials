@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -39,12 +39,12 @@ struct ExerciseView: View {
     Exercise.exercises[index]
   }
   let interval: TimeInterval = 30
+
   var body: some View {
     GeometryReader { geometry in
       VStack {
         HeaderView(exerciseName: exercise.exerciseName)
           .padding(.bottom)
-
         if let url = Bundle.main.url(
           forResource: exercise.videoName,
           withExtension: "mp4") {
@@ -54,17 +54,13 @@ struct ExerciseView: View {
           Text("Couldn't find \(exercise.videoName).mp4")
             .foregroundColor(.red)
         }
-
         Text(Date().addingTimeInterval(interval), style: .timer)
           .font(.system(size: geometry.size.height * 0.07))
-
         Button("Start/Done") { }
           .font(.title3)
           .padding()
-
         RatingView()
           .padding()
-
         Spacer()
         Button("History") { }
           .padding(.bottom)
@@ -73,8 +69,6 @@ struct ExerciseView: View {
   }
 }
 
-struct ExerciseView_Previews: PreviewProvider {
-  static var previews: some View {
-    ExerciseView(index: 0)
-  }
+#Preview {
+  ExerciseView(index: 0)
 }

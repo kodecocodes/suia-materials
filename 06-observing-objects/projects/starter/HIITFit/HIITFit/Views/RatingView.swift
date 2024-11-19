@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Razeware LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,10 @@
 import SwiftUI
 
 struct RatingView: View {
-  @Binding var rating: Int  // 1
-  let maximumRating = 5  // 2
+  @Binding var rating: Int
+  let maximumRating = 5
 
-  let onColor = Color.red  // 3
+  let onColor = Color.red
   let offColor = Color.gray
 
   var body: some View {
@@ -44,8 +44,8 @@ struct RatingView: View {
       ForEach(1 ..< maximumRating + 1, id: \.self) { index in
         Image(systemName: "waveform.path.ecg")
           .foregroundColor(
-            index > rating ? offColor : onColor)  // 4
-          .onTapGesture {  // 5
+            index > rating ? offColor : onColor)
+          .onTapGesture {
             rating = index
           }
       }
@@ -54,9 +54,6 @@ struct RatingView: View {
   }
 }
 
-struct RatingView_Previews: PreviewProvider {
-  static var previews: some View {
-    RatingView(rating: .constant(3))
-      .previewLayout(.sizeThatFits)
-  }
+#Preview(traits: .sizeThatFitsLayout) {
+  RatingView(rating: .constant(3))
 }

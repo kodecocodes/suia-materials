@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CD30C91F251474DC0049DB93"
-               BuildableName = "HIITFit.app"
-               BlueprintName = "HIITFit"
-               ReferencedContainer = "container:HIITFit.xcodeproj">
+               BlueprintIdentifier = "CDC4416D2CD0BBB10026E8B3"
+               BuildableName = "MyFirst.app"
+               BlueprintName = "MyFirst"
+               ReferencedContainer = "container:MyFirst.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CD30C91F251474DC0049DB93"
-            BuildableName = "HIITFit.app"
-            BlueprintName = "HIITFit"
-            ReferencedContainer = "container:HIITFit.xcodeproj">
+            BlueprintIdentifier = "CDC4416D2CD0BBB10026E8B3"
+            BuildableName = "MyFirst.app"
+            BlueprintName = "MyFirst"
+            ReferencedContainer = "container:MyFirst.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CD30C91F251474DC0049DB93"
-            BuildableName = "HIITFit.app"
-            BlueprintName = "HIITFit"
-            ReferencedContainer = "container:HIITFit.xcodeproj">
+            BlueprintIdentifier = "CDC4416D2CD0BBB10026E8B3"
+            BuildableName = "MyFirst.app"
+            BlueprintName = "MyFirst"
+            ReferencedContainer = "container:MyFirst.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
