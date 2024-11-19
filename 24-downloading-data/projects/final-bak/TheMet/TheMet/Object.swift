@@ -32,12 +32,16 @@
 
 import Foundation
 
-class TheMetStore: ObservableObject {
-  @Published var objects: [Object] = []
+struct Object: Codable, Hashable {
+  let objectID: Int
+  let title: String
+  let creditLine: String
+  let objectURL: String
+  let isPublicDomain: Bool
+  let primaryImageSmall: String
+}
 
-  init() {
-    #if DEBUG
-    createDevData()
-    #endif
-  }
+struct ObjectIDs: Codable {
+  let total: Int
+  let objectIDs: [Int]
 }

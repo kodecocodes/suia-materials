@@ -30,14 +30,10 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import SwiftUI
 
-class TheMetStore: ObservableObject {
-  @Published var objects: [Object] = []
-
-  init() {
-    #if DEBUG
-    createDevData()
-    #endif
-  }
+extension Color {
+  // Add app colors to standard colors
+  static let metBackground = Color("met-background")
+  static let metForeground = Color("met-foreground")
 }

@@ -32,77 +32,77 @@
 
 import SwiftUI
 
-struct ContentView: View {
-  @StateObject private var store = TheMetStore()
-  @State private var query = "rhino"
-  @State private var showQueryField = false
+struct ObjectView: View {
+  let object: Object
 
   var body: some View {
-    NavigationStack {
-      VStack {
-        Text("You searched for '\(query)'")
-          .padding(5)
-          .background(Color.metForeground)
-          .cornerRadius(10)
-        List(store.objects, id: \.objectID) { object in
-          if !object.isPublicDomain,
-            let url = URL(string: object.objectURL) {
-            NavigationLink(value: url) {
-              WebIndicatorView(title: object.title)
-            }
-            .listRowBackground(Color.metBackground)
+    VStack {
+      if let url = URL(string: object.objectURL) {
+        Link(destination: url) {
+          WebIndicatorView(title: object.title)
+            .multilineTextAlignment(.leading)
+            .font(.callout)
+            .frame(minHeight: 44)
+          // add these four modifiers
+            .padding()
+            .background(Color.metBackground)
             .foregroundColor(.white)
-          } else {
-            NavigationLink(value: object) {
-              Text(object.title)
-            }
-            .listRowBackground(Color.metForeground)
-          }
+            .cornerRadius(10)
         }
-        .navigationTitle("The Met")
-        .toolbar {
-          Button("Search the Met") {
-            query = ""
-            showQueryField = true
-          }
-          .foregroundColor(Color.metBackground)
-          .padding(.horizontal)
-          .background(
-            RoundedRectangle(cornerRadius: 8)
-              .stroke(Color.metBackground, lineWidth: 2))
-        }
-        .alert("Search the Met", isPresented: $showQueryField) {
-          TextField("Search the Met", text: $query)
-          Button("Search") { }
-        }
-        .navigationDestination(for: URL.self) { url in
-          SafariView(url: url)
-            .navigationBarTitleDisplayMode(.inline)
-            .ignoresSafeArea()
-        }
-        .navigationDestination(for: Object.self) { object in
-          ObjectView(object: object)
-        }
+      } else {
+        Text(object.title)
+          .multilineTextAlignment(.leading)
+          .font(.callout)
+          .frame(minHeight: 44)
       }
+
+      if object.isPublicDomain {
+        AsyncImage(url: URL(string: object.primaryImageSmall)) { image in
+          image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+        } placeholder: {
+          PlaceholderView(note: "Display image here")
+        }
+      } else {
+        PlaceholderView(note: "Not in public domain. URL not valid.")
+      }
+
+      Text(object.creditLine)
+        .font(.caption)
+        .padding()
+        .background(Color.metForeground)
+        .cornerRadius(10)
     }
+    .padding(.vertical)
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
-}
-
-struct WebIndicatorView: View {
-  let title: String
-
+struct PlaceholderView: View {
+  let note: String
   var body: some View {
-    HStack {
-      Text(title)
-      Spacer()
-      Image(systemName: "rectangle.portrait.and.arrow.right.fill")
-        .font(.footnote)
+    ZStack {
+      Rectangle()
+        .inset(by: 7)
+        .fill(Color.metForeground)
+        .border(Color.metBackground, width: 7)
+        .padding()
+      Text(note)
+        .foregroundColor(.metBackground)
     }
+  }
+}
+
+struct ObjectView_Previews: PreviewProvider {
+  static var previews: some View {
+    ObjectView(
+      object:
+        Object(
+          objectID: 452174,
+          title: "Bahram Gur Slays the Rhino-Wolf",
+          creditLine: "Gift of Arthur A. Houghton Jr., 1970",
+          objectURL: "https://www.metmuseum.org/art/collection/search/452174",
+          isPublicDomain: true,
+          primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg"))
   }
 }

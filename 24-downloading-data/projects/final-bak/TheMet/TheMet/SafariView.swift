@@ -30,14 +30,22 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import SwiftUI
+import SafariServices
 
-class TheMetStore: ObservableObject {
-  @Published var objects: [Object] = []
+struct SafariView: UIViewControllerRepresentable {
+  let url: URL
 
-  init() {
-    #if DEBUG
-    createDevData()
-    #endif
+  func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+    return SFSafariViewController(url: url)
+  }
+
+  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {}
+}
+
+struct SafariView_Previews: PreviewProvider {
+  static var previews: some View {
+    // swiftlint:disable:next force_unwrapping
+    SafariView(url: URL(string: "https://www.metmuseum.org/art/collection/search/437092")!)
   }
 }
