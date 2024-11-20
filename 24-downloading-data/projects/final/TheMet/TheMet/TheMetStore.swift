@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,10 +34,23 @@ import Foundation
 
 class TheMetStore: ObservableObject {
   @Published var objects: [Object] = []
+  let service = TheMetService()
+  let maxIndex: Int
 
-  init() {
-    #if DEBUG
-    createDevData()
-    #endif
+  init(_ maxIndex: Int = 30) {
+    self.maxIndex = maxIndex
+  }
+
+  func fetchObjects(for queryTerm: String) async throws {
+    if let objectIDs = try await service.getObjectIDs(from: queryTerm) {  // 1
+      for (index, objectID) in objectIDs.objectIDs.enumerated()  // 2
+      where index < maxIndex {
+        if let object = try await service.getObject(from: objectID) {
+          await MainActor.run {
+            objects.append(object)
+          }
+        }
+      }
+    }
   }
 }

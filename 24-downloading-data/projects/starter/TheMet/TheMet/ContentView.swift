@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ struct ContentView: View {
               WebIndicatorView(title: object.title)
             }
             .listRowBackground(Color.metBackground)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
           } else {
             NavigationLink(value: object) {
               Text(object.title)
@@ -88,10 +88,8 @@ struct ContentView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ContentView()
 }
 
 struct WebIndicatorView: View {

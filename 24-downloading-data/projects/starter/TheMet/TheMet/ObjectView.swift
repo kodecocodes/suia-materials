@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ struct ObjectView: View {
             .multilineTextAlignment(.leading)
             .font(.callout)
             .frame(minHeight: 44)
-          // add these four modifiers
+            // add these four modifiers
             .padding()
             .background(Color.metBackground)
             .foregroundColor(.white)
@@ -65,7 +65,7 @@ struct ObjectView: View {
           PlaceholderView(note: "Display image here")
         }
       } else {
-        PlaceholderView(note: "Not in public domain. URL not valid.")
+        PlaceholderView(note: "Image not in public domain. URL not valid.")
       }
 
       Text(object.creditLine)
@@ -93,16 +93,14 @@ struct PlaceholderView: View {
   }
 }
 
-struct ObjectView_Previews: PreviewProvider {
-  static var previews: some View {
-    ObjectView(
-      object:
-        Object(
-          objectID: 452174,
-          title: "Bahram Gur Slays the Rhino-Wolf",
-          creditLine: "Gift of Arthur A. Houghton Jr., 1970",
-          objectURL: "https://www.metmuseum.org/art/collection/search/452174",
-          isPublicDomain: true,
-          primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg"))
-  }
+#Preview {
+  ObjectView(
+    object:
+      Object(
+        objectID: 452174,
+        title: "Bahram Gur Slays the Rhino-Wolf",
+        creditLine: "Gift of Arthur A. Houghton Jr., 1970",
+        objectURL: "https://www.metmuseum.org/art/collection/search/452174",
+        isPublicDomain: true,
+        primaryImageSmall: "https://images.metmuseum.org/CRDImages/is/original/DP107178.jpg"))
 }

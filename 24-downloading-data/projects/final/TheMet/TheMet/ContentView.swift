@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,7 @@ struct ContentView: View {
   @StateObject private var store = TheMetStore()
   @State private var query = "rhino"
   @State private var showQueryField = false
+  @State private var fetchObjectsTask: Task<Void, Error>?
 
   var body: some View {
     NavigationStack {
@@ -51,7 +52,7 @@ struct ContentView: View {
               WebIndicatorView(title: object.title)
             }
             .listRowBackground(Color.metBackground)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
           } else {
             NavigationLink(value: object) {
               Text(object.title)
@@ -73,7 +74,15 @@ struct ContentView: View {
         }
         .alert("Search the Met", isPresented: $showQueryField) {
           TextField("Search the Met", text: $query)
-          Button("Search") { }
+          Button("Search") {
+            fetchObjectsTask?.cancel()
+            fetchObjectsTask = Task {
+              do {
+                store.objects = []
+                try await store.fetchObjects(for: query)
+              } catch {}
+            }
+          }
         }
         .navigationDestination(for: URL.self) { url in
           SafariView(url: url)
@@ -84,14 +93,20 @@ struct ContentView: View {
           ObjectView(object: object)
         }
       }
+      .overlay {
+        if store.objects.isEmpty { ProgressView() }
+      }
+    }
+    .task {
+      do {
+        try await store.fetchObjects(for: query)
+      } catch {}
     }
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ContentView()
 }
 
 struct WebIndicatorView: View {
