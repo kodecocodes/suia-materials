@@ -46,7 +46,7 @@ struct ObjectView: View {
             // add these four modifiers
             .padding()
             .background(Color.metBackground)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
             .cornerRadius(10)
         }
       } else {
@@ -88,7 +88,7 @@ struct PlaceholderView: View {
         .border(Color.metBackground, width: 7)
         .padding()
       Text(note)
-        .foregroundColor(.metBackground)
+        .foregroundStyle(Color.metBackground)
     }
   }
 }

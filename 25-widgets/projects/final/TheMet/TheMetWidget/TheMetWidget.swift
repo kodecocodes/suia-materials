@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2024 Kodeco LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -35,89 +35,83 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
   func placeholder(in context: Context) -> SimpleEntry {
-    SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: true))
+    SimpleEntry(date: Date(), emoji: "😀", object: Object.sample(isPublicDomain: true))
   }
-
-  func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-    let entry = SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: false))
+  
+  func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    let entry = SimpleEntry(date: Date(), emoji: "😀", object: Object.sample(isPublicDomain: true))
     completion(entry)
   }
-
-  func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
+  
+  func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
     var entries: [SimpleEntry] = []
-
+    
     // Generate a timeline consisting of five entries an hour apart, starting from the current date.
     let currentDate = Date()
-    let interval = 3
-
-    let objects = readObjects()
-    for index in 0 ..< objects.count {
-      let entryDate = Calendar.current.date(
-        byAdding: .second,
-        value: index * interval,
-        // swiftlint:disable:next force_unwrapping
-        to: currentDate)!
-      let entry = SimpleEntry(
-        date: entryDate,
-        object: objects[index])
+    for hourOffset in 0 ..< 5 {
+      let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+      let entry = SimpleEntry(date: entryDate, emoji: "😀", object: Object.sample(isPublicDomain: true))
       entries.append(entry)
     }
-
-    let timeline = Timeline(entries: entries, policy: .never)
+    
+    let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
   }
-
-  func readObjects() -> [Object] {
-    var objects: [Object] = []
-    let archiveURL =
-      FileManager.sharedContainerURL()
-      .appendingPathComponent("objects.json")
-    print(">>> \(archiveURL)")
-
-    if let codeData = try? Data(contentsOf: archiveURL) {
-      do {
-        objects = try JSONDecoder()
-          .decode([Object].self, from: codeData)
-      } catch {
-        print("Error: Can’t decode contents")
-      }
-    }
-    return objects
-  }
+  
+  //    func relevances() async -> WidgetRelevances<Void> {
+  //        // Generate a list containing the contexts this widget is relevant in.
+  //    }
 }
 
 struct SimpleEntry: TimelineEntry {
   let date: Date
+  let emoji: String
   let object: Object
 }
 
-struct TheMetWidgetEntryView: View {
+struct TheMetWidgetEntryView : View {
   var entry: Provider.Entry
-
+  
   var body: some View {
-    WidgetView(entry: entry)
+    VStack {
+//      Text("Time:")
+//      Text(entry.date, style: .time)
+//      
+//      Text("Emoji:")
+//      Text(entry.emoji)
+
+//      Text("Object:")
+      Text(entry.object.title)
+        .font(.title3)
+//        .foregroundStyle(Color.accentColor)
+        .lineLimit(3)
+    }
   }
 }
 
 struct TheMetWidget: Widget {
   let kind: String = "TheMetWidget"
-
+  
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
-      TheMetWidgetEntryView(entry: entry)
+      if #available(iOS 17.0, *) {
+        TheMetWidgetEntryView(entry: entry)
+          .containerBackground(Color.clear, for: .widget)
+      } else {
+        TheMetWidgetEntryView(entry: entry)
+          .padding()
+          .background()
+      }
     }
     .configurationDisplayName("The Met")
     .description("View objects from the Metropolitan Museum.")
-    .supportedFamilies([.systemMedium, .systemLarge])
+    
   }
 }
 
-struct TheMetWidget_Previews: PreviewProvider {
-  static var previews: some View {
-    TheMetWidgetEntryView(
-      entry: SimpleEntry(
-        date: Date(),
-        object: Object.sample(isPublicDomain: true)))
-      .previewContext(WidgetPreviewContext(family: .systemMedium))
-  }
+#Preview(as: .systemSmall) {
+  TheMetWidget()
+} timeline: {
+  SimpleEntry(date: .now, emoji: "🤩", object: Object.sample(isPublicDomain: false))
+  SimpleEntry(date: .now, emoji: "😀", object: Object.sample(isPublicDomain: true))
 }

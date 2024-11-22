@@ -65,7 +65,7 @@ struct ContentView: View {
             query = ""
             showQueryField = true
           }
-          .foregroundColor(Color.metBackground)
+          .foregroundStyle(Color.metBackground)
           .padding(.horizontal)
           .background(
             RoundedRectangle(cornerRadius: 8)

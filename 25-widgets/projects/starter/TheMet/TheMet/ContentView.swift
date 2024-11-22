@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ struct ContentView: View {
               WebIndicatorView(title: object.title)
             }
             .listRowBackground(Color.metBackground)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
           } else {
             NavigationLink(value: object) {
               Text(object.title)
@@ -66,25 +66,23 @@ struct ContentView: View {
             query = ""
             showQueryField = true
           }
-          .foregroundColor(Color.metBackground)
+          .foregroundStyle(Color.metBackground)
           .padding(.horizontal)
           .background(
             RoundedRectangle(cornerRadius: 8)
               .stroke(Color.metBackground, lineWidth: 2))
         }
-        .alert(
-          "Search the Met",
-          isPresented: $showQueryField) {
-            TextField("Search the Met", text: $query)
-            Button("Search") {
-              fetchObjectsTask?.cancel()
-              fetchObjectsTask = Task {
-                do {
-                  store.objects = []
-                  try await store.fetchObjects(for: query)
-                } catch {}
-              }
+        .alert("Search the Met", isPresented: $showQueryField) {
+          TextField("Search the Met", text: $query)
+          Button("Search") {
+            fetchObjectsTask?.cancel()
+            fetchObjectsTask = Task {
+              do {
+                store.objects = []
+                try await store.fetchObjects(for: query)
+              } catch {}
             }
+          }
         }
         .navigationDestination(for: URL.self) { url in
           SafariView(url: url)
@@ -107,10 +105,8 @@ struct ContentView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ContentView()
 }
 
 struct WebIndicatorView: View {
