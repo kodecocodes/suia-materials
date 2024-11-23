@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -38,21 +38,26 @@ struct CardToolbar: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("Done") {
-            dismiss()
-          }
-        }
-        ToolbarItem(placement: .bottomBar) {
-          BottomToolbar(modal: $currentModal)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button("Done") {
+          dismiss()
         }
       }
-      .sheet(item: $currentModal) { item in
-        switch item {
-        default:
-          Text(String(describing: item))
-        }
+      ToolbarItem(placement: .bottomBar) {
+        BottomToolbar(modal: $currentModal)
       }
+    }
+    .sheet(item: $currentModal) { item in
+      switch item {
+      default:
+        Text(String(describing: item))
+      }
+    }
   }
+}
+
+#Preview {
+  Color.yellow
+    .modifier(CardToolbar(currentModal: .constant(nil)))
 }

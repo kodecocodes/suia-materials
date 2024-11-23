@@ -1,5 +1,5 @@
-/// Copyright (c) 2023 Kodeco
-/// 
+/// Copyright (c) 2025 Kodeco
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -58,12 +58,12 @@ struct TextView: View {
     ForEach(0..<AppFonts.fonts.count, id: \.self) { index in
       ZStack {
         Circle()
-          .foregroundColor(.primary)
+          .foregroundStyle(.primary)
           .colorInvert()
         Text("Aa")
           .font(.custom(AppFonts.fonts[index], size: 20))
           .fontWeight(.heavy)
-          .foregroundColor(.primary)
+          .foregroundStyle(.primary)
       }
       .frame(
         width: AppFonts.fonts[index] == font ? 50 : 40,
@@ -84,7 +84,7 @@ struct TextView: View {
           .stroke(Color.white, lineWidth: 1.0)
           .overlay(
             Circle()
-              .foregroundColor(color == currentColor ? currentColor : .white))
+              .foregroundStyle(color == currentColor ? currentColor : .white))
           .frame(
             width: 44,
             height: 44)
@@ -92,7 +92,7 @@ struct TextView: View {
           .stroke(lineWidth: color == currentColor ? 0 : 1)
           .overlay(
             Circle()
-              .foregroundColor(currentColor))
+              .foregroundStyle(currentColor))
           .frame(
             width: color == currentColor ? 50 : 40,
             height: color == currentColor ? 50 : 40)
@@ -106,10 +106,8 @@ struct TextView: View {
   }
 }
 
-struct TextView_Previews: PreviewProvider {
-  static var previews: some View {
-    TextView(
-      font: .constant("San Fransisco"),
-      color: .constant(Color("appColor2")))
-  }
+#Preview {
+  TextView(
+    font: .constant("San Fransisco"),
+    color: .constant(Color("appColor2")))
 }

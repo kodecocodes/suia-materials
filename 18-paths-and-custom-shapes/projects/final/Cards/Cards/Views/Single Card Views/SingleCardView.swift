@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -46,15 +46,8 @@ struct SingleCardView: View {
   }
 }
 
-struct SingleCardView_Previews: PreviewProvider {
-  struct SingleCardPreview: View {
-    @EnvironmentObject var store: CardStore
-    var body: some View {
-      SingleCardView(card: $store.cards[0])
-    }
-  }
-  static var previews: some View {
-    SingleCardPreview()
-      .environmentObject(CardStore(defaultData: true))
-  }
+#Preview {
+  @Previewable @State var card = initialCards[0]
+  SingleCardView(card: $card)
+    .environmentObject(CardStore(defaultData: true))
 }

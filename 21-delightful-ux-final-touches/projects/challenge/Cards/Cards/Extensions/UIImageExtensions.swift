@@ -1,5 +1,5 @@
-/// Copyright (c) 2023 Kodeco
-/// 
+/// Copyright (c) 2025 Kodeco
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -32,48 +32,32 @@
 
 import SwiftUI
 
-extension UIImage: Transferable {
-  public static var transferRepresentation: some TransferRepresentation {
-    DataRepresentation(importedContentType: .image) { image in
-      UIImage(data: image) ?? errorImage
-    }
-  }
-
-  public static var errorImage: UIImage {
-    UIImage(named: "error-image") ?? UIImage()
-  }
-}
-
 // MARK: - SAVE, LOAD AND DELETE IMAGE FILE
 extension UIImage {
-  static var minsize = CGSize(width: 300, height: 200)
-  static var maxSize = CGSize(width: 1000, height: 1500)
+  static let minsize = CGSize(width: 300, height: 200)
+  static let maxSize = CGSize(width: 1000, height: 1500)
 
   func save(to filename: String? = nil) -> String {
     // first resize large images
     let image = resizeLargeImage()
-    let path: String
-    if let filename = filename {
-      path = filename
-    } else {
-      path = UUID().uuidString
-    }
+    let path = filename ?? UUID().uuidString
     let url = URL.documentsDirectory.appendingPathComponent(path)
+      .appendingPathExtension(for: .png)
     do {
       try image.pngData()?.write(to: url)
     } catch {
       print(error.localizedDescription)
     }
-    return path
+    return url.lastPathComponent
   }
 
-  static func load(uuidString: String) -> UIImage? {
-    guard uuidString != "none" else { return nil }
+  static func load(uuidString: String) -> UIImage {
+    guard uuidString != "none" else { return .error }
     let url = URL.documentsDirectory.appendingPathComponent(uuidString)
     if let imageData = try? Data(contentsOf: url) {
-      return UIImage(data: imageData)
+      return UIImage(data: imageData) ?? .error
     } else {
-      return nil
+      return .error
     }
   }
 
@@ -142,6 +126,7 @@ extension UIImage {
 }
 
 extension UIImage {
+  // 1
   @MainActor static func screenshot(
     card: Card,
     size: CGSize
@@ -149,7 +134,6 @@ extension UIImage {
     let cardView = ShareCardView(card: card)
     let content = cardView.content(size: size)
     let renderer = ImageRenderer(content: content)
-    let uiImage = renderer.uiImage ?? UIImage.errorImage
-    return uiImage
+    return renderer.uiImage ?? UIImage.error
   }
 }

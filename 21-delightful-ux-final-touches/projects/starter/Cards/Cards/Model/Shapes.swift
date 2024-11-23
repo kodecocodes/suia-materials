@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -45,19 +45,14 @@ enum Shapes {
   ]
 }
 
-struct Shapes_Previews: PreviewProvider {
-  static let currentShape = Lens()
-
-  static var previews: some View {
-    currentShape
-      .stroke(
-        Color.primary,
-        style: StrokeStyle(lineWidth: 10, lineJoin: .round))
-      .padding()
-      .aspectRatio(1, contentMode: .fit)
-      .background(Color.yellow)
-      .previewLayout(.sizeThatFits)
-  }
+#Preview(traits: .sizeThatFitsLayout) {
+  Lens()
+    .stroke(
+      Color.primary,
+      style: StrokeStyle(lineWidth: 10, lineJoin: .round))
+    .padding()
+    .aspectRatio(1, contentMode: .fit)
+    .background(Color.yellow)
 }
 
 struct Triangle: Shape {
@@ -95,7 +90,9 @@ struct Cone: Shape {
 struct Lens: Shape {
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    path.move(to: CGPoint(x: 0, y: rect.midY))
+    // View.contentShape(_:) does not recognize
+    // Lens with an exact midY point
+    path.move(to: CGPoint(x: 0, y: rect.midY + 0.00001))
     path.addQuadCurve(
       to: CGPoint(x: rect.width, y: rect.midY),
       control: CGPoint(x: rect.midX, y: 0))
@@ -218,8 +215,8 @@ struct Polygon: Shape {
       return CGPoint(x: pointX, y: pointY)
     }
     path.move(to: points[0])
-    for i in 1..<points.count {
-      path.addLine(to: points[i])
+    for index in 1..<points.count {
+      path.addLine(to: points[index])
     }
     path.closeSubpath()
     return path

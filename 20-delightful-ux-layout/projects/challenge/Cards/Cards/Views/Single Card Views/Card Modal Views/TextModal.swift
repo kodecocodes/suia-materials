@@ -1,5 +1,5 @@
-/// Copyright (c) 2023 Kodeco
-/// 
+/// Copyright (c) 2025 Kodeco
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -45,9 +45,6 @@ struct TextModal: View {
     .padding(20)
   }
 }
-
-struct TextModal_Previews: PreviewProvider {
-  static var previews: some View {
-    TextModal(textElement: .constant(TextElement()))
-  }
+#Preview {
+  TextModal(textElement: .constant(TextElement()))
 }

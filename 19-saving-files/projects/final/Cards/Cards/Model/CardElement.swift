@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -47,15 +47,11 @@ struct ImageElement: CardElement {
   let id = UUID()
   var transform = Transform()
   var frameIndex: Int?
+  var image: Image {
+    Image(uiImage: uiImage ?? UIImage.error)
+  }
   var uiImage: UIImage?
   var imageFilename: String?
-
-  var image: Image {
-    Image(
-      uiImage: uiImage ??
-        UIImage(named: "error-image") ??
-        UIImage())
-  }
 }
 
 extension ImageElement: Codable {
@@ -76,7 +72,7 @@ extension ImageElement: Codable {
     if let imageFilename {
       uiImage = UIImage.load(uuidString: imageFilename)
     } else {
-      uiImage = UIImage.errorImage
+      uiImage = UIImage.error
     }
   }
 

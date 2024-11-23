@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -35,15 +35,13 @@ import SwiftUI
 struct CardThumbnail: View {
   var body: some View {
     RoundedRectangle(cornerRadius: 15)
-      .foregroundColor(.random())
+      .foregroundStyle(Color.random())
       .frame(
         width: Settings.thumbnailSize.width,
         height: Settings.thumbnailSize.height)
   }
 }
 
-struct CardThumbnail_Previews: PreviewProvider {
-  static var previews: some View {
-    CardThumbnail()
-  }
+#Preview {
+  CardThumbnail()
 }

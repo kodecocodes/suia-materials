@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ struct SingleCardView: View {
     ZStack {
       Group {
         Capsule()
-          .foregroundColor(.yellow)
+          .foregroundStyle(.yellow)
         Text("Resize Me!")
           .fontWeight(.bold)
           .font(.system(size: 500))
@@ -61,8 +61,6 @@ struct SingleCardView: View {
   }
 }
 
-struct SingleCardView_Previews: PreviewProvider {
-  static var previews: some View {
-    SingleCardView()
-  }
+#Preview {
+  SingleCardView()
 }

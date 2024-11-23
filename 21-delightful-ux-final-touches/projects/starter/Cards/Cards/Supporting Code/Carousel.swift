@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -78,16 +78,16 @@ struct Carousel: View {
   }
 
   func loadCardImage(_ card: Card) -> Image? {
-    if let uiImage = UIImage.load(uuidString: card.id.uuidString) {
+    let uiImage = UIImage.load(uuidString: card.id.uuidString)
+    if uiImage != .error {
       return Image(uiImage: uiImage)
     }
     return nil
   }
 }
 
-struct Carousel_Previews: PreviewProvider {
-  static var previews: some View {
-    Carousel(selectedCard: .constant(Card()))
-      .environmentObject(CardStore(defaultData: true))
-  }
+#Preview {
+  Carousel(selectedCard: .constant(Card()))
+    .environmentObject(
+      CardStore(defaultData: true))
 }

@@ -1,5 +1,5 @@
-/// Copyright (c) 2023 Kodeco
-/// 
+/// Copyright (c) 2025 Kodeco
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -55,7 +55,7 @@ class CardStore: ObservableObject {
     UIImage.remove(name: card.id.uuidString)
     // remove the card details
     let path = URL.documentsDirectory
-      .appendingPathComponent("\(card.id.uuidString).rwcard")
+      .appendingPathComponent("\(card.id.uuidString).card")
     try? FileManager.default.removeItem(at: path)
     cards.remove(at: index)
   }
@@ -77,7 +77,7 @@ extension CardStore {
         .enumerator(atPath: path),
       let files = enumerator.allObjects as? [String]
     else { return cards }
-    let cardFiles = files.filter { $0.contains(".rwcard") }
+    let cardFiles = files.filter { $0.contains(".card") }
     for cardFile in cardFiles {
       do {
         let path = path + "/" + cardFile

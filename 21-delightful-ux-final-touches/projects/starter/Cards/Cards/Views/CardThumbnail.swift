@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -39,18 +39,16 @@ struct CardThumbnail: View {
     card.backgroundColor
       .cornerRadius(10)
       .shadow(
-        color: Color("shadow-color"),
+        color: .shadow,
         radius: 3,
         x: 0.0,
         y: 0.0)
   }
 }
 
-struct CardThumbnail_Previews: PreviewProvider {
-  static var previews: some View {
-    CardThumbnail(card: initialCards[0])
-      .frame(
-        width: Settings.thumbnailSize.width,
-        height: Settings.thumbnailSize.height)
-  }
+#Preview {
+  CardThumbnail(card: initialCards[0])
+    .frame(
+      width: Settings.thumbnailSize.width,
+      height: Settings.thumbnailSize.height)
 }

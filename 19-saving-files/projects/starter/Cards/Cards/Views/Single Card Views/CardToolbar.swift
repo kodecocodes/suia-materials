@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct CardToolbar: ViewModifier {
-  @EnvironmentObject var store: CardStore
   @Environment(\.dismiss) var dismiss
+  @EnvironmentObject var store: CardStore
   @Binding var currentModal: ToolbarSelection?
   @Binding var card: Card
   @State private var stickerImage: UIImage?
@@ -42,45 +42,45 @@ struct CardToolbar: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          menu
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        menu
+      }
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button("Done") {
+          dismiss()
         }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("Done") {
-            dismiss()
+      }
+      ToolbarItem(placement: .bottomBar) {
+        BottomToolbar(
+          card: $card,
+          modal: $currentModal)
+      }
+    }
+    .sheet(item: $currentModal) { item in
+      switch item {
+      case .stickerModal:
+        StickerModal(stickerImage: $stickerImage)
+          .onDisappear {
+            if let stickerImage = stickerImage {
+              card.addElement(uiImage: stickerImage)
+            }
+            stickerImage = nil
           }
-        }
-        ToolbarItem(placement: .bottomBar) {
-          BottomToolbar(
-            card: $card,
-            modal: $currentModal)
-        }
-      }
-      .sheet(item: $currentModal) { item in
-        switch item {
-        case .frameModal:
-          FrameModal(frameIndex: $frameIndex)
-            .onDisappear {
-              if let frameIndex {
-                card.update(
-                  store.selectedElement,
-                  frameIndex: frameIndex)
-              }
-              frameIndex = nil
+      case .frameModal:
+        FrameModal(frameIndex: $frameIndex)
+          .onDisappear {
+            if let frameIndex {
+              card.update(
+                store.selectedElement,
+                frameIndex: frameIndex)
             }
-        case .stickerModal:
-          StickerModal(stickerImage: $stickerImage)
-            .onDisappear {
-              if let stickerImage = stickerImage {
-                card.addElement(uiImage: stickerImage)
-              }
-              stickerImage = nil
-            }
-        default:
-          Text(String(describing: item))
-        }
+            frameIndex = nil
+          }
+      default:
+        Text(String(describing: item))
       }
+    }
   }
 
   var menu: some View {
@@ -99,8 +99,8 @@ struct CardToolbar: ViewModifier {
             }
           }
         }
-    } label: {
-      Label("Paste", systemImage: "doc.on.clipboard")
+      } label: {
+        Label("Paste", systemImage: "doc.on.clipboard")
       }
       .disabled(!UIPasteboard.general.hasImages
         && !UIPasteboard.general.hasStrings)
@@ -108,4 +108,12 @@ struct CardToolbar: ViewModifier {
       Label("Add", systemImage: "ellipsis.circle")
     }
   }
+}
+
+#Preview {
+  Color.yellow
+    .environmentObject(CardStore(defaultData: true))
+    .modifier(CardToolbar(
+      currentModal: .constant(nil),
+      card: .constant(Card())))
 }

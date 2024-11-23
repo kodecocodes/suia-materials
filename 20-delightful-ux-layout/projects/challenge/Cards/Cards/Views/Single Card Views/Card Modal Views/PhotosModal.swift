@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,29 +43,29 @@ struct PhotosModal: View {
       matching: .images) {
         ToolbarButton(modal: .photoModal)
     }
-    .onChange(of: selectedItems) { items in
-      for item in items {
-        item.loadTransferable(type: Data.self) { result in
-          Task {
-            switch result {
-            case .success(let data):
-              if let data,
-                let uiImage = UIImage(data: data) {
-                card.addElement(uiImage: uiImage)
+      .onChange(of: selectedItems) { _, items in
+        for item in items {
+          item.loadTransferable(type: Data.self) { result in
+            Task {
+              switch result {
+              case .success(let data):
+                if let data,
+                  let uiImage = UIImage(data: data) {
+                  await MainActor.run {
+                    card.addElement(uiImage: uiImage)
+                  }
+                }
+              case .failure(let failure):
+                fatalError("Image transfer failed: \(failure)")
               }
-            case .failure(let failure):
-              fatalError("Image transfer failed: \(failure)")
             }
           }
         }
+        selectedItems = []
       }
-      selectedItems = []
-    }
   }
 }
 
-struct PhotosModal_Previews: PreviewProvider {
-  static var previews: some View {
-    PhotosModal(card: .constant(Card()))
-  }
+#Preview {
+  PhotosModal(card: .constant(Card()))
 }
