@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -84,7 +84,7 @@ struct Card: Identifiable {
       let encoder = JSONEncoder()
       encoder.outputFormatting = .prettyPrinted
       let data = try encoder.encode(self)
-      let filename = "\(id).rwcard"
+      let filename = "\(id).card"
       let url = URL.documentsDirectory
         .appendingPathComponent(filename)
       try data.write(to: url)
@@ -104,31 +104,28 @@ extension Card: Codable {
       .container(keyedBy: CodingKeys.self)
     let id = try container.decode(String.self, forKey: .id)
     self.id = UUID(uuidString: id) ?? UUID()
-    elements += try container.decode(
-      [ImageElement].self, forKey: .imageElements)
+    let resolvedColor = try container.decode(
+      Color.Resolved.self,
+      forKey: .backgroundColor)
+    backgroundColor = Color(resolvedColor)
 
-    // Challenge 2 - load the text elements
-    elements += try container.decode([TextElement].self, forKey: .textElements)
-
-    // Challenge 1 - load the background color
-    let components = try container.decode([CGFloat].self, forKey: .backgroundColor)
-    backgroundColor = Color.color(components: components)
+    elements += try container
+      .decode([ImageElement].self, forKey: .imageElements)
+    elements += try container
+      .decode([TextElement].self, forKey: .textElements)
   }
 
   func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(id.uuidString, forKey: .id)
+    let environment = EnvironmentValues()
+    let resolvedColor = backgroundColor.resolve(in: environment)
+    try container.encode(resolvedColor, forKey: .backgroundColor)
     let imageElements: [ImageElement] =
       elements.compactMap { $0 as? ImageElement }
     try container.encode(imageElements, forKey: .imageElements)
-
-    // Challenge 2 - save the text elements
     let textElements: [TextElement] =
       elements.compactMap { $0 as? TextElement }
     try container.encode(textElements, forKey: .textElements)
-
-    // Challenge 1 - save the background color
-    let components = backgroundColor.colorComponents()
-    try container.encode(components, forKey: .backgroundColor)
   }
 }
