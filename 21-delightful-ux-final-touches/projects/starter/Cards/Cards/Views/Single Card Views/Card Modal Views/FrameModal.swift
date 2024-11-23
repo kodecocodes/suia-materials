@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,6 @@ import SwiftUI
 struct FrameModal: View {
   @Environment(\.dismiss) var dismiss
   @Binding var frameIndex: Int?
-
   private let columns = [
     GridItem(.adaptive(minimum: 120), spacing: 10)
   ]
@@ -49,8 +48,7 @@ struct FrameModal: View {
         ForEach(0..<Shapes.shapes.count, id: \.self) { index in
           Shapes.shapes[index]
             .stroke(Color.primary, style: style)
-            .background(
-              Shapes.shapes[index].fill(Color.secondary))
+            .fill(Color.secondary)
             .frame(width: 100, height: 120)
             .padding()
             .onTapGesture {
@@ -64,8 +62,6 @@ struct FrameModal: View {
   }
 }
 
-struct FrameModal_Previews: PreviewProvider {
-  static var previews: some View {
-    FrameModal(frameIndex: .constant(nil))
-  }
+#Preview {
+  FrameModal(frameIndex: .constant(nil))
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,9 +32,11 @@
 
 import SwiftUI
 
+// swiftlint:disable function_body_length
+
 struct CardToolbar: ViewModifier {
-  @EnvironmentObject var store: CardStore
   @Environment(\.dismiss) var dismiss
+  @EnvironmentObject var store: CardStore
   @Binding var currentModal: ToolbarSelection?
   @Binding var card: Card
   @State private var stickerImage: UIImage?
@@ -43,66 +45,66 @@ struct CardToolbar: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          menu
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("Done") {
-            dismiss()
-          }
-        }
-        ToolbarItem(placement: .navigationBarLeading) {
-          let uiImage = UIImage.screenshot(
-            card: card,
-            size: Settings.cardSize)
-          let image = Image(uiImage: uiImage)
-          ShareLink(
-            item: image,
-            preview: SharePreview(
-              "Card",
-              image: image)) {
-                Image(systemName: "square.and.arrow.up")
-          }
-        }
-        ToolbarItem(placement: .bottomBar) {
-          BottomToolbar(
-            card: $card,
-            modal: $currentModal)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        menu
+      }
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button("Done") {
+          dismiss()
         }
       }
-      .sheet(item: $currentModal) { item in
-        switch item {
-        case .frameModal:
-          FrameModal(frameIndex: $frameIndex)
-            .onDisappear {
-              if let frameIndex {
-                card.update(
-                  store.selectedElement,
-                  frameIndex: frameIndex)
-              }
-              frameIndex = nil
-            }
-        case .stickerModal:
-          StickerModal(stickerImage: $stickerImage)
-            .onDisappear {
-              if let stickerImage = stickerImage {
-                card.addElement(uiImage: stickerImage)
-              }
-              stickerImage = nil
-            }
-        case .textModal:
-          TextModal(textElement: $textElement)
-            .onDisappear {
-              if !textElement.text.isEmpty {
-                card.addElement(text: textElement)
-              }
-              textElement = TextElement()
-            }
-        default:
-          Text(String(describing: item))
+      ToolbarItem(placement: .navigationBarLeading) {
+        let uiImage = UIImage.screenshot(
+          card: card,
+          size: Settings.cardSize)
+        let image = Image(uiImage: uiImage)
+        ShareLink(
+          item: image,
+          preview: SharePreview(
+            "Card",
+            image: image)) {
+              Image(systemName: "square.and.arrow.up")
         }
       }
+      ToolbarItem(placement: .bottomBar) {
+        BottomToolbar(
+          card: $card,
+          modal: $currentModal)
+      }
+    }
+    .sheet(item: $currentModal) { item in
+      switch item {
+      case .stickerModal:
+        StickerModal(stickerImage: $stickerImage)
+          .onDisappear {
+            if let stickerImage = stickerImage {
+              card.addElement(uiImage: stickerImage)
+            }
+            stickerImage = nil
+          }
+      case .frameModal:
+        FrameModal(frameIndex: $frameIndex)
+          .onDisappear {
+            if let frameIndex {
+              card.update(
+                store.selectedElement,
+                frameIndex: frameIndex)
+            }
+            frameIndex = nil
+          }
+      case .textModal:
+        TextModal(textElement: $textElement)
+          .onDisappear {
+            if !textElement.text.isEmpty {
+              card.addElement(text: textElement)
+            }
+            textElement = TextElement()
+          }
+      default:
+        Text(String(describing: item))
+      }
+    }
   }
 
   var menu: some View {
@@ -131,3 +133,5 @@ struct CardToolbar: ViewModifier {
     }
   }
 }
+
+// swiftlint:enable function_body_length

@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -47,15 +47,11 @@ struct ImageElement: CardElement {
   let id = UUID()
   var transform = Transform()
   var frameIndex: Int?
+  var image: Image {
+    Image(uiImage: uiImage ?? UIImage.error)
+  }
   var uiImage: UIImage?
   var imageFilename: String?
-
-  var image: Image {
-    Image(
-      uiImage: uiImage ??
-        UIImage(named: "error-image") ??
-        UIImage())
-  }
 }
 
 extension ImageElement: Codable {
@@ -76,7 +72,7 @@ extension ImageElement: Codable {
     if let imageFilename {
       uiImage = UIImage.load(uuidString: imageFilename)
     } else {
-      uiImage = UIImage.errorImage
+      uiImage = UIImage.error
     }
   }
 
@@ -108,8 +104,10 @@ extension TextElement: Codable {
       .decode(Transform.self, forKey: .transform)
     text = try container
       .decode(String.self, forKey: .text)
-    let components = try container.decode([CGFloat].self, forKey: .textColor)
-    textColor = Color.color(components: components)
+    let resolvedColor = try container.decode(
+      Color.Resolved.self,
+      forKey: .textColor)
+    textColor = Color(resolvedColor)
     textFont = try container
       .decode(String.self, forKey: .textFont)
   }
@@ -118,8 +116,8 @@ extension TextElement: Codable {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(transform, forKey: .transform)
     try container.encode(text, forKey: .text)
-    let components = textColor.colorComponents()
-    try container.encode(components, forKey: .textColor)
+    let resolvedColor = textColor.resolve(in: EnvironmentValues())
+    try container.encode(resolvedColor, forKey: .textColor)
     try container.encode(textFont, forKey: .textFont)
   }
 }

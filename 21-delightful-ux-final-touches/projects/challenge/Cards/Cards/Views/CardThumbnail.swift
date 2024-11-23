@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,8 @@ struct CardThumbnail: View {
 
   var body: some View {
     Group {
-      if let uiImage = UIImage.load(uuidString: card.id.uuidString) {
+      let uiImage = UIImage.load(uuidString: card.id.uuidString.appending(".png"))
+      if uiImage != UIImage.error {
         Image(uiImage: uiImage)
           .resizable()
           .aspectRatio(contentMode: .fit)
@@ -47,18 +48,16 @@ struct CardThumbnail: View {
     }
     .cornerRadius(10)
     .shadow(
-      color: Color("shadow-color"),
+      color: .shadow,
       radius: 3,
       x: 0.0,
       y: 0.0)
   }
 }
 
-struct CardThumbnail_Previews: PreviewProvider {
-  static var previews: some View {
-    CardThumbnail(card: initialCards[0])
-      .frame(
-        width: Settings.thumbnailSize.width,
-        height: Settings.thumbnailSize.height)
-  }
+#Preview {
+  CardThumbnail(card: initialCards[0])
+    .frame(
+      width: Settings.thumbnailSize.width,
+      height: Settings.thumbnailSize.height)
 }

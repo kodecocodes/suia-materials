@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -42,14 +42,13 @@ struct ShareCardView: View {
   }
 
   func content(size: CGSize) -> some View {
-    ZStack {
-      card.backgroundColor
+    card.backgroundColor
+    .overlay {
       elements(size: size)
     }
     .frame(
       width: Settings.calculateSize(size).width,
       height: Settings.calculateSize(size).height)
-    .clipped()
   }
 
   func elements(size: CGSize) -> some View {
@@ -66,8 +65,6 @@ struct ShareCardView: View {
   }
 }
 
-struct ShareCardView_Previews: PreviewProvider {
-  static var previews: some View {
-    ShareCardView(card: initialCards[0])
-  }
+#Preview {
+  ShareCardView(card: initialCards[0])
 }
