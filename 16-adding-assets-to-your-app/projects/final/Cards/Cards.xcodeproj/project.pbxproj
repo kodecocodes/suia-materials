@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		82BCC4ED2CE8239500A4761C /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 82BCC4EC2CE8239500A4761C /* Stickers */; };
+		82F48F2C2CF1913600AE9B1B /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 82F48F2B2CF1913600AE9B1B /* Stickers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		82BCC4EC2CE8239500A4761C /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = ../../../assets/Stickers; sourceTree = "<group>"; };
 		82E7592A2CE4649D00E9C11B /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		82F48F2B2CF1913600AE9B1B /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Stickers; path = ../../../assets/Stickers; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		82BCC4EB2CE7457B00A4761C /* Exceptions for "Cards" folder in "Cards" target */ = {
+		82F48F2A2CF18FA300AE9B1B /* Exceptions for "Cards" folder in "Cards" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -29,7 +29,7 @@
 		82E7592C2CE4649D00E9C11B /* Cards */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				82BCC4EB2CE7457B00A4761C /* Exceptions for "Cards" folder in "Cards" target */,
+				82F48F2A2CF18FA300AE9B1B /* Exceptions for "Cards" folder in "Cards" target */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -50,7 +50,7 @@
 		82E759212CE4649D00E9C11B = {
 			isa = PBXGroup;
 			children = (
-				82BCC4EC2CE8239500A4761C /* Stickers */,
+				82F48F2B2CF1913600AE9B1B /* Stickers */,
 				82E7592C2CE4649D00E9C11B /* Cards */,
 				82E7592B2CE4649D00E9C11B /* Products */,
 			);
@@ -130,7 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82BCC4ED2CE8239500A4761C /* Stickers in Resources */,
+				82F48F2C2CF1913600AE9B1B /* Stickers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
