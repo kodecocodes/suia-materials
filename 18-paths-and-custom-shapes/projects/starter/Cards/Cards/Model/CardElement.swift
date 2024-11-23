@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -46,14 +46,10 @@ extension CardElement {
 struct ImageElement: CardElement {
   let id = UUID()
   var transform = Transform()
-  var uiImage: UIImage?
-
   var image: Image {
-    Image(
-      uiImage: uiImage ??
-        UIImage(named: "error-image") ??
-        UIImage())
+    Image(uiImage: uiImage ?? UIImage.error)
   }
+  var uiImage: UIImage?
 }
 
 struct TextElement: CardElement {
