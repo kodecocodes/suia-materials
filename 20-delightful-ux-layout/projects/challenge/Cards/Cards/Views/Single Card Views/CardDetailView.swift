@@ -66,22 +66,23 @@ struct CardDetailView: View {
             }
         }
       }
-    .onDisappear {
-      store.selectedElement = nil
-    }
-    .dropDestination(for: CustomTransfer.self) { items, location in
-      let offset = Settings.calculateDropOffset(
-        viewScale: viewScale,
-        location: location)
-      Task {
-        await MainActor.run {
-          card.addElements(
-            from: items,
-            at: offset)
-        }
+      .clipped()
+      .onDisappear {
+        store.selectedElement = nil
       }
-      return !items.isEmpty
-    }
+      .dropDestination(for: CustomTransfer.self) { items, location in
+        let offset = Settings.calculateDropOffset(
+          viewScale: viewScale,
+          location: location)
+        Task {
+          await MainActor.run {
+            card.addElements(
+              from: items,
+              at: offset)
+          }
+        }
+        return !items.isEmpty
+      }
   }
 }
 
@@ -98,8 +99,8 @@ private extension View {
     isSelected: Bool
   ) -> some View {
     if isSelected,
-      let element = element as? ImageElement,
-      let frameIndex = element.frameIndex {
+       let element = element as? ImageElement,
+       let frameIndex = element.frameIndex {
       let shape = Shapes.shapes[frameIndex]
       self.overlay(shape
         .stroke(lineWidth: Settings.borderWidth)

@@ -65,6 +65,8 @@ enum Settings {
 
 // use this method for
 // the drag and drop challenge
+// When dropped, the center of the image
+// will be located at the drop point
 extension Settings {
   static func calculateDropOffset(
     viewScale: CGFloat,

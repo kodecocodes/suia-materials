@@ -48,16 +48,16 @@ struct SingleCardView: View {
           height: Settings.calculateSize(proxy.size).height)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .modifier(CardToolbar(
-            currentModal: $currentModal,
-            card: $card))
-          .onDisappear {
+          currentModal: $currentModal,
+          card: $card))
+        .onDisappear {
+          card.save()
+        }
+        .onChange(of: scenePhase) { _, newScenePhase in
+          if newScenePhase == .inactive {
             card.save()
           }
-          .onChange(of: scenePhase) { _, newScenePhase in
-            if newScenePhase == .inactive {
-              card.save()
-            }
-          }
+        }
       }
     }
   }

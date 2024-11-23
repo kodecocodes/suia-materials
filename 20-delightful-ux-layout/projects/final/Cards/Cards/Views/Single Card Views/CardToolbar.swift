@@ -121,8 +121,8 @@ struct CardToolbar: ViewModifier {
 
 #Preview {
   Color.yellow
-    .environmentObject(CardStore(defaultData: true))
     .modifier(CardToolbar(
       currentModal: .constant(nil),
       card: .constant(Card())))
+    .environmentObject(CardStore(defaultData: true))
 }

@@ -42,46 +42,47 @@ struct CardDetailView: View {
   }
 
   var body: some View {
-      card.backgroundColor
-        .onTapGesture {
-          store.selectedElement = nil
+    card.backgroundColor
+      .onTapGesture {
+        store.selectedElement = nil
+      }
+      .overlay {
+        ForEach($card.elements, id: \.id) { $element in
+          CardElementView(element: element)
+            .overlay(
+              element: element,
+              isSelected: isSelected(element))
+            .elementContextMenu(
+              card: $card,
+              element: $element)
+            .resizableView(
+              transform: $element.transform,
+              viewScale: viewScale)
+            .frame(
+              width: element.transform.size.width,
+              height: element.transform.size.height)
+            .onTapGesture {
+              store.selectedElement = element
+            }
         }
-        .overlay {
-      ForEach($card.elements, id: \.id) { $element in
-        CardElementView(element: element)
-          .overlay(
-            element: element,
-            isSelected: isSelected(element))
-          .elementContextMenu(
-            card: $card,
-            element: $element)
-          .resizableView(
-            transform: $element.transform,
-            viewScale: viewScale)
-          .frame(
-            width: element.transform.size.width,
-            height: element.transform.size.height)
-          .onTapGesture {
-            store.selectedElement = element
+      }
+      .clipped()
+      .onDisappear {
+        store.selectedElement = nil
+      }
+      .dropDestination(for: CustomTransfer.self) { items, location in
+        print(location)
+        Task {
+          await MainActor.run {
+            card.addElements(from: items)
           }
-      }
-    }
-    .onDisappear {
-      store.selectedElement = nil
-    }
-    .dropDestination(for: CustomTransfer.self) { items, location in
-      print(location)
-      Task {
-        await MainActor.run {
-          card.addElements(from: items)
         }
+        return !items.isEmpty
       }
-      return !items.isEmpty
-    }
-    .onGeometryChange(for: CGSize.self) { proxy in
-      print("Size change:", proxy.size)
-      return proxy.size
-    } action: { _ in }
+      .onGeometryChange(for: CGSize.self) { proxy in
+        print("Size change:", proxy.size)
+        return proxy.size
+      } action: { _ in }
   }
 }
 
@@ -98,8 +99,8 @@ private extension View {
     isSelected: Bool
   ) -> some View {
     if isSelected,
-      let element = element as? ImageElement,
-      let frameIndex = element.frameIndex {
+       let element = element as? ImageElement,
+       let frameIndex = element.frameIndex {
       let shape = Shapes.shapes[frameIndex]
       self.overlay(shape
         .stroke(lineWidth: Settings.borderWidth)

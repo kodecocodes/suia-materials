@@ -43,21 +43,21 @@ struct SingleCardView: View {
         CardDetailView(
           card: $card,
           viewScale: Settings.calculateScale(proxy.size))
-          .frame(
-            width: Settings.calculateSize(proxy.size).width,
-            height: Settings.calculateSize(proxy.size).height)
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .modifier(CardToolbar(
-            currentModal: $currentModal,
-            card: $card))
-          .onDisappear {
+        .frame(
+          width: Settings.calculateSize(proxy.size).width,
+          height: Settings.calculateSize(proxy.size).height)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .modifier(CardToolbar(
+          currentModal: $currentModal,
+          card: $card))
+        .onDisappear {
+          card.save()
+        }
+        .onChange(of: scenePhase) { _, newScenePhase in
+          if newScenePhase == .inactive {
             card.save()
           }
-          .onChange(of: scenePhase) { _, newScenePhase in
-            if newScenePhase == .inactive {
-              card.save()
-            }
-          }
+        }
       }
     }
   }
