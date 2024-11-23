@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,14 +32,13 @@
 
 import SwiftUI
 
-extension UIImage: Transferable {
-  public static var transferRepresentation: some TransferRepresentation {
-    DataRepresentation(importedContentType: .image) { image in
-      UIImage(data: image) ?? errorImage
-    }
-  }
-
-  public static var errorImage: UIImage {
-    UIImage(named: "error-image") ?? UIImage()
-  }
+enum Settings {
+  static let cardSize =
+    CGSize(width: 1300, height: 2000)
+  static let thumbnailSize =
+    CGSize(width: 150, height: 250)
+  static let defaultElementSize =
+    CGSize(width: 250, height: 180)
+  static let borderColor: Color = .blue
+  static let borderWidth: CGFloat = 5
 }
