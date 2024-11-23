@@ -34,12 +34,31 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
+
+  func readObjects() -> [Object] {
+    var objects: [Object] = []
+    let archiveURL =
+      FileManager.sharedContainerURL()
+      .appendingPathComponent("objects.json")
+    print(">>> \(archiveURL)")
+
+    if let codeData = try? Data(contentsOf: archiveURL) {
+      do {
+        objects = try JSONDecoder()
+          .decode([Object].self, from: codeData)
+      } catch {
+        print("Error: Can't decode contents")
+      }
+    }
+    return objects
+  }
+
   func placeholder(in context: Context) -> SimpleEntry {
-    SimpleEntry(date: Date(), emoji: "😀", object: Object.sample(isPublicDomain: true))
+    SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: true))
   }
   
   func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-    let entry = SimpleEntry(date: Date(), emoji: "😀", object: Object.sample(isPublicDomain: true))
+    let entry = SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: false))
     completion(entry)
   }
   
@@ -48,12 +67,20 @@ struct Provider: TimelineProvider {
     
     // Generate a timeline consisting of five entries an hour apart, starting from the current date.
     let currentDate = Date()
-    for hourOffset in 0 ..< 5 {
-      let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-      let entry = SimpleEntry(date: entryDate, emoji: "😀", object: Object.sample(isPublicDomain: true))
+    let interval = 3
+
+    let objects = readObjects()
+    for index in 0 ..< objects.count {
+      let entryDate = Calendar.current.date(
+        byAdding: .second,
+        value: index * interval,
+        to: currentDate)!
+      let entry = SimpleEntry(
+        date: entryDate,
+        object: objects[index])
       entries.append(entry)
     }
-    
+
     let timeline = Timeline(entries: entries, policy: .atEnd)
     completion(timeline)
   }
@@ -65,8 +92,19 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
   let date: Date
-  let emoji: String
   let object: Object
+}
+
+struct DetailIndicatorView: View {
+  let title: String
+
+  var body: some View {
+    HStack(alignment: .firstTextBaseline) {
+      Text(title)
+      Spacer()
+      Image(systemName: "doc.text.image.fill")
+    }
+  }
 }
 
 struct TheMetWidgetEntryView : View {
@@ -74,18 +112,24 @@ struct TheMetWidgetEntryView : View {
   
   var body: some View {
     VStack {
-//      Text("Time:")
-//      Text(entry.date, style: .time)
-//      
-//      Text("Emoji:")
-//      Text(entry.emoji)
+      Text("The Met")  // 1
+        .font(.headline)
+      Divider()  // 2
 
-//      Text("Object:")
-      Text(entry.object.title)
-        .font(.title3)
-//        .foregroundStyle(Color.accentColor)
-        .lineLimit(3)
+      if !entry.object.isPublicDomain {  // 3
+        WebIndicatorView(title: entry.object.title)
+          .padding()
+          .background(Color.metBackground)
+          .foregroundStyle(.white)
+      } else {
+        DetailIndicatorView(title: entry.object.title)
+          .padding()
+          .background(Color.metForeground)
+      }
     }
+    .widgetURL(URL(string: "themet://\(entry.object.objectID)"))
+    .truncationMode(.middle)  // 4
+    .fontWeight(.semibold)
   }
 }
 
@@ -96,7 +140,7 @@ struct TheMetWidget: Widget {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       if #available(iOS 17.0, *) {
         TheMetWidgetEntryView(entry: entry)
-          .containerBackground(Color.clear, for: .widget)
+          .containerBackground(.fill.tertiary, for: .widget)
       } else {
         TheMetWidgetEntryView(entry: entry)
           .padding()
@@ -105,13 +149,13 @@ struct TheMetWidget: Widget {
     }
     .configurationDisplayName("The Met")
     .description("View objects from the Metropolitan Museum.")
-    
+    .supportedFamilies([.systemMedium, .systemLarge])
   }
 }
 
-#Preview(as: .systemSmall) {
+#Preview(as: .systemMedium) {
   TheMetWidget()
 } timeline: {
-  SimpleEntry(date: .now, emoji: "🤩", object: Object.sample(isPublicDomain: false))
-  SimpleEntry(date: .now, emoji: "😀", object: Object.sample(isPublicDomain: true))
+  SimpleEntry(date: .now, object: Object.sample(isPublicDomain: true))
+  SimpleEntry(date: .now, object: Object.sample(isPublicDomain: false))
 }

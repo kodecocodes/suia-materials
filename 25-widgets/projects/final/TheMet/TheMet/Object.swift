@@ -51,7 +51,7 @@ extension Object {
     if isPublicDomain {
       return Object(
         objectID: 452174,
-        title: "Bahram Gur Slays the Rhino-Wolf",
+        title: "\"Bahram Gur Slays the Rhino-Wolf\", Folio 586r from the Shahnama (Book of Kings) of Shah Tahmasp",
         creditLine: "Gift of Arthur A. Houghton Jr., 1970",
         objectURL: "https://www.metmuseum.org/art/collection/search/452174",
         isPublicDomain: true,
