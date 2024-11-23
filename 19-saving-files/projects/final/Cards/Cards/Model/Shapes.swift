@@ -90,11 +90,15 @@ struct Cone: Shape {
 struct Lens: Shape {
   func path(in rect: CGRect) -> Path {
     var path = Path()
-    // View.contentShape(_:) does not recognize
-    // Lens with an exact midY point
-    path.move(to: CGPoint(x: 0, y: rect.midY + 0.00001))
+    path.move(to: CGPoint(x: 0, y: rect.midY))
     path.addQuadCurve(
-      to: CGPoint(x: rect.width, y: rect.midY),
+      to: CGPoint(
+        x: rect.width,
+        // For some reason, an extra tiny bit
+        // needs to be added to y so that when the
+        // element is tapped, the tap is recognized
+        // (New in Xcode 16 / iOS 18)
+        y: rect.midY + 0.01),
       control: CGPoint(x: rect.midX, y: 0))
     path.addQuadCurve(
       to: CGPoint(x: 0, y: rect.midY),
