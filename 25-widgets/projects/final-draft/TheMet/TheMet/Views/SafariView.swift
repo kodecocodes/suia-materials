@@ -30,27 +30,22 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
+import SwiftUI
+import SafariServices
 
-class TheMetStore: ObservableObject {
-  @Published var objects: [Object] = []
-  let service = TheMetService()
-  let maxIndex: Int
+struct SafariView: UIViewControllerRepresentable {
+  let url: URL
 
-  init(_ maxIndex: Int = 30) {
-    self.maxIndex = maxIndex
+  func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+    return SFSafariViewController(url: url)
   }
 
-  func fetchObjects(for queryTerm: String) async throws {
-    if let objectIDs = try await service.getObjectIDs(from: queryTerm) {  // 1
-      for (index, objectID) in objectIDs.objectIDs.enumerated()  // 2
-      where index < maxIndex {
-        if let object = try await service.getObject(from: objectID) {
-          await MainActor.run {
-            objects.append(object)
-          }
-        }
-      }
-    }
+  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {}
+}
+
+struct SafariView_Previews: PreviewProvider {
+  static var previews: some View {
+    // swiftlint:disable:next force_unwrapping
+    SafariView(url: URL(string: "https://www.metmuseum.org/art/collection/search/437092")!)
   }
 }
