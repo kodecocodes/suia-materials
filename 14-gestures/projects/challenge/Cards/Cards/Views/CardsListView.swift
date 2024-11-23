@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -37,9 +37,9 @@ struct CardsListView: View {
 
   var body: some View {
     list
-    .fullScreenCover(isPresented: $isPresented) {
-      SingleCardView()
-    }
+      .fullScreenCover(isPresented: $isPresented) {
+        SingleCardView()
+      }
   }
 
   var list: some View {
@@ -56,8 +56,6 @@ struct CardsListView: View {
   }
 }
 
-struct CardsListView_Previews: PreviewProvider {
-  static var previews: some View {
-    CardsListView()
-  }
+#Preview {
+  CardsListView()
 }
