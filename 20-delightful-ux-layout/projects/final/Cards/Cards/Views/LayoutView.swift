@@ -6,10 +6,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -32,17 +32,27 @@
 
 import SwiftUI
 
-@main
-struct CardsApp: App {
-  @StateObject var store = CardStore(defaultData: false)
-
-  var body: some Scene {
-    WindowGroup {
-      CardsListView()
-        .environmentObject(store)
-        .onAppear {
-          print(URL.documentsDirectory)
-        }
+struct LayoutView: View {
+  var body: some View {
+    GeometryReader { proxy in
+      HStack {
+        Text("Hello, World!")
+          .background(Color.red)
+        Text("Hello, World!")
+          .padding()
+          .background(Color.red)
+      }
+      .background(Color.gray)
+      .frame(width: proxy.size.width * 0.8)
+      .background(Color.gray)
+      .padding(
+        .leading, (proxy.size.width - proxy.size.width * 0.8) / 2)
     }
+    .background(Color.yellow)
   }
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+    LayoutView()
+    .frame(width: 500, height: 300)
 }

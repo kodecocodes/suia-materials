@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco
+/// Copyright (c) 2025 Kodeco
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ import SwiftUI
 
 struct CardsListView: View {
   @EnvironmentObject var store: CardStore
-  @Environment(\.scenePhase) private var scenePhase
   @State private var selectedCard: Card?
 
   var body: some View {
@@ -43,11 +42,6 @@ struct CardsListView: View {
         .fullScreenCover(item: $selectedCard) { card in
           if let index = store.index(for: card) {
             SingleCardView(card: $store.cards[index])
-              .onChange(of: scenePhase) { newScenePhase in
-                if newScenePhase == .inactive {
-                  store.cards[index].save()
-                }
-              }
           } else {
             fatalError("Unable to locate selected card")
           }
@@ -79,9 +73,7 @@ struct CardsListView: View {
   }
 }
 
-struct CardsListView_Previews: PreviewProvider {
-  static var previews: some View {
-    CardsListView()
-      .environmentObject(CardStore(defaultData: true))
-  }
+#Preview {
+  CardsListView()
+    .environmentObject(CardStore(defaultData: true))
 }

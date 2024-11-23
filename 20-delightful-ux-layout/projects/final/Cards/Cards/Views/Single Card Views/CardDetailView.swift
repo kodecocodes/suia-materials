@@ -1,5 +1,5 @@
-/// Copyright (c) 2023 Kodeco
-/// 
+/// Copyright (c) 2025 Kodeco
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -42,11 +42,11 @@ struct CardDetailView: View {
   }
 
   var body: some View {
-    ZStack {
       card.backgroundColor
         .onTapGesture {
           store.selectedElement = nil
         }
+        .overlay {
       ForEach($card.elements, id: \.id) { $element in
         CardElementView(element: element)
           .overlay(
@@ -72,25 +72,23 @@ struct CardDetailView: View {
     .dropDestination(for: CustomTransfer.self) { items, location in
       print(location)
       Task {
-        card.addElements(from: items)
+        await MainActor.run {
+          card.addElements(from: items)
+        }
       }
       return !items.isEmpty
     }
+    .onGeometryChange(for: CGSize.self) { proxy in
+      print("Size change:", proxy.size)
+      return proxy.size
+    } action: { _ in }
   }
 }
 
-struct CardDetailView_Previews: PreviewProvider {
-  struct CardDetailPreview: View {
-    @EnvironmentObject var store: CardStore
-    var body: some View {
-      CardDetailView(card: $store.cards[0])
-    }
-  }
-
-  static var previews: some View {
-    CardDetailPreview()
-      .environmentObject(CardStore(defaultData: true))
-  }
+#Preview {
+  @Previewable @State var card = initialCards[0]
+  CardDetailView(card: $card)
+    .environmentObject(CardStore(defaultData: true))
 }
 
 private extension View {
@@ -105,7 +103,7 @@ private extension View {
       let shape = Shapes.shapes[frameIndex]
       self.overlay(shape
         .stroke(lineWidth: Settings.borderWidth)
-        .foregroundColor(Settings.borderColor))
+        .foregroundStyle(Settings.borderColor))
     } else {
       self
         .border(

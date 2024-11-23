@@ -1,5 +1,5 @@
-/// Copyright (c) 2023 Kodeco
-/// 
+/// Copyright (c) 2025 Kodeco
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -32,28 +32,26 @@
 
 import SwiftUI
 
-struct LayoutView: View {
-  var body: some View {
-    GeometryReader { proxy in
-      HStack {
-        Text("Hello, World!")
-          .background(Color.red)
-        Text("Hello, World!")
-          .padding()
-          .background(Color.red)
-      }
-      .frame(width: proxy.size.width * 0.8)
-      .background(Color.gray)
-      .padding(
-        .leading, (proxy.size.width - proxy.size.width * 0.8) / 2)
-    }
-    .background(Color.yellow)
-  }
+func + (left: CGSize, right: CGSize) -> CGSize {
+  CGSize(
+    width: left.width + right.width,
+    height: left.height + right.height)
 }
 
-struct LayoutView_Previews: PreviewProvider {
-  static var previews: some View {
-    LayoutView()
-      .previewLayout(.fixed(width: 500, height: 300))
-  }
+func * (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width * right,
+    height: left.height * right)
+}
+
+func *= (left: inout CGSize, right: Double) {
+  left = CGSize(
+    width: left.width * right,
+    height: left.height * right)
+}
+
+func / (left: CGSize, right: CGFloat) -> CGSize {
+  CGSize(
+    width: left.width / right,
+    height: left.height / right)
 }
