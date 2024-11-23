@@ -42,7 +42,6 @@ struct LayoutView: View {
           .padding()
           .background(Color.red)
       }
-      .background(Color.gray)
       .frame(width: proxy.size.width * 0.8)
       .background(Color.gray)
       .padding(
@@ -53,6 +52,6 @@ struct LayoutView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    LayoutView()
+  LayoutView()
     .frame(width: 500, height: 300)
 }
