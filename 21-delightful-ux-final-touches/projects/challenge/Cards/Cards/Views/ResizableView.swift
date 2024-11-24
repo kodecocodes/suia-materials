@@ -53,6 +53,10 @@ struct ResizableView: ViewModifier {
   var rotationGesture: some Gesture {
     RotationGesture()
       .onChanged { rotation in
+        // rotation sometimes gives NaN
+        if rotation.degrees.isNaN {
+          return
+        }
         transform.rotation += rotation - previousRotation
         previousRotation = rotation
       }
