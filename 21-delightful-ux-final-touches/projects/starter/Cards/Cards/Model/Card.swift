@@ -81,12 +81,12 @@ struct Card: Identifiable {
   }
 
   mutating func update(_ element: CardElement?, frameIndex: Int) {
-    if let element = element as? ImageElement,
-      let index = element.index(in: elements) {
-        var newElement = element
-        newElement.frameIndex = frameIndex
-        elements[index] = newElement
-    }
+    guard element is ImageElement,
+          let index = element?.index(in: elements),
+          var imageElement = elements[index] as? ImageElement
+      else { return }
+    imageElement.frameIndex = frameIndex
+    elements[index] = imageElement
   }
 
   func save() {
@@ -129,8 +129,11 @@ extension Card: Codable {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(id.uuidString, forKey: .id)
     let environment = EnvironmentValues()
-    let resolvedColor = backgroundColor.resolve(in: environment)
-    try container.encode(resolvedColor, forKey: .backgroundColor)
+    let resolvedColor = backgroundColor.resolve(
+      in: environment)
+    try container.encode(
+      resolvedColor,
+      forKey: .backgroundColor)
     let imageElements: [ImageElement] =
       elements.compactMap { $0 as? ImageElement }
     try container.encode(imageElements, forKey: .imageElements)

@@ -42,9 +42,9 @@ extension UIImage {
     let image = resizeLargeImage()
     let path = filename ?? UUID().uuidString
     let url = URL.documentsDirectory.appendingPathComponent(path)
-      .appendingPathExtension(for: .png)
     do {
-      try image.pngData()?.write(to: url)
+      try image.pngData()?.write(to: url.appendingPathExtension(for: .png)
+      )
     } catch {
       print(error.localizedDescription)
     }
@@ -54,6 +54,7 @@ extension UIImage {
   static func load(uuidString: String) -> UIImage {
     guard uuidString != "none" else { return .error }
     let url = URL.documentsDirectory.appendingPathComponent(uuidString)
+      .appendingPathExtension(for: .png)
     if let imageData = try? Data(contentsOf: url) {
       return UIImage(data: imageData) ?? .error
     } else {
@@ -64,6 +65,7 @@ extension UIImage {
   static func remove(name: String?) {
     if let name {
       let url = URL.documentsDirectory.appendingPathComponent(name)
+        .appendingPathExtension(for: .png)
       try? FileManager.default.removeItem(at: url)
     }
   }
@@ -126,7 +128,6 @@ extension UIImage {
 }
 
 extension UIImage {
-  // 1
   @MainActor static func screenshot(
     card: Card,
     size: CGSize

@@ -46,7 +46,6 @@ struct CardDetailView: View {
       .onTapGesture {
         store.selectedElement = nil
       }
-      .ignoresSafeArea()
       .overlay {
         ForEach($card.elements, id: \.id) { $element in
           CardElementView(element: element)
@@ -67,27 +66,28 @@ struct CardDetailView: View {
             }
         }
       }
-    .onDisappear {
-      store.selectedElement = nil
-    }
-    .dropDestination(for: CustomTransfer.self) { items, location in
-      let offset = Settings.calculateDropOffset(
-        viewScale: viewScale,
-        location: location)
-      Task {
-        await MainActor.run {
-          card.addElements(
-            from: items,
-            at: offset)
-        }
+      .clipped()
+      .onDisappear {
+        store.selectedElement = nil
       }
-      return !items.isEmpty
-    }
+      .dropDestination(for: CustomTransfer.self) { items, location in
+        let offset = Settings.calculateDropOffset(
+          viewScale: viewScale,
+          location: location)
+        Task {
+          await MainActor.run {
+            card.addElements(
+              from: items,
+              at: offset)
+          }
+        }
+        return !items.isEmpty
+      }
   }
 }
 
 #Preview {
-  @Previewable @State var card = initialCards[1]
+  @Previewable @State var card = initialCards[0]
   CardDetailView(card: $card, viewScale: 0.3)
     .environmentObject(CardStore(defaultData: true))
 }
@@ -99,8 +99,8 @@ private extension View {
     isSelected: Bool
   ) -> some View {
     if isSelected,
-      let element = element as? ImageElement,
-      let frameIndex = element.frameIndex {
+       let element = element as? ImageElement,
+       let frameIndex = element.frameIndex {
       let shape = Shapes.shapes[frameIndex]
       self.overlay(shape
         .stroke(lineWidth: Settings.borderWidth)

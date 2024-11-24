@@ -134,4 +134,12 @@ struct CardToolbar: ViewModifier {
   }
 }
 
+#Preview {
+  Color.yellow
+    .modifier(CardToolbar(
+      currentModal: .constant(nil),
+      card: .constant(Card())))
+    .environmentObject(CardStore(defaultData: true))
+}
+
 // swiftlint:enable function_body_length

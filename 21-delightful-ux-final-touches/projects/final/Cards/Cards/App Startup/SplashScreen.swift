@@ -79,7 +79,7 @@ private struct SplashAnimation: ViewModifier {
       .offset(y: animating ? -700 : finalYPosition)
       .rotationEffect(
         animating ? .zero
-          : Angle(degrees: Double.random(in: -10...10)))
+        : Angle(degrees: Double.random(in: -10...10)))
       .animation(
         Animation.snappy(
           duration: 0.5,

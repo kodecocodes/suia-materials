@@ -50,7 +50,7 @@ struct CardsListView: View {
   var thumbnailSize: CGSize {
     var scale: CGFloat = 1
     if verticalSizeClass == .regular,
-      horizontalSizeClass == .regular {
+       horizontalSizeClass == .regular {
       scale = 1.5
     }
     return Settings.thumbnailSize * scale
@@ -87,27 +87,27 @@ struct CardsListView: View {
           Carousel(selectedCard: $selectedCard)
         }
       }
-        .overlay {
-          if store.cards.isEmpty {
-            ContentUnavailableView {
-              initialView
-            } description: {
-              Text("Tap the plus button to add a card")
-            }
+      .overlay {
+        if store.cards.isEmpty {
+          ContentUnavailableView {
+            initialView
+          } description: {
+            Text("Tap the plus button to add a card")
           }
         }
-        .fullScreenCover(item: $selectedCard) { card in
-          if let index = store.index(for: card) {
-            SingleCardView(card: $store.cards[index])
-              .navigationTransition(
-                .zoom(
-                  sourceID: card.id,
-                  in: namespace))
-              .interactiveDismissDisabled(true)
-          } else {
-            fatalError("Unable to locate selected card")
-          }
+      }
+      .fullScreenCover(item: $selectedCard) { card in
+        if let index = store.index(for: card) {
+          SingleCardView(card: $store.cards[index])
+            .navigationTransition(
+              .zoom(
+                sourceID: card.id,
+                in: namespace))
+            .interactiveDismissDisabled(true)
+        } else {
+          fatalError("Unable to locate selected card")
         }
+      }
       createButton
     }
     .background(
@@ -123,9 +123,6 @@ struct CardsListView: View {
             .matchedTransitionSource(
               id: card.id,
               in: namespace)
-            .frame(
-              width: thumbnailSize.width,
-              height: thumbnailSize.height)
             .contextMenu {
               Button(role: .destructive) {
                 store.remove(card)
@@ -133,6 +130,9 @@ struct CardsListView: View {
                 Label("Delete", systemImage: "trash")
               }
             }
+            .frame(
+              width: thumbnailSize.width,
+              height: thumbnailSize.height)
             .onTapGesture {
               selectedCard = card
             }

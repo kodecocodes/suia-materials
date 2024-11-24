@@ -105,9 +105,6 @@ struct CardsListView: View {
       LazyVGrid(columns: columns, spacing: 30) {
         ForEach(store.cards) { card in
           CardThumbnail(card: card)
-            .frame(
-              width: thumbnailSize.width,
-              height: thumbnailSize.height)
             .contextMenu {
               Button(role: .destructive) {
                 store.remove(card)
@@ -115,6 +112,9 @@ struct CardsListView: View {
                 Label("Delete", systemImage: "trash")
               }
             }
+            .frame(
+              width: thumbnailSize.width,
+              height: thumbnailSize.height)
             .onTapGesture {
               selectedCard = card
             }

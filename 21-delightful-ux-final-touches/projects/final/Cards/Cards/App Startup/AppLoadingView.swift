@@ -43,12 +43,12 @@ struct AppLoadingView: View {
           withAnimation(
             .linear(duration: 1.0)
             .delay(1.5)) {
-            showSplash = false
-          }
+              showSplash = false
+            }
         }
     } else {
       CardsListView()
-      .transition(.scale(scale: 0, anchor: .top))
+        .transition(.scale(scale: 0, anchor: .top))
     }
   }
 }

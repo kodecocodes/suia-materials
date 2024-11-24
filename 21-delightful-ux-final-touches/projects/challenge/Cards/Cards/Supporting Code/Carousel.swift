@@ -78,7 +78,7 @@ struct Carousel: View {
   }
 
   func loadCardImage(_ card: Card) -> Image? {
-    let uiImage = UIImage.load(uuidString: card.id.uuidString.appending(".png"))
+    let uiImage = UIImage.load(uuidString: card.id.uuidString)
     if uiImage != .error {
       return Image(uiImage: uiImage)
     }

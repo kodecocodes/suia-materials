@@ -37,7 +37,7 @@ struct CardThumbnail: View {
 
   var body: some View {
     Group {
-      let uiImage = UIImage.load(uuidString: card.id.uuidString.appending(".png"))
+      let uiImage = UIImage.load(uuidString: card.id.uuidString)
       if uiImage != UIImage.error {
         Image(uiImage: uiImage)
           .resizable()
