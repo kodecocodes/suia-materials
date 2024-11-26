@@ -1,4 +1,4 @@
-/// Copyright (c) 2025 Kodeco Inc.
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,21 +33,20 @@
 import SwiftUI
 
 struct AddThingView: View {
+  @Environment(\.dismiss) var dismiss
   @State private var thing = ""
   @FocusState private var thingIsFocused: Bool
   @ObservedObject var someThings: ThingStore
-  @Environment(\.dismiss) var dismiss
 
   var body: some View {
     VStack {
       TextField("Thing I Learned", text: $thing)  // 1
-        .focused($thingIsFocused)
-        .onAppear { thingIsFocused = true }
-//        .autocapitalization(.allCharacters)
-        .disableAutocorrection(true)
         .textFieldStyle(.roundedBorder)  // 2
         .padding()  // 3
-
+        // .autocapitalization(.allCharacters)
+        .disableAutocorrection(true)
+        .focused($thingIsFocused)
+        .onAppear { thingIsFocused = true }
       Button("Done") {
         if !thing.isEmpty {
           someThings.things.append(thing)
@@ -60,7 +59,8 @@ struct AddThingView: View {
   }
 }
 
-#Preview {
-  AddThingView(someThings: ThingStore())
+struct AddThingView_Previews: PreviewProvider {
+  static var previews: some View {
+    AddThingView(someThings: ThingStore())
+  }
 }
-

@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +47,7 @@ struct ContentView: View {
           Text("Add acronyms you learn")
             .foregroundColor(.gray)
         }
+        
         ForEach(myThings.things, id: \.self) { thing in
           Text(thing)
         }
@@ -69,9 +70,7 @@ struct ContentView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-      .environment(\.textCase, .uppercase)
-  }
+#Preview {
+  ContentView()
+    .environment(\.textCase, .uppercase)
 }

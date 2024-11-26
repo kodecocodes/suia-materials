@@ -1,4 +1,4 @@
-/// Copyright (c) 2025 Kodeco Inc.
+/// Copyright (c) 2023 Kodeco LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,35 +32,46 @@
 
 import SwiftUI
 
-struct AddThingView: View {
-  @State private var thing = ""
-  @FocusState private var thingIsFocused: Bool
-  @ObservedObject var someThings: ThingStore
-  @Environment(\.dismiss) var dismiss
+final class ThingStore: ObservableObject {
+  @Published var things: [String] = []
+}
+
+struct ContentView: View {
+  @State private var showAddThing = false
+  @StateObject private var myThings = ThingStore()
 
   var body: some View {
-    VStack {
-      TextField("Thing I Learned", text: $thing)  // 1
-        .focused($thingIsFocused)
-        .onAppear { thingIsFocused = true }
-//        .autocapitalization(.allCharacters)
-        .disableAutocorrection(true)
-        .textFieldStyle(.roundedBorder)  // 2
-        .padding()  // 3
-
-      Button("Done") {
-        if !thing.isEmpty {
-          someThings.things.append(thing)
+    NavigationStack {
+      VStack(spacing: 20) {
+        if myThings.things.isEmpty {
+          Text("Add acronyms you learn")
+            .foregroundColor(.gray)
         }
-        dismiss()
+        ForEach(myThings.things, id: \.self) { thing in
+          Text(thing)
+        }
+        Spacer()
       }
-      Spacer()
+      .navigationTitle("TIL")
+      .toolbar {
+        ToolbarItem {
+          // swiftlint:disable:next multiple_closures_with_trailing_closure
+          Button(action: { showAddThing.toggle() }) {
+            Image(systemName: "plus.circle")
+              .font(.title)
+          }
+        }
+      }
+      .sheet(isPresented: $showAddThing) {
+        AddThingView(someThings: myThings)
+      }
     }
-    .environment(\.textCase, nil)
   }
 }
 
-#Preview {
-  AddThingView(someThings: ThingStore())
+struct ContentView_Previews: PreviewProvider {
+  static var previews: some View {
+    ContentView()
+      .environment(\.textCase, .uppercase)
+  }
 }
-
