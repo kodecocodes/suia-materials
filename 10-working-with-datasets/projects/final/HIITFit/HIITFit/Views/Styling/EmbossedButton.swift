@@ -1,4 +1,4 @@
-///// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,31 +32,52 @@
 
 import SwiftUI
 
-struct GradientBackground: View {
-  var gradient: Gradient {
-    let color1 = Color("gradient-top")
-    let color2 = Color("gradient-bottom")
-    let background = Color("background")
-    return Gradient(
-      stops: [
-        Gradient.Stop(color: color1, location: 0),
-        Gradient.Stop(color: color2, location: 0.9),
-        Gradient.Stop(color: background, location: 0.9),
-        Gradient.Stop(color: background, location: 1)
-      ])
+enum EmbossedButtonShape {
+  case circle, capsule
+}
+
+struct EmbossedButtonStyle: ButtonStyle {
+  var buttonShape = EmbossedButtonShape.capsule
+  var buttonScale = 1.0
+
+  func makeBody(configuration: Configuration) -> some View {
+    let shadow = Color.dropShadow
+    let highlight = Color.dropHighlight
+    return configuration.label
+      .padding(10)
+      .background(
+        GeometryReader { geometry in
+          shape(size: geometry.size)
+            .foregroundStyle(Color.background)
+            .shadow(color: shadow, radius: 1, x: 2, y: 2)
+            .shadow(color: highlight, radius: 1, x: -2, y: -2)
+            .offset(x: -1, y: -1)
+        })
+      .scaleEffect(configuration.isPressed ? buttonScale : 1.0)
   }
 
-  var body: some View {
-    LinearGradient(
-      gradient: gradient,
-      startPoint: .top,
-      endPoint: .bottom)
-    .ignoresSafeArea()
+  @ViewBuilder
+  func shape(size: CGSize) -> some View {
+    switch buttonShape {
+    case .circle:
+      Circle()
+        .stroke(Color.background, lineWidth: 2)
+        .frame(
+          width: max(size.width, size.height),
+          height: max(size.width, size.height))
+        .offset(x: -1)
+        .offset(y: -max(size.width, size.height) / 2 +
+          min(size.width, size.height) / 2)
+    case .capsule:
+      Capsule()
+        .stroke(Color.background, lineWidth: 2)
+    }
   }
 }
 
-struct GradientBackground_Previews: PreviewProvider {
-  static var previews: some View {
-    GradientBackground()
-  }
+#Preview(traits: .sizeThatFitsLayout) {
+  Button("History") {}
+    .fontWeight(.bold)
+    .buttonStyle(EmbossedButtonStyle(buttonShape: .circle))
+    .padding(40)
 }

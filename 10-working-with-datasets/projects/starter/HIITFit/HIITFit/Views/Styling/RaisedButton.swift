@@ -1,4 +1,4 @@
-///// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,55 +32,56 @@
 
 import SwiftUI
 
-enum EmbossedButtonShape {
-  case round, capsule
+struct RaisedButton: View {
+  let buttonText: String
+  let action: () -> Void
+
+  var body: some View {
+    Button(action: {
+      action()
+    }, label: {
+      Text(buttonText)
+        .raisedButtonTextStyle()
+    })
+    .buttonStyle(.raised)
+  }
 }
 
-struct EmbossedButtonStyle: ButtonStyle {
-  var buttonShape = EmbossedButtonShape.capsule
-  var buttonScale = 1.0
-
+struct RaisedButtonStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
-    let shadow = Color("drop-shadow")
-    let highlight = Color("drop-highlight")
-    return configuration.label
-      .padding(10)
+    configuration.label
+      .frame(maxWidth: .infinity)
+      .padding([.top, .bottom], 12)
       .background(
-        GeometryReader { geometry in
-          shape(size: geometry.size)
-            .foregroundColor(Color("background"))
-            .shadow(color: shadow, radius: 1, x: 2, y: 2)
-            .shadow(color: highlight, radius: 1, x: -2, y: -2)
-          .offset(x: -1, y: -1)
-        })
-      .scaleEffect(configuration.isPressed ? buttonScale : 1.0)
-  }
-
-  @ViewBuilder
-  func shape(size: CGSize) -> some View {
-    switch buttonShape {
-    case .round:
-      Circle()
-        .stroke(Color("background"), lineWidth: 2)
-        .frame(
-          width: max(size.width, size.height),
-          height: max(size.width, size.height))
-        .offset(x: -1)
-        .offset(y: -max(size.width, size.height) / 2 +
-          min(size.width, size.height) / 2)
-    case .capsule:
-      Capsule()
-        .stroke(Color("background"), lineWidth: 2)
-    }
+        Capsule()
+          .foregroundStyle(Color.background)
+          .shadow(color: Color.dropShadow, radius: 4, x: 6, y: 6)
+          .shadow(color: Color.dropHighlight, radius: 4, x: -6, y: -6)
+      )
   }
 }
 
-struct EmbossedButton_Previews: PreviewProvider {
-  static var previews: some View {
-    Button("History") {}
-      .fontWeight(.bold)
-      .buttonStyle(EmbossedButtonStyle(buttonShape: .round))
-      .padding(40)
-      .previewLayout(.sizeThatFits)
+extension ButtonStyle where Self == RaisedButtonStyle {
+  static var raised: RaisedButtonStyle {
+    .init()
   }
+}
+
+extension Text {
+  func raisedButtonTextStyle() -> some View {
+    self
+      .font(.body)
+      .fontWeight(.bold)
+  }
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+  ZStack {
+    RaisedButton(buttonText: "Get Started") {
+      print("Hello World")
+    }
+    .buttonStyle(.raised)
+    .padding(20)
+  }
+  .background(Color.background)
 }

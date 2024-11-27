@@ -1,4 +1,4 @@
-///// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -52,23 +52,20 @@ struct BarChartWeekView: View {
       "Step Up": Color("chart-step-up"),
       "Sun Salute": Color("chart-sun-salute")
     ])
-    .padding()
     .onAppear {
       let firstDate = history.exerciseDays.first?.date ?? Date()
       let dates = firstDate.previousSevenDays
       weekData = dates.map { date in
-        // swiftlint:disable:next trailing_closure
         history.exerciseDays.first(
           where: { $0.date.isSameDay(as: date) })
         ?? ExerciseDay(date: date)
       }
     }
+    .padding()
   }
 }
 
-struct BarChartWeekView_Previews: PreviewProvider {
-  static var previews: some View {
-    BarChartWeekView()
-      .environmentObject(HistoryStore(preview: true))
-  }
+#Preview {
+  BarChartWeekView()
+    .environmentObject(HistoryStore(preview: true))
 }

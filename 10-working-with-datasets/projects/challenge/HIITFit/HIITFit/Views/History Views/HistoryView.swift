@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,8 @@
 import SwiftUI
 
 struct HistoryView: View {
-  @EnvironmentObject var history: HistoryStore
   @Binding var showHistory: Bool
+  @EnvironmentObject var history: HistoryStore
   @State private var addMode = false
 
   var headerView: some View {
@@ -86,14 +86,14 @@ struct HistoryView: View {
           headerView
         }
       }
-      .padding()
+        .padding()
       List($history.exerciseDays, editActions: [.delete]) { $day in
         dayView(day: day)
       }
       if addMode {
         AddHistoryView(addMode: $addMode)
           .background(Color.primary.colorInvert()
-            .shadow(color: .primary.opacity(0.5), radius: 7))
+          .shadow(color: .primary.opacity(0.4), radius: 7))
       }
     }
     .onDisappear {
@@ -102,10 +102,8 @@ struct HistoryView: View {
   }
 }
 
-struct HistoryView_Previews: PreviewProvider {
-  static var history = HistoryStore(preview: true)
-  static var previews: some View {
-    HistoryView(showHistory: .constant(true))
-      .environmentObject(history)
-  }
+#Preview {
+  let history = HistoryStore(preview: true)
+  HistoryView(showHistory: .constant(true))
+    .environmentObject(history)
 }
