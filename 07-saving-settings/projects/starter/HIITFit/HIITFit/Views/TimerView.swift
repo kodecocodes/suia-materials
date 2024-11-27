@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ struct CountdownView: View {
     Text("\(timeRemaining)")
       .font(.system(size: size, design: .rounded))
       .padding()
-      .onChange(of: date) { _ in
+      .onChange(of: date) {
         timeRemaining -= 1
       }
   }
@@ -61,17 +61,15 @@ struct TimerView: View {
             date: context.date,
             timeRemaining: $timeRemaining,
             size: size)
-    }
-    .onChange(of: timeRemaining) { _ in
-      if timeRemaining < 1 {
-        timerDone = true
-      }
-    }
+        }
+        .onChange(of: timeRemaining) {
+          if timeRemaining < 1 {
+            timerDone = true
+          }
+        }
   }
 }
 
-struct TimerView_Previews: PreviewProvider {
-  static var previews: some View {
-    TimerView(timerDone: .constant(false), size: 90)
-  }
+#Preview {
+  TimerView(timerDone: .constant(false), size: 90)
 }

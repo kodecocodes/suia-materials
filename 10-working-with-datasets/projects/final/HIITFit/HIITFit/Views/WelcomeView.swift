@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,40 +33,40 @@
 import SwiftUI
 
 struct WelcomeView: View {
-  @EnvironmentObject var historyStore: HistoryStore
   @State private var showHistory = false
   @Binding var selectedTab: Int
 
   var body: some View {
-    GeometryReader { geometry in
-      VStack {
-        HeaderView(
-          selectedTab: $selectedTab,
-          titleText: "Welcome")
-        Spacer()
-        // container view
-        ContainerView {
-          ViewThatFits {
-            VStack {
-              WelcomeView.images
-              WelcomeView.welcomeText
-              getStartedButton
-              Spacer()
-              historyButton
-            }
-            VStack {
-              WelcomeView.welcomeText
-              getStartedButton
-              Spacer()
-              historyButton
-            }
+    VStack {
+      HeaderView(
+        selectedTab: $selectedTab,
+        titleText: "Welcome")
+      .containerRelativeFrame(.vertical) { length, _ in
+        length * 0.2
+      }
+      ContainerView {
+        ViewThatFits {
+          VStack {
+            WelcomeView.images
+            WelcomeView.welcomeText
+            getStartedButton
+            Spacer()
+            historyButton
+          }
+          VStack {
+            WelcomeView.welcomeText
+            getStartedButton
+            Spacer()
+            historyButton
           }
         }
-        .frame(height: geometry.size.height * 0.8)
       }
-      .sheet(isPresented: $showHistory) {
-        HistoryView(showHistory: $showHistory)
+      .containerRelativeFrame(.vertical) { length, _ in
+        length * 0.8
       }
+    }
+    .sheet(isPresented: $showHistory) {
+      HistoryView(showHistory: $showHistory)
     }
   }
 
@@ -91,8 +91,6 @@ struct WelcomeView: View {
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    WelcomeView(selectedTab: .constant(9))
-  }
+#Preview {
+  WelcomeView(selectedTab: .constant(9))
 }
