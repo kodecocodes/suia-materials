@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -77,8 +77,6 @@ struct WelcomeView: View {
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    WelcomeView(selectedTab: .constant(9))
-  }
+#Preview {
+  WelcomeView(selectedTab: .constant(9))
 }

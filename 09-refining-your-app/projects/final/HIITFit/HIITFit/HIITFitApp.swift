@@ -1,4 +1,4 @@
-/// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -43,16 +43,18 @@ struct HIITFitApp: App {
         .onAppear {
           print(URL.documentsDirectory)
         }
-        .alert(isPresented: $historyStore.loadingError) {
-          Alert(
-            title: Text("History"),
-            message: Text(
+        .alert(
+          "History",
+          isPresented: $historyStore.loadingError) {
+            Button("OK") { }
+          } message: {
+            Text(
               """
-              Unfortunately we can’t load your past history.
-              Email support:
+                Unfortunately we can't load your past history.
+                Email support:
                 support@xyz.com
-              """))
-        }
+                """)
+          }
     }
   }
 }

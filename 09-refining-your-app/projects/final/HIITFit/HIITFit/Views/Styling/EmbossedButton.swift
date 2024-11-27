@@ -1,4 +1,4 @@
-///// Copyright (c) 2022 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,58 +32,50 @@
 
 import SwiftUI
 
-struct RaisedButton: View {
-  let buttonText: String
-  let action: () -> Void
-
-  var body: some View {
-    Button(action: {
-      action()
-    }, label: {
-      Text(buttonText)
-        .raisedButtonTextStyle()
-    })
-    .buttonStyle(.raised)
-  }
+enum EmbossedButtonShape {
+  case circle, capsule
 }
 
-extension ButtonStyle where Self == RaisedButtonStyle {
-  static var raised: RaisedButtonStyle {
-    .init()
-  }
-}
+struct EmbossedButtonStyle: ButtonStyle {
+  var buttonShape = EmbossedButtonShape.capsule
 
-struct RaisedButtonStyle: ButtonStyle {
   func makeBody(configuration: Configuration) -> some View {
-    configuration.label
-      .frame(maxWidth: .infinity)
-      .padding([.top, .bottom], 12)
+    let shadow = Color.dropShadow
+    let highlight = Color.dropHighlight
+    return configuration.label
+      .padding(10)
       .background(
-        Capsule()
-          .foregroundColor(Color("background"))
-          .shadow(color: Color("drop-shadow"), radius: 4, x: 6, y: 6)
-          .shadow(color: Color("drop-highlight"), radius: 4, x: -6, y: -6))
+        GeometryReader { geometry in
+          shape(size: geometry.size)
+            .foregroundStyle(Color.background)
+            .shadow(color: shadow, radius: 1, x: 2, y: 2)
+            .shadow(color: highlight, radius: 1, x: -2, y: -2)
+            .offset(x: -1, y: -1)
+        })
   }
-}
 
-extension Text {
-  func raisedButtonTextStyle() -> some View {
-    self
-    .font(.body)
-    .fontWeight(.bold)
-  }
-}
-
-struct RaisedButton_Previews: PreviewProvider {
-  static var previews: some View {
-    ZStack {
-      RaisedButton(buttonText: "Get Started") {
-        print("Hello World")
-      }
-      .buttonStyle(.raised)
-      .padding(20)
+  @ViewBuilder
+  func shape(size: CGSize) -> some View {
+    switch buttonShape {
+    case .circle:
+      Circle()
+        .stroke(Color.background, lineWidth: 2)
+        .frame(
+          width: max(size.width, size.height),
+          height: max(size.width, size.height))
+        .offset(x: -1)
+        .offset(y: -max(size.width, size.height) / 2 +
+          min(size.width, size.height) / 2)
+    case .capsule:
+      Capsule()
+        .stroke(Color.background, lineWidth: 2)
     }
-    .background(Color("background"))
-    .previewLayout(.sizeThatFits)
   }
+}
+
+#Preview(traits: .sizeThatFitsLayout) {
+  Button("History") {}
+    .fontWeight(.bold)
+    .buttonStyle(EmbossedButtonStyle(buttonShape: .circle))
+    .padding(40)
 }
