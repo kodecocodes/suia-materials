@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -71,14 +71,12 @@ struct WelcomeView: View {
         .padding()
         .background(
           RoundedRectangle(cornerRadius: 20)
-          .stroke(Color.gray, lineWidth: 2))
+            .stroke(Color.gray, lineWidth: 2))
       }
     }
   }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-  static var previews: some View {
-    WelcomeView(selectedTab: .constant(9))
-  }
+#Preview {
+  WelcomeView(selectedTab: .constant(9))
 }

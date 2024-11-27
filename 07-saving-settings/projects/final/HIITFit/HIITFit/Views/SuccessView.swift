@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ struct SuccessView: View {
       VStack {
         Image(systemName: "hand.raised.fill")
           .resizedToFill(width: 75, height: 75)
-          .foregroundColor(.purple)
+          .foregroundStyle(.purple)
         Text("High Five!")
           .font(.largeTitle)
           .fontWeight(.bold)
@@ -50,8 +50,8 @@ struct SuccessView: View {
           Remember tomorrow's another day.
           So eat well and get some rest.
           """)
-          .foregroundColor(.gray)
-          .multilineTextAlignment(.center)
+        .foregroundStyle(.gray)
+        .multilineTextAlignment(.center)
       }
       VStack {
         Spacer()
@@ -65,8 +65,6 @@ struct SuccessView: View {
   }
 }
 
-struct SuccessView_Previews: PreviewProvider {
-  static var previews: some View {
-    SuccessView(selectedTab: .constant(3))
-  }
+#Preview {
+  SuccessView(selectedTab: .constant(3))
 }

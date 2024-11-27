@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -42,13 +42,11 @@ struct VideoPlayerView: View {
       VideoPlayer(player: AVPlayer(url: url))
     } else {
       Text("Couldn’t find \(videoName).mp4")
-        .foregroundColor(.red)
+        .foregroundStyle(.red)
     }
   }
 }
 
-struct VideoPlayerView_Previews: PreviewProvider {
-  static var previews: some View {
-    VideoPlayerView(videoName: "squat")
-  }
+#Preview {
+  VideoPlayerView(videoName: "squat")
 }
