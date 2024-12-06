@@ -42,7 +42,7 @@ struct HistoryView: View {
       }
       .font(.title)
       .padding(.trailing)
-       
+
       VStack {
         Text("History")
           .font(.title)
