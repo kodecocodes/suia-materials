@@ -40,7 +40,7 @@ struct SingleCardView: View {
     NavigationStack {
       Color.yellow
         .toolbar {
-          ToolbarItem(placement: .navigationBarTrailing) {
+          ToolbarItem(placement: .topBarTrailing) {
             Button("Done") {
               dismiss()
             }

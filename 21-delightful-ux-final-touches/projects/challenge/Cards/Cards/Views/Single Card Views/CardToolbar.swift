@@ -46,15 +46,15 @@ struct CardToolbar: ViewModifier {
   func body(content: Content) -> some View {
     content
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         menu
       }
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         Button("Done") {
           dismiss()
         }
       }
-      ToolbarItem(placement: .navigationBarLeading) {
+      ToolbarItem(placement: .topBarLeading) {
         let uiImage = UIImage.screenshot(
           card: card,
           size: Settings.cardSize)

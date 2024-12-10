@@ -41,7 +41,7 @@ struct CardToolbar: ViewModifier {
   func body(content: Content) -> some View {
     content
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         Button("Done") {
           dismiss()
         }
