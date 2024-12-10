@@ -63,4 +63,3 @@ struct AddThingView: View {
 #Preview {
   AddThingView(someThings: ThingStore())
 }
-
