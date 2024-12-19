@@ -1,4 +1,4 @@
-/// Copyright (c) 2024 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ struct ExerciseView: View {
             .frame(height: geometry.size.height * 0.45)
         } else {
           Text("Couldn't find \(exercise.videoName).mp4")
-            .foregroundColor(.red)
+            .foregroundStyle(.red)
         }
         Text(Date().addingTimeInterval(interval), style: .timer)
           .font(.system(size: geometry.size.height * 0.07))

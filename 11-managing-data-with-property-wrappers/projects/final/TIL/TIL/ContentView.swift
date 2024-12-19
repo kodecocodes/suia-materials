@@ -45,7 +45,7 @@ struct ContentView: View {
       VStack(spacing: 20) {
         if myThings.things.isEmpty {
           Text("Add acronyms you learn")
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
         }
 
         ForEach(myThings.things, id: \.self) { thing in

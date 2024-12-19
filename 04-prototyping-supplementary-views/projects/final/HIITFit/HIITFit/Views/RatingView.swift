@@ -1,4 +1,4 @@
-/// Copyright (c) 2024 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ struct RatingView: View {
     HStack {
       ForEach(0 ..< 5) { _ in
         Image(systemName: "waveform.path.ecg")
-          .foregroundColor(.gray)
+          .foregroundStyle(.gray)
           .font(.largeTitle)
       }
     }

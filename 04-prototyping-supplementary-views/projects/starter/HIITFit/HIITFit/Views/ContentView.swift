@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -41,11 +41,11 @@ struct ContentView: View {
       }
     }
     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    .indexViewStyle(
+      PageIndexViewStyle(backgroundDisplayMode: .always))
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
+#Preview {
+  ContentView()
 }

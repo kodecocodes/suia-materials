@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco LLC
+/// Copyright (c) 2025 Kodeco Inc.
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -50,9 +50,6 @@ struct HeaderView: View {
   }
 }
 
-struct HeaderView_Previews: PreviewProvider {
-  static var previews: some View {
-    HeaderView(exerciseName: "Squat")
-      .previewLayout(.sizeThatFits)
-  }
+#Preview(traits: .sizeThatFitsLayout) {
+  HeaderView(exerciseName: "Squat")
 }
