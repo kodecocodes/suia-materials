@@ -34,7 +34,6 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-
   func readObjects() -> [Object] {
     var objects: [Object] = []
     let archiveURL =
@@ -56,15 +55,15 @@ struct Provider: TimelineProvider {
   func placeholder(in context: Context) -> SimpleEntry {
     SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: true))
   }
-  
-  func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+
+  func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
     let entry = SimpleEntry(date: Date(), object: Object.sample(isPublicDomain: false))
     completion(entry)
   }
-  
-  func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+
+  func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> Void) {
     var entries: [SimpleEntry] = []
-    
+
     // Generate a timeline consisting of five entries an hour apart, starting from the current date.
     let currentDate = Date()
     let interval = 2
@@ -103,9 +102,9 @@ struct DetailIndicatorView: View {
   }
 }
 
-struct TheMetWidgetEntryView : View {
+struct TheMetWidgetEntryView: View {
   var entry: Provider.Entry
-  
+
   var body: some View {
     VStack {
       Text("The Met")  // 1
@@ -131,7 +130,7 @@ struct TheMetWidgetEntryView : View {
 
 struct TheMetWidget: Widget {
   let kind: String = "TheMetWidget"
-  
+
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       if #available(iOS 17.0, *) {
