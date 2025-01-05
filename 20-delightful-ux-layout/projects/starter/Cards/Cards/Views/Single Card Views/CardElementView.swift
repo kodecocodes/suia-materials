@@ -80,7 +80,7 @@ private extension ImageElementView {
       let shape = Shapes.shapes[frameIndex]
       self
         .clipShape(shape)
-        .contentShape(shape)
+        .contentShape(Ellipse())
     } else { self }
   }
 }
